@@ -95,6 +95,7 @@ ul.feat li::before{content:'›';position:absolute;left:0;color:var(--accent);fo
 
 /* ── SEPARATOR ── */
 hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
+
 </style>
 </head>
 <body>
@@ -366,11 +367,17 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
 <tr><td>Geschw.-Slider (1–10)</td><td>1 = sehr langsam und anschaulich · 10 = sehr schnell. Steuert die Paketbewegung zwischen den Schichten.</td></tr>
 <tr><td>☑ Aktivierungs-Animation</td><td>Pulsierende Ringe wenn Neuronen Werte senden (cyan) oder empfangen. Aktive Verbindungen leuchten heller.</td></tr>
 <tr><td>☑ Inaktive dimmen</td><td>Neuronen mit Ausgabewert ≈ 0 werden abgedunkelt — der aktive Signalfluss bleibt klar sichtbar.</td></tr>
-<tr><td>☑ Nur aktive animieren</td><td>Animiert ausschließlich Neuronen und Verbindungen mit Signalwert &nbsp;≠ 0. Inaktive Pfade erscheinen statisch.</td></tr>
-<tr><td>☑ Einzelschritte</td><td>Animation hält nach jeder Schicht an. Mit ▶ Schritt-Button manuell weiter.</td></tr>
-<tr><td>▶ Schritt</td><td>Nächste Schicht auslösen (nur im Einzelschritte-Modus).</td></tr>
+<tr><td>☑ Nur aktive animieren</td><td>Animiert ausschließlich Neuronen und Verbindungen mit Signalwert ≠ 0. Inaktive Pfade erscheinen statisch.</td></tr>
+<tr><td>☑ Einzelschritte</td><td>Animation hält nach jeder Schicht an. Mit ▶ Schritt-Button manuell zur nächsten Schicht weitergehen.</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;☐ ◉ Ausgaben-Schritt</td><td>Nur sichtbar wenn Einzelschritte aktiv. Nach jeder Schicht werden die Aktivierungswerte der Neuronen automatisch als animierter Zwischenschritt angezeigt, bevor ▶ Schritt wieder klickbar wird.</td></tr>
+<tr><td>▶ Schritt</td><td>Nächste Schicht auslösen (nur im Einzelschritte-Modus, nach Abschluss der aktuellen Schicht).</td></tr>
+<tr><td><span class="badge b-green">◉ Ausgaben</span></td><td><strong>Schalter:</strong> Zeigt die Aktivierungswerte der zuletzt berechneten Schicht dauerhaft als leuchtende Badges auf den Neuronen an. Erneuter Klick schaltet die Anzeige wieder aus. Funktioniert in 2D- und 3D-Ansicht.</td></tr>
 <tr><td>⟳ Loop</td><td>Animation wiederholt sich automatisch bis zum Stopp.</td></tr>
 </table>
+
+<div class="tip"><b>◉ Ausgaben-Schalter</b>
+  Der <strong>◉ Ausgaben</strong>-Button ist ein Schalter: einmal klicken = Aktivierungswerte einblenden (Button leuchtet grün), erneut klicken = ausblenden. So kann die Ansichtsdauer frei bestimmt werden.
+</div>
 
 <h2>Eingabewerte</h2>
 <p>Im Simulationsmodus erscheint links neben jedem Input-Neuron ein Eingabefeld direkt auf dem Canvas. Werte können dort oder im Seitenpanel geändert werden — beides ist synchron. <kbd>Enter</kbd> oder <kbd>Tab</kbd> startet die Neuberechnung.</p>
@@ -431,16 +438,23 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
 </table>
 
 <h3>Einzelschritt-Modus (🔬)</h3>
-<p>Erlaubt es, jeden einzelnen Trainingsschritt manuell durchzuführen und die Zwischenwerte zu inspizieren.</p>
+<p>Erlaubt es, jeden einzelnen Trainingsschritt — einschließlich feingranularer Zwischenschritte — manuell durchzuführen und die Berechnungswerte auf dem Canvas zu inspizieren. Jede Phase stoppt eigenständig; automatisches Weiterschalten findet nicht statt.</p>
 <table>
-<tr><th>Schaltfläche</th><th>Aktion</th></tr>
-<tr><td>→ Forward</td><td>Vorwärtspropagation: Berechnet Aktivierungen und Ausgaben für den aktuellen Datensatz.</td></tr>
-<tr><td>← Backward</td><td>Rückwärtspropagation: Berechnet Gradienten (δ, dW, dB) über alle Schichten.</td></tr>
-<tr><td>⟳ Weight Update</td><td>Wendet die berechneten Gradienten auf die Gewichte an.</td></tr>
-<tr><td>▶▶ Alle 3</td><td>Führt Forward, Backward und Weight Update in einem Schritt aus.</td></tr>
-<tr><td>↻ Epoche</td><td>Führt einen kompletten Epochen­durchlauf durch.</td></tr>
-<tr><td>Sample-Auswahl</td><td>Dropdown zur Wahl des aktiven Trainings­beispiels.</td></tr>
+<tr><th>Schaltfläche</th><th>Phase</th><th>Aktion</th></tr>
+<tr><td>→ Forward</td><td><span class="badge b-green">fw</span></td><td>Vorwärtspropagation: animierte Signalpakete fließen schichtweise durch die Verbindungen.</td></tr>
+<tr><td><span class="badge b-green">◉ Ausgaben</span></td><td><span class="badge b-green">fwout</span></td><td><strong>Schalter:</strong> Blendet die Aktivierungswerte aller Neuronen dauerhaft als Badges ein (a = …). Erneuter Klick schaltet aus.</td></tr>
+<tr><td>← Backward</td><td><span class="badge b-purple">bw</span></td><td>Rückwärtspropagation: animierte Gradienten­pakete fließen rückwärts durch das Netz.</td></tr>
+<tr><td><span class="badge b-purple">◉ Deltas</span></td><td><span class="badge b-purple">bwout</span></td><td><strong>Schalter:</strong> Blendet die Delta-Werte aller Neuronen dauerhaft ein (δ = …). Erneuter Klick schaltet aus.</td></tr>
+<tr><td>⟳ Update</td><td><span class="badge b-yellow">wu</span></td><td>Wendet die Gradienten auf die Gewichte an. Verbindungen leuchten grün (Δw &gt; 0) oder rot (Δw &lt; 0) auf.</td></tr>
+<tr><td>▶▶ Alle 5</td><td>—</td><td>Führt alle fünf Teilschritte (fw → ◉ Ausgaben → bw → ◉ Deltas → wu) automatisch nacheinander aus.</td></tr>
+<tr><td>↻ Epoche</td><td>—</td><td>Führt einen kompletten Epochen­durchlauf durch (alle Datensätze, aggregierter Weight Update).</td></tr>
+<tr><td>↺ Reset</td><td>—</td><td>Gewichte neu initialisieren, Zähler zurücksetzen.</td></tr>
+<tr><td>Sample-Auswahl</td><td>—</td><td>Dropdown zur Wahl des aktiven Trainings­beispiels.</td></tr>
 </table>
+
+<div class="info"><b>◉ Ausgaben / ◉ Deltas als Schalter</b>
+  Beide Buttons sind Umschalter: einmal klicken = Werte einblenden (Button leuchtet auf), erneut klicken = sofort ausblenden. Die Anzeige bleibt so lange sichtbar, wie der Schalter aktiv ist — ideal zum Nachvollziehen der Berechnungen.
+</div>
 
 <p>Im Einzelschritt-Modus zeigen drei Info-Spalten die Berechnungen im Detail:</p>
 <ul class="feat">
