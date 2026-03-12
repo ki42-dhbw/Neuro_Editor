@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vergleich: Menschliches Neuron vs. Künstliches Neuron</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f6f9;
+            color: #333;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            max-width: 500px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        ul {
+            line-height: 1.6;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #2c3e50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Vergleich: Menschliches Neuron vs. Künstliches Neuron (KI)</h1>
+    <p>Eine visuelle Gegenüberstellung biologischer und künstlicher Informationsverarbeitung</p>
+</header>
+
+<section class="container">
+
+    <!-- Menschliches Neuron -->
+    <div class="card">
+        <h2>🧠 Menschliches Neuron (Biologisch)</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Neuron_%28deutsch%29-1.svg" alt="Menschliches Neuron Diagramm">
+        <p style="font-size: 0.9em; color: #666;">Beschriftetes Diagramm eines biologischen Neurons (Dendriten, Soma, Axon)</p>
+        <ul>
+            <li><strong>Dendriten:</strong> Empfangen Signale von anderen Neuronen</li>
+            <li><strong>Zellkörper (Soma):</strong> Verarbeitet die eingehenden Signale</li>
+            <li><strong>Axon:</strong> Leitet elektrische Impulse weiter</li>
+            <li><strong>Synapsen:</strong> Verbindung zu anderen Neuronen</li>
+            <li><strong>Lernen:</strong> Durch Anpassung der Synapsenstärke (Plastizität)</li>
+            <li><strong>Signalart:</strong> Elektrochemisch</li>
+        </ul>
+    </div>
+
+    <!-- Künstliches Neuron -->
+    <div class="card">
+        <h2>🤖 Künstliches Neuron (KI / Neuronales Netz)</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/ArtificialNeuronModel_english.png" alt="Künstliches Neuron Diagramm">
+        <ul>
+            <li><strong>Eingaben (Inputs):</strong> Datenwerte (x₁, x₂, x₃, ...)</li>
+            <li><strong>Gewichte (Weights):</strong> Bestimmen die Wichtigkeit der Eingaben</li>
+            <li><strong>Summation:</strong> Gewichtete Summe der Eingaben</li>
+            <li><strong>Aktivierungsfunktion:</strong> Entscheidet über die Ausgabe</li>
+            <li><strong>Ausgabe (Output):</strong> Ergebnis der Berechnung</li>
+            <li><strong>Lernen:</strong> Anpassung der Gewichte durch Training (Backpropagation)</li>
+        </ul>
+    </div>
+
+</section>
+
+<section style="padding: 30px; max-width: 1000px; margin: auto;">
+    <h2>🔍 Direkter Vergleich</h2>
+    <table style="width:100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden;">
+        <thead style="background: #34495e; color: white;">
+            <tr>
+                <th style="padding: 12px;">Eigenschaft</th>
+                <th style="padding: 12px;">Menschliches Neuron</th>
+                <th style="padding: 12px;">Künstliches Neuron (KI)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 12px;">Struktur</td>
+                <td style="padding: 12px;">Biologische Zelle</td>
+                <td style="padding: 12px;">Mathematisches Modell</td>
+            </tr>
+            <tr style="background:#f2f2f2;">
+                <td style="padding: 12px;">Signalverarbeitung</td>
+                <td style="padding: 12px;">Elektrochemische Impulse</td>
+                <td style="padding: 12px;">Numerische Berechnung</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px;">Geschwindigkeit</td>
+                <td style="padding: 12px;">Relativ langsam (Millisekunden)</td>
+                <td style="padding: 12px;">Sehr schnell (Nanosekunden)</td>
+            </tr>
+            <tr style="background:#f2f2f2;">
+                <td style="padding: 12px;">Lernen</td>
+                <td style="padding: 12px;">Synaptische Plastizität</td>
+                <td style="padding: 12px;">Gewichtsoptimierung (Training)</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px;">Komplexität</td>
+                <td style="padding: 12px;">Extrem komplex und biologisch</td>
+                <td style="padding: 12px;">Vereinfachtes Modell</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<footer>
+    <p>Erstellt als Vergleich zwischen biologischen und künstlichen neuronalen Systemen</p>
+</footer>
+
+</body>
+</html>

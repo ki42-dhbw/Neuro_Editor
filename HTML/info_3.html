@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><title>Backpropagation — Schritt für Schritt</title>
+<style>
+:root{--bg:#0a0c12;--surface:#111318;--border:#1e2330;--text:#e2e8f0;--dim:#64748b;
+  --accent:#00d4ff;--green:#10b981;--purple:#a78bfa;--orange:#f59e0b;--red:#ef4444;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);
+  padding:28px 32px;line-height:1.7;font-size:14px;}
+h1{font-size:20px;font-weight:800;color:var(--purple);margin-bottom:6px;}
+h2{font-size:14px;font-weight:700;color:var(--accent);margin:22px 0 8px;
+  padding-bottom:4px;border-bottom:1px solid var(--border);}
+p{margin-bottom:12px;color:#cbd5e1;}
+.formula{background:#05080f;border:1px solid var(--border);border-radius:6px;
+  padding:12px 16px;font-family:monospace;font-size:13px;color:var(--accent);
+  margin:10px 0;text-align:center;}
+.step{background:#111318;border:1px solid #1e2330;border-radius:8px;
+  padding:14px 18px;margin:12px 0;border-left:3px solid var(--purple);}
+.step-num{font-size:10px;font-weight:700;color:var(--purple);letter-spacing:.1em;
+  text-transform:uppercase;margin-bottom:6px;}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0;}
+th{background:#0d1018;color:var(--purple);padding:6px 10px;
+  border:1px solid var(--border);font-size:11px;}
+td{padding:6px 10px;border:1px solid var(--border);color:#94a3b8;}
+a{color:var(--accent);}
+</style></head><body>
+<h1>← Backpropagation im Detail</h1>
+<p>Backpropagation ist der Algorithmus, mit dem neuronale Netze lernen. Er berechnet, wie stark jedes Gewicht zum Fehler beiträgt.</p>
+
+<h2>Schritt 1 — Verlust berechnen</h2>
+<div class="step"><div class="step-num">Forward Pass abgeschlossen</div>
+<p>Nach dem Forward Pass liegt die Vorhersage ŷ vor. Der Verlust misst den Fehler:</p>
+<div class="formula">L = 1/n · Σ(ŷᵢ − yᵢ)²  &nbsp;(MSE)</div></div>
+
+<h2>Schritt 2 — Ausgabeschicht δ</h2>
+<div class="step"><div class="step-num">Output-Neuronen</div>
+<p>Das Delta (Fehlersignal) der Ausgabeneuronen:</p>
+<div class="formula">δ_out = (ŷ − y) · f′(z)</div>
+<p>wobei f′(z) die Ableitung der Aktivierungsfunktion ist.</p></div>
+
+<h2>Schritt 3 — Rückwärts propagieren</h2>
+<div class="step"><div class="step-num">Versteckte Schichten</div>
+<div class="formula">δ_h = (Σ w_out · δ_out) · f′(z_h)</div>
+<p>Die Deltas fließen rückwärts — gewichtet durch die Verbindungsgewichte.</p></div>
+
+<h2>Schritt 4 — Gradienten berechnen</h2>
+<div class="step"><div class="step-num">Alle Gewichte</div>
+<div class="formula">∂L/∂w = δ · a_prev</div>
+<p>Der Gradient ist das Produkt aus Delta des Zielneurons und der Aktivierung des Quellneurons.</p></div>
+
+<h2>Schritt 5 — Gewichte aktualisieren</h2>
+<div class="step"><div class="step-num">Weight Update</div>
+<div class="formula">w ← w − η · ∂L/∂w</div>
+<p>η ist die Lernrate. Adam passt diese pro Gewicht adaptiv an.</p></div>
+
+<h2>Ableitungen der Aktivierungsfunktionen</h2>
+<table>
+  <tr><th>Funktion</th><th>Ableitung f′(z)</th></tr>
+  <tr><td>ReLU</td><td>1 wenn z&gt;0, sonst 0</td></tr>
+  <tr><td>Sigmoid σ</td><td>σ(z)·(1−σ(z))</td></tr>
+  <tr><td>Tanh</td><td>1 − tanh²(z)</td></tr>
+  <tr><td>Linear</td><td>1</td></tr>
+</table>
+<p style="margin-top:20px"><a href="info_1.html">← Zurück zur Übersicht</a></p>
+</body></html>

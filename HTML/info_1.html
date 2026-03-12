@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slideshow: Neuron vs. Künstliches Neuronales Netz</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #1e1e2f;
+        color: white;
+        overflow: hidden;
+    }
+
+    .slide {
+        display: none;
+        height: 100vh;
+        width: 100vw;
+        padding: 40px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .active {
+        display: block;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #00d4ff;
+        margin-top: 20px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+
+    .card {
+        background: #2a2a40;
+        padding: 20px;
+        border-radius: 12px;
+        width: 420px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    img {
+        max-width: 100%;
+        border-radius: 8px;
+        background: white;
+        padding: 5px;
+    }
+
+    ul {
+        text-align: left;
+        line-height: 1.6;
+    }
+
+    .hint {
+        margin-top: 15px;
+        font-size: 1em;
+        color: #aaaaaa;
+    }
+
+    code {
+        background: #111;
+        padding: 6px 10px;
+        border-radius: 6px;
+        display: inline-block;
+        margin-top: 5px;
+        white-space: pre-wrap;
+    }
+
+    /* Navigation Buttons */
+    .controls {
+        position: fixed;
+        bottom: 70px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .btn {
+        background: #00d4ff;
+        color: black;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background: #00aacc;
+    }
+
+    /* Dots Navigation */
+    .dots {
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .dot {
+        height: 14px;
+        width: 14px;
+        margin: 0 6px;
+        background-color: #555;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .dot.active-dot {
+        background-color: #00d4ff;
+    }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 -->
+<div class="slide active">
+    <h1>Vergleich: Menschliches Neuron vs. Künstliches Neuron (KI)</h1>
+
+    <div class="container">
+        <div class="card">
+            <h2>🧠 Menschliches Neuron (Biologie)</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Neuron_%28deutsch%29-1.svg" alt="Menschliches Neuron">
+            <ul>
+                <li><strong>Dendriten:</strong> Empfangen Signale</li>
+                <li><strong>Zellkörper (Soma):</strong> Verarbeitet Informationen</li>
+                <li><strong>Axon:</strong> Leitet elektrische Impulse weiter</li>
+                <li><strong>Synapsen:</strong> Verbindung zu anderen Neuronen</li>
+                <li><strong>Signalart:</strong> Elektrochemisch</li>
+                <li><strong>Lernen:</strong> Synaptische Plastizität</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🤖 Künstliches Neuron (KI)</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/ArtificialNeuronModel_english.png" alt="Künstliches Neuron">
+            <ul>
+                <li><strong>Inputs:</strong> Eingangsdaten (x₁, x₂, x₃)</li>
+                <li><strong>Gewichte:</strong> Wichtigkeit der Eingaben</li>
+                <li><strong>Summation:</strong> Gewichtete Berechnung</li>
+                <li><strong>Aktivierungsfunktion:</strong> Entscheidung über Output</li>
+                <li><strong>Output:</strong> Ergebnis der Berechnung</li>
+                <li><strong>Lernen:</strong> Anpassung der Gewichte (Training)</li>
+            </ul>
+        </div>
+    </div>
+
+    <p class="hint">➡️ Klick, Pfeiltasten oder Buttons zum Navigieren</p>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide">
+    <h1>Aufbau eines Künstlichen Neuronalen Netzes</h1>
+
+    <div class="container">
+        <div class="card">
+            <h2>📥 Eingabeschicht (Input Layer)</h2>
+            <ul>
+                <li>Erste Schicht des Netzwerks</li>
+                <li>Nimmt Rohdaten auf (Bilder, Zahlen, Text)</li>
+                <li>Jedes Neuron = ein Eingabewert</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🧠 Hidden Layers</h2>
+            <ul>
+                <li>Mehrere Schichten künstlicher Neuronen</li>
+                <li>Erkennen Muster und Zusammenhänge</li>
+                <li>Gewichtete Berechnungen + Aktivierungsfunktionen</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>📤 Output Layer</h2>
+            <ul>
+                <li>Letzte Schicht des Netzwerks</li>
+                <li>Liefert das finale Ergebnis</li>
+                <li>z. B. Klassifikation oder Vorhersage</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>⚙️ Lernprozess</h2>
+            <ul>
+                <li>Training mit Datensätzen</li>
+                <li>Loss Function misst den Fehler</li>
+                <li>Backpropagation passt Gewichte an</li>
+                <li>Optimierung mit Gradient Descent</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide">
+    <h1>Python, TensorFlow und Keras</h1>
+
+    <div class="container">
+        <div class="card">
+            <h2>🐍 Python</h2>
+            <ul>
+                <li>Beliebte Sprache für KI und Machine Learning</li>
+                <li>Einfache Syntax und viele Bibliotheken</li>
+                <li>Steuert das Training neuronaler Netze</li>
+            </ul>
+            <code>import tensorflow as tf</code>
+        </div>
+
+        <div class="card">
+            <h2>🧠 TensorFlow</h2>
+            <ul>
+                <li>KI-Framework von Google</li>
+                <li>Berechnet Matrizen und neuronale Netze</li>
+                <li>Nutzt CPU und GPU für schnelles Training</li>
+                <li>Skalierbar für große Modelle</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>⚙️ Keras</h2>
+            <ul>
+                <li>Benutzerfreundliche API auf TensorFlow</li>
+                <li>Erstellt Modelle mit wenigen Zeilen Code</li>
+                <li>Ideal für Schule und Einsteiger</li>
+            </ul>
+            <code>from tensorflow import keras</code>
+        </div>
+
+        <div class="card">
+            <h2>📊 Beispiel Modell</h2>
+            <code>
+model = keras.Sequential([
+  keras.layers.Dense(10, activation="relu"),
+  keras.layers.Dense(1)
+])
+model.compile(optimizer="adam", loss="mse")
+            </code>
+        </div>
+    </div>
+</div>
+
+<!-- Steuerung -->
+<div class="controls">
+    <button class="btn" onclick="prevSlide()">◀ Zurück</button>
+    <button class="btn" onclick="goToSlide(0)">1</button>
+    <button class="btn" onclick="goToSlide(1)">2</button>
+    <button class="btn" onclick="goToSlide(2)">3</button>
+    <button class="btn" onclick="nextSlide()">Weiter ▶</button>
+</div>
+
+<div class="dots">
+    <span class="dot active-dot" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function updateDots() {
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active-dot', i === currentSlide);
+        });
+    }
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+        currentSlide = index;
+        updateDots();
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function goToSlide(index) {
+        showSlide(index);
+    }
+
+    // Tastatursteuerung (Pfeiltasten)
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowRight') nextSlide();
+        if (event.key === 'ArrowLeft') prevSlide();
+        if (event.key === '1') goToSlide(0);
+        if (event.key === '2') goToSlide(1);
+        if (event.key === '3') goToSlide(2);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><title>Das XOR-Problem</title>
+<style>
+:root{--bg:#0a0c12;--surface:#111318;--border:#1e2330;--text:#e2e8f0;--dim:#64748b;
+  --accent:#00d4ff;--green:#10b981;--purple:#a78bfa;--orange:#f59e0b;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);
+  padding:28px 32px;line-height:1.7;font-size:14px;}
+h1{font-size:20px;font-weight:800;color:var(--orange);margin-bottom:6px;}
+h2{font-size:14px;font-weight:700;color:var(--accent);margin:22px 0 8px;
+  padding-bottom:4px;border-bottom:1px solid var(--border);}
+p{margin-bottom:12px;color:#cbd5e1;}
+table{border-collapse:collapse;margin:12px auto;font-size:13px;}
+th{background:#0d1018;color:var(--accent);padding:8px 20px;
+  border:1px solid var(--border);}
+td{padding:7px 20px;border:1px solid var(--border);color:#94a3b8;text-align:center;}
+td.one{color:var(--green);font-weight:700;}
+td.zero{color:#475569;}
+.note{background:#0d1a0e;border-left:3px solid var(--green);padding:10px 14px;
+  border-radius:0 6px 6px 0;font-size:12px;color:#86efac;margin:12px 0;}
+.xor-vis{display:grid;grid-template-columns:1fr 1fr;gap:4px;
+  width:160px;margin:16px auto;font-family:monospace;font-size:20px;text-align:center;}
+.xor-vis div{padding:16px;background:#111318;border:1px solid #1e2330;border-radius:6px;}
+.xor-vis .on{color:var(--green);border-color:#10b98144;}
+.xor-vis .off{color:#334155;}
+a{color:var(--accent);}
+</style></head><body>
+<h1>⊕ Das XOR-Problem</h1>
+<p>XOR (Exklusiv-Oder) ist das klassische Beispiel für ein Problem, das ein <strong>einfaches Perceptron nicht lösen kann</strong> — aber ein mehrschichtiges Netz schon.</p>
+
+<h2>Wahrheitstabelle</h2>
+<table>
+  <tr><th>x₁</th><th>x₂</th><th>x₁ XOR x₂</th></tr>
+  <tr><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td></tr>
+  <tr><td class="zero">0</td><td class="one">1</td><td class="one">1</td></tr>
+  <tr><td class="one">1</td><td class="zero">0</td><td class="one">1</td></tr>
+  <tr><td class="one">1</td><td class="one">1</td><td class="zero">0</td></tr>
+</table>
+
+<h2>Visualisierung</h2>
+<div class="xor-vis">
+  <div class="off">0<br><small>(0,0)</small></div>
+  <div class="on">1<br><small>(0,1)</small></div>
+  <div class="on">1<br><small>(1,0)</small></div>
+  <div class="off">0<br><small>(1,1)</small></div>
+</div>
+<p style="text-align:center;font-size:11px;color:#475569">Die 1er sind nicht linear trennbar!</p>
+
+<h2>Warum scheitert das Perceptron?</h2>
+<p>Ein einzelnes Neuron kann nur eine <strong>lineare Entscheidungsgrenze</strong> (Hyperebene) ziehen. XOR-Daten sind jedoch nicht linear trennbar — es gibt keine Gerade, die 0- von 1-Ausgaben trennt.</p>
+
+<h2>Lösung: Versteckte Schicht</h2>
+<div class="note">
+  <strong>Netzstruktur für XOR:</strong> 2 Inputs → 2 Hidden (ReLU oder Sigmoid) → 1 Output (Sigmoid)<br>
+  Mit Backpropagation lernt das Netz die richtige nicht-lineare Grenze.
+</div>
+
+<h2>Im Neural Network Builder ausprobieren</h2>
+<p>Klicke im Training-Tab auf <strong>XOR</strong> um die Trainingsdaten zu laden, dann starte das Training oder nutze den Einzelschritt-Modus um jeden Lernschritt zu beobachten.</p>
+
+<p style="margin-top:20px"><a href="info_1.html">← Zurück zur Übersicht</a></p>
+</body></html>

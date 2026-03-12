@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Hilfe — Neural Network Builder</title>
+<style>
+:root{
+  --bg:#0a0c10;--surface:#111318;--surface2:#181c24;--border:#252a35;
+  --accent:#00d4ff;--accent2:#ff6b35;--accent3:#a78bfa;--accent4:#10b981;
+  --text:#e2e8f0;--dim:#64748b;--red:#ef4444;--yellow:#f59e0b;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);
+  font-size:13px;line-height:1.65;}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:#0a0c10ee;
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--border);
+  padding:8px 16px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+nav a{font-size:10px;color:var(--dim);text-decoration:none;padding:2px 7px;
+  border:1px solid transparent;border-radius:3px;white-space:nowrap;transition:all .15s;}
+nav a:hover{color:var(--accent);border-color:var(--accent);}
+.nav-title{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.1em;
+  text-transform:uppercase;margin-right:6px;white-space:nowrap;}
+
+/* ── LAYOUT ── */
+main{max-width:860px;margin:0 auto;padding:24px 20px 60px;}
+
+/* ── SECTION ── */
+section{margin-bottom:36px;}
+h1{font-size:20px;font-weight:800;color:var(--accent);letter-spacing:.06em;
+  margin-bottom:4px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+h2{font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.08em;
+  text-transform:uppercase;margin:22px 0 10px;padding-left:8px;
+  border-left:3px solid var(--accent);}
+h3{font-size:12px;font-weight:700;color:var(--accent3);margin:14px 0 6px;}
+p{margin-bottom:8px;color:#cbd5e1;}
+.sub{font-size:11px;color:var(--dim);margin-bottom:14px;}
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:11.5px;}
+th{background:var(--surface2);color:var(--dim);text-align:left;
+  padding:5px 10px;font-weight:600;letter-spacing:.06em;font-size:10px;
+  text-transform:uppercase;border:1px solid var(--border);}
+td{padding:5px 10px;border:1px solid var(--border);vertical-align:top;color:#cbd5e1;}
+tr:nth-child(even) td{background:#0d1018;}
+td:first-child{white-space:nowrap;}
+
+/* ── BADGE ── */
+.badge{display:inline-block;padding:1px 7px;border-radius:3px;font-size:10px;
+  font-weight:700;font-family:'Courier New',monospace;border:1px solid;}
+.b-cyan{background:#00d4ff18;color:var(--accent);border-color:var(--accent);}
+.b-orange{background:#ff6b3518;color:var(--accent2);border-color:var(--accent2);}
+.b-purple{background:#a78bfa18;color:var(--accent3);border-color:var(--accent3);}
+.b-green{background:#10b98118;color:var(--accent4);border-color:var(--accent4);}
+.b-yellow{background:#f59e0b18;color:var(--yellow);border-color:var(--yellow);}
+.b-red{background:#ef444418;color:var(--red);border-color:var(--red);}
+.b-dim{background:#25293518;color:var(--dim);border-color:var(--border);}
+
+/* ── KEY ── */
+kbd{display:inline-block;padding:1px 6px;border-radius:3px;font-size:10px;
+  font-family:'Courier New',monospace;background:var(--surface2);
+  border:1px solid #374151;border-bottom:2px solid #374151;color:var(--text);}
+
+/* ── TIP / INFO / WARN ── */
+.info,.warn,.tip{border-radius:5px;padding:9px 12px;margin:10px 0;font-size:12px;}
+.info{background:#00d4ff0d;border-left:3px solid var(--accent);}
+.warn{background:#f59e0b0d;border-left:3px solid var(--yellow);}
+.tip{background:#10b9810d;border-left:3px solid var(--accent4);}
+.info b,.warn b,.tip b{display:block;font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;margin-bottom:3px;}
+.info b{color:var(--accent);}
+.warn b{color:var(--yellow);}
+.tip b{color:var(--accent4);}
+
+/* ── CARD GRID ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin:8px 0;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:6px;
+  padding:10px 12px;}
+.card-title{font-size:11px;font-weight:700;margin-bottom:4px;}
+.card p{font-size:11px;color:var(--dim);margin:0;}
+.card .formula{font-family:'Courier New',monospace;font-size:10px;
+  color:var(--accent3);margin-top:3px;}
+
+/* ── STEP LIST ── */
+ol.steps{padding-left:0;list-style:none;counter-reset:steps;}
+ol.steps li{counter-increment:steps;display:flex;gap:10px;margin-bottom:8px;font-size:12px;}
+ol.steps li::before{content:counter(steps);min-width:20px;height:20px;
+  border-radius:50%;background:var(--accent);color:#000;font-weight:700;font-size:10px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+ul.feat{padding-left:0;list-style:none;}
+ul.feat li{padding:3px 0 3px 14px;position:relative;font-size:12px;color:#cbd5e1;}
+ul.feat li::before{content:'›';position:absolute;left:0;color:var(--accent);font-weight:700;}
+
+/* ── SEPARATOR ── */
+hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-title">ℹ Hilfe</span>
+  <a href="#ueberblick">Überblick</a>
+  <a href="#toolbar">Toolbar</a>
+  <a href="#neuronen">Neuronen</a>
+  <a href="#aktivierung">Aktivierungen</a>
+  <a href="#canvas">Canvas</a>
+  <a href="#verbindungen">Verbindungen</a>
+  <a href="#simulation">Simulation</a>
+  <a href="#training">Training</a>
+  <a href="#hyperparameter">Hyperparameter</a>
+  <a href="#shortcuts">Shortcuts</a>
+  <a href="#speichern">Speichern</a>
+  <a href="#generator">Generator</a>
+  <a href="#infopanel">Info-Panel</a>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="ueberblick">
+<h1>Neural Network Builder — Hilfe</h1>
+<p class="sub">Visueller Editor zum Erstellen, Simulieren und Trainieren neuronaler Netze</p>
+
+<p>Der <strong>Neural Network Builder</strong> ermöglicht es, neuronale Netze vollständig grafisch aufzubauen: Neuronen per Drag&nbsp;&amp;&nbsp;Drop platzieren, Verbindungen durch einfaches Klicken herstellen, Aktivierungsfunktionen zuweisen und das Netz entweder simulieren (Forward Pass) oder überwacht trainieren (Backpropagation).</p>
+
+<div class="info"><b>Schnellstart</b>
+  1. Neuronen aus der rechten Seitenleiste auf die Zeichenfläche ziehen &nbsp;·&nbsp;
+  2. Verbinden-Modus aktivieren und Neuronen verknüpfen &nbsp;·&nbsp;
+  3. Simulation starten oder Trainingsdaten eingeben
+</div>
+
+<div class="grid">
+  <div class="card"><div class="card-title" style="color:var(--accent4)">● Input-Neuron</div><p>Eingabe­größe des Netzes. Kein Aktivierungs­aufwand nötig.</p></div>
+  <div class="card"><div class="card-title" style="color:var(--accent)">● Hidden-Neuron</div><p>Verarbeitung in versteckten Schichten mit Aktivierungsfunktion.</p></div>
+  <div class="card"><div class="card-title" style="color:var(--accent2)">● Output-Neuron</div><p>Ergebnis­knoten. Keine Aktivierungs­funktion, kein Bias.</p></div>
+  <div class="card"><div class="card-title" style="color:var(--yellow)">● Bias-Neuron</div><p>Konstanter Eingang&nbsp;= 1. Gewicht entspricht dem Bias-Wert.</p></div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="toolbar">
+<h1>Obere Werkzeugleiste</h1>
+
+<h2>Modi</h2>
+<table>
+<tr><th>Schaltfläche</th><th>Tastenkürzel</th><th>Beschreibung</th></tr>
+<tr><td><span class="badge b-cyan">⬆ Auswahl</span></td><td><kbd>S</kbd></td>
+  <td>Standardmodus. Neuronen anklicken, verschieben, per Lasso-Rechteck gruppieren oder mit <kbd>Shift</kbd>+Klick mehrfach auswählen. <kbd>Ctrl</kbd>+<kbd>A</kbd> wählt alle.</td></tr>
+<tr><td><span class="badge b-orange">⟶ Verbinden</span></td><td><kbd>C</kbd></td>
+  <td>Verbindungs­modus. Erstes Neuron anklicken (leuchtet orange), dann Zielneuron. Animierte Vorschaulinie zeigt die geplante Verbindung.</td></tr>
+</table>
+
+<h2>Raster</h2>
+<table>
+<tr><th>Steuerelement</th><th>Beschreibung</th></tr>
+<tr><td>Raster&nbsp;☐</td><td>Raster ein-/ausschalten. Neuronen rasten am nächsten Gitterpunkt ein.</td></tr>
+<tr><td>Größen-Slider</td><td>Rastergröße 10–80&nbsp;px (Standard: 30&nbsp;px).</td></tr>
+</table>
+
+<h2>Zoom</h2>
+<table>
+<tr><th>Aktion</th><th>Tastenkürzel / Maus</th><th>Wertbereich</th></tr>
+<tr><td>Herauszoomen</td><td><kbd>−</kbd> · Mausrad ↓ · <kbd>Ctrl</kbd><kbd>−</kbd></td><td rowspan="3">10 %–400 %</td></tr>
+<tr><td>Hineinzoomen</td><td><kbd>+</kbd> · Mausrad ↑ · <kbd>Ctrl</kbd><kbd>+</kbd></td></tr>
+<tr><td>Zoom zurücksetzen</td><td>⟳-Schaltfläche</td></tr>
+</table>
+
+<h2>Weitere Toolbar-Aktionen</h2>
+<table>
+<tr><th>Schaltfläche</th><th>Beschreibung</th></tr>
+<tr><td>Aa-Slider</td><td>Schriftgröße auf dem Canvas skalieren (50–200&nbsp;%, gilt für Neuronen-, Gewichts- und Label-Beschriftungen).</td></tr>
+<tr><td><span class="badge b-red">✕ Neu</span></td><td>Alles löschen nach Bestätigung. Nicht rückgängig machbar.</td></tr>
+<tr><td>⬇ Speichern</td><td>Netzwerk als JSON-Datei exportieren (Neuronen, Verbindungen, Gewichte, Viewport, Bereiche).</td></tr>
+<tr><td>⬆ Laden</td><td>Gespeicherte JSON-Datei importieren. Ersetzt das aktuelle Netzwerk.</td></tr>
+<tr><td>⊞ Generieren</td><td>Automatisch ein vollvernetztes Netzwerk erstellen (→ <a href="#generator">Generator</a>).</td></tr>
+<tr><td>⚡ Lernen</td><td>Öffnet das Trainings­panel mit Backpropagation (→ <a href="#training">Training</a>).</td></tr>
+<tr><td>▶ Simulation</td><td>Öffnet den Simulationsmodus für den Forward Pass (→ <a href="#simulation">Simulation</a>).</td></tr>
+</table>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="neuronen">
+<h1>Neuron-Typen</h1>
+<p>Neuronen werden aus der rechten Seitenleiste per <strong>Drag&nbsp;&amp;&nbsp;Drop</strong> auf die Zeichenfläche gezogen. Alternativ: Rechtsklick auf die Zeichenfläche → Neuron hinzufügen.</p>
+
+<table>
+<tr><th>Typ</th><th>Symbol</th><th>Farbe</th><th>Eigenschaften</th></tr>
+<tr>
+  <td><strong>Input</strong></td>
+  <td><span class="badge b-green">IN</span></td>
+  <td style="color:var(--accent4)">Grün</td>
+  <td>Repräsentiert eine Eingabegröße (x₁, x₂, …). Im Simulationsmodus erscheint ein direkt editierbares Eingabefeld auf dem Canvas. Keine Aktivierungsfunktion nötig.</td>
+</tr>
+<tr>
+  <td><strong>Hidden</strong></td>
+  <td><span class="badge b-cyan">H</span></td>
+  <td style="color:var(--accent)">Cyan</td>
+  <td>Verarbeitungsknoten in versteckten Schichten. Empfängt gewichtete Eingaben, summiert sie und wendet die gewählte Aktivierungsfunktion an.</td>
+</tr>
+<tr>
+  <td><strong>Output</strong></td>
+  <td><span class="badge b-orange">OUT</span></td>
+  <td style="color:var(--accent2)">Orange</td>
+  <td>Ausgabeknoten des Netzwerks. <em>Keine</em> Aktivierungsfunktion und <em>kein</em> Bias-Neuron zulässig. Liefert das Endergebnis der Berechnung.</td>
+</tr>
+<tr>
+  <td><strong>Bias</strong></td>
+  <td><span class="badge b-yellow">B</span></td>
+  <td style="color:var(--yellow)">Gelb</td>
+  <td>Konstante Eingabe mit festem Wert&nbsp;1. Das Verbindungsgewicht vom Bias zum nächsten Neuron entspricht dem klassischen Bias-Wert. Kann <em>nicht</em> mit Output-Neuronen verbunden werden.</td>
+</tr>
+</table>
+
+<h2>Neuron-Eigenschaften bearbeiten</h2>
+<ul class="feat">
+  <li><strong>Bezeichnung:</strong> Rechtsklick → „Bezeichnung ändern" oder Properties-Panel (rechte Seitenleiste nach Auswahl).</li>
+  <li><strong>Aktivierungsfunktion:</strong> Funktion aus der Seitenleiste auf das Neuron ziehen, oder Rechtsklick → Aktivierungsfunktion wählen.</li>
+  <li><strong>Σ-Symbol:</strong> Rechtsklick → „Σ-Symbol einblenden/ausblenden" — visualisiert die Summation am Neuron.</li>
+  <li><strong>Löschen:</strong> Neuron auswählen + <kbd>Del</kbd>, oder Rechtsklick → „Neuron löschen".</li>
+</ul>
+
+<div class="tip"><b>Tipp</b>
+  Im <strong>Properties-Panel</strong> (erscheint bei Auswahl automatisch in der Seitenleiste) können Bezeichnung und Aktivierungsfunktion direkt per Dropdown gesetzt werden.
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="aktivierung">
+<h1>Aktivierungsfunktionen</h1>
+<p>Aktivierungsfunktionen werden durch <strong>Drag&nbsp;&amp;&nbsp;Drop</strong> aus der Seitenleiste auf ein Neuron gezogen. Alternativ: Rechtsklick auf Neuron. Nicht anwendbar auf Input-, Output- und Bias-Neuronen.</p>
+
+<div class="grid">
+  <div class="card">
+    <div class="card-title" style="color:#f87171">ReLU</div>
+    <p>Standard für Hidden Layers. Löst das Vanishing-Gradient-Problem.</p>
+    <div class="formula">f(x) = max(0, x)</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:#34d399">Sigmoid</div>
+    <p>Ausgabe in [0, 1]. Gut für binäre Klassifikation. Neigt zu Vanishing Gradient.</p>
+    <div class="formula">f(x) = 1 / (1 + e⁻ˣ)</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:#60a5fa">Tanh</div>
+    <p>Ausgabe in [−1, 1]. Zentriert um 0 — besser als Sigmoid für Hidden Layers.</p>
+    <div class="formula">f(x) = tanh(x)</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:#a78bfa">Softmax</div>
+    <p>Normalisiert mehrere Ausgaben zu Wahrscheinlichkeiten (Summe = 1). Mehrklassen­klassifikation.</p>
+    <div class="formula">f(xᵢ) = eˣⁱ / Σeˣʲ</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:#94a3b8">Linear</div>
+    <p>Keine Nichtlinearität. Für Regression oder als Pass-Through-Schicht.</p>
+    <div class="formula">f(x) = x</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:#fb923c">Leaky ReLU</div>
+    <p>Behebt das „Dead Neuron"-Problem von ReLU durch kleinen negativen Gradienten.</p>
+    <div class="formula">f(x) = x ≥ 0 ? x : αx  (α ≈ 0.15)</div>
+  </div>
+</div>
+
+<h2>Anzeigeoptionen (Seitenleiste)</h2>
+<table>
+<tr><th>Option</th><th>Beschreibung</th></tr>
+<tr><td>Aktivierungsgrafik</td><td>Zeigt die Funktion als Mini-Diagramm rechts neben dem Neuron auf dem Canvas.</td></tr>
+<tr><td>Aktivierungslabel</td><td>Zeigt den Funktionsnamen als farbiges Pill-Label am Neuron.</td></tr>
+<tr><td>Gewichtswerte</td><td>Blendet die numerischen Gewichte auf den Verbindungslinien ein oder aus.</td></tr>
+</table>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="canvas">
+<h1>Canvas — Zeichenfläche</h1>
+
+<h2>Navigation</h2>
+<table>
+<tr><th>Aktion</th><th>Maus / Tastatur</th></tr>
+<tr><td>Canvas verschieben (Pan)</td><td>Auf leere Fläche klicken und ziehen</td></tr>
+<tr><td>Zoomen</td><td>Mausrad · <kbd>+</kbd>/<kbd>−</kbd> · <kbd>Ctrl</kbd>+Rad</td></tr>
+<tr><td>Zoom zurücksetzen</td><td>⟳ in der Toolbar</td></tr>
+</table>
+
+<h2>Neuron-Interaktionen</h2>
+<table>
+<tr><th>Aktion</th><th>Ergebnis</th></tr>
+<tr><td>Neuron anklicken</td><td>Neuron auswählen, Properties-Panel öffnet sich</td></tr>
+<tr><td>Neuron ziehen</td><td>Neuron verschieben (rastet am Raster ein)</td></tr>
+<tr><td><kbd>Shift</kbd> + Klick</td><td>Mehrfachauswahl</td></tr>
+<tr><td>Leerfläche ziehen</td><td>Lasso-Rechteck — alle eingeschlossenen Neuronen auswählen</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>A</kbd></td><td>Alle Neuronen auswählen</td></tr>
+<tr><td>Rechtsklick auf Neuron</td><td>Kontextmenü mit Umbenennen, Aktivierung, Löschen</td></tr>
+<tr><td><kbd>Del</kbd> / <kbd>Backspace</kbd></td><td>Auswahl löschen</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Auswahl aufheben, Verbindungs­modus abbrechen</td></tr>
+</table>
+
+<h2>Kontextmenü — Neuron (Rechtsklick)</h2>
+<ul class="feat">
+  <li>✎ Bezeichnung ändern</li>
+  <li>Σ-Symbol ein-/ausblenden</li>
+  <li>Aktivierungsfunktion wählen (nur bei Non-Output-Neuronen)</li>
+  <li>🗑 Neuron löschen</li>
+</ul>
+
+<h2>Kontextmenü — Hintergrund (Rechtsklick)</h2>
+<ul class="feat">
+  <li>Neuron hinzufügen: Input / Hidden / Output / Bias</li>
+  <li>Netzwerk speichern / laden</li>
+  <li>Alles löschen</li>
+</ul>
+
+<h2>Kontextmenü — Mehrfachauswahl (Rechtsklick)</h2>
+<ul class="feat">
+  <li>💾 Als Bereich speichern</li>
+  <li>Neuron hinzufügen</li>
+  <li>🗑 Auswahl löschen (Anzahl wird angezeigt)</li>
+</ul>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="verbindungen">
+<h1>Verbindungen</h1>
+
+<h2>Verbindung erstellen</h2>
+<ol class="steps">
+  <li>Schaltfläche <span class="badge b-orange">⟶ Verbinden</span> in der Toolbar aktivieren (oder <kbd>C</kbd> drücken).</li>
+  <li>Auf das <strong>Quell-Neuron</strong> klicken — es leuchtet orange auf.</li>
+  <li>Auf das <strong>Zielneuron</strong> klicken — die Verbindung wird mit zufälligem Startgewicht erstellt.</li>
+</ol>
+
+<div class="warn"><b>Einschränkungen</b>
+  Bias-Neuronen können nicht mit Output-Neuronen verbunden werden. Selbstverbindungen und Doppelverbindungen werden automatisch verhindert.
+</div>
+
+<h2>Verbindung bearbeiten</h2>
+<table>
+<tr><th>Aktion</th><th>Ergebnis</th></tr>
+<tr><td>Doppelklick auf Verbindung</td><td>Inline-Eingabefeld für Gewicht (Enter = bestätigen, Esc = abbrechen)</td></tr>
+<tr><td>Rechtsklick auf Verbindung</td><td>Kontextmenü: Gewicht bearbeiten · Einfrieren · Löschen</td></tr>
+<tr><td>Properties-Panel</td><td>Präzise Gewichtseingabe + Einfrieren-Checkbox</td></tr>
+</table>
+
+<h2>Gewicht einfrieren 🔒</h2>
+<p>Ein eingefrorenes Gewicht wird beim Training auf <strong>1.0 fixiert</strong> und nicht verändert. Rechtsklick → „Auf 1.0 einfrieren" oder Properties-Panel. Goldene Markierung zeigt eingefrorene Verbindungen.</p>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="simulation">
+<h1>Simulation (Forward Pass)</h1>
+<p>Die Simulation berechnet den Forward Pass: Eingabewerte werden schicht­weise durch das Netz propagiert und Ausgabewerte berechnet. Pakete animieren den Datenstrom auf den Verbindungslinien.</p>
+
+<h2>Aktivieren</h2>
+<ol class="steps">
+  <li>Schaltfläche <span class="badge b-green">▶ Simulation</span> in der Toolbar klicken.</li>
+  <li>Eingabewerte in den Input-Feldern auf dem Canvas oder im Seitenpanel setzen.</li>
+  <li><strong>▶ Berechnen &amp; Animieren</strong> klicken.</li>
+</ol>
+
+<h2>Steuerelemente</h2>
+<table>
+<tr><th>Steuerelement</th><th>Beschreibung</th></tr>
+<tr><td>Geschw.-Slider (1–10)</td><td>1 = sehr langsam und anschaulich · 10 = sehr schnell. Steuert die Paketbewegung zwischen den Schichten.</td></tr>
+<tr><td>☑ Aktivierungs-Animation</td><td>Pulsierende Ringe wenn Neuronen Werte senden (cyan) oder empfangen. Aktive Verbindungen leuchten heller.</td></tr>
+<tr><td>☑ Inaktive dimmen</td><td>Neuronen mit Ausgabewert ≈ 0 werden abgedunkelt — der aktive Signalfluss bleibt klar sichtbar.</td></tr>
+<tr><td>☑ Nur aktive animieren</td><td>Animiert ausschließlich Neuronen und Verbindungen mit Signalwert &nbsp;≠ 0. Inaktive Pfade erscheinen statisch.</td></tr>
+<tr><td>☑ Einzelschritte</td><td>Animation hält nach jeder Schicht an. Mit ▶ Schritt-Button manuell weiter.</td></tr>
+<tr><td>▶ Schritt</td><td>Nächste Schicht auslösen (nur im Einzelschritte-Modus).</td></tr>
+<tr><td>⟳ Loop</td><td>Animation wiederholt sich automatisch bis zum Stopp.</td></tr>
+</table>
+
+<h2>Eingabewerte</h2>
+<p>Im Simulationsmodus erscheint links neben jedem Input-Neuron ein Eingabefeld direkt auf dem Canvas. Werte können dort oder im Seitenpanel geändert werden — beides ist synchron. <kbd>Enter</kbd> oder <kbd>Tab</kbd> startet die Neuberechnung.</p>
+
+<h2>Ausgaben</h2>
+<p>Nach der Berechnung werden die Ausgabewerte unter den Output-Neuronen auf dem Canvas und zusätzlich im Seitenpanel angezeigt.</p>
+
+<div class="tip"><b>Farbkodierung der Pakete</b>
+  <span style="color:var(--accent)">Cyan</span> = positiver Signalwert (Gewicht ≥ 0) &nbsp;·&nbsp;
+  <span style="color:var(--accent2)">Orange</span> = negativer Signalwert (Gewicht &lt; 0)
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="training">
+<h1>Überwachtes Lernen (Training)</h1>
+<p>Das Trainingspanel ermöglicht Backpropagation mit konfigurierbaren Hyperparametern, Dateneingabe und Echtzeit-Metriken.</p>
+
+<h2>Panel öffnen</h2>
+<ol class="steps">
+  <li>Schaltfläche <span class="badge b-purple">⚡ Lernen</span> in der Toolbar klicken.</li>
+  <li>Das Panel erscheint als frei verschiebbares Fenster (Titel-Leiste ziehen). Es kann links oder rechts angedockt werden.</li>
+</ol>
+
+<h2>Tab ① — Trainingsdaten</h2>
+<p>Trainingsdaten werden als Tabelle eingegeben: eine Zeile = ein Datensatz.</p>
+
+<table>
+<tr><th>Methode</th><th>Beschreibung</th></tr>
+<tr><td>Direkte Eingabe</td><td>Werte in die Tabellen­zellen tippen.</td></tr>
+<tr><td>Drag&nbsp;&amp;&nbsp;Drop</td><td>Text in die grüne <em>Inputs</em>-Zone oder orange <em>Outputs</em>-Zone ziehen. Format: komma­getrennte Werte, Zeilen mit <code>/</code> trennen. Beispiel: <code>1,0 / 0,1 / 1,1</code></td></tr>
+<tr><td>Vorlagen</td><td>Schaltflächen <strong>XOR</strong>, <strong>AND</strong>, <strong>Linear</strong> laden vordefinierte Datensätze.</td></tr>
+<tr><td>CSV/JSON</td><td>📂-Schaltfläche lädt externe Datei (JSON, CSV oder TXT).</td></tr>
+</table>
+
+<ul class="feat">
+  <li><strong>+ Zeile / − Zeile:</strong> Datensätze hinzufügen oder die letzte Zeile löschen.</li>
+  <li><strong>Clear:</strong> Tabelle leeren.</li>
+  <li><strong>💾 Speichern:</strong> Trainingsdaten als JSON exportieren.</li>
+</ul>
+
+<h2>Tab ② — Hyperparameter</h2>
+<p>→ Siehe <a href="#hyperparameter">Hyperparameter-Referenz</a></p>
+
+<h2>Tab ③ — Training ausführen</h2>
+
+<h3>Auto-Modus (⚡)</h3>
+<table>
+<tr><th>Element</th><th>Beschreibung</th></tr>
+<tr><td>⚡ Starten</td><td>Training beginnen. Metriken aktualisieren sich in Echtzeit.</td></tr>
+<tr><td>■ Stopp</td><td>Training pausieren.</td></tr>
+<tr><td>↺ Reset</td><td>Gewichte neu initialisieren (gemäß Hyperparameter-Einstellung).</td></tr>
+<tr><td>Epoche</td><td>Aktueller Trainingsschritt mit prozentualer Fortschrittsanzeige.</td></tr>
+<tr><td>Loss</td><td>Aktueller und bisher bester Verlust.</td></tr>
+<tr><td>Accuracy</td><td>Klassifikationsgenauigkeit und aktuelle Lernrate.</td></tr>
+<tr><td>‖∇‖ Gradienten-Norm</td><td>Magnitude der Gradienten — Indikator für Vanishing/Exploding Gradients.</td></tr>
+<tr><td>Fortschrittsbalken</td><td>Visuelle Epoche-Übersicht.</td></tr>
+</table>
+
+<h3>Einzelschritt-Modus (🔬)</h3>
+<p>Erlaubt es, jeden einzelnen Trainingsschritt manuell durchzuführen und die Zwischenwerte zu inspizieren.</p>
+<table>
+<tr><th>Schaltfläche</th><th>Aktion</th></tr>
+<tr><td>→ Forward</td><td>Vorwärtspropagation: Berechnet Aktivierungen und Ausgaben für den aktuellen Datensatz.</td></tr>
+<tr><td>← Backward</td><td>Rückwärtspropagation: Berechnet Gradienten (δ, dW, dB) über alle Schichten.</td></tr>
+<tr><td>⟳ Weight Update</td><td>Wendet die berechneten Gradienten auf die Gewichte an.</td></tr>
+<tr><td>▶▶ Alle 3</td><td>Führt Forward, Backward und Weight Update in einem Schritt aus.</td></tr>
+<tr><td>↻ Epoche</td><td>Führt einen kompletten Epochen­durchlauf durch.</td></tr>
+<tr><td>Sample-Auswahl</td><td>Dropdown zur Wahl des aktiven Trainings­beispiels.</td></tr>
+</table>
+
+<p>Im Einzelschritt-Modus zeigen drei Info-Spalten die Berechnungen im Detail:</p>
+<ul class="feat">
+  <li><strong>Forward:</strong> Eingangsgewichte, Summation z, Aktivierungs­ausgabe a</li>
+  <li><strong>Backward:</strong> Fehler­gradient δ, Gewichts­gradient dW, Bias­gradient dB</li>
+  <li><strong>Weight Update:</strong> Angewendete Δ-Werte, neue Gewichte</li>
+</ul>
+
+<h2>Diagramme &amp; Visualisierungen</h2>
+<table>
+<tr><th>Diagramm</th><th>Inhalt</th></tr>
+<tr><td>Loss-Kurve</td><td>Trainingsverlust über Epochen</td></tr>
+<tr><td>Accuracy-Kurve</td><td>Klassifikationsgenauigkeit in %</td></tr>
+<tr><td>Gradienten-Norm</td><td>‖∇‖ über Epochen — zeigt Trainings­stabilität</td></tr>
+<tr><td>Lernraten-Kurve</td><td>LR-Scheduler-Verlauf</td></tr>
+<tr><td>Gewichts­histogramm</td><td>Verteilung aller Gewichte im Netz</td></tr>
+<tr><td>Konfusions­matrix</td><td>Klassifikationsgenauigkeit pro Klasse</td></tr>
+</table>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="hyperparameter">
+<h1>Hyperparameter-Referenz</h1>
+
+<h2>Training</h2>
+<table>
+<tr><th>Parameter</th><th>Standard</th><th>Beschreibung</th></tr>
+<tr><td>Epochen</td><td>500</td><td>Anzahl vollständiger Durchläufe durch den Datensatz (1–100 000).</td></tr>
+<tr><td>Batch-Größe</td><td>32</td><td>1 = Online-Learning · 8/16/32 = Mini-Batch · 0 = Full Batch (ganzer Datensatz pro Schritt).</td></tr>
+<tr><td>Loss-Funktion</td><td>MSE</td><td>MSE = Mean Squared Error (Regression) · MAE = Mean Absolute Error · BCE = Binary Cross-Entropy (Klassifikation).</td></tr>
+<tr><td>Shuffle</td><td>✓</td><td>Datensätze zu Beginn jeder Epoche zufällig mischen.</td></tr>
+</table>
+
+<h2>Optimierer</h2>
+<table>
+<tr><th>Parameter</th><th>Standard</th><th>Beschreibung</th></tr>
+<tr><td>Optimierer</td><td>Adam</td><td>SGD · SGD+Momentum · Adam · RMSProp · Adagrad</td></tr>
+<tr><td>Lernrate η</td><td>0.01</td><td>Schrittgröße pro Update. Zu groß: Instabilität. Zu klein: langsame Konvergenz.</td></tr>
+<tr><td>Momentum β</td><td>0.9</td><td>Für SGD+Momentum. Beschleunigt konsistente Richtungen, dämpft Schwingungen.</td></tr>
+<tr><td>β₂ (Adam)</td><td>0.999</td><td>Zweites Moment­schätz­decay in Adam.</td></tr>
+<tr><td>ε (Epsilon)</td><td>1e-8</td><td>Numerische Stabilitätskonstante (Division durch Null verhindern).</td></tr>
+<tr><td>ρ (RMSProp)</td><td>0.9</td><td>Decay-Rate für den gleitenden Durchschnitt der quadrierten Gradienten.</td></tr>
+</table>
+
+<h2>Regularisierung</h2>
+<table>
+<tr><th>Parameter</th><th>Standard</th><th>Beschreibung</th></tr>
+<tr><td>L2-Regularisierung λ</td><td>0</td><td>Strafterm für große Gewichte (Weight Decay). Verhindert Overfitting.</td></tr>
+<tr><td>Dropout</td><td>0</td><td>Anteil der Neuronen, die pro Trainingsschritt deaktiviert werden (0–0.99).</td></tr>
+<tr><td>Gewichts-Initialisierung</td><td>Xavier</td><td>Xavier/Glorot · He (für ReLU) · Zufällig ±0.5 · Beibehalten (keine Änderung).</td></tr>
+<tr><td>Gradient Clipping</td><td>0</td><td>Maximale Gradientennorm. 0 = deaktiviert. Verhindert Exploding Gradients.</td></tr>
+</table>
+
+<h2>LR-Scheduler</h2>
+<table>
+<tr><th>Parameter</th><th>Standard</th><th>Beschreibung</th></tr>
+<tr><td>Scheduler-Typ</td><td>Keiner</td><td>Keiner · Step Decay · Exponential · Cosine Annealing</td></tr>
+<tr><td>Decay Rate</td><td>0.95</td><td>Multiplikator pro Decay-Schritt.</td></tr>
+<tr><td>Step Size</td><td>100</td><td>Epochen zwischen zwei Decay-Schritten.</td></tr>
+<tr><td>Min. Lernrate</td><td>0.0001</td><td>Untere Schranke der Lernrate.</td></tr>
+</table>
+
+<h2>Frühstopp (Early Stopping)</h2>
+<table>
+<tr><th>Parameter</th><th>Standard</th><th>Beschreibung</th></tr>
+<tr><td>Aktivieren</td><td>☐</td><td>Training beendet sich automatisch wenn sich der Loss nicht verbessert.</td></tr>
+<tr><td>Patience</td><td>20</td><td>Anzahl Epochen ohne Verbesserung vor dem Stopp.</td></tr>
+<tr><td>Toleranz</td><td>1e-6</td><td>Minimale Verbesserung, die als Fortschritt gilt.</td></tr>
+</table>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="shortcuts">
+<h1>Tastaturkürzel &amp; Schnellreferenz</h1>
+
+<h2>Globale Tastaturkürzel</h2>
+<table>
+<tr><th>Taste</th><th>Aktion</th></tr>
+<tr><td><kbd>S</kbd></td><td>Auswahl-Modus aktivieren</td></tr>
+<tr><td><kbd>C</kbd></td><td>Verbinden-Modus aktivieren</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>A</kbd></td><td>Alle Neuronen auswählen</td></tr>
+<tr><td><kbd>Del</kbd> / <kbd>Backspace</kbd></td><td>Auswahl löschen</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Verbindungs­modus abbrechen · Auswahl aufheben · Panel schließen</td></tr>
+<tr><td><kbd>+</kbd> / <kbd>−</kbd></td><td>Hinein-/Herauszoomen</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>+</kbd> / <kbd>−</kbd></td><td>Zoomen (alternativ)</td></tr>
+<tr><td>Mausrad</td><td>Zoomen</td></tr>
+</table>
+
+<h2>Canvas-Mausgesten</h2>
+<table>
+<tr><th>Geste</th><th>Aktion</th></tr>
+<tr><td>Leerfläche ziehen</td><td>Canvas verschieben (Pan)</td></tr>
+<tr><td>Neuron ziehen</td><td>Neuron verschieben</td></tr>
+<tr><td>Leerfläche mit Shift ziehen</td><td>Lasso-Auswahl</td></tr>
+<tr><td>Doppelklick auf Verbindung</td><td>Gewicht inline bearbeiten</td></tr>
+<tr><td>Rechtsklick</td><td>Kontextmenü öffnen</td></tr>
+<tr><td>Mausrad</td><td>Zoom</td></tr>
+</table>
+
+<h2>Simulationseingaben</h2>
+<table>
+<tr><th>Taste</th><th>Aktion</th></tr>
+<tr><td><kbd>Enter</kbd> / <kbd>Tab</kbd></td><td>Neuberechnung starten</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Eingabefeld verlassen</td></tr>
+</table>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="speichern">
+<h1>Speichern &amp; Laden</h1>
+
+<h2>Netzwerk speichern / laden</h2>
+<table>
+<tr><th>Funktion</th><th>Format</th><th>Inhalt</th></tr>
+<tr><td>⬇ Netzwerk speichern</td><td>JSON</td><td>Alle Neuronen (Position, Typ, Label, Aktivierung), alle Verbindungen (Gewicht, Einfrierstand), Viewport-Position und Zoomstufe, gespeicherte Bereiche.</td></tr>
+<tr><td>⬆ Netzwerk laden</td><td>JSON</td><td>Ersetzt das gesamte aktuelle Netzwerk. Kein Rückgängig möglich.</td></tr>
+</table>
+
+<h2>Trainingsdaten speichern / laden</h2>
+<table>
+<tr><th>Funktion</th><th>Format</th></tr>
+<tr><td>💾 Daten speichern</td><td>JSON (Inputs- und Outputs-Arrays)</td></tr>
+<tr><td>📂 Daten laden</td><td>JSON, CSV oder TXT</td></tr>
+</table>
+
+<h2>Bereiche (Saved Regions)</h2>
+<p>Neurongruppen können als <strong>benannte Bereiche</strong> gespeichert und später wiederverwendet werden.</p>
+<ol class="steps">
+  <li>Mehrere Neuronen per Lasso-Rechteck auswählen.</li>
+  <li>Rechtsklick → „Als Bereich speichern".</li>
+  <li>Der Bereich erscheint in der Seitenleiste unter „Bereiche".</li>
+  <li>Klick auf den Bereich = In das aktuelle Netz einfügen.</li>
+  <li>Rechtsklick auf Bereich = Als Datei exportieren.</li>
+</ol>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="generator">
+<h1>Netzwerk-Generator</h1>
+<p>Der Generator erstellt automatisch ein vollvernetztes Netz mit wählbarer Architektur. Öffnen über <span class="badge b-dim">⊞ Generieren</span> in der Toolbar.</p>
+
+<h2>Optionen</h2>
+<table>
+<tr><th>Option</th><th>Standard</th><th>Beschreibung</th></tr>
+<tr><td>Eingaben</td><td>2</td><td>Anzahl Input-Neuronen (1–50).</td></tr>
+<tr><td>Hidden Layers</td><td>—</td><td>Kommagetrennte Neuronen­anzahlen, z.&nbsp;B. <code>4, 3</code> = zwei versteckte Schichten mit 4 und 3 Neuronen.</td></tr>
+<tr><td>Ausgaben</td><td>1</td><td>Anzahl Output-Neuronen (1–50). Keine Aktivierungsfunktion, kein Bias.</td></tr>
+<tr><td>Aktivierungsfunktion</td><td>ReLU</td><td>Gilt für alle Hidden-Neuronen.</td></tr>
+<tr><td>Bias-Neuronen</td><td>☑</td><td>Fügt pro Schicht (außer der letzten Hidden-Schicht und dem Output) ein Bias-Neuron hinzu.</td></tr>
+<tr><td>Abstand horizontal</td><td>180&nbsp;px</td><td>Abstand zwischen den Schichten (60–600&nbsp;px).</td></tr>
+<tr><td>Abstand vertikal</td><td>80&nbsp;px</td><td>Abstand zwischen den Neuronen einer Schicht (40–300&nbsp;px).</td></tr>
+</table>
+
+<div class="info"><b>Hinweis</b>
+  Ein bestehendes Netzwerk wird durch den Generator nach Bestätigung vollständig ersetzt. Alle Gewichte erhalten zufällige Startwerte im Bereich [−1, 1].
+</div>
+
+<h2>Beispiel-Architekturen</h2>
+<table>
+<tr><th>Eingabe</th><th>Hidden Layers</th><th>Ausgabe</th><th>Typische Verwendung</th></tr>
+<tr><td>2</td><td>—</td><td>1</td><td>Lineares Perceptron</td></tr>
+<tr><td>2</td><td>4, 4</td><td>1</td><td>XOR-Problem</td></tr>
+<tr><td>3</td><td>8, 6</td><td>3</td><td>Mehrklassen­klassifikation</td></tr>
+<tr><td>1</td><td>6, 4</td><td>1</td><td>Kurvenanpassung (Regression)</td></tr>
+</table>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="infopanel">
+<h1>Info-Panel</h1>
+<p>Das ausklappbare Panel am rechten Rand zeigt Lehrinhalte, Erklärungen und weiterführende Informationen in einem eingebetteten Browserfenster.</p>
+
+<h2>Panel öffnen / schließen</h2>
+<ul class="feat">
+  <li><strong>Klick auf den Griff</strong> (vertikale Leiste am rechten Rand) öffnet und schließt das Panel.</li>
+  <li>Alternativ: ✕-Schaltfläche im Panel-Header.</li>
+</ul>
+
+<h2>Folien-Navigation</h2>
+<p>Unterhalb der Browser-Toolbar befindet sich eine Tab-Leiste mit den verfügbaren Lernfolien. Der aktive Tab wird hervorgehoben.</p>
+<table>
+<tr><th>Tab</th><th>Inhalt</th></tr>
+<tr><td>Neuron &amp; KNN</td><td>Vergleich biologisches vs. künstliches Neuron, Netzwerk­aufbau</td></tr>
+<tr><td>Einführung</td><td>Grundlagen neuronaler Netze, Schicht­typen, Aktivierungen</td></tr>
+<tr><td>Backpropagation</td><td>Schritt-für-Schritt-Erklärung des Lernalgorithmus</td></tr>
+<tr><td>XOR-Problem</td><td>Warum lineare Modelle scheitern — und wie mehrlagige Netze helfen</td></tr>
+<tr><td>Hilfe</td><td>Diese Hilfeseite</td></tr>
+</table>
+
+<h2>Browser-Steuerung</h2>
+<table>
+<tr><th>Element</th><th>Funktion</th></tr>
+<tr><td>‹ Zurück</td><td>Zur vorherigen Seite im Verlauf</td></tr>
+<tr><td>› Vor</td><td>Zur nächsten Seite im Verlauf</td></tr>
+<tr><td>⌂ Home</td><td>Zur ersten Folie zurückkehren</td></tr>
+<tr><td>↺ Neu laden</td><td>Aktuelle Seite neu laden</td></tr>
+<tr><td>URL-Leiste</td><td>Direkteingabe einer Seiten-URL, bestätigen mit <kbd>Enter</kbd></td></tr>
+<tr><td>↔ Breite</td><td>Panel-Breite in px eingeben und mit <kbd>Enter</kbd> bestätigen. Wird gespeichert.</td></tr>
+</table>
+
+<div class="tip"><b>Tipp: Breite anpassen</b>
+  Die Panel-Breite kann auch durch <strong>Ziehen am Griff</strong> stufenlos eingestellt werden. Die Einstellung wird automatisch im Browser gespeichert und beim nächsten Öffnen wiederhergestellt.
+</div>
+</section>
+
+<hr>
+<p style="font-size:10px;color:var(--dim);text-align:center;padding-top:8px">
+  © Stefan Bauer · DHBW Mosbach 2026 &nbsp;·&nbsp; Neural Network Builder
+</p>
+
+</main>
+</body>
+</html>
