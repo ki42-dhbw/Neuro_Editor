@@ -64,4 +64,4 @@ Diese Datei kann direkt im Browser geöffnet werden.
 Einfach die HTML-Datei lokal im Browser öffnen:
 
 ```bash
-neural-network-builder_simu_netz_v14.html
+neural-network-builder_simu_netz_v15.html
