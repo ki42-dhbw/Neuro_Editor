@@ -53,7 +53,7 @@ Im Fokus stehen:
 
 Das Projekt besteht aktuell aus einer zentralen Datei:
 
-- `neural-network-builder_simu_netz_v14.html`
+- `neural-network-builder_simu_netz_v15.html`
 
 Diese Datei kann direkt im Browser geöffnet werden.
 
