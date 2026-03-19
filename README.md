@@ -22,7 +22,7 @@ Die App besteht aus mehreren Dateien, die im **gleichen Verzeichnis** liegen mü
 📁 Projektordner/
 │
 ├── neural-network-builder_simu_netz_v20.html   ← Hauptdatei (im Browser öffnen)
-├── ani_gif_1.gif                                ← Startanimation
+├── ani_gif_1.gif                                ← Startanimation (optional)
 │
 ├── 📁 HTML/
 │   ├── info_1.html          ← Info-Panel: Neuron & KNN
@@ -31,7 +31,7 @@ Die App besteht aus mehreren Dateien, die im **gleichen Verzeichnis** liegen mü
 │   ├── info_4.html          ← Info-Panel: XOR-Problem
 │   ├── hilfe.html           ← Info-Panel: Allgemeine Hilfe
 │   ├── rl_hilfe.html        ← Info-Panel: RL-Hilfe & Deep RL-Erklärung
-│   └── 📁 Bilder/
+│   └── 📁 Bilder/ (optional)
 │       ├── ArtificialNeuronModel_english.png
 │       └── Neuron_(deutsch)-1.svg
 ```
