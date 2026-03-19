@@ -97,6 +97,7 @@
   <button class="tab-btn" onclick="tab('layout',this)">🖥️ Layout</button>
   <button class="tab-btn" onclick="tab('qtable',this)">📊 Q-Tabelle</button>
   <button class="tab-btn" onclick="tab('math',this)">🧮 Mathematik</button>
+  <button class="tab-btn" onclick="tab('deeprl',this)">🧠 Deep RL</button>
   <button class="tab-btn" onclick="tab('params',this)">🎛️ Parameter</button>
   <button class="tab-btn" onclick="tab('controls',this)">🎮 Steuerung</button>
 </div>
@@ -297,7 +298,300 @@
   <p>Q-Learning ist ein <b>model-freies TD-Verfahren</b> — der Agent braucht kein Modell der Umgebung. Er lernt direkt aus Erfahrung, Schritt für Schritt, ohne auf eine vollständige Episode warten zu müssen.</p>
 </div>
 
-<!-- ═══ PANE 5: PARAMETER ═══ -->
+<!-- ═══ PANE 5: DEEP RL ═══ -->
+<div id="deeprl" class="pane">
+  <h2>🧠 Deep Reinforcement Learning (DQN)</h2>
+
+  <div class="info-box green">
+    <div class="lbl">Kernidee in einem Satz</div>
+    Statt einer Tabelle mit einem Wert pro Feld und Aktion lernt ein <b>neuronales Netz</b> eine Funktion, die aus einer Zustandsbeschreibung direkt vier Q-Werte berechnet — einen für jede mögliche Richtung.
+  </div>
+
+  <!-- ─── Vergleich ─── -->
+  <h3>Q-Learning vs. Deep Q-Network (DQN)</h3>
+  <table class="tbl">
+    <tr><th>Eigenschaft</th><th>Q-Learning (Tabelle)</th><th>DQN (Neuronales Netz)</th></tr>
+    <tr><td>Gedächtnis</td><td>Tabelle: ein Wert je Feld+Richtung</td><td>Gewichte des Netzes</td></tr>
+    <tr><td>Skalierbarkeit</td><td>Explodiert bei vielen Zuständen</td><td>Skaliert auch für riesige Zustandsräume</td></tr>
+    <tr><td>Generalisierung</td><td>Nein — jedes Feld einzeln</td><td>Ja — ähnliche Felder → ähnliche Q-Werte</td></tr>
+    <tr><td>Training</td><td>Direkte Wertzuweisung</td><td>Backpropagation (Gradientenabstieg)</td></tr>
+    <tr><td>Rechenaufwand</td><td>Minimal</td><td>Höher, aber noch sehr schnell</td></tr>
+  </table>
+
+  <!-- ─── Architektur ─── -->
+  <h3>Das Netzwerk: 2 → 32 → 4</h3>
+  <p>Das hier verwendete DQN ist ein einfaches vollverknüpftes Netz (MLP) mit drei Schichten:</p>
+
+  <div style="background:#080c14;border:1px solid #1e2a40;border-radius:8px;padding:16px;margin:10px 0">
+    <!-- Layer-Diagramm -->
+    <div style="display:flex;align-items:stretch;gap:0;font-size:11px;font-family:'Consolas',monospace">
+
+      <!-- Eingabe -->
+      <div style="flex:1;text-align:center">
+        <div style="color:#60a5fa;font-weight:700;margin-bottom:8px;font-size:10px;letter-spacing:.06em">EINGABE</div>
+        <div style="background:#0a1830;border:1px solid #2563eb;border-radius:5px;padding:10px 6px;margin-bottom:4px">
+          <div style="color:#93c5fd;font-size:13px;font-weight:700">Neuron 1</div>
+          <div style="color:#60a5fa;margin:3px 0">row_norm</div>
+          <div style="color:#475569;font-size:10px">Zeilennr. ÷ (Zeilen−1)</div>
+          <div style="color:#fde047;margin-top:4px;font-size:12px">z. B. 0.33</div>
+        </div>
+        <div style="background:#0a1830;border:1px solid #2563eb;border-radius:5px;padding:10px 6px">
+          <div style="color:#93c5fd;font-size:13px;font-weight:700">Neuron 2</div>
+          <div style="color:#60a5fa;margin:3px 0">col_norm</div>
+          <div style="color:#475569;font-size:10px">Spaltennr. ÷ (Spalten−1)</div>
+          <div style="color:#fde047;margin-top:4px;font-size:12px">z. B. 0.67</div>
+        </div>
+        <div style="color:#475569;font-size:10px;margin-top:6px">Aktivierung:<br>linear (keine)</div>
+      </div>
+
+      <!-- Pfeil 1 -->
+      <div style="display:flex;align-items:center;padding:0 8px;color:#374151;font-size:18px">→</div>
+
+      <!-- Hidden -->
+      <div style="flex:1;text-align:center">
+        <div style="color:#a78bfa;font-weight:700;margin-bottom:8px;font-size:10px;letter-spacing:.06em">HIDDEN</div>
+        <div style="background:#100820;border:1px solid #5b21b6;border-radius:5px;padding:10px 6px">
+          <div style="color:#c4b5fd;font-size:13px;font-weight:700">32 Neuronen</div>
+          <div style="color:#7c3aed;margin:4px 0;font-size:10px">Gewichte W1 [32×2]<br>Bias b1 [32]</div>
+          <div style="background:#1e0a3c;border-radius:3px;padding:4px;margin-top:6px">
+            <div style="color:#a78bfa;font-size:10px">Aktivierung:</div>
+            <div style="color:#fde047;font-size:13px;font-weight:700">ReLU</div>
+            <div style="color:#475569;font-size:10px">max(0, x)</div>
+          </div>
+        </div>
+        <div style="color:#475569;font-size:10px;margin-top:6px">He-Initialisierung</div>
+      </div>
+
+      <!-- Pfeil 2 -->
+      <div style="display:flex;align-items:center;padding:0 8px;color:#374151;font-size:18px">→</div>
+
+      <!-- Ausgabe -->
+      <div style="flex:1;text-align:center">
+        <div style="color:#10b981;font-weight:700;margin-bottom:8px;font-size:10px;letter-spacing:.06em">AUSGABE</div>
+        <div style="background:#061a10;border:1px solid #065f46;border-radius:5px;padding:6px">
+          <div style="color:#6ee7b7;font-size:12px;font-weight:700;margin-bottom:6px">4 Q-Werte</div>
+          <div style="background:#0a2818;border-radius:3px;padding:4px;margin:2px 0;display:flex;justify-content:space-between">
+            <span style="color:#10b981">Q(L)</span><span style="color:#fde047;font-size:10px">Q-Wert Links</span>
+          </div>
+          <div style="background:#0a2818;border-radius:3px;padding:4px;margin:2px 0;display:flex;justify-content:space-between">
+            <span style="color:#10b981">Q(D)</span><span style="color:#fde047;font-size:10px">Q-Wert Runter</span>
+          </div>
+          <div style="background:#0a2818;border-radius:3px;padding:4px;margin:2px 0;display:flex;justify-content:space-between">
+            <span style="color:#10b981">Q(R)</span><span style="color:#fde047;font-size:10px">Q-Wert Rechts</span>
+          </div>
+          <div style="background:#0a2818;border-radius:3px;padding:4px;margin:2px 0;display:flex;justify-content:space-between">
+            <span style="color:#10b981">Q(U)</span><span style="color:#fde047;font-size:10px">Q-Wert Hoch</span>
+          </div>
+        </div>
+        <div style="color:#475569;font-size:10px;margin-top:6px">Aktivierung:<br>linear (keine)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Eingaben ─── -->
+  <h3>Was geht ins Netz hinein? (Eingaben)</h3>
+  <div class="info-box blue">
+    <div class="lbl">Die Zustandsbeschreibung</div>
+    Das Netz bekommt <b>zwei normalisierte Zahlen</b> — die Zeilen- und Spaltennummer des Agenten, jeweils geteilt durch die maximale Anzahl. Steht der Agent auf Feld (Zeile 1, Spalte 2) in einem 4×4-Gitter:<br><br>
+    <div class="code" style="margin:8px 0">
+      row_norm = 1 ÷ (4−1) = <b>0.333</b><br>
+      col_norm = 2 ÷ (4−1) = <b>0.667</b>
+    </div>
+    Beide Werte liegen immer zwischen <b>0.0</b> (oben/links) und <b>1.0</b> (unten/rechts). Diese Normalisierung hilft dem Netz, alle Felder gleich gut zu verarbeiten — unabhängig von der Gittergröße.
+  </div>
+
+  <!-- ─── Ausgaben ─── -->
+  <h3>Was kommt aus dem Netz heraus? (Die 4 Ausgabewerte)</h3>
+  <p>Das Netz gibt gleichzeitig <b>vier Zahlen</b> zurück — einen Q-Wert für jede mögliche Richtung. Diese Zahlen sind nicht begrenzt (kein Softmax), können also positiv, negativ oder Null sein.</p>
+
+  <table class="tbl">
+    <tr><th>Ausgang</th><th>Richtung</th><th>Bedeutung des Wertes</th></tr>
+    <tr>
+      <td><b style="color:#10b981">Q(L)</b></td>
+      <td>← Links</td>
+      <td>Geschätzte zukünftige Gesamtbelohnung, wenn der Agent von diesem Feld nach <b>links</b> geht</td>
+    </tr>
+    <tr>
+      <td><b style="color:#10b981">Q(D)</b></td>
+      <td>↓ Runter</td>
+      <td>Geschätzte zukünftige Gesamtbelohnung, wenn der Agent <b>nach unten</b> geht</td>
+    </tr>
+    <tr>
+      <td><b style="color:#10b981">Q(R)</b></td>
+      <td>→ Rechts</td>
+      <td>Geschätzte zukünftige Gesamtbelohnung, wenn der Agent <b>nach rechts</b> geht</td>
+    </tr>
+    <tr>
+      <td><b style="color:#10b981">Q(U)</b></td>
+      <td>↑ Hoch</td>
+      <td>Geschätzte zukünftige Gesamtbelohnung, wenn der Agent <b>nach oben</b> geht</td>
+    </tr>
+  </table>
+
+  <div class="info-box amber">
+    <div class="lbl">Konkretes Beispiel — Feld neben dem Ziel</div>
+    Das Netz gibt aus: <code style="color:#fde047">Q(L)=−1.2 · Q(D)=−0.8 · Q(R)=<b style="color:#10b981">7.4</b> · Q(U)=0.3</code><br><br>
+    → Der Agent wählt <b>Rechts</b>, weil Q(R)=7.4 der höchste Wert ist.<br>
+    → Der Wert 7.4 bedeutet: „Wenn ich von hier nach rechts gehe, erwarte ich insgesamt ca. 7.4 Punkte Belohnung (inkl. Zukunft, diskontiert mit Gamma)."<br><br>
+    <b>Entscheidungsregel:</b> Wähle immer die Aktion mit dem höchsten Q-Wert — <code style="color:#fde047">argmax(Q(L), Q(D), Q(R), Q(U))</code>.
+  </div>
+
+  <div class="info-box red">
+    <div class="lbl">Negative Werte</div>
+    Negative Q-Werte bedeuten, dass diese Richtung mit hoher Wahrscheinlichkeit in ein Loch oder in eine Sackgasse führt. Je negativer der Wert, desto sicherer ist das Netz, dass diese Aktion schlecht ist. Werte nahe 0 bedeuten: das Netz hat dort noch wenig gelernt.
+  </div>
+
+  <!-- ─── Forward Pass ─── -->
+  <h3>Schritt 1: Vorwärtsdurchlauf (Forward Pass)</h3>
+  <p>Bevor der Agent handelt, berechnet das Netz alle vier Q-Werte für den aktuellen Zustand. Das passiert in zwei Rechenschritten:</p>
+
+  <div class="formula" style="text-align:left;line-height:2.2">
+    <span style="color:#60a5fa">Schicht 1 (Hidden):</span><br>
+    h<sub>i</sub> = <span class="o">ReLU</span>( <span class="v">b1[i]</span> + <span class="c">W1[i][0]</span>·row + <span class="c">W1[i][1]</span>·col )
+    &nbsp;&nbsp; <span style="color:#475569;font-size:11px">für i = 0 … 31</span><br><br>
+    <span style="color:#10b981">Schicht 2 (Ausgabe):</span><br>
+    Q(a) = <span class="v">b2[a]</span> + <span style="color:#a78bfa">W2[a][0]</span>·h<sub>0</sub> + … + <span style="color:#a78bfa">W2[a][31]</span>·h<sub>31</sub>
+    &nbsp;&nbsp; <span style="color:#475569;font-size:11px">für a ∈ {L, D, R, U}</span>
+  </div>
+
+  <ul>
+    <li><b>W1</b> [32×2] — Gewichtsmatrix Eingabe→Hidden (64 Werte)</li>
+    <li><b>b1</b> [32] — Bias-Vektor der Hidden-Schicht (32 Werte)</li>
+    <li><b>ReLU(x) = max(0, x)</b> — negative Voraktivierungen werden auf 0 gesetzt</li>
+    <li><b>W2</b> [4×32] — Gewichtsmatrix Hidden→Ausgabe (128 Werte)</li>
+    <li><b>b2</b> [4] — Bias-Vektor der Ausgabeschicht (4 Werte)</li>
+  </ul>
+  <p>Insgesamt hat das Netz <b>196 trainierbare Parameter</b> (64 + 32 + 128 + 4).</p>
+
+  <!-- ─── Bellman Target ─── -->
+  <h3>Schritt 2: Bellman-Zielwert berechnen</h3>
+  <p>Nach der Aktion kennt der Agent das Ergebnis: Sofort-Belohnung <b>r</b> und Folgezustand <b>s'</b>. Daraus berechnet er den Zielwert, auf den das Netz trainiert wird:</p>
+
+  <div class="formula">
+    <span class="v">target</span> <span class="o">=</span>
+    <span class="v">r</span> <span class="o">+</span>
+    <span class="c">γ</span> <span class="o">·</span>
+    <span class="o">max</span>(
+    <span class="v">Q_Netz</span>(s', L),
+    <span class="v">Q_Netz</span>(s', D),
+    <span class="v">Q_Netz</span>(s', R),
+    <span class="v">Q_Netz</span>(s', U) )
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Wenn Ziel erreicht (r = +10)</h3>
+      <p>Kein Folgezustand → <b>max Q(s') = 0</b></p>
+      <div class="code">target = 10 + 0.95 · 0 = <b>10.0</b></div>
+      <p>Der Ausgabeknoten der gewählten Aktion soll auf <b>10.0</b> trainiert werden.</p>
+    </div>
+    <div class="card">
+      <h3>Normaler Schritt (r = −0.1)</h3>
+      <p>Bester Q-Wert im Folgezustand z. B. = 7.4</p>
+      <div class="code">target = −0.1 + 0.95 · 7.4 = <b>6.93</b></div>
+      <p>Der Ausgangsknoten dieser Aktion soll auf <b>6.93</b> trainiert werden.</p>
+    </div>
+  </div>
+
+  <!-- ─── Backprop ─── -->
+  <h3>Schritt 3: Rückwärtsdurchlauf (Backpropagation)</h3>
+  <p>Jetzt wird das Netz mit <b>Gradientenabstieg</b> angepasst. Nur der Ausgangsknoten der tatsächlich gewählten Aktion erhält einen Fehler — die anderen drei bleiben unverändert:</p>
+
+  <div class="formula" style="text-align:left;line-height:2.2">
+    <span style="color:#ef4444">Fehler (nur für gewählte Aktion a):</span><br>
+    δ = <span class="v">Q_Netz(s, a)</span> <span class="o">−</span> <span class="v">target</span><br><br>
+    <span style="color:#fde047">Verlust:</span><br>
+    L = δ² &nbsp;&nbsp; <span style="color:#475569;font-size:11px">(Mean Squared Error)</span><br><br>
+    <span style="color:#10b981">Gewichtsänderung (Ausgabeschicht):</span><br>
+    ΔW2[a][j] = <span class="o">−</span> <span class="c">lr</span> · δ · h<sub>j</sub><br><br>
+    <span style="color:#a78bfa">Gewichtsänderung (Hidden-Schicht, nur wenn h<sub>i</sub> &gt; 0):</span><br>
+    ΔW1[i][k] = <span class="o">−</span> <span class="c">lr</span> · δ · W2[a][i] · x<sub>k</sub>
+  </div>
+
+  <div class="info-box amber">
+    <div class="lbl">Warum nur eine Aktion trainieren?</div>
+    Das Netz hat keinen Fehler für die nicht-gewählten Aktionen — der Agent weiß nicht, was dort passiert wäre. Nur für die <b>tatsächlich ausgeführte Aktion</b> liegt ein echtes Ergebnis vor. Die anderen drei Q-Werte bleiben bei dieser Trainingsrunde unverändert, auch wenn sie im Forward Pass berechnet wurden.
+  </div>
+
+  <div class="info-box blue">
+    <div class="lbl">ReLU-Ableitung in der Hidden-Schicht</div>
+    Beim Rückwärtsdurchlauf durch die ReLU-Aktivierung gilt:<br>
+    <code style="color:#fde047">dReLU/dx = 1 wenn h &gt; 0, sonst 0</code><br><br>
+    Neuronen, die im Forward Pass auf 0 lagen (weil ihre Voraktivierung negativ war), erhalten <b>keinen Gradienten</b> und werden in diesem Schritt nicht aktualisiert. Das ist die „tote Neuron"-Eigenschaft von ReLU.
+  </div>
+
+  <!-- ─── Lernrate ─── -->
+  <h3>Lernrate (lr)</h3>
+  <p>Die Lernrate bestimmt, wie groß der Gradientenschritt bei jeder Trainingsrunde ist. Im DQN-Modus gibt es zwei Werte:</p>
+
+  <table class="tbl">
+    <tr><th>Modus</th><th>Lernrate</th><th>Warum?</th></tr>
+    <tr><td>▶️ Schritt / Start</td><td><b>0.005</b></td><td>Konservativ — stabile Konvergenz Schritt für Schritt</td></tr>
+    <tr><td>🚀 Turbo (×100)</td><td><b>0.01</b></td><td>Schnellere Anpassung im Batch-Training, konvergiert in ~300–500 Episoden</td></tr>
+    <tr><td>zu groß (0.1+)</td><td>—</td><td>Netz überschwingt — Werte springen hin und her, kein stabiles Lernen</td></tr>
+    <tr><td>zu klein (0.0001)</td><td>—</td><td>Netz lernt extrem langsam, braucht tausende Episoden</td></tr>
+  </table>
+
+  <!-- ─── Generalisierung ─── -->
+  <h3>Generalisierung — der Hauptvorteil</h3>
+  <div class="info-box green">
+    <div class="lbl">Was Q-Tabelle nicht kann, DQN schon</div>
+    Die Q-Tabelle behandelt jedes Feld als völlig unabhängig. Das Netz hingegen lernt eine <b>stetige Funktion</b> über den Positionsraum. Felder, die geometrisch ähnlich liegen (z. B. beide weit oben rechts), erhalten automatisch ähnliche Q-Werte — auch wenn das Netz diese Felder nie direkt trainiert hat.<br><br>
+    <b>Beispiel:</b> Das Netz lernt auf einem 4×4-Gitter, dass „nah am Ziel unten rechts" große positive Q-Werte für Bewegungen nach unten-rechts bedeutet. Dieses Wissen überträgt es automatisch auf andere Felder in ähnlicher relativer Lage.
+  </div>
+
+  <!-- ─── Canvas-Visualisierung ─── -->
+  <h3>Netzwerk-Visualisierung in der Steuerleiste</h3>
+  <p>Im <b>🧠 Deep RL</b>-Modus zeigt die rechte Steuerleiste eine Live-Visualisierung des Netzes:</p>
+  <ul>
+    <li><b>Verbindungen:</b> <span style="color:#34d399">Grüne Linien</span> = positive Gewichte, <span style="color:#f87171">rote Linien</span> = negative Gewichte. Die Helligkeit entspricht dem Betrag des Gewichts.</li>
+    <li><b>Eingabeneuronen (blau):</b> Helligkeit zeigt den normalisierten Positionswert (0 = dunkel, 1 = hell).</li>
+    <li><b>Hidden-Neuronen (lila→gelb):</b> Zeigen die ReLU-Aktivierung nach dem Forward Pass. Dunkel = inaktiv (0), hell/gelb = stark aktiv.</li>
+    <li><b>Ausgabeneuronen:</b> Jeder der 4 Ausgangsknoten zeigt einen <b>Richtungspfeil</b> (←↓→↑), den <b>Q-Wert</b> mit Vorzeichen und den <b>Richtungsnamen</b> (Links/Runter/Rechts/Hoch). Der Knoten mit dem höchsten Q-Wert leuchtet <span style="color:#fbbf24"><b>gold</b></span> — das ist die aktuell gewählte Aktion.</li>
+    <li>Die Anzeige aktualisiert sich bei <b>jedem Schritt</b> des Agenten.</li>
+  </ul>
+
+  <h3>Zoom der Netzvisualisierung</h3>
+  <div class="info-box blue">
+    <div class="lbl">Vergrößern &amp; Verkleinern</div>
+    Über die Buttons <b>＋</b> und <b>－</b> über dem Netz-Canvas lässt sich die Darstellung vergrößern. Stufen: <b>1× / 1.5× / 2× / 3×</b>.<br><br>
+    Alternativ: <b>Mausrad</b> direkt auf dem Netz-Canvas drehen.<br><br>
+    Bei höherem Zoom werden die Hidden-Neuronen größer dargestellt und sind besser unterscheidbar. Die Hidden-Schicht zeigt bis zu 32 Neuronen — bei kleinem Zoom werden sie automatisch komprimiert.
+  </div>
+
+  <h3>Steuerleiste in der Breite anpassen</h3>
+  <div class="info-box green">
+    <div class="lbl">Sidebar-Resize</div>
+    Am linken Rand der rechten Steuerleiste befindet sich ein <b>Zieh-Handle</b> (schmaler Balken). Diesen mit der Maus nach links ziehen verbreitert die Leiste, nach rechts verschmälert sie. Die eingestellte Breite wird im Browser gespeichert.<br><br>
+    Mindestbreite: <b>180 px</b> &nbsp;·&nbsp; Maximalbreite: <b>520 px</b> &nbsp;·&nbsp; Standard: <b>215 px</b>
+  </div>
+
+  <!-- ─── Test-Modus DQN ─── -->
+  <h3>Test-Modus im DQN</h3>
+  <div class="info-box amber">
+    <div class="lbl">„Kein Zufall · Netz eingefroren"</div>
+    Im DQN-Modus bewirkt der Test-Modus <b>zwei Dinge gleichzeitig</b>:<br><br>
+    <b>1. Kein Zufall (ε = 0)</b> — der Agent handelt ausschließlich nach dem höchsten Q-Wert des Netzes, keine zufälligen Aktionen.<br>
+    <b>2. Netz eingefroren</b> — die Gewichte W1/b1/W2/b2 werden nicht mehr aktualisiert. Der Agent läuft im reinen Inferenz-Modus — kein Backpropagation, kein Lernen mehr.<br><br>
+    Das stellt sicher, dass der Test das tatsächlich Gelernte zeigt und das Training nicht verfälscht.
+  </div>
+
+  <!-- ─── Kopieren ─── -->
+  <h3>→ In NN-Editor kopieren</h3>
+  <div class="info-box amber">
+    <div class="lbl">Trainierte Gewichte übernehmen</div>
+    Der Button <b>„→ In NN-Editor kopieren"</b> überträgt das gesamte trainierte DQN in den Netzwerk-Editor:<br><br>
+    <ul style="margin:0;padding-left:16px">
+      <li>2 <b>Input</b>-Neuronen (row_norm, col_norm)</li>
+      <li>32 <b>Hidden</b>-Neuronen mit ReLU-Aktivierung</li>
+      <li>4 <b>Output</b>-Neuronen (Q: Links / Runter / Rechts / Hoch)</li>
+      <li>192 Verbindungen mit den <b>exakten trainierten Gewichten</b> aus W1 und W2</li>
+    </ul>
+    <br>Im NN-Editor lassen sich dann einzelne Gewichte inspizieren, das Netz exportieren oder als Keras/Python-Code ausgeben.
+  </div>
+</div>
+
+<!-- ═══ PANE 6 (ehem. 5): PARAMETER ═══ -->
 <div id="params" class="pane">
   <h2>🎛️ Parameter-Einstellungen</h2>
   <p>Alle Schieberegler befinden sich in der <b>rechten Steuerleiste</b> unter „Einstellungen".</p>
@@ -311,11 +605,12 @@
   </div>
 
   <div class="info-box green">
-    <div class="lbl">🎓 Alpha — Lernrate</div>
+    <div class="lbl">🎓 Alpha — Lernrate (nur Q-Learning)</div>
     Wie stark neue Informationen die alte Schätzung überschreiben.<br><br>
     <b>α = 0.1:</b> Sehr vorsichtig, braucht viele Episoden.<br>
     <b>α = 0.7:</b> Guter Standard-Wert für kleine Gitter.<br>
-    <b>α = 1.0:</b> Jede neue Info überschreibt die alte komplett (instabil).
+    <b>α = 1.0:</b> Jede neue Info überschreibt die alte komplett (instabil).<br><br>
+    <b>Im DQN-Modus</b> hat Alpha keinen Einfluss — das Netz verwendet eine <b>interne Lernrate</b> (0.005 im Schritt/Start-Modus, 0.01 im Turbo-Modus), die direkt im Gradientenabstieg wirkt.
   </div>
 
   <div class="info-box amber">
@@ -356,10 +651,10 @@
   <h3>Aktions-Buttons (rechte Leiste)</h3>
   <table class="tbl">
     <tr><th>Button</th><th>Funktion</th></tr>
-    <tr><td><span class="tag tb">👣 Schritt</span></td><td>Führt genau einen Q-Learning-Schritt aus. Q-Tabelle und Spielfeld aktualisieren sich sofort.</td></tr>
+    <tr><td><span class="tag tb">👣 Schritt</span></td><td>Führt genau einen Schritt aus. Q-Tabelle / DQN-Netz und Spielfeld aktualisieren sich sofort.</td></tr>
     <tr><td><span class="tag tb">▶️ Start / ⏸️ Stop</span></td><td>Läuft automatisch mit dem eingestellten Geschwindigkeits-Intervall.</td></tr>
-    <tr><td><span class="tag tg">🚀 Turbo (×100)</span></td><td>Simuliert 100 vollständige Episoden auf einmal. Schnellstes Training. Epsilon sinkt automatisch.</td></tr>
-    <tr><td><span class="tag ta">🧹 Lern-Reset</span></td><td>Löscht nur die Q-Tabelle (alle Werte auf 0). Map, Größe und Einstellungen bleiben erhalten.</td></tr>
+    <tr><td><span class="tag tg">🚀 Turbo (×100)</span></td><td>Simuliert 100 vollständige Episoden auf einmal. Schnellstes Training. Epsilon sinkt automatisch.<br><b>DQN:</b> Empfehlung 300–500+ Episoden (3–5× Turbo drücken).</td></tr>
+    <tr><td><span class="tag ta">🧹 Lern-Reset</span></td><td>Löscht Q-Tabelle bzw. setzt alle DQN-Gewichte zurück. Map und Einstellungen bleiben erhalten.</td></tr>
     <tr><td><span class="tag tr">💥 Map-Reset</span></td><td>Erstellt eine neue Karte mit der eingestellten Größe. Alles wird zurückgesetzt.</td></tr>
   </table>
 
@@ -374,7 +669,9 @@
   </div>
   <div class="info-box amber">
     <div class="lbl">🛡️ Test-Modus</div>
-    Setzt Epsilon auf 0. Der Agent handelt ausschließlich nach gelerntem Wissen — kein Zufall. Aktiviere erst nach ausreichend Training (Epsilon sollte &lt; 0.2 sein). Ideal um den Lernerfolg zu prüfen.
+    Setzt Epsilon auf 0 — der Agent handelt ausschließlich nach gelerntem Wissen, kein Zufall. Aktiviere erst nach ausreichend Training (Epsilon &lt; 0.2).<br><br>
+    <b>Q-Learning:</b> Anzeige „Kein Zufall" — Q-Tabelle wird weiterhin aktualisiert (da tabellares Update harmlos ist).<br>
+    <b>DQN:</b> Anzeige „Kein Zufall · Netz eingefroren" — Gewichte werden <i>nicht</i> mehr trainiert. Reiner Inferenz-Modus.
   </div>
 
   <h3>Statistik-Anzeige (rechte Leiste oben)</h3>
