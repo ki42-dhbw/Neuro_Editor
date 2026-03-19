@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>RL Hilfe</title>
+<style>
+  :root{--bg:#0a0c10;--surface:#111318;--surface2:#181c24;--border:#1e3a20;
+    --green:#10b981;--amber:#f59e0b;--blue:#3b82f6;--red:#ef4444;
+    --text:#e2e8f0;--dim:#64748b;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);
+    color:var(--text);font-size:13px;line-height:1.65;padding:0;}
+
+  /* TAB NAV */
+  .tab-bar{position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;gap:0;
+    background:#0d1f12;border-bottom:1px solid var(--border);}
+  .tab-btn{padding:8px 13px;background:transparent;border:none;border-bottom:3px solid transparent;
+    color:var(--dim);font-size:11px;font-family:inherit;cursor:pointer;
+    white-space:nowrap;transition:all .15s;letter-spacing:.04em;}
+  .tab-btn:hover{color:var(--green);background:#0f1f14;}
+  .tab-btn.active{color:var(--green);border-bottom-color:var(--green);background:#0f2218;}
+
+  /* PANES */
+  .pane{display:none;padding:18px 16px;}
+  .pane.active{display:block;}
+
+  h2{font-size:14px;font-weight:700;color:var(--green);
+    border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:14px;
+    letter-spacing:.05em;text-transform:uppercase;}
+  h3{font-size:12px;font-weight:700;color:var(--amber);margin:16px 0 7px;
+    padding-left:8px;border-left:3px solid var(--amber);}
+  p{margin-bottom:10px;color:#94a3b8;font-size:12px;}
+  ul,ol{padding-left:18px;margin-bottom:12px;}
+  li{margin-bottom:5px;color:#94a3b8;font-size:12px;}
+  b{color:var(--text);}
+
+  /* CARDS GRID */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  @media(max-width:420px){.grid2{grid-template-columns:1fr;}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:6px;
+    padding:12px 14px;}
+
+  /* FORMULA */
+  .formula{background:#0a1a0e;border:1px solid #1e3a20;border-radius:6px;
+    padding:14px;font-family:'Consolas',monospace;font-size:13px;
+    text-align:center;margin:12px 0;line-height:2;}
+  .v{color:#fde047;font-weight:700;}
+  .o{color:#f472b6;font-weight:700;}
+  .c{color:#60a5fa;}
+
+  /* TAGS */
+  .tag{display:inline-block;padding:2px 7px;border-radius:3px;
+    font-size:10px;font-weight:700;color:#fff;margin:1px;}
+  .tg{background:#16a34a;} .tr{background:#dc2626;} .tb{background:#2563eb;}
+  .ta{background:#d97706;}
+
+  /* TABLE */
+  .tbl{width:100%;border-collapse:collapse;font-size:11px;margin:10px 0;}
+  .tbl th{background:#0f2218;color:var(--green);padding:6px 8px;
+    border:1px solid var(--border);text-align:left;font-weight:700;}
+  .tbl td{padding:5px 8px;border:1px solid var(--border);color:#94a3b8;vertical-align:top;}
+  .tbl tr:hover td{background:#0d1a11;}
+
+  /* CODE BLOCK */
+  .code{background:#06100a;border:1px solid var(--border);border-radius:4px;
+    padding:10px 12px;font-family:'Consolas',monospace;font-size:11.5px;
+    color:#a3e635;margin:8px 0;}
+
+  /* OVERVIEW BOXES */
+  .info-box{background:var(--surface);border-left:3px solid;border-radius:4px;
+    padding:10px 12px;margin-bottom:10px;font-size:12px;}
+  .info-box.green{border-color:var(--green);}
+  .info-box.amber{border-color:var(--amber);}
+  .info-box.blue{border-color:var(--blue);}
+  .info-box.red{border-color:var(--red);}
+  .info-box .lbl{font-size:10px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;margin-bottom:4px;}
+  .info-box.green .lbl{color:var(--green);}
+  .info-box.amber .lbl{color:var(--amber);}
+  .info-box.blue  .lbl{color:var(--blue);}
+  .info-box.red   .lbl{color:var(--red);}
+
+  /* Mini grid preview */
+  .mini-grid{display:inline-grid;gap:2px;background:#cbd5e1;border:3px solid #334155;
+    border-radius:5px;padding:2px;vertical-align:middle;margin:6px 0;}
+  .mc{width:28px;height:28px;background:#fff;display:flex;align-items:center;
+    justify-content:center;font-size:11px;font-weight:700;color:#334155;}
+  .mc.ms{background:#bbf7d0;color:#15803d;}
+  .mc.mg{background:#fef08a;color:#854d0e;}
+  .mc.mh{background:#0f172a;color:#f87171;}
+</style>
+</head>
+<body>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="tab('start',this)">🚀 Einstieg</button>
+  <button class="tab-btn" onclick="tab('layout',this)">🖥️ Layout</button>
+  <button class="tab-btn" onclick="tab('qtable',this)">📊 Q-Tabelle</button>
+  <button class="tab-btn" onclick="tab('math',this)">🧮 Mathematik</button>
+  <button class="tab-btn" onclick="tab('params',this)">🎛️ Parameter</button>
+  <button class="tab-btn" onclick="tab('controls',this)">🎮 Steuerung</button>
+</div>
+
+<!-- ═══ PANE 1: EINSTIEG ═══ -->
+<div id="start" class="pane active">
+  <h2>🚀 Schnelleinstieg</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>1. Training (Lernen)</h3>
+      <ol>
+        <li>Klicke oben auf <b>🤖 Simulator</b> — das Spielfeld und die rechte Steuerleiste erscheinen.</li>
+        <li>Optional: Rastergröße anpassen und <b>NEU</b> drücken.</li>
+        <li>Drücke in der rechten Leiste auf <span class="tag tg">🚀 Turbo</span>.</li>
+        <li>Der Agent fällt anfangs oft in Löcher. <b>Das ist normal!</b></li>
+        <li>Wenn Pfeile auf dem Spielfeld einen konsistenten Weg zum Ziel zeigen → fertig gelernt.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>2. Test-Modus (Prüfung)</h3>
+      <ol>
+        <li>Aktiviere in der rechten Leiste: <span class="tag tb">🛡️ Test-Modus</span>.</li>
+        <li>Zufall (Epsilon) wird auf 0 gesetzt — nur reines Wissen.</li>
+        <li>Drücke <span class="tag tb">▶️ Start</span>.</li>
+        <li>Der Agent sollte jetzt fehlerfrei zum Ziel laufen.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>Was ist Reinforcement Learning?</h3>
+  <div class="info-box green">
+    <div class="lbl">Kernidee</div>
+    Ein Agent lernt durch <b>Versuch und Irrtum</b>. Er bekommt Belohnungen (positiv) oder Bestrafungen (negativ) und optimiert sein Verhalten, um langfristig die höchste Gesamtbelohnung zu erzielen — ganz ohne vorprogrammierte Regeln.
+  </div>
+  <div class="info-box amber">
+    <div class="lbl">Die 4 Elemente des RL</div>
+    <b>Agent</b> 🤖 — handelt in der Umgebung<br>
+    <b>Umgebung</b> 🗺️ — das Gitter mit Start, Ziel und Löchern<br>
+    <b>Zustand (State)</b> — die aktuelle Feldnummer des Agenten<br>
+    <b>Aktion</b> — Links / Unten / Rechts / Oben (L D R U)
+  </div>
+
+  <h3>Belohnungsschema</h3>
+  <table class="tbl">
+    <tr><th>Ereignis</th><th>Belohnung</th><th>Bedeutung</th></tr>
+    <tr><td>🏆 Ziel erreicht</td><td style="color:#10b981"><b>+10</b></td><td>Starker positiver Anreiz</td></tr>
+    <tr><td>🕳️ In Loch gefallen</td><td style="color:#ef4444"><b>−5</b></td><td>Bestrafung für Fehler, Episode endet</td></tr>
+    <tr><td>👣 Schritt auf freiem Feld</td><td style="color:#f59e0b"><b>−0.1</b></td><td>Effizienz fördern (kurze Wege)</td></tr>
+    <tr><td>🧱 Gegen Rand gelaufen</td><td style="color:#ef4444"><b>−0.5</b></td><td>Ungültige Aktionen bestrafen</td></tr>
+  </table>
+</div>
+
+<!-- ═══ PANE 2: LAYOUT ═══ -->
+<div id="layout" class="pane">
+  <h2>🖥️ Layout &amp; Bedienoberfläche</h2>
+
+  <h3>Menüleiste oben (RL-Header)</h3>
+  <div class="info-box green">
+    <div class="lbl">🤖 Simulator-Button</div>
+    Öffnet oder schließt den RL-Modus. Beim Öffnen erscheint das Spielfeld in der Mitte und die Steuerleiste rechts. Die normale NN-Werkzeugleiste wird dabei ausgeblendet.
+  </div>
+  <div class="info-box blue">
+    <div class="lbl">Rastergröße</div>
+    Eingabefelder für <b>Zeilen × Spalten</b> (2–10). Nach Änderung auf <b>NEU</b> drücken — erstellt eine neue leere Karte und setzt das Training zurück.
+  </div>
+  <div class="info-box amber">
+    <div class="lbl">Karten-Werkzeuge</div>
+    <b>👆</b> Auswählen &nbsp;·&nbsp; <b>🏁</b> Startpunkt &nbsp;·&nbsp; <b>🏆</b> Ziel &nbsp;·&nbsp; <b>🕳️</b> Loch &nbsp;·&nbsp; <b>⬜</b> Feld frei<br>
+    Werkzeug wählen, dann auf ein Feld im Spielfeld klicken.
+  </div>
+
+  <h3>Spielfeld (Mitte)</h3>
+  <p>Das Gitter zeigt den aktuellen Zustand der Karte. Die Felder sind <b>weiß</b> — Löcher stechen als <b>schwarze Felder</b> deutlich hervor.</p>
+
+  <div style="text-align:center;padding:8px 0">
+    <div class="mini-grid" style="grid-template-columns:repeat(4,28px)">
+      <div class="mc ms">S</div><div class="mc"></div><div class="mc mh">☠</div><div class="mc"></div>
+      <div class="mc"></div><div class="mc mh">☠</div><div class="mc"></div><div class="mc"></div>
+      <div class="mc"></div><div class="mc"></div><div class="mc"></div><div class="mc mh">☠</div>
+      <div class="mc mh">☠</div><div class="mc"></div><div class="mc"></div><div class="mc mg">G</div>
+    </div>
+    <p style="font-size:10px;margin-top:4px;color:var(--dim)">Beispiel: 4×4 Gitter — Weiß = frei, Schwarz = Loch</p>
+  </div>
+
+  <table class="tbl">
+    <tr><th>Feld</th><th>Farbe</th><th>Bedeutung</th></tr>
+    <tr><td>Freies Feld (F)</td><td>Weiß</td><td>Normal begehbar, Reward −0.1 pro Schritt</td></tr>
+    <tr><td>Start (S)</td><td>Hellgrün</td><td>Startposition des Agenten</td></tr>
+    <tr><td>Ziel (G)</td><td>Hellgelb</td><td>Ziel, Reward +10, Episode endet</td></tr>
+    <tr><td>Loch (H)</td><td>Schwarz</td><td>Falle, Reward −5, Episode endet</td></tr>
+  </table>
+
+  <h3>Rechte Steuerleiste</h3>
+  <p>Erscheint nur im RL-Modus. Enthält von oben nach unten:</p>
+  <ol>
+    <li><b>Statistik</b> — Episoden, Epsilon %, aktueller Reward, Schritte</li>
+    <li><b>Aktionen</b> — Schritt, Start/Stop, Turbo, Lern-Reset, Map-Reset</li>
+    <li><b>Einstellungen</b> — Test-Modus, Alpha, Gamma, Epsilon, Geschwindigkeit, Pfeile/Farben</li>
+    <li><b>Q-Tabelle</b> — live aktualisiert mit Farbhervorhebung</li>
+  </ol>
+</div>
+
+<!-- ═══ PANE 3: Q-TABELLE ═══ -->
+<div id="qtable" class="pane">
+  <h2>📊 Die Q-Tabelle: Das Gedächtnis</h2>
+  <p>Der Agent hat kein Gehirn — er hat eine <b>Q-Tabelle</b>. Q steht für „Quality" (Qualität). Sie beantwortet: <i>„Wie gut ist Aktion A in Zustand S?"</i></p>
+
+  <h3>Aufbau der Tabelle</h3>
+  <table class="tbl">
+    <tr><th>Spalte</th><th>Bedeutung</th><th>Beispiel</th></tr>
+    <tr><td><b># (Zeile)</b></td><td>Feldnummer auf der Karte (State).</td><td>Feld 0 = oben links (Start)</td></tr>
+    <tr><td><b>L / D / R / U</b></td><td>Die 4 Richtungen: Links, Unten, Rechts, Oben.</td><td>Spalte R = Wert für „nach Rechts"</td></tr>
+    <tr><td><b>Zahlenwert</b></td><td>Erwartete zukünftige Gesamtbelohnung.</td><td><span style="color:#10b981">8.50</span> = führt sicher zum Ziel</td></tr>
+  </table>
+
+  <h3>Farbcodierung in der Q-Tabelle</h3>
+  <div class="info-box red">
+    <div class="lbl">Roter Hintergrund — Bester Wert</div>
+    In jeder Zeile wird der <b>höchste Q-Wert</b> (die beste Aktion für diesen Zustand) mit rotem Hintergrund hervorgehoben. Das zeigt sofort welche Richtung der Agent wählen würde.
+  </div>
+  <div class="info-box green">
+    <div class="lbl">Grüner Zeilenhintergrund — Optimaler Pfad</div>
+    Die Zeilen, die auf dem aktuell besten Weg von Start zum Ziel liegen, werden grün markiert. Diese Pfad-Hervorhebung aktualisiert sich nach jedem Schritt und nach dem Turbo-Training.
+  </div>
+  <div class="info-box blue">
+    <div class="lbl">Flash-Animation — Aktuelle Position</div>
+    Wenn der Agent sich bewegt, blinkt die entsprechende Zeile kurz auf und scrollt automatisch ins Sichtfeld. So lässt sich live verfolgen was der Agent gerade „denkt".
+  </div>
+  <div class="info-box amber">
+    <div class="lbl">Zahlenwerte</div>
+    <b style="color:#10b981">Grüne Zahlen</b> = positive Werte (führen zum Ziel)<br>
+    <b style="color:#ef4444">Rote Zahlen</b> = negative Werte (gefährliche Richtungen)<br>
+    Grau / 0 = noch unbekannt, kein Training dort stattgefunden
+  </div>
+
+  <h3>Visualisierung auf dem Spielfeld</h3>
+  <div class="info-box green">
+    <div class="lbl">Pfeile</div>
+    Zeigen auf jedem Feld in die Richtung des höchsten Q-Werts. Wenn alle Pfeile einen konsistenten Weg zum Ziel zeigen, ist das Training abgeschlossen.
+  </div>
+  <div class="info-box blue">
+    <div class="lbl">Heatmap-Farben</div>
+    Freie Felder färben sich leicht grün (positive Q-Werte) oder rot (negative) — die Intensität entspricht der Stärke des Wertes. Weißbleibende Felder wurden noch nicht erkundet.
+  </div>
+
+  <h3>Lernfortschritt erkennen</h3>
+  <ol>
+    <li><b>Anfang:</b> Alle Werte = 0. Agent wandert zufällig. Kein Rot in der Tabelle.</li>
+    <li><b>Erste Treffer:</b> Zielfeld-Zeile bekommt positive Werte → erste rote Markierung.</li>
+    <li><b>Propagation:</b> Die Werte „wandern" rückwärts vom Ziel zum Start. Mehr Zeilen bekommen rote Markierungen.</li>
+    <li><b>Fertig:</b> Die grün markierten Pfad-Zeilen bilden eine lückenlose Kette von Start bis Ziel.</li>
+  </ol>
+</div>
+
+<!-- ═══ PANE 4: MATHEMATIK ═══ -->
+<div id="math" class="pane">
+  <h2>🧮 Die Bellman-Gleichung</h2>
+  <p>Nach jedem Schritt aktualisiert der Agent <b>genau einen Wert</b> in der Q-Tabelle:</p>
+
+  <div class="formula">
+    <span class="v">Q_neu</span> <span class="o">=</span>
+    <span class="v">Q_alt</span> <span class="o">+</span>
+    <span class="c">α</span> <span class="o">·</span>
+    (<span class="v">r</span> <span class="o">+</span>
+    <span class="c">γ</span> <span class="o">·</span>
+    <span class="v">max Q_nächst</span>
+    <span class="o">−</span>
+    <span class="v">Q_alt</span>)
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Auf Deutsch erklärt</h3>
+      <p>„Mein neues Wissen (<span style="color:#fde047">Q_neu</span>) = altes Wissen + ein bisschen Korrektur."</p>
+      <p>Die Korrektur ist der Unterschied zwischen dem was ich <i>erwartet</i> habe und dem was <i>wirklich</i> passiert ist.</p>
+    </div>
+    <div class="card">
+      <h3>Variablen</h3>
+      <ul>
+        <li><b style="color:#fde047">Q_alt</b> — bisherige Schätzung</li>
+        <li><b style="color:#60a5fa">α (Alpha)</b> — Lernrate</li>
+        <li><b style="color:#fde047">r</b> — Sofort-Belohnung dieses Schritts</li>
+        <li><b style="color:#60a5fa">γ (Gamma)</b> — Diskontfaktor: Gewicht der Zukunft</li>
+        <li><b style="color:#fde047">max Q_nächst</b> — bester bekannter Wert des Folgefelds</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Rechenbeispiel — erster Treffer am Ziel</h3>
+  <div class="info-box amber">
+    <div class="lbl">Ausgangssituation</div>
+    Agent steht auf Feld vor dem Ziel. Q_alt = 0. Reward = +10. Alpha = 0.7. Gamma = 0.95.
+  </div>
+  <div class="code">Q_neu = 0.0 + 0.7 · (10.0 + 0.95 · 0 − 0.0) = <b>7.0</b></div>
+  <p>Beim nächsten Mal weiß der Agent: <b>„Dieser Schritt bringt 7 Punkte!"</b> Die Information pflanzt sich rückwärts fort bis zum Start — sichtbar als wachsende rote Markierungen in der Q-Tabelle.</p>
+
+  <h3>Temporal Difference (TD) Learning</h3>
+  <p>Q-Learning ist ein <b>model-freies TD-Verfahren</b> — der Agent braucht kein Modell der Umgebung. Er lernt direkt aus Erfahrung, Schritt für Schritt, ohne auf eine vollständige Episode warten zu müssen.</p>
+</div>
+
+<!-- ═══ PANE 5: PARAMETER ═══ -->
+<div id="params" class="pane">
+  <h2>🎛️ Parameter-Einstellungen</h2>
+  <p>Alle Schieberegler befinden sich in der <b>rechten Steuerleiste</b> unter „Einstellungen".</p>
+
+  <div class="info-box blue">
+    <div class="lbl">🎲 Epsilon — Entdeckerdrang (Exploration vs. Exploitation)</div>
+    Das wichtigste Konzept! RL balanciert zwischen <b>Exploration</b> (Neues ausprobieren) und <b>Exploitation</b> (Bekanntes nutzen).<br><br>
+    <b>ε = 1.0 (100%):</b> Vollständig zufällig. Ideal zu Beginn — alles erkunden.<br>
+    <b>ε = 0.0 (0%):</b> Nur Wissen nutzen. Ideal am Ende — perfekt ausführen.<br><br>
+    <b>Strategie:</b> Epsilon sinkt nach jedem Turbo-Durchlauf automatisch (Epsilon Decay × 0.99 pro Episode).
+  </div>
+
+  <div class="info-box green">
+    <div class="lbl">🎓 Alpha — Lernrate</div>
+    Wie stark neue Informationen die alte Schätzung überschreiben.<br><br>
+    <b>α = 0.1:</b> Sehr vorsichtig, braucht viele Episoden.<br>
+    <b>α = 0.7:</b> Guter Standard-Wert für kleine Gitter.<br>
+    <b>α = 1.0:</b> Jede neue Info überschreibt die alte komplett (instabil).
+  </div>
+
+  <div class="info-box amber">
+    <div class="lbl">🔭 Gamma — Weitsicht (Diskontfaktor)</div>
+    Wie wichtig ist die <i>Zukunft</i> im Vergleich zur Gegenwart?<br><br>
+    <b>γ = 0.0:</b> Nur Sofort-Belohnung zählt. Kein Vorausdenken.<br>
+    <b>γ = 0.95:</b> Agent denkt weit voraus. Standard für RL.<br>
+    <b>γ = 1.0:</b> Fernste Zukunft genauso wichtig wie Gegenwart.
+  </div>
+
+  <div class="info-box blue">
+    <div class="lbl">⏱️ Geschwindigkeit</div>
+    Pause zwischen zwei automatischen Schritten (20–1000 ms). Nur beim <b>▶️ Start</b>-Modus relevant. Turbo ignoriert die Geschwindigkeit und rechnet sofort.
+  </div>
+
+  <div class="info-box red">
+    <div class="lbl">⚡ Empfohlene Startwerte</div>
+    Alpha <b>0.7</b> · Gamma <b>0.95</b> · Epsilon <b>1.0</b><br>
+    → <b>Turbo</b> mehrfach drücken bis Epsilon auf ~0.1 sinkt<br>
+    → <b>Test-Modus</b> aktivieren → <b>▶️ Start</b>
+  </div>
+</div>
+
+<!-- ═══ PANE 6: STEUERUNG ═══ -->
+<div id="controls" class="pane">
+  <h2>🎮 Steuerung &amp; Werkzeuge</h2>
+
+  <h3>Karten-Werkzeuge (oben in der Menüleiste)</h3>
+  <table class="tbl">
+    <tr><th>Werkzeug</th><th>Funktion</th></tr>
+    <tr><td>👆 Auswählen</td><td>Navigieren ohne Karte zu verändern. Standard-Tool.</td></tr>
+    <tr><td>🏁 Start</td><td>Setzt den Startpunkt (S). Es kann nur einen geben.</td></tr>
+    <tr><td>🏆 Ziel</td><td>Setzt das Ziel (G). Belohnung: +10. Episode endet.</td></tr>
+    <tr><td>🕳️ Loch</td><td>Setzt eine Falle (H). Bestrafung: −5. Episode endet.</td></tr>
+    <tr><td>⬜ Eis</td><td>Macht ein Feld wieder frei (F = normal begehbar).</td></tr>
+  </table>
+
+  <h3>Aktions-Buttons (rechte Leiste)</h3>
+  <table class="tbl">
+    <tr><th>Button</th><th>Funktion</th></tr>
+    <tr><td><span class="tag tb">👣 Schritt</span></td><td>Führt genau einen Q-Learning-Schritt aus. Q-Tabelle und Spielfeld aktualisieren sich sofort.</td></tr>
+    <tr><td><span class="tag tb">▶️ Start / ⏸️ Stop</span></td><td>Läuft automatisch mit dem eingestellten Geschwindigkeits-Intervall.</td></tr>
+    <tr><td><span class="tag tg">🚀 Turbo (×100)</span></td><td>Simuliert 100 vollständige Episoden auf einmal. Schnellstes Training. Epsilon sinkt automatisch.</td></tr>
+    <tr><td><span class="tag ta">🧹 Lern-Reset</span></td><td>Löscht nur die Q-Tabelle (alle Werte auf 0). Map, Größe und Einstellungen bleiben erhalten.</td></tr>
+    <tr><td><span class="tag tr">💥 Map-Reset</span></td><td>Erstellt eine neue Karte mit der eingestellten Größe. Alles wird zurückgesetzt.</td></tr>
+  </table>
+
+  <h3>Anzeigeoptionen (rechte Leiste)</h3>
+  <div class="info-box green">
+    <div class="lbl">Pfeile anzeigen</div>
+    Zeigt auf jedem Feld einen Pfeil in die Richtung des höchsten Q-Werts. Hilft den Lernfortschritt auf der Karte zu verfolgen.
+  </div>
+  <div class="info-box blue">
+    <div class="lbl">Farben (Heatmap) anzeigen</div>
+    Färbt freie Felder nach ihrem maximalen Q-Wert. Leicht grün = gute Zone (nah am Ziel), leicht rot = gefährliche Zone (nah an Löchern). Weiß = noch unbekannt.
+  </div>
+  <div class="info-box amber">
+    <div class="lbl">🛡️ Test-Modus</div>
+    Setzt Epsilon auf 0. Der Agent handelt ausschließlich nach gelerntem Wissen — kein Zufall. Aktiviere erst nach ausreichend Training (Epsilon sollte &lt; 0.2 sein). Ideal um den Lernerfolg zu prüfen.
+  </div>
+
+  <h3>Statistik-Anzeige (rechte Leiste oben)</h3>
+  <table class="tbl">
+    <tr><th>Wert</th><th>Bedeutung</th></tr>
+    <tr><td><b>Episoden</b></td><td>Gesamtzahl abgeschlossener Lernrunden (Ziel erreicht oder Loch)</td></tr>
+    <tr><td><b>Epsilon</b></td><td>Aktueller Zufallsanteil in Prozent</td></tr>
+    <tr><td><b>Reward</b></td><td>Belohnung des zuletzt ausgeführten Schritts</td></tr>
+    <tr><td><b>Schritte</b></td><td>Anzahl Schritte in der aktuellen Episode</td></tr>
+  </table>
+</div>
+
+<script>
+function tab(id, btn) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

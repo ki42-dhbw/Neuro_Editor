@@ -115,6 +115,7 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
   <a href="#speichern">Speichern</a>
   <a href="#generator">Generator</a>
   <a href="#infopanel">Info-Panel</a>
+  <a href="#embeddings" style="color:var(--accent3);border-color:var(--accent3)">⬡ Embedding Lab</a>
 </nav>
 
 <main>
@@ -657,6 +658,146 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
 
 <div class="tip"><b>Tipp: Breite anpassen</b>
   Die Panel-Breite kann auch durch <strong>Ziehen am Griff</strong> stufenlos eingestellt werden. Die Einstellung wird automatisch im Browser gespeichert und beim nächsten Öffnen wiederhergestellt.
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="embeddings">
+<h1>⬡ Embedding Lab</h1>
+<p class="sub">Zweite Menüleiste — interaktives Lernmodul für Tokenisierung, Embedding-Vektoren und RAG</p>
+
+<p>Das <strong>Embedding Lab</strong> ist eine eigenständige Lernumgebung in der zweiten Toolbar-Zeile. Sie zeigt Schritt für Schritt, wie moderne Sprachmodelle Text verarbeiten: vom Rohtext über Token-IDs bis hin zu hochdimensionalen Vektoren und semantischer Suche.</p>
+
+<div class="info"><b>Schnellstart</b>
+  Text in das Eingabefeld der zweiten Leiste tippen → <kbd>Enter</kbd> oder <strong>▶ Analysieren</strong> klicken → alle drei Tabs zeigen das Ergebnis live.
+</div>
+
+<h2>Zweite Menüleiste</h2>
+<table>
+<tr><th>Element</th><th>Funktion</th></tr>
+<tr><td>Eingabefeld</td><td>Text eingeben. <kbd>Enter</kbd> startet die Analyse und öffnet den Tab „① Token-Zerlegung" automatisch.</td></tr>
+<tr><td>▶ Analysieren</td><td>Text tokenisieren, Embedding-Vektoren berechnen und Embedding Lab öffnen.</td></tr>
+<tr><td><span class="badge b-purple">① Token-Zerlegung</span></td><td>Direkt zur animierten Token-Analyse springen.</td></tr>
+<tr><td><span class="badge b-cyan">② 3D Vektor-Raum</span></td><td>Direkt zur 3D-Darstellung des Embedding-Raums springen.</td></tr>
+<tr><td><span class="badge b-green">③ RAG / VectorDB</span></td><td>Direkt zur Vektordatenbank und Ähnlichkeitssuche springen.</td></tr>
+</table>
+
+<h2>Tab ① — Token-Zerlegung</h2>
+<p>Zeigt wie Text in Tokens zerlegt wird — genau so wie es ein Sprachmodell (BERT, GPT usw.) intern tut.</p>
+
+<ol class="steps">
+  <li>Text in das Textfeld eingeben (oder <strong>⊞ Beispiel</strong> klicken).</li>
+  <li><strong>⬡ Tokenisieren</strong> klicken oder <kbd>Enter</kbd> drücken.</li>
+  <li>Tokens erscheinen animiert mit Farb-Kodierung, Token-ID und Typ.</li>
+  <li>Die Tabelle darunter zeigt alle Tokens mit Index, ID und Typ.</li>
+  <li>Optional: <strong>💾 In VectorDB speichern</strong> — speichert den Text als Embedding in die Vektordatenbank.</li>
+  <li>Optional: <strong>◉ → 3D ansehen</strong> — wechselt direkt zum 3D Vektor-Raum mit den neuen Tokens.</li>
+</ol>
+
+<h3>Token-Typen</h3>
+<table>
+<tr><th>Farbe</th><th>Typ</th><th>Bedeutung</th></tr>
+<tr><td><span class="badge b-purple">lila</span></td><td>Special Token</td><td><code>[CLS]</code> (Anfang), <code>[SEP]</code> (Ende), <code>[PAD]</code> (Auffüllen), <code>[MASK]</code></td></tr>
+<tr><td><span class="badge b-cyan">cyan</span></td><td>Bekanntes Wort</td><td>Im Vokabular vorhandenes Wort mit fester ID</td></tr>
+<tr><td><span class="badge b-green">grün</span></td><td>Normales Wort</td><td>Unbekanntes Wort — bekommt eine berechnete ID</td></tr>
+<tr><td><span class="badge b-orange">orange</span></td><td>Subword (<code>##</code>)</td><td>Teilstück eines langen Worts (BPE/WordPiece). Präfix <code>##</code> zeigt Fortsetzung.</td></tr>
+</table>
+
+<div class="tip"><b>Was ist ein Token?</b>
+  Ein Token ist die kleinste Einheit, die ein Sprachmodell versteht. Es kann ein Wort, ein Wortteil, ein Zeichen oder ein Sonderzeichen sein. Jedes Token bekommt eine ganzzahlige ID aus dem Vokabular des Modells. GPT-4 hat ~100 000 Tokens, BERT 30 522.
+</div>
+
+<h3>Statistiken</h3>
+<table>
+<tr><th>Anzeige</th><th>Bedeutung</th></tr>
+<tr><td>Tokens</td><td>Gesamtanzahl der Tokens inkl. Special Tokens (<code>[CLS]</code>, <code>[SEP]</code>)</td></tr>
+<tr><td>Wörter</td><td>Anzahl Leerzeichen-getrennte Wörter im Originaltext</td></tr>
+<tr><td>Unique IDs</td><td>Anzahl verschiedener Token-IDs — zeigt wie viele unterschiedliche Tokens verwendet werden</td></tr>
+</table>
+
+<h2>Tab ② — 3D Vektor-Raum</h2>
+<p>Stellt die Embedding-Vektoren als interaktiven 3D-Punktwolken-Graph dar. Semantisch ähnliche Wörter liegen räumlich nahe beieinander.</p>
+
+<h3>Navigation</h3>
+<table>
+<tr><th>Aktion</th><th>Ergebnis</th></tr>
+<tr><td>Maus ziehen</td><td>Ansicht rotieren</td></tr>
+<tr><td>Mausrad</td><td>Zoom rein/raus</td></tr>
+<tr><td>Hover über Punkt</td><td>Tooltip mit Token, ID, 3D-Koordinaten und 50D-Vektor (Ausschnitt)</td></tr>
+</table>
+
+<h3>Wörter direkt hinzufügen (Sidebar)</h3>
+<p>Im 3D Vektor-Raum kann direkt in der rechten Sidebar ein Wort oder eine kommagetrennte Liste eingegeben werden, ohne den Tab zu wechseln:</p>
+<ol class="steps">
+  <li>Wort oder Wörter in das Feld <strong>⊕ Wort hinzufügen</strong> eingeben.</li>
+  <li><kbd>Enter</kbd> oder <strong>+</strong>-Button klicken.</li>
+  <li>Der Punkt erscheint sofort im 3D-Raum mit Glow-Effekt.</li>
+</ol>
+<div class="tip"><b>Tipp: Cluster erkunden</b>
+  Probiere: <code>Hund, Katze, Vogel</code> → alle landen im Tiere-Cluster. Dann <code>Auto, Fahrrad, Zug</code> → ein völlig anderer Bereich des Raums. Das zeigt semantische Bedeutung im Vektorraum.
+</div>
+
+<h3>Schaltflächen</h3>
+<table>
+<tr><th>Schaltfläche</th><th>Funktion</th></tr>
+<tr><td>⊕ Tokens hinzufügen</td><td>Fügt die zuletzt tokenisierten Wörter (Tab ①) in den 3D-Raum ein</td></tr>
+<tr><td>✕ Leeren</td><td>Entfernt alle Punkte aus dem 3D-Raum (löscht <em>nicht</em> die Vektordatenbank)</td></tr>
+<tr><td>⟳ Auto-Rotation: AN/AUS</td><td>Aktiviert oder deaktiviert die automatische Drehung</td></tr>
+</table>
+
+<h3>Cluster im 3D-Raum</h3>
+<table>
+<tr><th>Cluster</th><th>Enthält u.a.</th><th>Position</th></tr>
+<tr><td>🐾 Tiere</td><td>Hund, Katze, Pferd, Vogel</td><td>Oben links vorne</td></tr>
+<tr><td>🚗 Fahrzeuge</td><td>Auto, Fahrrad, Zug, Flugzeug</td><td>Oben rechts vorne</td></tr>
+<tr><td>🌳 Natur</td><td>Baum, Blume, Wald, Berg</td><td>Unten links hinten</td></tr>
+<tr><td>🤖 KI / ML</td><td>Token, Embedding, BERT, GPT</td><td>Unten rechts hinten</td></tr>
+<tr><td>👑 Royalty</td><td>King, Queen, Man, Woman</td><td>Oben Mitte</td></tr>
+<tr><td>± Adjektive</td><td>good↔bad, fast↔slow, big↔small</td><td>Mitte links/rechts</td></tr>
+</table>
+
+<div class="info"><b>Warum 3D?</b>
+  Echte Embedding-Vektoren haben 768 bis 4096 Dimensionen. Zur Visualisierung wird PCA (Principal Component Analysis) verwendet, um die wichtigsten 3 Dimensionen zu extrahieren. Die Achsen PC₁, PC₂, PC₃ entsprechen den drei größten Variationsrichtungen im Datensatz.
+</div>
+
+<h3>Verbindungslinien</h3>
+<p>Punkte die im 3D-Raum weniger als 0,22 Einheiten voneinander entfernt sind, werden durch eine Linie verbunden. Das zeigt semantische Nähe visuell.</p>
+
+<h2>Tab ③ — VectorDB &amp; RAG</h2>
+<p><strong>RAG</strong> steht für <em>Retrieval Augmented Generation</em> — eine Technik bei der ein Sprachmodell relevante Texte aus einer Datenbank abruft, bevor es eine Antwort generiert.</p>
+
+<h3>Vektordatenbank</h3>
+<ol class="steps">
+  <li>Im Tab ① Text tokenisieren.</li>
+  <li><strong>💾 In VectorDB speichern</strong> klicken.</li>
+  <li>Der Text wird als 50-dimensionaler Vektor (Durchschnitt aller Token-Vektoren) gespeichert.</li>
+  <li>Im Tab ③ erscheint der Eintrag in der Tabelle mit einer Vektor-Vorschau als Balkendiagramm.</li>
+</ol>
+
+<div class="tip"><b>Persistenz</b>
+  Die Vektordatenbank wird im Browser-LocalStorage gespeichert und bleibt auch nach dem Neuladen erhalten. Mit <strong>✕ Leeren</strong> kann sie vollständig geleert werden.
+</div>
+
+<h3>RAG-Suche (Cosinus-Similarität)</h3>
+<ol class="steps">
+  <li>Mehrere Texte in der VectorDB gespeichert haben.</li>
+  <li>Suchanfrage in das Suchfeld eingeben.</li>
+  <li><kbd>Enter</kbd> oder <strong>🔍 Suchen</strong> klicken.</li>
+  <li>Die Top-5 ähnlichsten Texte erscheinen mit Ähnlichkeitsprozent und Fortschrittsbalken.</li>
+</ol>
+
+<table>
+<tr><th>Konzept</th><th>Erklärung</th></tr>
+<tr><td>Cosinus-Similarität</td><td>Misst den Winkel zwischen zwei Vektoren. 100 % = identisch, 0 % = keine Gemeinsamkeit, negative Werte = entgegengesetzt.</td></tr>
+<tr><td>Anfrage-Vektor</td><td>Der Suchtext wird ebenfalls in einen Vektor umgewandelt und mit allen gespeicherten Vektoren verglichen.</td></tr>
+<tr><td>Top-K Retrieval</td><td>Die K ähnlichsten Dokumente werden zurückgegeben — in echten RAG-Systemen werden diese als Kontext an ein LLM übergeben.</td></tr>
+</table>
+
+<div class="info"><b>RAG-Ablauf im echten System</b>
+  1. Alle Dokumente → Embedding → Vektordatenbank &nbsp;·&nbsp;
+  2. Nutzeranfrage → Embedding &nbsp;·&nbsp;
+  3. Cosinus-Suche → Top-K Dokumente &nbsp;·&nbsp;
+  4. Kontext + Anfrage → LLM → Antwort
 </div>
 </section>
 
