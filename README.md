@@ -10,7 +10,7 @@ Die Anwendung richtet sich besonders an Lernende, Lehrende und alle, die KI-Konz
 
 ## Aktuelle Version
 
-**`neural-network-builder_simu_netz_v20.html`**
+**`neural-network-builder_simu_netz_v22.html`**
 
 ---
 
@@ -31,6 +31,7 @@ Die App besteht aus mehreren Dateien, die im **gleichen Verzeichnis** liegen mü
 │   ├── info_4.html          ← Info-Panel: XOR-Problem
 │   ├── hilfe.html           ← Info-Panel: Allgemeine Hilfe
 │   ├── rl_hilfe.html        ← Info-Panel: RL-Hilfe & Deep RL-Erklärung
+│   ├── start.html           ← Info-Panel: Wie starte ich
 │   └── 📁 Bilder/ (optional)
 │       ├── ArtificialNeuronModel_english.png
 │       └── Neuron_(deutsch)-1.svg
