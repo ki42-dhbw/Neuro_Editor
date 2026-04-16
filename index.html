@@ -11754,7 +11754,7 @@ document.getElementById('embTextInput').addEventListener('keydown',e=>{
 // ── Persistente Einstellungen ──────────────────────────────────────
 const CHAT_SETTINGS_KEY = 'nnbChatSettings';
 let chatSettings = {
-  host: 'http://192.168.1.100:1234',
+  host: 'http://127.0.0.1:1234',
   model: 'local-model',
   sysPrompt: 'Du bist ein KI-Tutor für den Neural Network Builder (v19). Die App hat drei Bereiche: (1) Neuronales Netz — visueller Editor mit Drag & Drop, Forward-Pass-Simulation und überwachtem Training inkl. Backpropagation, Loss, Accuracy und Keras-Export; (2) Embedding Lab — Tokenisierung, 2D/3D-Vektorvisualisierung und Vektordatenbank; (3) Reinforcement Learning — nativer Q-Learning-Simulator mit Gitterwelt, Bellman-Gleichung, Q-Tabelle und Heatmap. Beantworte alle Fragen auf Deutsch, kurz und präzise. Beziehe dich auf Netzwerk- oder Trainingsdaten die der Nutzer dir mitgibt. Erkläre KI-Konzepte verständlich für Lernende.',
   maxTokens: 4096
