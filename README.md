@@ -6,7 +6,7 @@
 **Sprache:** Vanilla HTML · CSS · JavaScript (keine Abhängigkeiten)  
 **Version:** v27
 
-🚀 **[Hier sofort ausprobieren](https://ki42-dhbw.github.io/Neuro_Editor/)**
+🚀 **[Hier sofort ausprobieren!](https://ki42-dhbw.github.io/Neuro_Editor/)**
 
 ---
 
