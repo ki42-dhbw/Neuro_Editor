@@ -1,158 +1,169 @@
-# Neural Network Builder
+# ⬛ Neuro Editor — Visueller Neural Network Builder
 
-Ein visueller **Editor für neuronale Netze** — vollständig im Browser, keine Installation nötig.
-Mit dem Tool lassen sich Netzwerke per **Drag & Drop** erstellen, simulieren, trainieren und exportieren.
-Zusätzlich enthält die App ein **Embedding Lab** und einen integrierten **Reinforcement Learning Simulator** mit klassischem Q-Learning und Deep Q-Network (DQN).
+> Ein vollständig browser-basierter, interaktiver Editor und Simulator für neuronale Netze — ohne Installation, ohne Backend, ohne Build-Schritt.
 
-Die Anwendung richtet sich besonders an Lernende, Lehrende und alle, die KI-Konzepte **interaktiv verstehen und demonstrieren** möchten.
+**Autor:** Stefan Bauer · DHBW Mosbach 2026  
+**Sprache:** Vanilla HTML · CSS · JavaScript (keine Abhängigkeiten)  
+**Version:** v27
 
 ---
 
-## Aktuelle Version
+## Überblick
 
-**`neural-network-builder_simu_netz_v20.html`**
+Der **Neuro Editor** ist eine Lehr- und Experimentierplattform für künstliche neuronale Netze. Sie läuft vollständig im Browser und benötigt keine Installation, keinen Server und keine externe Bibliothek (außer Google Fonts). Alle Module — vom grafischen Netz-Editor über den Backpropagation-Trainer bis zum CNN-Faltungssimulator — sind in einer einzigen HTML-Datei enthalten.
+
+---
+
+## Module & Funktionen
+
+### 1. Neural Network Builder (Canvas-Editor)
+
+- Drag & Drop von Neuronen (Input, Hidden, Output, Bias) auf einem unendlichen Canvas
+- Verbindungen durch Klick-zu-Klick im Verbindungsmodus
+- Gewichte editierbar (Doppelklick), einfrierbar (Weight Freeze)
+- Raster-Snap, Zoom (10–400 %), Pan, Lasso-Selektion
+- Rechtsklick-Kontextmenü für Neuronen und Hintergrund
+- Speichern / Laden als JSON · Python-Export
+- Aktivierungsfunktionen: **ReLU · Sigmoid · Tanh · Softmax · Linear · Leaky ReLU**
+
+### 2. Simulation (Forward Pass)
+
+- Animierte Signalpakete auf Verbindungslinien (cyan = positiv, orange = negativ)
+- Eingabewerte direkt auf dem Canvas editierbar
+- Steuerung: Geschwindigkeit, Einzelschritte, Loop, Aktivierungsvisualisierung
+
+### 3. Überwachtes Lernen / Backpropagation-Training
+
+- Verschiebbares, andockbares Trainings-Panel
+- Trainingsdaten: Tabelleneingabe, Drag & Drop, Vorlagen (XOR, AND, Linear), CSV/JSON-Import
+- Auto-Modus und Einzelschritt-Modus (Forward → Backward → Weight Update)
+- Echtzeit-Metriken: Loss, Accuracy, Gradienten-Norm, Lernrate
+- Charts: Loss-Kurve, Accuracy-Kurve, Gradienten-Norm, LR-Verlauf, Gewichtshistogramm, Konfusionsmatrix
+- Optimierer: **SGD · Momentum · Adam · RMSProp · Adagrad**
+- Hyperparameter: Epochen, Batch-Größe, L2-Regularisierung, Dropout, Gradient Clipping, LR-Scheduler, Early Stopping
+
+### 4. ⬛ CNN-Modul — Faltungsmatrizen Visualisierung
+
+- Schwebendes, verschiebbares und größenänderbares Fenster
+- **Dreispalten-Layout:** Eingabebild → 3×3-Kernel → Ausgabebild (Feature Map)
+- **Eingabebilder:**
+  - 7 synthetische Testmuster (32×32 Graustufen): Schachbrett, Kreis, Diagonale, Streifen, Buchstabe A, Kante, Gradient
+  - Eigene Fotos laden — werden **farbig** dargestellt, intern auf Graustufen konvertiert
+  - Auflösungs-Dropdown für Fotos: 64 / 96 / 128 / 256 / 512 px oder Originalgröße
+- **10 Kernel-Presets:** Identität, Box-Blur, Gauß, Schärfen, Sobel-X/Y, Laplace, Emboss, Verschiebung, Kantenschärfe
+- **6 Animationsmodi:**
+  - ⬜ Sliding Window — Kernel gleitet Pixel für Pixel
+  - ↗ Verbindungslinien — 9 animierte gewichtete Leitungen
+  - ◈ 3D-Lift — Patch hebt sich perspektivisch aus dem Bild
+  - ◎ Wellen — konzentrische Wellenpulse vom Ausgabepixel
+  - ▦ Histogramm — Live-Verteilung der Ausgabewerte
+  - ⊞ Filter-Stapel — alle 10 Kernel gleichzeitig vergleichen
+- Parameter: Divisor, Bias, Randbehandlung (Zero-Padding / Erweitern / Abschneiden)
+- PNG-Download des Ausgabebilds
+
+### 5. Embedding Lab
+
+- **Tab ①** Token-Zerlegung: Simulierte BERT-Tokenisierung mit Farb-Kodierung
+- **Tab ②** 3D-Vektor-Raum: Interaktive 3D-Punktwolke mit PCA-Simulation (semantische Cluster)
+- **Tab ③** VectorDB & RAG: Lokale Browser-Vektordatenbank, Cosinus-Ähnlichkeitssuche, ChromaDB-Connector
+
+### 6. Reinforcement Learning
+
+- **GridWorld:** Q-Learning mit Q-Tabelle, editierbare Karte, Heatmap, Pfeilvisualisierung
+- **BrickBlaster:** Arkanoid-artiges Spiel als RL-Umgebung (manuell oder KI-gesteuert)
+- Lernmodi: klassisches Q-Learning (Q-Tabelle) und Deep RL (DQN mit neuronalem Netz)
+- DQN-Viewer zeigt das lernende Netz live; Export in den NN-Builder möglich
+
+### 7. Netzwerk-Generator
+
+- Automatisch vollvernetztes Netz erstellen (Architektur per Eingabe, z. B. `2, 4, 3, 1`)
+
+### 8. Info-Drawer (Lehr-Panel)
+
+- Ausklappbares Panel mit Lehrfolien im Pseudo-Browser
+- Themen: Neuron & KNN, Einführung in KI, Backpropagation, XOR-Problem, CNN-Erklärung, Hilfe
+
+---
+
+## Schnellstart
+
+```
+1. Repository klonen oder ZIP herunterladen
+2. Datei  neural-network-builder_simu_netz_v27.html  im Browser öffnen
+3. Fertig — keine Installation, kein Server nötig
+```
+
+> Empfohlene Browser: **Chrome** oder **Edge** (aktuell). Firefox funktioniert, Safari eingeschränkt.
+
+---
+
+## Tastaturkürzel
+
+| Taste | Funktion |
+|---|---|
+| `S` | Auswahl-Modus |
+| `C` | Verbinden-Modus |
+| `Ctrl`+`A` | Alle auswählen |
+| `Del` | Auswahl löschen |
+| `Esc` | Abbrechen / Aufheben |
+| `+` / `-` | Zoom |
 
 ---
 
 ## Projektstruktur
 
-Die App besteht aus mehreren Dateien, die im **gleichen Verzeichnis** liegen müssen:
-
 ```
-📁 Projektordner/
-│
-├── neural-network-builder_simu_netz_v20.html   ← Hauptdatei (im Browser öffnen)
-├── ani_gif_1.gif                                ← Startanimation
-│
-├── 📁 HTML/
-│   ├── info_1.html          ← Info-Panel: Neuron & KNN
-│   ├── info_2.html          ← Info-Panel: Einführung
-│   ├── info_3.html          ← Info-Panel: Backpropagation
-│   ├── info_4.html          ← Info-Panel: XOR-Problem
-│   ├── hilfe.html           ← Info-Panel: Allgemeine Hilfe
-│   ├── rl_hilfe.html        ← Info-Panel: RL-Hilfe & Deep RL-Erklärung
-│   └── 📁 Bilder/
-│       ├── ArtificialNeuronModel_english.png
-│       └── Neuron_(deutsch)-1.svg
+Neuroedit_webapp/
+├── neural-network-builder_simu_netz_v27.html   ← Hauptanwendung (aktuell)
+├── HTML/
+│   ├── hilfe.html                              ← Hilfe-Seite (Info-Drawer)
+│   ├── info_1.html … info_4.html               ← Lehrfolien
+│   ├── start.html                              ← Startseite Info-Panel
+│   └── rl_hilfe.html                           ← RL-Hilfe
+├── Bilder/                                     ← Beispielfotos für CNN
+├── RL/                                         ← RL-Experimente
+├── neural-network_1.json / _2.json             ← Beispiel-Netzwerke
+├── trainingsdaten_1.txt                        ← Beispiel-Trainingsdaten (TXT)
+└── trainingsdaten_reg_1.json                   ← Beispiel-Trainingsdaten (JSON)
 ```
 
 ---
 
-## Features
+## Speicherformate
 
-### Neuronales Netz — Editor
-- Visueller Aufbau per **Drag & Drop** auf einem unendlichen Canvas
-- Neurontypen: Input, Hidden, Output, Bias
-- **Aktivierungsfunktionen** direkt am Neuron: ReLU, Sigmoid, Tanh, Softmax, Linear, Leaky ReLU
-- Verbindungen manuell erstellen, Gewichte bearbeiten und einfrieren
-- **Lasso-Auswahl** und Mehrfachselektion
-- **Gespeicherte Bereiche** (Regionen) zum Wiederverwenden
-- Zoom, Pan, Raster
-- **Anpassbare UI-Schriftgröße** (70 %–150 %, gespeichert im Browser)
-- Netzwerk als **JSON** exportieren / importieren
-- Export als **Python-Skript** (Keras/TensorFlow)
-
-### Neuronales Netz — Simulation & Training
-- **Forward-Pass-Simulation** mit animierten Datenpaketen
-- Eingabefelder der Eingangsneuronen direkt auf dem Canvas — **frei verschiebbar** per Drag, Doppelklick zum Zurücksetzen
-- **Überwachtes Lernen** mit eigenen Trainingsdaten (Drag & Drop CSV/JSON)
-- Hyperparameter: Lernrate, Epochen, Batch-Größe, Optimizer, Loss-Funktion
-- **Trainingsvisualisierung**: Loss, Accuracy, Gradienten-Norm, Lernrate, Konfusionsmatrix, Gewichts-Histogramm
-
-### KI-Assistent
-- Verbindung mit lokalem LLM über **LM Studio** (OpenAI-kompatible API)
-- Kontextchips: Netzwerktopologie, Simulationswerte, Embeddings, Trainingsmetriken an LLM mitschicken
-- **Vorschau** der gesendeten Daten vor dem Absenden (👁-Button)
-- Unterstützung für **Thinking-Modelle** (Qwen, DeepSeek-R1): Denkprozess als aufklappbares Panel
-- **Max. Tokens** frei einstellbar (256–131 072) mit Schnellauswahl: 1K / 2K / 4K / 8K / 16K / 32K
-- Dynamisches Timeout: skaliert automatisch mit der Token-Anzahl
-- **Debug-Modus** (🐛): zeigt Antwortzeiten, HTTP-Status, finish_reason, Token-Verbrauch und Fehlerdetails
-
-### Embedding Lab
-- Tokenisierung und Vektordarstellung
-- **2D/3D-Embedding-Visualisierung**
-- Vektordatenbank
-
-### Reinforcement Learning — Q-Learning
-- **Interaktiver Gitterwelt-Simulator** — direkt eingebettet, kein Extra-Fenster
-- Karteneditor: Start, Ziel, Löcher, freie Felder per Klick setzen
-- Rastergröße frei wählbar (2×2 bis 10×10)
-- Q-Learning-Engine mit **Bellman-Gleichung**
-- **Q-Tabelle live** im rechten Panel:
-  - Bester Wert pro Zeile **rot hervorgehoben**
-  - Optimaler Pfad (Start → Ziel) **grün markiert**
-  - **Flash-Animation** bei jeder Agentenbewegung
-- Heatmap und Pfeil-Visualisierung auf dem Spielfeld
-- Parameter: Alpha (Lernrate), Gamma (Weitsicht), Epsilon (Zufall), Geschwindigkeit
-- Test-Modus: kein Zufall, nur gelerntes Wissen
-- Turbo-Training: 100 Episoden auf einmal
-
-### Reinforcement Learning — Deep Q-Network (DQN)
-- Umschaltbar per Toggle zwischen **Q-Learning** und **DQN-Modus**
-- Eigenes **2→32→4 MLP** (He-Init, ReLU, lineare Ausgabe) direkt in der App
-- **Live-Visualisierung** des neuronalen Netzes in der Steuerleiste:
-  - Neuronen farbkodiert nach Aktivierungsstärke
-  - 4 Ausgabeneuronen mit Richtungspfeil (←↓→↑), Q-Wert und Beschriftung
-  - Beste Aktion gold hervorgehoben
-  - Zoom (1×/1.5×/2×/3×) per Button oder Mausrad
-- **DQN in den NN-Editor kopieren** — Gewichte als visuelles Netzwerk übertragen
-- Korrekte Bellman-Gleichung: reines Target `r + γ·max(Q')` ohne doppeltes Alpha
-- Test-Modus: kein Zufall, Netz eingefroren (kein Training)
-- Steuerleiste stufenlos in der **Breite verschiebbar** (gespeichert im Browser)
-
-### Allgemeines
-- **Rechte Info-Seitenleiste** (einklappbar, stufenlos breite verstellbar): Hilfeseiten, RL-Hilfe inkl. Deep RL
-- **Seitenleisten-Toggle**: NN-Panel und RL-Panel wechseln automatisch je nach aktivem Modus
-- Alle Einstellungen (Schriftgröße, Panel-Breiten) werden im Browser gespeichert
-
----
-
-## Nutzung
-
-### Starten
-
-Die Hauptdatei direkt im Browser öffnen — kein Server, kein Build-Schritt nötig:
-
-```
-neural-network-builder_simu_netz_v20.html
+**Netzwerk-JSON**
+```json
+{
+  "neurons": [{ "id": "n1", "type": "input", "x": 100, "y": 200, "label": "x₁", "activation": null }],
+  "connections": [{ "from": "n1", "to": "n2", "weight": 0.42, "frozen": false }],
+  "viewport": { "x": 0, "y": 0, "scale": 1 },
+  "regions": []
+}
 ```
 
-> **Wichtig:** Alle Dateien aus der Projektstruktur müssen vorhanden sein, damit Info-Panel und Hilfe funktionieren.
-
-### Drei Arbeitsbereiche
-
-| Menüleiste | Bereich | Aktivierung |
-|---|---|---|
-| Oben (dunkel) | Neuronales Netz — Editor & Simulation | immer sichtbar |
-| Mitte (blau-violett) | Embedding Lab | Button „🔬 Embedding Lab" |
-| Unten (dunkelgrün) | Reinforcement Learning | Button „🤖 Simulator" |
-
-### RL-Schnelleinstieg (Q-Learning)
-
-1. **🤖 Simulator** klicken → Spielfeld und RL-Panel erscheinen
-2. Karte nach Wunsch bearbeiten (Werkzeuge oben in der RL-Menüleiste)
-3. **🚀 Turbo** in der rechten Leiste klicken (mehrfach, bis Epsilon < 0.2)
-4. **🛡️ Test-Modus** aktivieren → **▶️ Start** klicken
-5. Agent läuft fehlerfrei zum Ziel
-
-### RL-Schnelleinstieg (DQN)
-
-1. **🤖 Simulator** klicken → im RL-Panel **DQN** aktivieren
-2. Karte nach Wunsch bearbeiten
-3. **🚀 Turbo** mehrfach klicken (500+ Episoden empfohlen)
-4. **Test-Modus** aktivieren → **▶️ Start** klicken
-5. Optional: **→ In NN-Editor kopieren** um das trainierte Netz zu visualisieren
+**Trainingsdaten-JSON**
+```json
+{ "inputs": [[0,0],[0,1],[1,0],[1,1]], "outputs": [[0],[1],[1],[0]] }
+```
 
 ---
 
 ## Technologie
 
-- **Vanilla HTML / CSS / JavaScript** — keine Frameworks, keine Abhängigkeiten
-- Läuft vollständig lokal im Browser (offline-fähig)
-- Schriftarten via Google Fonts (JetBrains Mono, Syne) — optional, funktioniert auch ohne
+| Bereich | Technologie |
+|---|---|
+| Sprache | Vanilla JavaScript (ES2020+) |
+| UI | HTML5 + CSS3 (Custom Properties, Flexbox, Grid) |
+| Grafik | Canvas 2D API, requestAnimationFrame |
+| Schriften | JetBrains Mono · Syne (Google Fonts CDN) |
+| Persistenz | Browser LocalStorage + JSON-Datei-Download/Upload |
+| KI-Logik | Vollständig lokal simuliert — kein API-Key erforderlich |
+| Backend | Keines |
+| Build | Keiner |
 
 ---
 
-## Autor
+## Lizenz
 
-© Stefan Bauer, DHBW Mosbach 2026
+© Stefan Bauer, DHBW Mosbach 2026 — Alle Rechte vorbehalten.  
+Nutzung für Lehr- und Bildungszwecke gestattet.
