@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Handbuch — Neuro Editor</title>
+<style>
+:root{
+  --bg:#0a0c10;--surface:#111318;--surface2:#181c24;--border:#252a35;
+  --accent:#00d4ff;--accent2:#ff6b35;--accent3:#a78bfa;--accent4:#10b981;
+  --text:#e2e8f0;--dim:#64748b;--red:#ef4444;--yellow:#f59e0b;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);
+  font-size:13px;line-height:1.7;}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,#0d1520 0%,#0a0c10 55%,#0e0c18 100%);
+  border-bottom:1px solid var(--border);padding:32px 20px 26px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 90% at 50% 0%,#00d4ff14 0%,transparent 68%);
+  pointer-events:none;}
+.hero-badge{display:inline-block;padding:3px 14px;border-radius:20px;
+  border:1px solid var(--accent);background:#00d4ff0d;
+  color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;margin-bottom:14px;}
+.hero h1{font-size:26px;font-weight:800;color:var(--text);
+  letter-spacing:.04em;margin-bottom:8px;}
+.hero h1 span{color:var(--accent);}
+.hero .hero-sub{font-size:13px;color:#94a3b8;max-width:560px;margin:0 auto 16px;}
+.hero-modules{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px;}
+.hero-mod{padding:3px 10px;border-radius:3px;border:1px solid;font-size:10px;font-weight:700;}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:#0a0c10ee;
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--border);
+  padding:6px 14px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.nav-title{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.12em;
+  text-transform:uppercase;margin-right:4px;white-space:nowrap;flex-shrink:0;}
+nav a{font-size:10px;color:var(--dim);text-decoration:none;padding:2px 7px;
+  border:1px solid transparent;border-radius:3px;white-space:nowrap;transition:all .15s;}
+nav a:hover{color:var(--accent);border-color:var(--accent);}
+nav a.cnn{color:var(--yellow);}nav a.cnn:hover{border-color:var(--yellow);}
+nav a.emb{color:var(--accent3);}nav a.emb:hover{border-color:var(--accent3);}
+nav a.rl {color:var(--accent4);}nav a.rl:hover{border-color:var(--accent4);}
+
+/* ── LAYOUT ── */
+main{max-width:900px;margin:0 auto;padding:28px 20px 70px;}
+section{margin-bottom:44px;}
+
+/* ── HEADINGS ── */
+h2{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.09em;
+  text-transform:uppercase;margin:28px 0 12px;padding-left:10px;
+  border-left:3px solid var(--accent);}
+h2.cnn{color:var(--yellow); border-left-color:var(--yellow);}
+h2.emb{color:var(--accent3);border-left-color:var(--accent3);}
+h2.rl {color:var(--accent4);border-left-color:var(--accent4);}
+h3{font-size:12px;font-weight:700;color:#c8d5e4;margin:16px 0 7px;}
+h3.cnn{color:var(--yellow);}
+h3.emb{color:var(--accent3);}
+h3.rl {color:var(--accent4);}
+p{margin-bottom:8px;color:#cbd5e1;line-height:1.75;}
+.sub{font-size:11px;color:var(--dim);margin-bottom:16px;}
+
+/* ── STEP LIST ── */
+ol.steps{padding-left:0;list-style:none;counter-reset:steps;}
+ol.steps li{counter-increment:steps;display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;}
+ol.steps li::before{content:counter(steps);min-width:24px;height:24px;border-radius:50%;
+  background:var(--accent);color:#000;font-weight:800;font-size:10px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+ol.steps.cnn li::before{background:var(--yellow);}
+ol.steps.emb li::before{background:var(--accent3);}
+ol.steps.rl  li::before{background:var(--accent4);}
+ol.steps li .sb{flex:1;}
+ol.steps li .st{font-weight:700;color:var(--text);margin-bottom:3px;}
+ol.steps li .sd{color:var(--dim);font-size:11.5px;line-height:1.65;}
+ul.feat{padding-left:0;list-style:none;}
+ul.feat li{padding:4px 0 4px 16px;position:relative;font-size:12px;color:#cbd5e1;line-height:1.6;}
+ul.feat li::before{content:'›';position:absolute;left:0;color:var(--accent);font-weight:700;font-size:15px;line-height:1.3;}
+
+/* ── BADGE ── */
+.badge{display:inline-block;padding:1px 7px;border-radius:3px;font-size:10px;
+  font-weight:700;font-family:'Courier New',monospace;border:1px solid;vertical-align:middle;}
+.b-cyan{background:#00d4ff18;color:var(--accent);border-color:var(--accent);}
+.b-orange{background:#ff6b3518;color:var(--accent2);border-color:var(--accent2);}
+.b-purple{background:#a78bfa18;color:var(--accent3);border-color:var(--accent3);}
+.b-green{background:#10b98118;color:var(--accent4);border-color:var(--accent4);}
+.b-yellow{background:#f59e0b18;color:var(--yellow);border-color:var(--yellow);}
+.b-red{background:#ef444418;color:var(--red);border-color:var(--red);}
+.b-dim{background:#25293518;color:var(--dim);border-color:var(--border);}
+
+/* ── KEY ── */
+kbd{display:inline-block;padding:1px 6px;border-radius:3px;font-size:10px;
+  font-family:'Courier New',monospace;background:var(--surface2);
+  border:1px solid #374151;border-bottom:2px solid #374151;color:var(--text);}
+
+/* ── CALLOUT BOXES ── */
+.info,.warn,.tip,.note{border-radius:6px;padding:10px 14px;margin:12px 0;font-size:12px;line-height:1.65;}
+.info{background:#00d4ff0d;border-left:3px solid var(--accent);}
+.warn{background:#f59e0b0d;border-left:3px solid var(--yellow);}
+.tip {background:#10b9810d;border-left:3px solid var(--accent4);}
+.note{background:#a78bfa0d;border-left:3px solid var(--accent3);}
+.info b,.warn b,.tip b,.note b{display:block;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;margin-bottom:4px;}
+.info b{color:var(--accent);}
+.warn b{color:var(--yellow);}
+.tip b{color:var(--accent4);}
+.note b{color:var(--accent3);}
+
+/* ── CONCEPT CARDS ── */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;}
+@media(max-width:540px){.concept-grid{grid-template-columns:1fr;}}
+.concept-card{background:var(--surface);border:1px solid var(--border);border-radius:7px;
+  padding:12px 14px;}
+.concept-card .cc-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.concept-card .cc-icon{font-size:20px;width:32px;text-align:center;flex-shrink:0;}
+.concept-card .cc-title{font-size:12px;font-weight:700;color:var(--text);}
+.concept-card p{font-size:11.5px;color:var(--dim);margin:0;}
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:11.5px;}
+th{background:var(--surface2);color:var(--dim);text-align:left;
+  padding:6px 10px;font-weight:600;letter-spacing:.06em;font-size:10px;
+  text-transform:uppercase;border:1px solid var(--border);}
+td{padding:6px 10px;border:1px solid var(--border);vertical-align:top;color:#cbd5e1;}
+tr:nth-child(even) td{background:#0d1018;}
+td:first-child{white-space:nowrap;}
+
+/* ── FLOW ── */
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:14px 0;}
+.flow-step{background:var(--surface);border:1px solid var(--border);border-radius:5px;
+  padding:6px 13px;font-size:11px;color:var(--text);white-space:nowrap;}
+.flow-step.hl{border-color:var(--accent);color:var(--accent);background:#00d4ff0d;}
+.flow-step.yl{border-color:var(--yellow);color:var(--yellow);background:#f59e0b0d;}
+.flow-step.pu{border-color:var(--accent3);color:var(--accent3);background:#a78bfa0d;}
+.flow-step.gr{border-color:var(--accent4);color:var(--accent4);background:#10b9810d;}
+.flow-arrow{color:var(--dim);font-size:16px;flex-shrink:0;}
+
+/* ── NET DIAGRAM ── */
+.net-diagram{display:flex;align-items:center;gap:20px;padding:14px 18px;
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;margin:12px 0;
+  overflow-x:auto;}
+.net-layer{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.net-lbl{font-size:9px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;}
+.neuron{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:10px;font-weight:700;border:2px solid;flex-shrink:0;}
+.n-in  {background:#10b98118;border-color:#10b981;color:#10b981;}
+.n-hid {background:#00d4ff18;border-color:#00d4ff;color:#00d4ff;}
+.n-out {background:#ff6b3518;border-color:#ff6b35;color:#ff6b35;}
+.n-bias{background:#f59e0b18;border-color:#f59e0b;color:#f59e0b;}
+.net-arrow{font-size:22px;color:#334155;flex-shrink:0;}
+
+/* ── WEIGHT VIS ── */
+.weight-ex{display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:var(--surface);border:1px solid var(--border);border-radius:6px;
+  margin:8px 0;font-size:11.5px;}
+.w-line{height:3px;flex:1;border-radius:2px;}
+.w-pos{background:linear-gradient(90deg,#00d4ff44,#00d4ff);}
+.w-neg{background:linear-gradient(90deg,#ef444444,#ef4444);}
+.w-zero{background:#252a35;}
+
+/* ── ACT FUNCTION ── */
+.act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0;}
+@media(max-width:500px){.act-grid{grid-template-columns:1fr 1fr;}}
+.act-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;
+  padding:9px 11px;text-align:center;}
+.act-card .ac-name{font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.act-card .ac-range{font-size:10px;color:var(--accent);font-family:'Courier New',monospace;}
+.act-card .ac-desc{font-size:10px;color:var(--dim);margin-top:3px;}
+
+/* ── CNN DIAGRAM ── */
+.cnn-flow{display:flex;align-items:stretch;gap:4px;margin:14px 0;overflow-x:auto;}
+.cnn-block{flex:1;min-width:80px;background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:10px 8px;text-align:center;}
+.cnn-block .cb-icon{font-size:20px;margin-bottom:4px;}
+.cnn-block .cb-title{font-size:10px;font-weight:700;color:var(--text);}
+.cnn-block .cb-sub{font-size:9px;color:var(--dim);margin-top:2px;}
+.cnn-sep{display:flex;align-items:center;color:#334155;font-size:18px;flex-shrink:0;}
+
+/* ── PIXEL GRID ── */
+.pixel-grid{display:inline-grid;gap:2px;margin:8px 4px;}
+.px{width:28px;height:28px;border-radius:3px;display:flex;align-items:center;
+  justify-content:center;font-size:9px;font-weight:700;color:#000;font-family:'Courier New',monospace;}
+
+/* ── TOKEN DEMO ── */
+.token-demo{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0;}
+.tok{display:inline-block;padding:3px 8px;border-radius:4px;font-family:'Courier New',monospace;
+  font-size:11px;font-weight:700;border:1px solid;}
+.tok-w{background:#1e1640;color:#c4b5fd;border-color:#6d28d9;}
+.tok-s{background:#0f1e14;color:#6ee7b7;border-color:#059669;}
+.tok-n{background:#1e1208;color:#fcd34d;border-color:#b45309;}
+.tok-p{background:#1e0f0f;color:#fca5a5;border-color:#b91c1c;}
+
+/* ── RL ── */
+.rl-concept{display:flex;gap:10px;padding:9px 12px;background:var(--surface);
+  border:1px solid var(--border);border-radius:6px;margin-bottom:7px;font-size:11.5px;}
+.rl-concept .sym{font-size:20px;flex-shrink:0;width:30px;text-align:center;}
+.rl-concept .rt{font-weight:700;color:var(--text);margin-bottom:2px;}
+.rl-concept .rd{color:var(--dim);}
+.rl-grid-demo{display:inline-grid;grid-template-columns:repeat(5,32px);gap:3px;margin:10px 0;}
+.rl-cell{width:32px;height:32px;border-radius:4px;border:1px solid #1a3020;
+  display:flex;align-items:center;justify-content:center;font-size:15px;background:#0a1410;}
+.rl-cell.start{background:#0f2218;border-color:#10b981;}
+.rl-cell.goal {background:#1c2810;border-color:#84cc16;}
+.rl-cell.hole {background:#1f0d0d;border-color:#ef4444;}
+.rl-cell.wall {background:#151515;border-color:#374151;}
+
+/* ── MISC ── */
+hr{border:none;border-top:1px solid var(--border);margin:30px 0;}
+code{font-family:'Courier New',monospace;background:#0d1018;padding:1px 5px;
+  border-radius:3px;color:var(--accent);font-size:11px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;}
+@media(max-width:540px){.two-col{grid-template-columns:1fr;}}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:12px 14px;}
+.panel h4{font-size:11px;font-weight:700;color:var(--text);margin-bottom:7px;
+  padding-bottom:5px;border-bottom:1px solid var(--border);}
+.panel ul{list-style:none;padding:0;}
+.panel ul li{padding:3px 0 3px 13px;position:relative;font-size:11px;color:#94a3b8;}
+.panel ul li::before{content:'·';position:absolute;left:0;color:var(--dim);}
+.toolbar-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  background:var(--surface2);border:1px solid var(--border);border-radius:6px;
+  padding:8px 10px;margin:10px 0;font-size:11px;}
+.toolbar-row .tb-lbl{color:var(--dim);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;flex-shrink:0;margin-right:4px;}
+.big-num{font-size:22px;font-weight:800;color:var(--accent);margin-right:6px;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Vollständiges Handbuch · Beginner-Niveau</div>
+  <h1><span>Neuro</span> Editor</h1>
+  <p class="hero-sub">Lerne neuronale Netze kennen — bauen, simulieren und trainieren, direkt im Browser, ohne Installation.</p>
+  <div class="hero-modules">
+    <span class="hero-mod" style="color:#10b981;border-color:#10b981;background:#10b98112">🧠 NN-Builder</span>
+    <span class="hero-mod" style="color:#00d4ff;border-color:#00d4ff;background:#00d4ff12">▶ Simulation</span>
+    <span class="hero-mod" style="color:#ff6b35;border-color:#ff6b35;background:#ff6b3512">📈 Training</span>
+    <span class="hero-mod" style="color:#f59e0b;border-color:#f59e0b;background:#f59e0b12">⬛ CNN</span>
+    <span class="hero-mod" style="color:#a78bfa;border-color:#a78bfa;background:#a78bfa12">🔤 Embedding</span>
+    <span class="hero-mod" style="color:#10b981;border-color:#10b981;background:#10b98112">🎮 RL</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-title">Handbuch</span>
+  <a href="#wasist">Was ist KI?</a>
+  <a href="#oberflaeche">Oberfläche</a>
+  <a href="#quickstart">Quickstart</a>
+  <a href="#neuronen">Neuronen</a>
+  <a href="#verbinden">Verbinden</a>
+  <a href="#aktivierung">Aktivierung</a>
+  <a href="#simulation">Simulation</a>
+  <a href="#training">Training</a>
+  <a href="#generator">Generator</a>
+  <a href="#cnn" class="cnn">CNN</a>
+  <a href="#pooling" class="cnn">Pooling</a>
+  <a href="#embedding" class="emb">Embedding</a>
+  <a href="#rl" class="rl">RL</a>
+  <a href="#speichern">Speichern</a>
+  <a href="#shortcuts">Shortcuts</a>
+  <a href="#fehler">Tipps</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="wasist">
+  <h2>Was ist ein neuronales Netz?</h2>
+  <p>Ein künstliches neuronales Netz (KNN) ist ein Computermodell, das grob vom menschlichen Gehirn inspiriert ist. Es besteht aus vielen einfachen Recheneinheiten — den <strong>Neuronen</strong> — die miteinander verbunden sind. Diese Verbindungen haben Gewichte, die bestimmen, wie stark ein Signal weitergeleitet wird.</p>
+  <p>Das Netz lernt, indem diese Gewichte schrittweise angepasst werden, bis die Ausgabe möglichst gut zu den Trainingsdaten passt.</p>
+
+  <div class="concept-grid">
+    <div class="concept-card">
+      <div class="cc-head"><div class="cc-icon">🔢</div><div class="cc-title">Eingabe (Input)</div></div>
+      <p>Die Daten, die ins Netz gegeben werden — z.B. Pixelwerte eines Bildes, Sensordaten oder Zahlen.</p>
+    </div>
+    <div class="concept-card">
+      <div class="cc-head"><div class="cc-icon">⚙️</div><div class="cc-title">Verarbeitung (Hidden Layer)</div></div>
+      <p>Verborgene Schichten rechnen mit den Eingaben und lernen abstrakte Merkmale zu erkennen.</p>
+    </div>
+    <div class="concept-card">
+      <div class="cc-head"><div class="cc-icon">✅</div><div class="cc-title">Ausgabe (Output)</div></div>
+      <p>Das Ergebnis des Netzes — z.B. eine Klassifikation (Katze/Hund) oder ein Zahlenwert.</p>
+    </div>
+    <div class="concept-card">
+      <div class="cc-head"><div class="cc-icon">📉</div><div class="cc-title">Training (Lernen)</div></div>
+      <p>Das Netz vergleicht seine Ausgabe mit der richtigen Antwort und korrigiert die Gewichte per Backpropagation.</p>
+    </div>
+  </div>
+
+  <div class="net-diagram">
+    <div class="net-layer">
+      <div class="net-lbl">Input</div>
+      <div class="neuron n-in">x₁</div>
+      <div class="neuron n-in">x₂</div>
+    </div>
+    <div class="net-arrow">→</div>
+    <div class="net-layer">
+      <div class="net-lbl">Hidden</div>
+      <div class="neuron n-hid">h₁</div>
+      <div class="neuron n-hid">h₂</div>
+      <div class="neuron n-hid">h₃</div>
+    </div>
+    <div class="net-arrow">→</div>
+    <div class="net-layer">
+      <div class="net-lbl">Output</div>
+      <div class="neuron n-out">y</div>
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:-4px;">Einfaches Feed-Forward-Netz mit 2 Eingängen, 3 Hidden-Neuronen und 1 Ausgang</p>
+
+  <div class="info">
+    <b>Kein Vorwissen nötig</b>
+    Du brauchst keine Mathematik-Kenntnisse um loszulegen. Der Neuro Editor zeigt alle Berechnungen visuell — Zahlen und Formeln tauchen nur dann auf, wenn du sie sehen möchtest.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="oberflaeche">
+  <h2>Die Oberfläche im Überblick</h2>
+
+  <div class="toolbar-row">
+    <span class="tb-lbl">Symbolleiste oben:</span>
+    <span class="badge b-cyan">Auswahl</span>
+    <span class="badge b-cyan">Verbinden</span>
+    <span class="badge b-green">▶ Input</span>
+    <span class="badge b-cyan">Hidden</span>
+    <span class="badge b-orange">Output</span>
+    <span class="badge b-yellow">Bias</span>
+    <span class="badge b-dim">⬛ CNN</span>
+    <span class="badge b-dim">Sim ▶</span>
+    <span class="badge b-dim">Training</span>
+    <span class="badge b-dim">🧠 RL</span>
+    <span class="badge b-dim">Embedding</span>
+  </div>
+
+  <div class="two-col">
+    <div class="panel">
+      <h4>🖥️ Arbeitsfläche (Canvas)</h4>
+      <ul>
+        <li>Großer schwarzer Bereich in der Mitte</li>
+        <li>Hier baust du dein Netz per Drag &amp; Drop</li>
+        <li>Mausrad zum Zoomen (10 % – 400 %)</li>
+        <li>Mittelklick oder Leertaste + Ziehen zum Verschieben</li>
+        <li>Rechtsklick → Kontextmenü (Neuron hinzufügen etc.)</li>
+        <li>Raster-Snap: Neuronen rasten automatisch ein</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4>📋 Info-Panel (rechts)</h4>
+      <ul>
+        <li>Dieses Panel — du liest es gerade!</li>
+        <li>Öffnen/Schließen: Griff am rechten Bildschirmrand</li>
+        <li>Enthält Hilfeseiten, Theorie und dieses Handbuch</li>
+        <li>Navigationsleiste oben im Panel zum Wechseln der Seite</li>
+        <li>Alle Erklärungen auf Deutsch, mit Beispielen</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4>⚡ Trainings-Panel (ausklappbar)</h4>
+      <ul>
+        <li>Klick auf „Lernen" in der Toolbar öffnet das Panel</li>
+        <li>Tab ① Trainingsdaten eingeben oder laden</li>
+        <li>Tab ② Hyperparameter konfigurieren</li>
+        <li>Tab ③ Training starten und Metriken beobachten</li>
+        <li>Panel ist verschiebbar und in der Größe änderbar</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4>⬛ CNN-Fenster (schwebend)</h4>
+      <ul>
+        <li>Klick auf „⬛ CNN" in der Toolbar öffnet das Fenster</li>
+        <li>Frei verschiebbar und in der Größe änderbar</li>
+        <li>Tab „Faltung": Kernel auf Bild anwenden und animieren</li>
+        <li>Tab „Pooling": Max/Avg/Min-Pooling interaktiv zeigen</li>
+        <li>✕-Button schließt das Fenster</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="quickstart">
+  <h2>Quickstart — Erstes Netz in 7 Schritten</h2>
+  <p class="sub">Ziel: Ein einfaches XOR-Netz bauen, das prüft ob genau einer von zwei Eingängen aktiv ist.</p>
+
+  <div class="flow">
+    <div class="flow-step hl">1 Netz laden</div><div class="flow-arrow">→</div>
+    <div class="flow-step">2 Neuronen</div><div class="flow-arrow">→</div>
+    <div class="flow-step">3 Verbinden</div><div class="flow-arrow">→</div>
+    <div class="flow-step">4 Daten</div><div class="flow-arrow">→</div>
+    <div class="flow-step">5 Training</div><div class="flow-arrow">→</div>
+    <div class="flow-step">6 Testen</div><div class="flow-arrow">→</div>
+    <div class="flow-step">7 Speichern</div>
+  </div>
+
+  <ol class="steps" style="margin-top:18px;">
+    <li>
+      <div class="sb">
+        <div class="st">Netz-Generator starten (schnellster Einstieg)</div>
+        <div class="sd">Klicke in der Toolbar auf <span class="badge b-dim">⚙ Generator</span>. Gib die Architektur ein, z.B. <code>2, 4, 1</code> (2 Eingänge, 4 Hidden, 1 Ausgang) und klicke <strong>Erstellen</strong>. Das Netz wird automatisch vollvernetzt aufgebaut.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Alternativ: Neuronen einzeln platzieren</div>
+        <div class="sd">Klicke auf <span class="badge b-green">Input</span> in der Toolbar und dann auf die Arbeitsfläche — ein grünes Eingabe-Neuron erscheint. Wiederhole für weitere Neuronen. Tipp: <kbd>Rechtsklick</kbd> auf leere Fläche → Neuron hinzufügen.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Neuronen verbinden</div>
+        <div class="sd">Drücke <kbd>C</kbd> oder klicke auf <span class="badge b-cyan">Verbinden</span>. Jetzt: Klick auf Quell-Neuron → Klick auf Ziel-Neuron. Eine Linie mit Gewicht erscheint. Mit <kbd>Esc</kbd> Modus beenden.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Trainingsdaten laden</div>
+        <div class="sd">Klicke auf <span class="badge b-dim">Lernen</span> in der Toolbar → Tab <strong>① Daten</strong>. Klicke auf <span class="badge b-cyan">Vorlage XOR</span>. Die 4 XOR-Datenpunkte werden automatisch eingefügt.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Training starten</div>
+        <div class="sd">Wechsle zu Tab <strong>③ Training</strong>. Lernrate auf <code>0.1</code> lassen. Klicke auf <span class="badge b-orange">⚡ Starten</span>. Der Verlust (Loss) sollte innerhalb von Sekunden sinken.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Ergebnis testen</div>
+        <div class="sd">Klicke in der Toolbar auf <span class="badge b-cyan">▶ Sim</span>. Ändere die Eingabewerte der Input-Neuronen direkt auf dem Canvas (Doppelklick auf den Wert). Beobachte wie sich die Ausgabe ändert.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Netz speichern</div>
+        <div class="sd">Klicke auf <span class="badge b-dim">💾 Speichern</span> in der Toolbar. Eine JSON-Datei wird heruntergeladen. Später wieder laden mit <span class="badge b-dim">📂 Laden</span>.</div>
+      </div>
+    </li>
+  </ol>
+
+  <div class="tip">
+    <b>Beispiel-Netz laden</b>
+    In der Toolbar gibt es <span class="badge b-dim">📂 Laden</span> — öffne <code>neural-network_1.json</code> aus dem Projektordner. Das ist ein fertig trainiertes XOR-Netz, das du direkt testen kannst.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="neuronen">
+  <h2>Neuronen-Typen</h2>
+  <p>Es gibt vier Typen von Neuronen. Jeder hat eine bestimmte Aufgabe im Netz.</p>
+
+  <table>
+    <tr><th>Typ</th><th>Farbe</th><th>Aufgabe</th><th>Wann verwenden?</th></tr>
+    <tr>
+      <td><span class="badge b-green">Input</span></td>
+      <td style="color:#10b981">Grün</td>
+      <td>Empfängt einen Eingabewert von außen (z.B. Messwert, Pixel).</td>
+      <td>Für jeden Feature-Kanal einen Input. Für XOR: 2 Inputs.</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-cyan">Hidden</span></td>
+      <td style="color:#00d4ff">Cyan</td>
+      <td>Rechnet intern, kombiniert Signale, erkennt Muster.</td>
+      <td>Mindestens eine Hidden-Schicht für komplexere Probleme.</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-orange">Output</span></td>
+      <td style="color:#ff6b35">Orange</td>
+      <td>Liefert das Ergebnis des Netzes.</td>
+      <td>1 Output für Regression / binäre Klasse. N Outputs für N Klassen.</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-yellow">Bias</span></td>
+      <td style="color:#f59e0b">Gelb</td>
+      <td>Gibt immer den Wert 1.0 aus. Wirkt wie ein Offset.</td>
+      <td>Optional, aber empfohlen. Verbessert die Lernfähigkeit deutlich.</td>
+    </tr>
+  </table>
+
+  <h3>Neuron bearbeiten</h3>
+  <ul class="feat">
+    <li><strong>Verschieben:</strong> Im Auswahl-Modus (<kbd>S</kbd>) ein Neuron mit der Maus ziehen</li>
+    <li><strong>Umbenennen:</strong> Doppelklick auf das Neuron → Eingabe des neuen Labels</li>
+    <li><strong>Löschen:</strong> Neuron anklicken, dann <kbd>Entf</kbd> drücken</li>
+    <li><strong>Aktivierungsfunktion:</strong> Rechtsklick auf Neuron → Aktivierung wählen</li>
+    <li><strong>Mehrere auswählen:</strong> Lasso-Selektion (Ziehen über leere Fläche) oder <kbd>Strg</kbd>+<kbd>A</kbd></li>
+    <li><strong>Eingabewert setzen</strong> (nur Input-Neuronen): Doppelklick auf den Zahlenwert des Neurons</li>
+  </ul>
+
+  <div class="info">
+    <b>Was passiert im Neuron?</b>
+    Jedes Neuron summiert die gewichteten Eingaben aller eingehenden Verbindungen auf, addiert den Bias und wendet dann eine Aktivierungsfunktion an. Das Ergebnis ist die Aktivierung (der Ausgabewert) des Neurons.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="verbinden">
+  <h2>Verbindungen &amp; Gewichte</h2>
+  <p>Verbindungen zwischen Neuronen haben ein <strong>Gewicht (Weight)</strong>. Dieses Gewicht bestimmt, wie stark das Signal des Quell-Neurons das Ziel-Neuron beeinflusst.</p>
+
+  <div style="margin:14px 0;">
+    <div class="weight-ex">
+      <span class="neuron n-in" style="width:28px;height:28px;font-size:9px;">in</span>
+      <div class="w-line w-pos"></div>
+      <span style="color:var(--accent);font-weight:700;font-size:12px;">w = +2.5</span>
+      <div class="w-line w-pos"></div>
+      <span class="neuron n-hid" style="width:28px;height:28px;font-size:9px;">h</span>
+      <span style="color:var(--dim);font-size:11px;margin-left:8px;">Positiv: Signal wird verstärkt weitergeleitet</span>
+    </div>
+    <div class="weight-ex">
+      <span class="neuron n-in" style="width:28px;height:28px;font-size:9px;">in</span>
+      <div class="w-line w-neg"></div>
+      <span style="color:#ef4444;font-weight:700;font-size:12px;">w = −1.8</span>
+      <div class="w-line w-neg"></div>
+      <span class="neuron n-hid" style="width:28px;height:28px;font-size:9px;">h</span>
+      <span style="color:var(--dim);font-size:11px;margin-left:8px;">Negativ: Signal wird abgeschwächt / invertiert</span>
+    </div>
+    <div class="weight-ex">
+      <span class="neuron n-in" style="width:28px;height:28px;font-size:9px;">in</span>
+      <div class="w-line w-zero"></div>
+      <span style="color:var(--dim);font-weight:700;font-size:12px;">w = 0.0</span>
+      <div class="w-line w-zero"></div>
+      <span class="neuron n-hid" style="width:28px;height:28px;font-size:9px;">h</span>
+      <span style="color:var(--dim);font-size:11px;margin-left:8px;">Null: Verbindung hat keinen Einfluss</span>
+    </div>
+  </div>
+
+  <h3>Verbindung erstellen</h3>
+  <ol class="steps">
+    <li>
+      <div class="sb">
+        <div class="st">Verbindungs-Modus aktivieren</div>
+        <div class="sd">Drücke <kbd>C</kbd> oder klicke auf <span class="badge b-cyan">Verbinden</span> in der Toolbar. Die Cursor-Form ändert sich zu einem Fadenkreuz.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Quell-Neuron anklicken</div>
+        <div class="sd">Das Neuron, von dem die Verbindung ausgeht, anklicken. Es leuchtet auf.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Ziel-Neuron anklicken</div>
+        <div class="sd">Das Neuron, bei dem die Verbindung ankommen soll, anklicken. Eine Linie mit Gewichts-Label erscheint. Mit <kbd>Esc</kbd> ohne Verbindung abbrechen.</div>
+      </div>
+    </li>
+  </ol>
+
+  <h3>Gewicht ändern</h3>
+  <ul class="feat">
+    <li><strong>Doppelklick</strong> auf das Gewichts-Label → direktes Eingabefeld erscheint</li>
+    <li><strong>Mausrad</strong> direkt auf einer Verbindung drehen → ±0.1 pro Schritt</li>
+    <li><strong>Rechtsklick</strong> auf Verbindung → Kontextmenü (Wert setzen, löschen, einfrieren)</li>
+  </ul>
+
+  <h3>Gewicht einfrieren</h3>
+  <p>Rechtsklick auf eine Verbindung → <strong>Weight Freeze</strong>. Das Gewicht wird während des Trainings nicht verändert. Nützlich um bestimmte Verbindungen zu fixieren.</p>
+
+  <div class="tip">
+    <b>Simulation: Signalfarben</b>
+    In der Simulation (Forward Pass) werden animierte Pakete auf den Verbindungen angezeigt: <strong style="color:#00d4ff">Cyan</strong> = positives Signal, <strong style="color:#ff6b35">Orange</strong> = negatives Signal. Je dicker die Linie, desto größer der Absolutwert des Gewichts.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="aktivierung">
+  <h2>Aktivierungsfunktionen</h2>
+  <p>Eine Aktivierungsfunktion bestimmt, was ein Neuron mit seiner gewichteten Eingabesumme macht. Sie sorgt für <strong>Nichtlinearität</strong> — ohne sie wäre ein tiefes Netz mathematisch gleichwertig mit einem einzigen Neuron.</p>
+
+  <div class="act-grid">
+    <div class="act-card">
+      <div class="ac-name">ReLU</div>
+      <div class="ac-range">max(0, x)</div>
+      <div class="ac-desc">Negatives abschneiden, positives durchlassen. Standard in Hidden-Layers.</div>
+    </div>
+    <div class="act-card">
+      <div class="ac-name">Sigmoid</div>
+      <div class="ac-range">0 … 1</div>
+      <div class="ac-desc">Quetscht alles auf 0–1. Für Ausgaben mit Wahrscheinlichkeit (0/1-Klassifikation).</div>
+    </div>
+    <div class="act-card">
+      <div class="ac-name">Tanh</div>
+      <div class="ac-range">−1 … +1</div>
+      <div class="ac-desc">Wie Sigmoid, aber symmetrisch um 0. Besser für Hidden-Layers als Sigmoid.</div>
+    </div>
+    <div class="act-card">
+      <div class="ac-name">Softmax</div>
+      <div class="ac-range">Summe = 1</div>
+      <div class="ac-desc">Wandelt Ausgaben in Wahrscheinlichkeiten um. Für Mehrklassen-Probleme.</div>
+    </div>
+    <div class="act-card">
+      <div class="ac-name">Linear</div>
+      <div class="ac-range">x</div>
+      <div class="ac-desc">Keine Transformation. Für Regressions-Ausgaben (beliebiger Zahlenwert).</div>
+    </div>
+    <div class="act-card">
+      <div class="ac-name">Leaky ReLU</div>
+      <div class="ac-range">x &gt; 0: x  else 0.01x</div>
+      <div class="ac-desc">Wie ReLU, aber negative Werte werden leicht weitergeleitet (kein "Dead ReLU").</div>
+    </div>
+  </div>
+
+  <div class="warn">
+    <b>Welche Funktion soll ich nehmen?</b>
+    Als Anfänger: <strong>ReLU</strong> für Hidden-Neuronen, <strong>Sigmoid</strong> für Ausgabe bei Ja/Nein-Problemen, <strong>Linear</strong> für Ausgabe bei Zahlenwert-Problemen. Das ist für 90 % der Fälle korrekt.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="simulation">
+  <h2>Simulation — Forward Pass</h2>
+  <p>Die Simulation zeigt, wie ein Signal durch das Netz fließt — vom Eingang bis zum Ausgang. Das nennt sich <strong>Forward Pass</strong> (Vorwärts-Durchlauf).</p>
+
+  <h3>So startest du die Simulation</h3>
+  <ol class="steps">
+    <li>
+      <div class="sb">
+        <div class="st">Eingabewerte setzen</div>
+        <div class="sd">Doppelklick auf den Zahlenwert eines Input-Neurons auf dem Canvas. Einen neuen Wert eingeben (z.B. <code>1</code> oder <code>0.5</code>) und <kbd>Enter</kbd> drücken.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Simulation starten</div>
+        <div class="sd">Klicke in der Toolbar auf <span class="badge b-cyan">▶ Sim</span>. Animierte Pakete fließen über die Verbindungen. Jedes Neuron zeigt seinen Aktivierungswert an.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Simulation steuern</div>
+        <div class="sd">Mit dem <strong>Geschwindigkeits-Regler</strong> in der Toolbar die Animationsgeschwindigkeit anpassen. <span class="badge b-dim">Loop</span> wiederholt automatisch. <span class="badge b-dim">■ Stop</span> hält an.</div>
+      </div>
+    </li>
+  </ol>
+
+  <table>
+    <tr><th>Anzeige</th><th>Bedeutung</th></tr>
+    <tr><td><span style="color:#00d4ff">■ Cyan</span> Paket</td><td>Positives Signal (Gewicht &gt; 0)</td></tr>
+    <tr><td><span style="color:#ff6b35">■ Orange</span> Paket</td><td>Negatives Signal (Gewicht &lt; 0)</td></tr>
+    <tr><td>Zahl auf Neuron</td><td>Aktueller Aktivierungswert nach Aktivierungsfunktion</td></tr>
+    <tr><td>Liniendicke</td><td>Betrag des Gewichts — dicke Linie = starker Einfluss</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="training">
+  <h2>Training — Backpropagation</h2>
+  <p>Beim Training vergleicht das Netz seine Ausgabe mit den richtigen Antworten (Labels) und passt die Gewichte an. Das wiederholt sich viele Male — pro <strong>Epoche</strong> einmal über alle Daten.</p>
+
+  <div class="flow">
+    <div class="flow-step hl">Forward Pass</div><div class="flow-arrow">→</div>
+    <div class="flow-step">Fehler berechnen</div><div class="flow-arrow">→</div>
+    <div class="flow-step">Backward Pass</div><div class="flow-arrow">→</div>
+    <div class="flow-step">Gewichte updaten</div><div class="flow-arrow">→</div>
+    <div class="flow-step hl">nächste Epoche</div>
+  </div>
+
+  <h3>Trainings-Panel öffnen</h3>
+  <p>Klicke in der Toolbar auf <span class="badge b-dim">Lernen</span>. Das Panel öffnet sich auf der linken Seite. Es hat drei Tabs:</p>
+  <table>
+    <tr><th>Tab</th><th>Inhalt</th></tr>
+    <tr><td><span class="badge b-green">① Daten</span></td><td>Trainingsdaten eingeben: Tabelle mit Eingabe- und Zielwerten. Vorlagen: XOR, AND, Linear. CSV/JSON-Import per Drag &amp; Drop.</td></tr>
+    <tr><td><span class="badge b-cyan">② Hyperparameter</span></td><td>Lernrate, Epochen, Optimizer, Batch-Größe, Regularisierung usw. (siehe Tabelle unten)</td></tr>
+    <tr><td><span class="badge b-orange">③ Training</span></td><td>Start/Stop, Metriken (Loss, Accuracy), Live-Charts: Verlustkurve, Genauigkeit, Gradienten, Gewichtshistogramm, Konfusionsmatrix</td></tr>
+  </table>
+
+  <h3>Wichtige Hyperparameter</h3>
+  <table>
+    <tr><th>Parameter</th><th>Typischer Wert</th><th>Bedeutung</th></tr>
+    <tr><td>Lernrate (LR)</td><td>0.01 – 0.1</td><td>Wie groß ein Gewichts-Update ist. Zu groß → instabil; zu klein → langsam.</td></tr>
+    <tr><td>Epochen</td><td>50 – 500</td><td>Wie oft das Netz alle Trainingsdaten durchläuft.</td></tr>
+    <tr><td>Batch-Größe</td><td>1, 8, 32</td><td>Wie viele Datenpunkte pro Update verwendet werden. Kleiner = öfter updaten.</td></tr>
+    <tr><td>Optimizer</td><td>Adam</td><td>Algorithmus zum Anpassen der Gewichte. Adam ist für Einsteiger empfohlen.</td></tr>
+    <tr><td>Loss-Funktion</td><td>MSE / CrossEntropy</td><td>Wie der Fehler gemessen wird. MSE für Zahlen, CrossEntropy für Klassen.</td></tr>
+    <tr><td>Early Stopping</td><td>Patience 20</td><td>Training stoppt automatisch wenn sich nichts mehr verbessert. Spart Zeit.</td></tr>
+  </table>
+
+  <h3>Einzelschritt-Modus</h3>
+  <p>Im Tab <strong>③ Training</strong> auf den Modus <span class="badge b-dim">🔬 Einzelschritt</span> umschalten. Dann jeden Rechenschritt manuell auslösen: <strong>Forward → Ausgaben → Backward → Deltas → Gewicht-Update</strong>. Ideal zum Verstehen wie Backpropagation funktioniert.</p>
+
+  <div class="tip">
+    <b>Loss steigt plötzlich an — was tun?</b>
+    Lernrate halbieren (z.B. von 0.1 auf 0.05). Oder den Optimizer auf <strong>Adam</strong> wechseln — Adam passt die Lernrate automatisch an und ist robuster.
+  </div>
+  <div class="info">
+    <b>Was ist Loss?</b>
+    Der Loss (Verlust) ist ein Maß dafür, wie falsch das Netz liegt. Ein Loss von 0 wäre perfekt. Am Anfang ist der Loss hoch. Beim Training soll er kontinuierlich sinken.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="generator">
+  <h2>Netzwerk-Generator</h2>
+  <p>Der Generator baut automatisch ein vollvernetztes Netz — kein manuelles Platzieren nötig. Ideal um schnell verschiedene Architekturen auszuprobieren.</p>
+
+  <ol class="steps">
+    <li>
+      <div class="sb">
+        <div class="st">Generator öffnen</div>
+        <div class="sd">Klicke in der Toolbar auf <span class="badge b-dim">⚙ Generator</span> (oder Rechtsklick auf Arbeitsfläche → Generator).</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Architektur eingeben</div>
+        <div class="sd">Kommagetrennte Zahl pro Schicht eingeben. Beispiel: <code>2, 4, 4, 1</code> bedeutet: 2 Input-Neuronen → 4 Hidden → 4 Hidden → 1 Output. Beliebig viele Schichten möglich.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Erstellen</div>
+        <div class="sd">Klick auf <span class="badge b-cyan">Erstellen</span>. Das Netz erscheint sofort auf der Arbeitsfläche — vollständig verbunden, mit zufälligen Gewichten.</div>
+      </div>
+    </li>
+  </ol>
+
+  <table>
+    <tr><th>Beispiel-Eingabe</th><th>Bedeutung</th><th>Verwendung</th></tr>
+    <tr><td><code>2, 4, 1</code></td><td>2 → 4 → 1</td><td>XOR, einfache binäre Klassifikation</td></tr>
+    <tr><td><code>3, 8, 8, 3</code></td><td>3 → 8 → 8 → 3</td><td>Mehrklassen-Klassifikation mit 3 Klassen</td></tr>
+    <tr><td><code>1, 6, 1</code></td><td>1 → 6 → 1</td><td>Kurvenanpassung (Regression)</td></tr>
+    <tr><td><code>4, 16, 8, 2</code></td><td>4 → 16 → 8 → 2</td><td>Iris-Datensatz (4 Features, 2 Klassen)</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="cnn">
+  <h2 class="cnn">⬛ CNN — Faltungsmatrizen</h2>
+  <p>Das CNN-Fenster zeigt interaktiv, wie ein Faltungskernel (Convolutional Filter) ein Bild verarbeitet. Du siehst jeden Rechenschritt animiert.</p>
+
+  <div class="cnn-flow">
+    <div class="cnn-block">
+      <div class="cb-icon">🖼️</div>
+      <div class="cb-title">Eingabebild</div>
+      <div class="cb-sub">Pixel-Matrix (Graustufen)</div>
+    </div>
+    <div class="cnn-sep">★</div>
+    <div class="cnn-block" style="border-color:var(--yellow);">
+      <div class="cb-icon">🔲</div>
+      <div class="cb-title">3×3 Kernel</div>
+      <div class="cb-sub">Filter mit 9 Gewichten</div>
+    </div>
+    <div class="cnn-sep">→</div>
+    <div class="cnn-block">
+      <div class="cb-icon">✨</div>
+      <div class="cb-title">Feature Map</div>
+      <div class="cb-sub">Ausgabebild</div>
+    </div>
+  </div>
+
+  <h3 class="cnn">Was ist eine Faltung?</h3>
+  <p>Ein kleines 3×3-Raster (Kernel) gleitet Pixel für Pixel über das Eingabebild. An jeder Position werden die 9 Pixel mit den 9 Kernel-Gewichten multipliziert und aufsummiert. Das Ergebnis ist ein Pixel im Ausgabebild. Unterschiedliche Kernel erkennen unterschiedliche Merkmale: Kanten, Texturen, Schärfen.</p>
+
+  <h3 class="cnn">CNN-Fenster öffnen &amp; bedienen</h3>
+  <ol class="steps cnn">
+    <li>
+      <div class="sb">
+        <div class="st">CNN öffnen</div>
+        <div class="sd">Klicke auf <span class="badge b-yellow">⬛ CNN</span> in der Toolbar. Ein schwebendes Fenster öffnet sich — verschiebbar per Titelleiste, Größe änderbar per Ziehen der Ecken/Kanten.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Testbild auswählen</div>
+        <div class="sd">Oben in Spalte 1 (<span style="color:#10b981">Eingabebild</span>) gibt es 7 Schnell-Buttons: Schachbrett, Kreis, Diagonale, Streifen, Buchstabe A, Kante, Gradient. Auf einen Button klicken — das 32×32-Pixel-Bild erscheint sofort.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Eigenes Foto laden</div>
+        <div class="sd">Klicke auf <span class="badge b-green">⬆ Bild laden</span>. Die Auflösung im Dropdown links davon steuert die Pixelgröße (64 bis 512 px oder Original). Das Foto wird farbig angezeigt — intern wird Graustufen für die Faltung verwendet.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Kernel auswählen</div>
+        <div class="sd">In Spalte 2 (<span style="color:#f59e0b">Faltungskern</span>) stehen 10 Vorlagen: Identität, Box-Blur, Gauß, Schärfen, Sobel-X, Sobel-Y, Laplace, Emboss, Verschiebung, Kantenschärfe. Einen Button anklicken → Kernel-Grid füllt sich automatisch.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Animations-Modus wählen</div>
+        <div class="sd">Direkt unter der Titelleiste gibt es 6 Animations-Buttons:<br>
+          <span class="badge b-yellow">⬜ Sliding Window</span> — Fenster gleitet Pixel für Pixel<br>
+          <span class="badge b-yellow">↗ Verbindungslinien</span> — 9 animierte Leitungen<br>
+          <span class="badge b-yellow">◈ 3D-Lift</span> — Patch hebt sich heraus<br>
+          <span class="badge b-yellow">◎ Wellen</span> — Wellenpulse vom Ausgabepixel<br>
+          <span class="badge b-yellow">▦ Histogramm</span> — Verteilung der Ausgabewerte<br>
+          <span class="badge b-yellow">⊞ Filter-Stapel</span> — alle 10 Kernel gleichzeitig</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Animation starten</div>
+        <div class="sd">Klicke auf <span class="badge b-green">▶ Start</span> im Footer. In Spalte 3 (<span style="color:#00d4ff">Ausgabebild</span>) entsteht die Feature Map Pixel für Pixel. <span class="badge b-cyan">⟶ Schritt</span> für einen Schritt, <span class="badge b-cyan">⚡ Sofort</span> für das komplette Bild auf einmal.</div>
+      </div>
+    </li>
+  </ol>
+
+  <h3 class="cnn">Kernel-Presets im Überblick</h3>
+  <table>
+    <tr><th>Preset</th><th>Effekt</th><th>Typischer Einsatz</th></tr>
+    <tr><td>Identität</td><td>Bild bleibt unverändert</td><td>Referenz / Test</td></tr>
+    <tr><td>Box-Blur</td><td>Gleichmäßige Weichzeichnung</td><td>Rauschreduzierung</td></tr>
+    <tr><td>Gauß</td><td>Natürlichere Weichzeichnung (Mitte stärker)</td><td>Vorverarbeitung</td></tr>
+    <tr><td>Schärfen</td><td>Kanten werden kontrastreicher</td><td>Bildschärfung</td></tr>
+    <tr><td>Sobel-X</td><td>Erkennt vertikale Kanten</td><td>Kantendetektion</td></tr>
+    <tr><td>Sobel-Y</td><td>Erkennt horizontale Kanten</td><td>Kantendetektion</td></tr>
+    <tr><td>Laplace</td><td>Alle Kanten gleichzeitig</td><td>Kantendetektion allgemein</td></tr>
+    <tr><td>Emboss</td><td>Relief-/Prägungseffekt</td><td>Visuelle Effekte</td></tr>
+    <tr><td>Verschiebung</td><td>Bild um 1 Pixel verschoben</td><td>Konzept-Demonstration</td></tr>
+    <tr><td>Kantenschärfe</td><td>Aggressive Schärfung</td><td>Kanten sehr deutlich machen</td></tr>
+  </table>
+
+  <div class="info">
+    <b>Was zeigt das Berechnungs-Panel (Spalte 2)?</b>
+    Bei jedem Schritt siehst du die vollständige Rechnung: alle 9 Multiplikationen (Pixel × Kernel-Gewicht), deren Summe, die Division durch den Divisor und die Addition des Bias. So kannst du jeden Ausgabepixel nachvollziehen.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="pooling">
+  <h2 class="cnn">▦ Max Pooling</h2>
+  <p>Max Pooling ist ein wichtiger Schritt in CNNs: Er <strong>verkleinert die Feature Map</strong>, indem er aus jedem kleinen Bereich nur den größten Wert (oder den Durchschnitt, oder das Minimum) behält. Das macht das Netz robuster gegen kleine Verschiebungen im Bild.</p>
+
+  <div class="cnn-flow">
+    <div class="cnn-block">
+      <div class="cb-icon">🔢</div>
+      <div class="cb-title">Eingabe 8×8</div>
+      <div class="cb-sub">Original-Pixelwerte</div>
+    </div>
+    <div class="cnn-sep">→</div>
+    <div class="cnn-block" style="border-color:var(--accent3);">
+      <div class="cb-icon">🔲</div>
+      <div class="cb-title">Pool 2×2, S=2</div>
+      <div class="cb-sub">max(4 Pixel)</div>
+    </div>
+    <div class="cnn-sep">→</div>
+    <div class="cnn-block">
+      <div class="cb-icon">⬇</div>
+      <div class="cb-title">Ausgabe 4×4</div>
+      <div class="cb-sub">Halbierte Auflösung</div>
+    </div>
+  </div>
+
+  <h3 class="cnn">Pooling-Tab öffnen</h3>
+  <p>Im CNN-Fenster gibt es oben zwei Tab-Buttons: <span class="badge b-yellow">⬛ Faltung</span> und <span class="badge b-yellow">▦ Pooling</span>. Auf <strong>Pooling</strong> klicken — der Tab öffnet sich mit eigenem Bild und Einstellungen.</p>
+
+  <h3 class="cnn">Einstellungen im Pooling-Tab</h3>
+  <div class="two-col">
+    <div class="panel">
+      <h4>Pool-Typ</h4>
+      <ul>
+        <li><strong>▲ Maximum</strong> — größter Wert im Fenster. Standard in CNNs. Betont Kanten.</li>
+        <li><strong>≈ Durchschnitt</strong> — Mittelwert. Weichere Ausgabe.</li>
+        <li><strong>▼ Minimum</strong> — kleinster Wert. Selten in der Praxis.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4>Fenstergröße &amp; Stride</h4>
+      <ul>
+        <li><strong>2×2, 3×3, 4×4</strong> — Wie viele Pixel das Fenster umfasst</li>
+        <li><strong>S=1</strong> — Fenster rückt 1 Pixel vor (viel Überlapp)</li>
+        <li><strong>S=2</strong> — Standard bei 2×2 (halbiert Auflösung)</li>
+        <li><strong>S=P</strong> — kein Überlapp (jeder Pixel nur einmal)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="cnn">Bildgröße für bessere Lesbarkeit</h3>
+  <p>Das Dropdown oben links in Spalte 1 steuert die Bildgröße (6×6 bis 32×32). Bei <strong>8×8</strong> oder kleiner sieht man alle Pixelwerte und die Pooling-Berechnung sehr klar. Außerdem gibt es die gleichen 7 Testmuster wie im Faltungs-Tab sowie einen <span class="badge b-green">⬆ Foto</span>-Button.</p>
+
+  <div class="info">
+    <b>Was zeigt das Berechnungs-Panel (Spalte 2)?</b>
+    Beim Pooling siehst du alle N×N Pixelwerte im aktuellen Fenster als Grid. Der gewählte Wert (Max/Avg/Min) ist orange hervorgehoben. Darunter steht: Maximum(128, 200, 45, 180) = 200.
+  </div>
+  <div class="tip">
+    <b>Lerntipp: Pooling verstehen</b>
+    Wähle das Schachbrett-Muster (8×8), Pool-Typ Maximum, Fenstergröße 2×2, Stride=2. Klicke dann auf <span class="badge b-cyan">⚡ Sofort</span>. Die Ausgabe wird ein 4×4-Bild sein. Beobachte: Der Maximalwert jedes 2×2-Blocks bestimmt den Ausgabepixel.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="embedding">
+  <h2 class="emb">🔤 Embedding Lab</h2>
+  <p>Das Embedding Lab zeigt wie moderne KI-Modelle (wie ChatGPT) Text verarbeiten: als <strong>Zahlenvektoren</strong> in einem mathematischen Raum. Semantisch ähnliche Wörter liegen dabei nah beieinander.</p>
+
+  <h3 class="emb">Was ist ein Token?</h3>
+  <p>Bevor Text in Vektoren umgewandelt wird, zerlegt das Modell ihn in kleine Einheiten — sogenannte <strong>Tokens</strong>. Manchmal ist ein Token ein ganzes Wort, manchmal nur ein Wort-Teil.</p>
+  <div class="token-demo">
+    <span class="tok tok-w">Hallo</span>
+    <span class="tok tok-w">Welt</span>
+    <span class="tok tok-p">!</span>
+    <span class="tok tok-w">Das</span>
+    <span class="tok tok-w">ist</span>
+    <span class="tok tok-w">Künstliche</span>
+    <span class="tok tok-w">##Intelligenz</span>
+    <span class="tok tok-n">42</span>
+  </div>
+  <table>
+    <tr><th>Farbe</th><th>Token-Typ</th><th>Bedeutung</th></tr>
+    <tr><td><span class="tok tok-w" style="font-size:10px">lila</span></td><td>Wort-Token</td><td>Vollständige Wörter. <code>##</code> = Subword-Fortsetzung</td></tr>
+    <tr><td><span class="tok tok-s" style="font-size:10px">grün</span></td><td>Sonderzeichen</td><td>Leerzeichen, Trennzeichen</td></tr>
+    <tr><td><span class="tok tok-n" style="font-size:10px">gelb</span></td><td>Zahlen-Token</td><td>Ziffern und Zahlenwerte</td></tr>
+    <tr><td><span class="tok tok-p" style="font-size:10px">rot</span></td><td>Satzzeichen</td><td>Punkt, Komma, Ausrufezeichen</td></tr>
+  </table>
+
+  <h3 class="emb">Die drei Lab-Ansichten</h3>
+  <ol class="steps emb">
+    <li>
+      <div class="sb">
+        <div class="st">① Token-Zerlegung</div>
+        <div class="sd">Zeigt wie ein Text in Tokens zerlegt wird. Token-IDs, Typen und Farben sichtbar. Gib Text ein und klicke auf <span class="badge b-purple">▶ Analysieren</span>.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">② 3D Vektor-Raum</div>
+        <div class="sd">Interaktive 3D-Punktwolke — jeder Token ist ein Punkt im Raum. Semantisch ähnliche Wörter clustern zusammen. Linksklick dreht, Mausrad zoomt, Hover zeigt Token-Details.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">③ VectorDB &amp; RAG</div>
+        <div class="sd">Texte als Vektoren speichern und per Cosinus-Ähnlichkeit suchen (Retrieval Augmented Generation). Mehrere Texte eingeben → Suche → die ähnlichsten Texte werden angezeigt.</div>
+      </div>
+    </li>
+  </ol>
+
+  <div class="note">
+    <b>Alles lokal simuliert</b>
+    Das Embedding Lab braucht keinen API-Key. Alle Vektoren und Tokenisierungen sind lokale Simulationen — direkt im Browser, ohne Internet.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="rl">
+  <h2 class="rl">🎮 Reinforcement Learning</h2>
+  <p>Im RL-Modus lernt ein Agent (🤖) durch <strong>Versuch und Irrtum</strong>. Er probiert Aktionen aus, bekommt Belohnungen oder Strafen und verbessert sich schrittweise — ganz ohne vorgegebene Trainingsdaten.</p>
+
+  <h3 class="rl">Die 5 Grundbegriffe</h3>
+  <div class="rl-concept">
+    <div class="sym">🤖</div>
+    <div><div class="rt">Agent</div><div class="rd">Das lernende System. Trifft Entscheidungen und beobachtet die Ergebnisse.</div></div>
+  </div>
+  <div class="rl-concept">
+    <div class="sym">🌍</div>
+    <div><div class="rt">Umgebung (Environment)</div><div class="rd">Die Welt, in der der Agent agiert. Hier: GridWorld (Gitter) oder BrickBlaster (Spiel).</div></div>
+  </div>
+  <div class="rl-concept">
+    <div class="sym">📍</div>
+    <div><div class="rt">Zustand (State)</div><div class="rd">Wo sich der Agent gerade befindet — z.B. Zeile 3, Spalte 2 im Gitter.</div></div>
+  </div>
+  <div class="rl-concept">
+    <div class="sym">🎮</div>
+    <div><div class="rt">Aktion (Action)</div><div class="rd">Was der Agent tun kann: Links / Rechts / Oben / Unten (GridWorld), Paddle links/rechts (BrickBlaster).</div></div>
+  </div>
+  <div class="rl-concept">
+    <div class="sym">🏆</div>
+    <div><div class="rt">Belohnung (Reward)</div><div class="rd">Feedback der Umgebung nach jeder Aktion. Ziel: maximale Gesamtbelohnung ansammeln.</div></div>
+  </div>
+
+  <h3 class="rl">GridWorld — Erste Schritte</h3>
+  <div style="display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;margin:12px 0;">
+    <div>
+      <div class="rl-grid-demo">
+        <div class="rl-cell start">🏁</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell hole">🕳️</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell wall">⬛</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell hole">🕳️</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell">·</div>
+        <div class="rl-cell hole">🕳️</div>
+        <div class="rl-cell goal">🏆</div>
+      </div>
+    </div>
+    <table style="flex:1;min-width:190px;">
+      <tr><th>Zelle</th><th>Reward</th><th>Bedeutung</th></tr>
+      <tr><td>🏁 Start</td><td>–</td><td>Startpunkt des Agenten</td></tr>
+      <tr><td>🏆 Ziel</td><td style="color:#10b981">+10</td><td>Episode erfolgreich</td></tr>
+      <tr><td>🕳️ Loch</td><td style="color:#ef4444">−5</td><td>Episode fehlgeschlagen</td></tr>
+      <tr><td>⬛ Wand</td><td>–</td><td>Blockiert den Weg</td></tr>
+      <tr><td>· Frei</td><td style="color:#94a3b8">−0.1</td><td>Kleiner Abzug pro Schritt</td></tr>
+    </table>
+  </div>
+
+  <ol class="steps rl">
+    <li>
+      <div class="sb">
+        <div class="st">RL-Modus starten</div>
+        <div class="sd">Klick auf <span class="badge b-green">🧠 RL</span> in der Toolbar. Das RL-Panel öffnet sich.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Karte anpassen (optional)</div>
+        <div class="sd">Mit den Werkzeug-Buttons Start, Ziel, Loch, Wand, Frei auf die Grid-Zellen klicken um die Karte zu gestalten. Größere Karten → komplexere Lernaufgabe.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Lernmodus wählen</div>
+        <div class="sd"><span class="badge b-green">📋 Q-Learning</span> = klassisch (Q-Tabelle). <span class="badge b-purple">⚡ Deep RL</span> = neuronales Netz als Q-Funktion. Für den Einstieg: Q-Learning.</div>
+      </div>
+    </li>
+    <li>
+      <div class="sb">
+        <div class="st">Training starten</div>
+        <div class="sd">Klick auf <span class="badge b-green">▶ Start</span>. Der Agent (🤖) bewegt sich im Grid. Am Anfang zufällig, mit der Zeit klüger. Die Heatmap zeigt welche Felder der Agent als gut oder schlecht bewertet.</div>
+      </div>
+    </li>
+  </ol>
+
+  <h3 class="rl">Wichtige RL-Parameter</h3>
+  <table>
+    <tr><th>Parameter</th><th>Symbol</th><th>Was es bedeutet</th><th>Empfehlung</th></tr>
+    <tr><td>Lernrate</td><td><strong>α</strong></td><td>Wie stark neue Erfahrungen das Gelernte überschreiben</td><td>0.1 – 0.3</td></tr>
+    <tr><td>Diskontierung</td><td><strong>γ</strong></td><td>Wie wichtig sind zukünftige Belohnungen (0 = jetzt, 1 = weit vorausschauend)</td><td>0.9 – 0.99</td></tr>
+    <tr><td>Erkundung</td><td><strong>ε</strong></td><td>Wahrscheinlichkeit für Zufalls-Aktion. Hoch am Anfang, sinkt mit der Zeit.</td><td>Startwert 1.0</td></tr>
+    <tr><td>Episoden</td><td>–</td><td>Anzahl kompletter Durchläufe (Start → Ziel oder Loch)</td><td>100 – 500</td></tr>
+  </table>
+
+  <h3 class="rl">BrickBlaster — RL als Spiel</h3>
+  <p>BrickBlaster ist ein Arkanoid/Breakout-artiges Spiel als RL-Umgebung. Der Agent steuert das Paddle und lernt, Bälle abzuwehren und Steine zu treffen.</p>
+  <ul class="feat">
+    <li>In der RL-Toolbar <span class="badge b-dim">🎮 BrickBlaster</span> wählen</li>
+    <li>Manuell spielen mit Pfeiltasten — oder KI auf <span class="badge b-green">▶ KI-Start</span> steuern lassen</li>
+    <li><strong>Deep RL</strong> empfohlen (DQN-Netz: 7 → 64 → 32 → 3 Neuronen)</li>
+    <li>Nach ~150 Episoden sieht man deutliche Fortschritte</li>
+    <li>Der DQN-Viewer zeigt das lernende Netz live — und du kannst es in den NN-Builder exportieren</li>
+  </ul>
+
+  <div class="tip">
+    <b>RL und KNN verbinden</b>
+    Im Deep-RL-Modus wird im Hintergrund ein echtes neuronales Netz trainiert. Klicke auf <span class="badge b-dim">→ Builder exportieren</span> um das gelernte Netz im NN-Builder sichtbar zu machen und die Gewichte zu inspizieren.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="speichern">
+  <h2>Speichern &amp; Laden</h2>
+
+  <div class="two-col">
+    <div class="panel">
+      <h4>💾 Netz speichern / laden</h4>
+      <ul>
+        <li>Toolbar: <span class="badge b-dim">💾 Speichern</span> → JSON-Download</li>
+        <li>Toolbar: <span class="badge b-dim">📂 Laden</span> → JSON auswählen</li>
+        <li>Oder Datei per Drag &amp; Drop auf die Arbeitsfläche ziehen</li>
+        <li>Das JSON enthält: Neuronen, Verbindungen, Gewichte, Viewport</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4>📤 Export-Optionen</h4>
+      <ul>
+        <li><span class="badge b-dim">Python</span>-Export: Netz als NumPy-Code herunterladen</li>
+        <li>CNN-Ausgabebild: <span class="badge b-dim">⬇ PNG</span> im CNN-Footer</li>
+        <li>Pool-Ausgabebild: <span class="badge b-dim">⬇ PNG</span> im Pooling-Footer</li>
+        <li>Trainingsdaten: JSON oder CSV exportieren</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info">
+    <b>Beispiel-Netze &amp; Daten</b>
+    Im Projektordner befinden sich: <code>neural-network_1.json</code> (fertig trainiertes Netz) und <code>trainingsdaten_1.txt</code> / <code>trainingsdaten_reg_1.json</code> (Beispiel-Trainingsdaten). Diese kannst du direkt laden.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="shortcuts">
+  <h2>Tastaturkürzel</h2>
+
+  <table>
+    <tr><th>Taste</th><th>Aktion</th></tr>
+    <tr><td><kbd>S</kbd></td><td>Auswahl-Modus (Neuronen verschieben/auswählen)</td></tr>
+    <tr><td><kbd>C</kbd></td><td>Verbindungs-Modus umschalten</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>Aktion abbrechen / Auswahl aufheben</td></tr>
+    <tr><td><kbd>Entf</kbd></td><td>Ausgewähltes Element löschen</td></tr>
+    <tr><td><kbd>Strg</kbd>+<kbd>A</kbd></td><td>Alle Neuronen auswählen</td></tr>
+    <tr><td><kbd>+</kbd> / <kbd>-</kbd></td><td>Zoom vergrößern / verkleinern</td></tr>
+    <tr><td>Mausrad auf Canvas</td><td>Zoomen</td></tr>
+    <tr><td>Mausrad auf Verbindung</td><td>Gewicht um ±0.1 ändern</td></tr>
+    <tr><td>Mittlere Maustaste</td><td>Canvas verschieben (Pan)</td></tr>
+    <tr><td><kbd>Rechtsklick</kbd></td><td>Kontextmenü öffnen (Neuron oder Hintergrund)</td></tr>
+    <tr><td>Doppelklick auf Neuron</td><td>Neuron umbenennen</td></tr>
+    <tr><td>Doppelklick auf Gewicht-Label</td><td>Gewicht direkt eingeben</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="fehler">
+  <h2>Häufige Fragen &amp; Tipps</h2>
+
+  <div class="warn">
+    <b>Loss sinkt nicht — was tun?</b>
+    1. Lernrate reduzieren (z.B. von 0.1 auf 0.01). 2. Optimizer auf Adam wechseln. 3. Mehr Hidden-Neuronen hinzufügen. 4. Prüfen ob Trainingsdaten korrekt sind (Tab ① Daten).
+  </div>
+
+  <div class="warn">
+    <b>Netz gibt immer denselben Wert aus</b>
+    Alle Gewichte könnten gleich sein (Symmetrieproblem). Lösung: Gewichts-Initialisierung auf <strong>Xavier</strong> oder <strong>He</strong> stellen (Tab ② Hyperparameter → Gewichts-Init).
+  </div>
+
+  <div class="info">
+    <b>Neuron auf Canvas nicht sichtbar</b>
+    Canvas zoomen (<kbd>+</kbd>) oder auf <span class="badge b-dim">Zentrieren</span> klicken. Oder <kbd>Strg</kbd>+<kbd>A</kbd> → alle auswählen → Neuron ist dann hervorgehoben.
+  </div>
+
+  <div class="tip">
+    <b>Verbindung lässt sich nicht erstellen</b>
+    Prüfe ob der Verbindungs-Modus aktiv ist (Taste <kbd>C</kbd>). Verbindungen von Output → Input sind möglich, aber ungewöhnlich. Versuche <kbd>Esc</kbd> und dann erneut <kbd>C</kbd> zu drücken.
+  </div>
+
+  <div class="tip">
+    <b>CNN-Fenster lässt sich nicht verschieben</b>
+    Das Fenster nur an der dunklen <strong>Titelleiste</strong> (obere Leiste mit „⬛ CNN – Faltung &amp; Pooling") ziehen. An der Textfläche des Fensters funktioniert Drag nicht. Größe ändern: Ecken oder Kanten des Fensters ziehen.
+  </div>
+
+  <div class="info">
+    <b>Browser-Empfehlung</b>
+    Die Anwendung läuft am besten in <strong>Chrome</strong> oder <strong>Edge</strong> (aktuell). Firefox funktioniert gut. Safari hat eingeschränkte Canvas-Unterstützung.
+  </div>
+
+  <div class="tip">
+    <b>Performance bei großen Netzen</b>
+    Bei sehr vielen Neuronen (50+) die Simulations-Animation ausschalten (<span class="badge b-dim">Loop</span> deaktivieren) und stattdessen nur den Vorwärts-Pass per Einzelklick berechnen. Training kann auch ohne Animation laufen.
+  </div>
+
+  <hr>
+
+  <h3>Weiterführende Hilfe</h3>
+  <ul class="feat">
+    <li>Vollständige Dokumentation: Klick auf den <strong>ℹ-Griff</strong> am rechten Bildschirmrand → Themen-Buttons oben im Panel</li>
+    <li>Tooltips: Fahre mit der Maus über <strong>jeden</strong> Button, Label und Eingabefeld — es erscheint eine Erklärung</li>
+    <li>Theorie-Seiten: Im Info-Panel oben: <span class="badge b-dim">Neuron &amp; KNN</span> <span class="badge b-dim">Backprop</span> <span class="badge b-dim">XOR-Problem</span> <span class="badge b-dim">CNN</span></li>
+    <li>Beispiele laden: <code>neural-network_1.json</code> per Drag &amp; Drop auf den Canvas ziehen</li>
+  </ul>
+</section>
+
+</main>
+</body>
+</html>
