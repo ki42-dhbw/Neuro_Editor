@@ -121,10 +121,7 @@ Neuroedit_webapp/
 │   ├── start.html                              ← Startseite Info-Panel
 │   └── rl_hilfe.html                           ← RL-Hilfe
 ├── Bilder/                                     ← Beispielfotos für CNN
-├── RL/                                         ← RL-Experimente
-├── neural-network_1.json / _2.json             ← Beispiel-Netzwerke
-├── trainingsdaten_1.txt                        ← Beispiel-Trainingsdaten (TXT)
-└── trainingsdaten_reg_1.json                   ← Beispiel-Trainingsdaten (JSON)
+
 ```
 
 ---
