@@ -325,8 +325,8 @@ header h1 span{color:var(--text-dim);font-weight:400;}
 }
 .ltab{
   padding:5px 12px;border-radius:4px;border:1px solid #252a35;
-  background:#181c24;color:#64748b;font-family:'JetBrains Mono',monospace;
-  font-size:10px;cursor:pointer;transition:all .15s;
+  background:#181c24;color:#94a3b8;font-family:'JetBrains Mono',monospace;
+  font-size:12px;cursor:pointer;transition:all .15s;
 }
 .ltab.active{background:#a78bfa;color:#000;border-color:#a78bfa;}
 .ltab:hover:not(.active){border-color:#a78bfa;color:#a78bfa;}
@@ -348,27 +348,27 @@ header h1 span{color:var(--text-dim);font-weight:400;}
   flex:1;min-height:64px;border:2px dashed #252a35;border-radius:8px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:4px;padding:8px;cursor:pointer;transition:all .2s;position:relative;
-  background:#0d1118;font-size:9px;color:#94a3b8;text-align:center;
+  background:#0d1118;font-size:11px;color:#c0cdd9;text-align:center;
 }
 .dnd-zone.in-zone{border-color:#10b98166;}
 .dnd-zone.out-zone{border-color:#ff6b3566;}
 .dnd-zone.drag-over.in-zone{border-color:#10b981;background:#0d2518;color:#10b981;transform:scale(1.01);}
 .dnd-zone.drag-over.out-zone{border-color:#ff6b35;background:#261808;color:#ff6b35;transform:scale(1.01);}
 .dnd-zone .dnd-icon{font-size:18px;opacity:.5;}
-.dnd-zone .dnd-label{font-size:10px;font-weight:700;letter-spacing:.05em;}
-.dnd-zone .dnd-hint{font-size:8px;opacity:.6;line-height:1.5;}
+.dnd-zone .dnd-label{font-size:12px;font-weight:700;letter-spacing:.05em;}
+.dnd-zone .dnd-hint{font-size:10px;opacity:.7;line-height:1.5;}
 .dnd-zone .dnd-preview{
-  font-size:8px;margin-top:4px;color:#64748b;max-width:100%;
+  font-size:10px;margin-top:4px;color:#7a8fa6;max-width:100%;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 .dnd-zone.has-data .dnd-icon{opacity:1;}
 .dnd-zone.has-data.in-zone .dnd-label{color:#10b981;}
 .dnd-zone.has-data.out-zone .dnd-label{color:#ff6b35;}
-.dnd-or{display:flex;align-items:center;font-size:9px;color:#252a35;padding:0 4px;flex-shrink:0;}
+.dnd-or{display:flex;align-items:center;font-size:11px;color:#475569;padding:0 4px;flex-shrink:0;}
 .tbl-wrap{flex:1;overflow:auto;border:1px solid #252a35;border-radius:6px;}
-#dataTable{width:100%;border-collapse:collapse;font-size:10px;}
+#dataTable{width:100%;border-collapse:collapse;font-size:12px;}
 #dataTable th{
-  background:#111318;color:#64748b;font-size:9px;letter-spacing:.1em;
+  background:#111318;color:#94a3b8;font-size:11px;letter-spacing:.1em;
   text-transform:uppercase;padding:6px 8px;border-bottom:1px solid #252a35;
   position:sticky;top:0;white-space:nowrap;
 }
@@ -379,7 +379,7 @@ header h1 span{color:var(--text-dim);font-weight:400;}
 }
 #dataTable td input{
   width:100%;background:transparent;border:none;color:var(--text);
-  font-family:'JetBrains Mono',monospace;font-size:10px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;
   text-align:center;outline:none;padding:2px 4px;border-radius:2px;
 }
 #dataTable td input:focus{background:#1a2030;color:#00d4ff;}
@@ -387,9 +387,9 @@ header h1 span{color:var(--text-dim);font-weight:400;}
 #dataTable tr.hdr-row td{background:#111318;}
 .tbl-btns{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
 .tbl-btn{
-  padding:4px 10px;border-radius:3px;border:1px solid #252a35;
+  padding:5px 12px;border-radius:3px;border:1px solid #252a35;
   background:#181c24;color:#e2e8f0;font-family:'JetBrains Mono',monospace;
-  font-size:9px;cursor:pointer;transition:all .15s;
+  font-size:11px;cursor:pointer;transition:all .15s;
 }
 .tbl-btn:hover{border-color:#a78bfa;color:#a78bfa;}
 .tbl-btn.green{border-color:#10b981;color:#10b981;}
@@ -402,21 +402,21 @@ header h1 span{color:var(--text-dim);font-weight:400;}
   padding:10px 12px;min-width:180px;flex:1;
 }
 .hp-gtitle{
-  font-size:9px;letter-spacing:.15em;color:#a78bfa;text-transform:uppercase;
+  font-size:11px;letter-spacing:.12em;color:#a78bfa;text-transform:uppercase;
   font-weight:700;margin-bottom:9px;
 }
 .hp-row{display:flex;align-items:center;gap:6px;margin-bottom:7px;}
-.hp-lbl{font-size:9px;color:#94a3b8;flex:1;}
+.hp-lbl{font-size:11px;color:#c0cdd9;flex:1;}
 .hp-inp{
   width:70px;background:#181c24;border:1px solid #252a35;color:var(--text);
   padding:3px 6px;border-radius:3px;font-family:'JetBrains Mono',monospace;
-  font-size:10px;outline:none;text-align:right;
+  font-size:12px;outline:none;text-align:right;
 }
 .hp-inp:focus{border-color:#a78bfa;}
 .hp-sel{
   background:#181c24;border:1px solid #252a35;color:var(--text);
   padding:3px 5px;border-radius:3px;font-family:'JetBrains Mono',monospace;
-  font-size:10px;outline:none;
+  font-size:11px;outline:none;
 }
 .hp-sel:focus{border-color:#a78bfa;}
 .hp-check{accent-color:#a78bfa;}
@@ -453,21 +453,21 @@ header h1 span{color:var(--text-dim);font-weight:400;}
   transition:border-color .2s;
 }
 .metric-card.active{border-color:#a78bfa44;}
-.metric-card .mc-label{font-size:8px;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;}
+.metric-card .mc-label{font-size:10px;color:#c0cdd9;letter-spacing:.08em;text-transform:uppercase;}
 .metric-card .mc-val{font-size:14px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#e2e8f0;letter-spacing:-.02em;}
 .metric-card .mc-val.c-purple{color:#a78bfa;}
 .metric-card .mc-val.c-orange{color:#ff6b35;}
 .metric-card .mc-val.c-green{color:#10b981;}
 .metric-card .mc-val.c-cyan{color:#00d4ff;}
 .metric-card .mc-val.c-yellow{color:#f59e0b;}
-.metric-card .mc-sub{font-size:8px;color:#64748b;font-family:'JetBrains Mono',monospace;}
+.metric-card .mc-sub{font-size:10px;color:#94a3b8;font-family:'JetBrains Mono',monospace;}
 
 /* Phase badge */
 .phase-badge{
   display:inline-flex;align-items:center;gap:5px;
-  font-size:9px;font-family:'JetBrains Mono',monospace;font-weight:700;
+  font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;
   padding:3px 10px;border-radius:20px;border:1px solid #252a35;
-  color:#64748b;background:#111318;transition:all .2s;letter-spacing:.05em;
+  color:#94a3b8;background:#111318;transition:all .2s;letter-spacing:.05em;
 }
 .phase-badge.fw{border-color:#10b981;color:#10b981;background:#10b98111;}
 .phase-badge.bw{border-color:#a78bfa;color:#a78bfa;background:#a78bfa11;}
@@ -488,14 +488,14 @@ header h1 span{color:var(--text-dim);font-weight:400;}
   background:#0d1118;border:1px solid #1a2030;border-radius:7px;
   padding:8px 10px;display:flex;flex-direction:column;min-height:130px;
 }
-.chart-title{font-size:8px;letter-spacing:.1em;text-transform:uppercase;
-  color:#94a3b8;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:4px;}
+.chart-title{font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:#c0cdd9;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:4px;}
 .chart-canvas{width:100%;flex:1;display:block;min-height:90px;}
 
 /* Log */
 .train-log{
   background:#06080d;border:1px solid #141820;border-radius:6px;
-  font-size:8.5px;color:#94a3b8;padding:7px 9px;height:120px;overflow-y:auto;
+  font-size:11px;color:#c0cdd9;padding:7px 9px;height:120px;overflow-y:auto;
   font-family:'JetBrains Mono',monospace;line-height:1.8;flex-shrink:0;
 }
 .train-log .log-good{color:#10b981;}
@@ -506,10 +506,10 @@ header h1 span{color:var(--text-dim);font-weight:400;}
 /* Confusion matrix */
 .cm-wrap{display:none;background:#111318;border:1px solid #1e2330;border-radius:7px;padding:10px;}
 .cm-wrap.visible{display:block;}
-.cm-title{font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
-.cm-table{border-collapse:collapse;width:100%;font-size:9px;font-family:'JetBrains Mono',monospace;}
+.cm-title{font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.cm-table{border-collapse:collapse;width:100%;font-size:11px;font-family:'JetBrains Mono',monospace;}
 .cm-table td,.cm-table th{padding:4px 6px;text-align:center;border:1px solid #1a2030;}
-.cm-table th{color:#64748b;background:#0d1118;}
+.cm-table th{color:#94a3b8;background:#0d1118;}
 .cm-cell-tp{background:#10b98122;color:#10b981;}
 .cm-cell-fp{background:#ef444422;color:#ef4444;}
 .cm-cell-fn{background:#f59e0b22;color:#f59e0b;}
@@ -522,12 +522,12 @@ header h1 span{color:var(--text-dim);font-weight:400;}
 
 /* ── Mode tabs ── */
 .mode-tabs{display:flex;gap:0;border:1px solid #252a35;border-radius:5px;overflow:hidden;flex-shrink:0;}
-.mode-tab{padding:5px 12px;font-size:9px;font-family:'JetBrains Mono',monospace;font-weight:700;
-  background:transparent;color:#64748b;border:none;cursor:pointer;transition:all .15s;letter-spacing:.05em;}
+.mode-tab{padding:5px 12px;font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;
+  background:transparent;color:#94a3b8;border:none;cursor:pointer;transition:all .15s;letter-spacing:.05em;}
 .mode-tab.active{background:#a78bfa;color:#000;}
 .mode-tab:hover:not(.active){color:#a78bfa;}
 /* ── Step buttons ── */
-.step-btn{padding:5px 11px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:9px;
+.step-btn{padding:5px 11px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:11px;
   font-weight:700;cursor:pointer;border:1px solid;transition:all .15s;}
 .step-btn.fw{border-color:#10b981;color:#10b981;background:transparent;}
 .step-btn.fw:hover:not(:disabled){background:#10b98118;}
@@ -551,16 +551,16 @@ header h1 span{color:var(--text-dim);font-weight:400;}
   box-shadow:0 8px 32px #0008;
 }
 #floatStep.visible{display:flex;}
-#floatStep .fs-label{font-size:9px;color:#64748b;margin-right:4px;}
-#floatStep .fs-epoch{font-size:11px;font-weight:800;color:#a78bfa;margin-right:8px;}
+#floatStep .fs-label{font-size:11px;color:#94a3b8;margin-right:4px;}
+#floatStep .fs-epoch{font-size:12px;font-weight:800;color:#a78bfa;margin-right:8px;}
 /* ── Step info ── */
 .step-info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;}
 .step-info-section{background:#0a0d12;border:1px solid #1a2030;border-radius:5px;padding:6px 8px;}
-.si-title{font-size:8.5px;font-weight:700;font-family:'JetBrains Mono',monospace;
+.si-title{font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;
   letter-spacing:.07em;margin-bottom:4px;}
-.si-body{font-size:8px;font-family:'JetBrains Mono',monospace;line-height:1.9;}
+.si-body{font-size:10px;font-family:'JetBrains Mono',monospace;line-height:1.9;}
 .si-row{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #0f1520;padding:1px 0;}
-.si-key{color:#94a3b8;flex-shrink:0;}
+.si-key{color:#c0cdd9;flex-shrink:0;}
 .si-val{color:#e2e8f0;font-weight:600;text-align:right;}
 .si-val.pos{color:#10b981;} .si-val.neg{color:#ef4444;} .si-val.hi{color:#f59e0b;}
 
@@ -1449,6 +1449,66 @@ header h1 span{color:var(--text-dim);font-weight:400;}
 #cnnLiftCanvas{
   position:absolute;inset:0;pointer-events:none;z-index:10;display:none;
 }
+
+/* ── CNN Tab bar ── */
+.cnn-tab-bar{display:flex;gap:4px;margin-left:8px;}
+.cnn-tab-btn{
+  padding:4px 13px;border-radius:10px;border:1px solid #252a35;
+  background:#0d0f1a;color:#94a3b8;font-size:11px;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;transition:all .12s;white-space:nowrap;
+}
+.cnn-tab-btn:hover{border-color:#f59e0b;color:#f59e0b;}
+.cnn-tab-btn.active{background:#f59e0b22;border-color:#f59e0b;color:#f59e0b;font-weight:700;}
+
+/* ── Pool type / size buttons ── */
+.cnn-pool-type-btn,.cnn-pool-size-btn{
+  padding:4px 10px;border-radius:3px;border:1px solid #252a35;
+  background:#111320;color:#c0cdd9;font-size:11px;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;transition:all .12s;
+}
+.cnn-pool-type-btn:hover,.cnn-pool-size-btn:hover{border-color:#00d4ff;color:#00d4ff;}
+.cnn-pool-type-btn.active,.cnn-pool-size-btn.active{
+  background:#00d4ff22;border-color:#00d4ff;color:#00d4ff;font-weight:700;
+}
+/* Pool stride / overlap buttons */
+.cnn-pool-stride-btn{
+  padding:4px 10px;border-radius:3px;border:1px solid #252a35;
+  background:#111320;color:#c0cdd9;font-size:11px;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;transition:all .12s;
+}
+.cnn-pool-stride-btn:hover{border-color:#a78bfa;color:#a78bfa;}
+.cnn-pool-stride-btn.active{background:#a78bfa22;border-color:#a78bfa;color:#a78bfa;font-weight:700;}
+
+/* Pool calc box */
+#cnnPoolCalcBox{
+  background:#06070e;border:1px solid #1a1e2a;border-radius:5px;
+  padding:7px 8px;font-size:11px;font-family:'JetBrains Mono',monospace;
+  color:#94a3b8;line-height:1.7;min-height:80px;
+}
+#cnnPoolCalcBox .pv-max{color:#f59e0b;font-weight:700;}
+#cnnPoolCalcBox .pv-norm{color:#94a3b8;}
+#cnnPoolCalcBox .pres{color:#00d4ff;font-weight:700;}
+
+/* Pool input overlay (pool window border) */
+#cnnPoolInOverlay{
+  position:absolute;border:2px solid #00d4ff;border-radius:2px;
+  pointer-events:none;box-shadow:0 0 14px #00d4ff88;display:none;
+  transition:left .06s linear,top .06s linear;
+}
+/* Pool size info strip */
+#cnnPoolSizeInfo{
+  flex-shrink:0;padding:5px 10px;background:#0b0d16;
+  border-top:1px solid #1a1e2a;font-size:10px;color:#64748b;
+  font-family:'JetBrains Mono',monospace;text-align:center;letter-spacing:.05em;
+}
+/* Pool footer */
+#cnnPoolFooter{
+  display:flex;align-items:center;gap:6px;padding:7px 12px;
+  background:#0d0f1a;border-top:1px solid #1a1e2a;flex-shrink:0;flex-wrap:wrap;
+}
+/* Pool pane wrapper */
+#cnnConvPane{display:flex;flex-direction:column;flex:1;overflow:hidden;}
+#cnnPoolPane{display:none;flex-direction:column;flex:1;overflow:hidden;}
 
 /* ══ KI-CHAT PANEL ══════════════════════════════════════════════ */
 #chatModal{position:fixed;inset:0;z-index:8500;display:none;pointer-events:none;}
@@ -2402,14 +2462,21 @@ header h1 span{color:var(--text-dim);font-weight:400;}
 <div id="learnBox">
   <div class="lhdr" id="learnHdr">
     <h2 style="flex:1;cursor:move;user-select:none" id="learnDragHandle">⚡ Überwachtes Lernen</h2>
-    <button class="ltab active" id="ltab0" onclick="lTab(0);event.stopPropagation()">① Daten</button>
-    <button class="ltab" id="ltab1" onclick="lTab(1);event.stopPropagation()">② Hyperparameter</button>
-    <button class="ltab" id="ltab2" onclick="lTab(2);event.stopPropagation()">③ Training</button>
+    <button class="ltab active" id="ltab0" onclick="lTab(0);event.stopPropagation()"
+      onmouseenter="showTT(event,'① Trainingsdaten','Trainingsdaten eingeben oder laden. Jede Zeile ist ein Trainingsbeispiel mit Eingabe- und Zielwerten. Vorlagen für XOR, AND und lineare Regression sind verfügbar.',null)" onmouseleave="hideTT()">① Daten</button>
+    <button class="ltab" id="ltab1" onclick="lTab(1);event.stopPropagation()"
+      onmouseenter="showTT(event,'② Hyperparameter','Alle Lernparameter konfigurieren: Epochen, Batch-Größe, Loss-Funktion, Optimizer, Lernrate, Regularisierung, Scheduler und Early Stopping.',null)" onmouseleave="hideTT()">② Hyperparameter</button>
+    <button class="ltab" id="ltab2" onclick="lTab(2);event.stopPropagation()"
+      onmouseenter="showTT(event,'③ Training','Training starten und überwachen. Auto-Modus: vollautomatisch. Einzelschritt: Forward → Backward → Weight Update manuell durchführen. Live-Charts zeigen Loss, Accuracy, Gradienten und Lernrate.',null)" onmouseleave="hideTT()">③ Training</button>
     <div style="display:flex;gap:4px;margin-left:8px">
-      <button class="lclose" title="Links andocken" onclick="dockLearn('left');event.stopPropagation()">◧</button>
-      <button class="lclose" title="Rechts andocken" onclick="dockLearn('right');event.stopPropagation()">◨</button>
-      <button class="lclose" title="Minimieren" id="btnMinLearn" onclick="toggleMinLearn();event.stopPropagation()">─</button>
-      <button class="lclose" title="Schließen" onclick="toggleLearnMode()">✕</button>
+      <button class="lclose" onclick="dockLearn('left');event.stopPropagation()"
+        onmouseenter="showTT(event,'Links andocken','Fenster an den linken Bildschirmrand andocken — vollständige Höhe, feste Breite.',null)" onmouseleave="hideTT()">◧</button>
+      <button class="lclose" onclick="dockLearn('right');event.stopPropagation()"
+        onmouseenter="showTT(event,'Rechts andocken','Fenster an den rechten Bildschirmrand andocken — vollständige Höhe, feste Breite.',null)" onmouseleave="hideTT()">◨</button>
+      <button class="lclose" id="btnMinLearn" onclick="toggleMinLearn();event.stopPropagation()"
+        onmouseenter="showTT(event,'Minimieren / Wiederherstellen','Klappt das Fenster auf die Titelleiste zusammen. Nochmals klicken stellt die volle Größe wieder her.',null)" onmouseleave="hideTT()">─</button>
+      <button class="lclose" onclick="toggleLearnMode()"
+        onmouseenter="showTT(event,'Schließen','Trainings-Panel schließen. Laufendes Training wird gestoppt.',null)" onmouseleave="hideTT()">✕</button>
     </div>
   </div>
 
@@ -2419,7 +2486,8 @@ header h1 span{color:var(--text-dim);font-weight:400;}
     <div class="dnd-area">
       <div class="dnd-zone in-zone" id="dndIn"
            ondragover="dndOver(event,'in')" ondragleave="dndLeave(event,'in')"
-           ondrop="dndDrop(event,'in')" onclick="dndClick('in')">
+           ondrop="dndDrop(event,'in')" onclick="dndClick('in')"
+           onmouseenter="showTT(event,'Eingabe-Daten (X)','Eingabewerte für das Netzwerk — eine Zeile pro Trainingsbeispiel, Werte kommagetrennt.\nBeispiel XOR: 0,0 / 0,1 / 1,0 / 1,1\nDatei per Drag & Drop ablegen oder klicken zum Einfügen aus Zwischenablage.',null)" onmouseleave="hideTT()">
         <div class="dnd-icon">📥</div>
         <div class="dnd-label" style="color:#10b981">EINGABEN</div>
         <div class="dnd-hint">Zahlenreihen per Drag &amp; Drop<br>oder klicken zum Einfügen<br><b>Format: 1,0,1 / 0,1,0 / …</b></div>
@@ -2428,7 +2496,8 @@ header h1 span{color:var(--text-dim);font-weight:400;}
       <div class="dnd-or">↔</div>
       <div class="dnd-zone out-zone" id="dndOut"
            ondragover="dndOver(event,'out')" ondragleave="dndLeave(event,'out')"
-           ondrop="dndDrop(event,'out')" onclick="dndClick('out')">
+           ondrop="dndDrop(event,'out')" onclick="dndClick('out')"
+           onmouseenter="showTT(event,'Ausgabe-Daten (Y / Ziel)','Gewünschte Ausgabewerte — eine Zeile pro Trainingsbeispiel.\nBeispiel XOR: 0 / 1 / 1 / 0\nMuss gleich viele Zeilen haben wie die Eingabe. Für Mehrklassen-Probleme mehrere Spalten verwenden.',null)" onmouseleave="hideTT()">
         <div class="dnd-icon">📤</div>
         <div class="dnd-label" style="color:#ff6b35">AUSGABEN (Ziel)</div>
         <div class="dnd-hint">Zahlenreihen per Drag &amp; Drop<br>oder klicken zum Einfügen<br><b>Format: 0 / 1 / 1 / 0</b></div>
@@ -2448,16 +2517,25 @@ header h1 span{color:var(--text-dim);font-weight:400;}
       </table>
     </div>
     <div class="tbl-btns">
-      <button class="tbl-btn green" onclick="addDataRow()">+ Zeile</button>
-      <button class="tbl-btn" onclick="delDataRow()">− Zeile</button>
-      <button class="tbl-btn" onclick="clearDataTable()">Leeren</button>
-      <button class="tbl-btn" onclick="applyDndData()" id="dndApplyBtn" style="display:none;border-color:#a78bfa;color:#a78bfa">✓ Übernehmen</button>
-      <button class="tbl-btn" onclick="loadDataPreset('xor')">XOR</button>
-      <button class="tbl-btn" onclick="loadDataPreset('and')">AND</button>
-      <button class="tbl-btn" onclick="loadDataPreset('linear')">Linear</button>
+      <button class="tbl-btn green" onclick="addDataRow()"
+        onmouseenter="showTT(event,'Zeile hinzufügen','Fügt eine leere Trainingszeile am Ende der Tabelle ein.',null)" onmouseleave="hideTT()">+ Zeile</button>
+      <button class="tbl-btn" onclick="delDataRow()"
+        onmouseenter="showTT(event,'Zeile löschen','Entfernt die letzte Zeile aus der Tabelle.',null)" onmouseleave="hideTT()">− Zeile</button>
+      <button class="tbl-btn" onclick="clearDataTable()"
+        onmouseenter="showTT(event,'Tabelle leeren','Löscht alle Trainingsdaten aus der Tabelle. Nicht rückgängig machbar.',null)" onmouseleave="hideTT()">Leeren</button>
+      <button class="tbl-btn" onclick="applyDndData()" id="dndApplyBtn" style="display:none;border-color:#a78bfa;color:#a78bfa"
+        onmouseenter="showTT(event,'Drag & Drop übernehmen','Übernimmt die per Drag & Drop eingefügten Daten in die Tabelle.',null)" onmouseleave="hideTT()">✓ Übernehmen</button>
+      <button class="tbl-btn" onclick="loadDataPreset('xor')"
+        onmouseenter="showTT(event,'XOR-Vorlage','Lädt das klassische XOR-Problem: 4 Beispiele mit 2 Eingaben und 1 Ausgang.\nXOR = 1 wenn genau ein Eingang = 1. Ideal zum Testen, ob das Netz nichtlineare Probleme lösen kann.',null)" onmouseleave="hideTT()">XOR</button>
+      <button class="tbl-btn" onclick="loadDataPreset('and')"
+        onmouseenter="showTT(event,'AND-Vorlage','Lädt das AND-Problem: 4 Beispiele, Ausgang = 1 nur wenn beide Eingänge = 1. Lineares Problem — lösbar ohne Hidden Layer.',null)" onmouseleave="hideTT()">AND</button>
+      <button class="tbl-btn" onclick="loadDataPreset('linear')"
+        onmouseenter="showTT(event,'Lineare Regression','Lädt ein Regressionsproblem: kontinuierliche Eingaben und Ausgaben. Geeignet für Netze ohne Sigmoid-Ausgang.',null)" onmouseleave="hideTT()">Linear</button>
       <div style="margin-left:auto;display:flex;gap:4px">
-        <button class="tbl-btn" onclick="saveTrainData()" style="border-color:#10b981;color:#10b981" title="Trainingsdaten als JSON speichern">💾 Speichern</button>
-        <button class="tbl-btn" onclick="document.getElementById('tdFileIn').click()" style="border-color:#00d4ff;color:#00d4ff" title="Trainingsdaten aus JSON/CSV laden">📂 Laden</button>
+        <button class="tbl-btn" onclick="saveTrainData()" style="border-color:#10b981;color:#10b981"
+          onmouseenter="showTT(event,'Trainingsdaten speichern','Exportiert alle Trainingsdaten als JSON-Datei im Format {inputs:[…], outputs:[…]}.',null)" onmouseleave="hideTT()">💾 Speichern</button>
+        <button class="tbl-btn" onclick="document.getElementById('tdFileIn').click()" style="border-color:#00d4ff;color:#00d4ff"
+          onmouseenter="showTT(event,'Trainingsdaten laden','Importiert Trainingsdaten aus einer JSON-Datei ({inputs, outputs}) oder CSV/TXT-Datei.',null)" onmouseleave="hideTT()">📂 Laden</button>
         <input type="file" id="tdFileIn" accept=".json,.csv,.txt" style="display:none" onchange="loadTrainDataFile(event)">
       </div>
     </div>
@@ -2466,14 +2544,16 @@ header h1 span{color:var(--text-dim);font-weight:400;}
   <!-- ── TAB 1: HYPERPARAMETER ── -->
   <div class="lpane" id="paneHP">
     <div class="hp-group">
-      <div class="hp-gtitle">🔁 Training</div>
+      <div class="hp-gtitle" onmouseenter="showTT(event,'🔁 Training','Grundlegende Trainingsparameter: wie lange trainiert wird (Epochen), wie viele Beispiele pro Update (Batch), wie der Fehler gemessen wird (Loss) und ob die Reihenfolge gemischt wird (Shuffle).',null)" onmouseleave="hideTT()">🔁 Training</div>
       <div class="hp-row">
-        <span class="hp-lbl">Epochen</span>
-        <input class="hp-inp" id="hpEpochs" type="number" value="500" min="1" max="100000">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Epochen','Wie oft das gesamte Trainingsset durchlaufen wird. 1 Epoche = alle Trainingsbeispiele einmal gesehen.\nMehr Epochen → bessere Anpassung, aber Gefahr von Overfitting.',null)" onmouseleave="hideTT()">Epochen</span>
+        <input class="hp-inp" id="hpEpochs" type="number" value="500" min="1" max="100000"
+          onmouseenter="showTT(event,'Epochen','Wie oft das gesamte Trainingsset durchlaufen wird.\nEmpfehlung: 100–1000 für einfache Probleme, 5000+ für komplexe.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Batch Size</span>
-        <select class="hp-sel" id="hpBatch">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Batch Size','Anzahl Trainingsbeispiele pro Gewichts-Update.\n• 1 (Online): jedes Beispiel aktualisiert sofort — unruhig aber schnell.\n• Mini-Batch (8–32): Balance aus Stabilität und Geschwindigkeit.\n• Full Batch: alle Beispiele zusammen — stabil aber langsam.',null)" onmouseleave="hideTT()">Batch Size</span>
+        <select class="hp-sel" id="hpBatch"
+          onmouseenter="showTT(event,'Batch Size','• 1 (Online): jedes Beispiel sofort updaten — schnell, aber unruhige Loss-Kurve.\n• 8–32: Mini-Batch — gute Balance. Empfehlung für die meisten Fälle.\n• Full Batch: alle Beispiele auf einmal — glatte Kurve, aber langsam.',null)" onmouseleave="hideTT()">
           <option value="1">1 (Online)</option>
           <option value="8">8</option>
           <option value="16">16</option>
@@ -2482,24 +2562,27 @@ header h1 span{color:var(--text-dim);font-weight:400;}
         </select>
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Loss-Funktion</span>
-        <select class="hp-sel" id="hpLoss">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Loss-Funktion','Messgröße für den Fehler zwischen Netzausgabe und Zielwert.\n• MSE: Mittlerer quadratischer Fehler — für Regression.\n• MAE: Mittlerer absoluter Fehler — robuster gegen Ausreißer.\n• BCE: Binary Cross-Entropy — für Klassifikation (0/1-Ausgaben).',null)" onmouseleave="hideTT()">Loss-Funktion</span>
+        <select class="hp-sel" id="hpLoss"
+          onmouseenter="showTT(event,'Loss-Funktion','• MSE (Mean Squared Error): Standardwahl für Regression. Bestraft große Fehler stark.\n• MAE (Mean Absolute Error): robuster gegen Ausreißer.\n• BCE (Binary Cross-Entropy): für 0/1-Klassifikation mit Sigmoid-Ausgang.',null)" onmouseleave="hideTT()">
           <option value="mse">MSE</option>
           <option value="mae">MAE</option>
           <option value="bce">BCE</option>
         </select>
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Shuffle</span>
-        <input class="hp-check" type="checkbox" id="hpShuffle" checked>
+        <span class="hp-lbl" onmouseenter="showTT(event,'Shuffle','Reihenfolge der Trainingsbeispiele jede Epoche zufällig mischen. Verhindert, dass das Netz die Reihenfolge auswendig lernt.',null)" onmouseleave="hideTT()">Shuffle</span>
+        <input class="hp-check" type="checkbox" id="hpShuffle" checked
+          onmouseenter="showTT(event,'Shuffle','Aktiviert: Trainingsbeispiele werden jede Epoche neu gemischt.\nDeaktiviert: immer gleiche Reihenfolge — nur für Debugging sinnvoll.',null)" onmouseleave="hideTT()">
       </div>
     </div>
 
     <div class="hp-group">
-      <div class="hp-gtitle">⚡ Optimizer</div>
+      <div class="hp-gtitle" onmouseenter="showTT(event,'⚡ Optimizer','Der Optimizer bestimmt wie die Gewichte anhand der Gradienten aktualisiert werden. Adam ist für die meisten Probleme die beste Wahl. SGD ist einfacher zu verstehen.',null)" onmouseleave="hideTT()">⚡ Optimizer</div>
       <div class="hp-row">
-        <span class="hp-lbl">Optimizer</span>
-        <select class="hp-sel" id="hpOptim" onchange="updateOptimFields()">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Optimizer','Algorithmus für die Gewichtsaktualisierung.\n• SGD: einfach, stabil, langsam.\n• SGD+Momentum: SGD mit Schwungmasse — schneller.\n• Adam: adaptiv, robust, Empfehlung für die meisten Aufgaben.\n• RMSProp: adaptiv, gut für rekurrente Netze.\n• Adagrad: passt Lernrate je Gewicht an — gut für spärliche Daten.',null)" onmouseleave="hideTT()">Optimizer</span>
+        <select class="hp-sel" id="hpOptim" onchange="updateOptimFields()"
+          onmouseenter="showTT(event,'Optimizer wählen','• SGD: Gradient direkt × Lernrate. Einfach, aber langsam.\n• SGD+Momentum: Schwungmasse verhindert Hängenbleiben in flachen Regionen.\n• Adam: kombiniert Momentum + adaptive Lernrate. Robust, schnell.\n• RMSProp: adaptiv, gut für RNNs.\n• Adagrad: häufige Parameter lernen langsamer.',null)" onmouseleave="hideTT()">
           <option value="sgd">SGD</option>
           <option value="sgdm">SGD + Momentum</option>
           <option value="adam" selected>Adam</option>
@@ -2508,40 +2591,48 @@ header h1 span{color:var(--text-dim);font-weight:400;}
         </select>
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Lernrate (η)</span>
-        <input class="hp-inp" id="hpLR" type="number" value="0.01" step="0.001" min="0.00001">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Lernrate η','Schrittweite der Gewichtsaktualisierung.\n• Zu groß: Training divergiert (Loss steigt).\n• Zu klein: Training sehr langsam.\nTypische Werte: 0.001 (Adam), 0.01–0.1 (SGD).',null)" onmouseleave="hideTT()">Lernrate (η)</span>
+        <input class="hp-inp" id="hpLR" type="number" value="0.01" step="0.001" min="0.00001"
+          onmouseenter="showTT(event,'Lernrate η','Empfohlene Startwerte:\n• Adam: 0.001\n• SGD: 0.01–0.1\n• RMSProp: 0.001\nBei Divergenz (Loss steigt): Wert halbieren.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row" id="rowMomentum">
-        <span class="hp-lbl">Momentum (β)</span>
-        <input class="hp-inp" id="hpMomentum" type="number" value="0.9" step="0.01">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Momentum β','Anteil des vorherigen Gradienten, der in den nächsten Schritt übernommen wird. Wirkt wie eine Schwungmasse. Typisch: 0.9.',null)" onmouseleave="hideTT()">Momentum (β)</span>
+        <input class="hp-inp" id="hpMomentum" type="number" value="0.9" step="0.01"
+          onmouseenter="showTT(event,'Momentum β','0.9 = 90% des vorherigen Gradienten wird übernommen. Höhere Werte = mehr Schwung, aber riskanter. Bereich: 0.5–0.99.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row" id="rowBeta2">
-        <span class="hp-lbl">β₂ (Adam)</span>
-        <input class="hp-inp" id="hpBeta2" type="number" value="0.999" step="0.001">
+        <span class="hp-lbl" onmouseenter="showTT(event,'β₂ (Adam)','Decay-Rate für das quadratische Mittel der Gradienten in Adam. Kontrolliert den adaptiven Lernraten-Anteil. Standard: 0.999.',null)" onmouseleave="hideTT()">β₂ (Adam)</span>
+        <input class="hp-inp" id="hpBeta2" type="number" value="0.999" step="0.001"
+          onmouseenter="showTT(event,'β₂ (Adam)','Zweiter Decay-Parameter in Adam — kontrolliert das Gedächtnis des quadratischen Gradientenmittels. Standard 0.999 fast immer optimal.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row" id="rowEps">
-        <span class="hp-lbl">ε (Epsilon)</span>
-        <input class="hp-inp" id="hpEps" type="number" value="1e-8" step="1e-9">
+        <span class="hp-lbl" onmouseenter="showTT(event,'ε Epsilon','Numerischer Stabilisierungswert — verhindert Division durch Null im Nenner des Optimizers. Standard: 1e-8.',null)" onmouseleave="hideTT()">ε (Epsilon)</span>
+        <input class="hp-inp" id="hpEps" type="number" value="1e-8" step="1e-9"
+          onmouseenter="showTT(event,'ε Epsilon','Schutzkonstante gegen Division durch Null. Standard 1e-8 muss fast nie geändert werden. Bei numerischen Problemen auf 1e-7 erhöhen.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row" id="rowRho">
-        <span class="hp-lbl">ρ (RMSProp)</span>
-        <input class="hp-inp" id="hpRho" type="number" value="0.9" step="0.01">
+        <span class="hp-lbl" onmouseenter="showTT(event,'ρ RMSProp','Decay-Rate für den gleitenden Durchschnitt der quadrierten Gradienten in RMSProp. Standard: 0.9.',null)" onmouseleave="hideTT()">ρ (RMSProp)</span>
+        <input class="hp-inp" id="hpRho" type="number" value="0.9" step="0.01"
+          onmouseenter="showTT(event,'ρ RMSProp','Decay-Rate des gleitenden quadratischen Mittels. 0.9 = Standard. Kleinere Werte reagieren schneller auf Änderungen.',null)" onmouseleave="hideTT()">
       </div>
     </div>
 
     <div class="hp-group">
-      <div class="hp-gtitle">🛡 Regularisierung</div>
+      <div class="hp-gtitle" onmouseenter="showTT(event,'🛡 Regularisierung','Techniken gegen Overfitting: das Netz soll nicht einfach die Trainingsdaten auswendig lernen, sondern generalisieren. L2 bestraft große Gewichte, Dropout schaltet Neuronen zufällig ab.',null)" onmouseleave="hideTT()">🛡 Regularisierung</div>
       <div class="hp-row">
-        <span class="hp-lbl">L2 (λ)</span>
-        <input class="hp-inp" id="hpL2" type="number" value="0" step="0.0001" min="0">
+        <span class="hp-lbl" onmouseenter="showTT(event,'L2-Regularisierung λ','Bestraft große Gewichte — zieht Gewichte bei jedem Update leicht Richtung 0. Reduziert Overfitting.\n0 = deaktiviert. Typisch: 0.0001–0.001.',null)" onmouseleave="hideTT()">L2 (λ)</span>
+        <input class="hp-inp" id="hpL2" type="number" value="0" step="0.0001" min="0"
+          onmouseenter="showTT(event,'L2 λ','Jedes Gewicht wird um λ × Gewicht verringert. Kleine Gewichte → einfacheres Modell → weniger Overfitting.\n0 = aus. Start mit 0.0001, bei Bedarf erhöhen.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Dropout</span>
-        <input class="hp-inp" id="hpDropout" type="number" value="0" step="0.05" min="0" max="0.99">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Dropout','Wahrscheinlichkeit, mit der Neuronen beim Training zufällig deaktiviert werden. Erzwingt robustere Repräsentationen.\n0 = kein Dropout. Typisch: 0.2–0.5.',null)" onmouseleave="hideTT()">Dropout</span>
+        <input class="hp-inp" id="hpDropout" type="number" value="0" step="0.05" min="0" max="0.99"
+          onmouseenter="showTT(event,'Dropout','0.2 = 20% der Neuronen werden pro Trainingsschritt zufällig deaktiviert. Beim Testen alle aktiv.\n0 = kein Dropout. Sinnvoll ab 0.1, typisch 0.2–0.5.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Gewichte init.</span>
-        <select class="hp-sel" id="hpInit">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Gewichtsinitialisierung','Startwerte der Gewichte vor dem Training.\n• Xavier/Glorot: optimal für Sigmoid/Tanh.\n• He: optimal für ReLU.\n• Zufällig ±0.5: einfach, oft ausreichend.\n• Behalten: aktuelle Gewichte nicht ändern.',null)" onmouseleave="hideTT()">Gewichte init.</span>
+        <select class="hp-sel" id="hpInit"
+          onmouseenter="showTT(event,'Gewichtsinitialisierung','• Xavier/Glorot: varianzerhaltend für Sigmoid/Tanh — Standardwahl.\n• He: für ReLU-Netze optimiert — vermeidet verschwindende Gradienten.\n• Zufällig ±0.5: einfach, für kleine Netze ausreichend.\n• Behalten: kein Reset — sinnvoll für Weitertraining.',null)" onmouseleave="hideTT()">
           <option value="xavier">Xavier/Glorot</option>
           <option value="he">He</option>
           <option value="random">Zufällig (±0.5)</option>
@@ -2549,16 +2640,18 @@ header h1 span{color:var(--text-dim);font-weight:400;}
         </select>
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Grad. Clipping</span>
-        <input class="hp-inp" id="hpClip" type="number" value="0" step="0.5" min="0" title="0 = deaktiviert">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Gradient Clipping','Begrenzt die maximale Länge des Gradienten-Vektors. Verhindert explodierende Gradienten bei tiefen Netzen.\n0 = deaktiviert. Typisch: 1.0–5.0.',null)" onmouseleave="hideTT()">Grad. Clipping</span>
+        <input class="hp-inp" id="hpClip" type="number" value="0" step="0.5" min="0"
+          onmouseenter="showTT(event,'Gradient Clipping','Wenn ‖∇‖ > Grenzwert: Gradienten werden skaliert. Verhindert explodierender Gradienten-Norm.\n0 = aus. Typisch 1.0–5.0. Im Gradientnorm-Chart erkennbar wenn Norm plötzlich gekappt wird.',null)" onmouseleave="hideTT()">
       </div>
     </div>
 
     <div class="hp-group">
-      <div class="hp-gtitle">📉 Lernraten-Scheduler</div>
+      <div class="hp-gtitle" onmouseenter="showTT(event,'📉 Lernraten-Scheduler','Reduziert die Lernrate automatisch während des Trainings. Am Anfang großer Schritt zum schnellen Lernfortschritt, später kleinerer Schritt für Feinabstimmung.',null)" onmouseleave="hideTT()">📉 Lernraten-Scheduler</div>
       <div class="hp-row">
-        <span class="hp-lbl">Scheduler</span>
-        <select class="hp-sel" id="hpScheduler">
+        <span class="hp-lbl" onmouseenter="showTT(event,'LR-Scheduler','Verringert die Lernrate automatisch während des Trainings.\n• Step Decay: alle N Epochen mit Decay Rate multiplizieren.\n• Exponentiell: kontinuierlich abnehmend.\n• Cosine Annealing: schwingend abnehmend — oft beste Konvergenz.',null)" onmouseleave="hideTT()">Scheduler</span>
+        <select class="hp-sel" id="hpScheduler"
+          onmouseenter="showTT(event,'Scheduler wählen','• Keiner: konstante Lernrate.\n• Step Decay: alle N Epochen × Decay Rate (z.B. alle 100 × 0.95).\n• Exponentiell: LR × Decay^Epoche — kontinuierlich abnehmend.\n• Cosine Annealing: sinusförmig abnehmend — oft beste Konvergenz.',null)" onmouseleave="hideTT()">
           <option value="none">Keiner</option>
           <option value="step">Step Decay</option>
           <option value="exp">Exponentiell</option>
@@ -2566,45 +2659,54 @@ header h1 span{color:var(--text-dim);font-weight:400;}
         </select>
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Decay Rate</span>
-        <input class="hp-inp" id="hpDecay" type="number" value="0.95" step="0.01">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Decay Rate','Multiplikationsfaktor für die Lernrate bei jedem Decay-Schritt. 0.95 = Lernrate sinkt auf 95% des Vorwerts.',null)" onmouseleave="hideTT()">Decay Rate</span>
+        <input class="hp-inp" id="hpDecay" type="number" value="0.95" step="0.01"
+          onmouseenter="showTT(event,'Decay Rate','Wie stark die Lernrate pro Schritt sinkt. 0.95 = −5% pro Step. 0.5 = Halbierung pro Step. Typisch: 0.9–0.99.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Step Size</span>
-        <input class="hp-inp" id="hpStep" type="number" value="100" min="1">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Step Size','Anzahl Epochen zwischen zwei Decay-Schritten (nur bei Step Decay). Alle N Epochen wird die Lernrate mit Decay Rate multipliziert.',null)" onmouseleave="hideTT()">Step Size</span>
+        <input class="hp-inp" id="hpStep" type="number" value="100" min="1"
+          onmouseenter="showTT(event,'Step Size','Nur bei Step Decay: alle N Epochen wird die Lernrate um Decay Rate verringert.\nBeispiel: 100 Epochen, Rate 0.9 → nach 100, 200, 300 Epochen je ×0.9.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Min. Lernrate</span>
-        <input class="hp-inp" id="hpLRMin" type="number" value="0.0001" step="0.0001">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Minimale Lernrate','Untergrenze für die Lernrate — der Scheduler verringert die Lernrate nicht unter diesen Wert.',null)" onmouseleave="hideTT()">Min. Lernrate</span>
+        <input class="hp-inp" id="hpLRMin" type="number" value="0.0001" step="0.0001"
+          onmouseenter="showTT(event,'Minimale Lernrate','Die Lernrate wird nie kleiner als dieser Wert. Verhindert, dass das Training zum Stillstand kommt. Typisch: 1e-4 bis 1e-6.',null)" onmouseleave="hideTT()">
       </div>
     </div>
 
     <div class="hp-group">
-      <div class="hp-gtitle">🎬 Animation</div>
+      <div class="hp-gtitle" onmouseenter="showTT(event,'🎬 Animation & Protokoll','Steuert die Visualisierung während des Trainings und das Protokoll-Intervall. Langsamere Animation = besser beobachtbar. Deaktivierte Animation = schnelleres Training.',null)" onmouseleave="hideTT()">🎬 Animation</div>
       <div class="hp-row">
-        <span class="hp-lbl">Anim.-Speed</span>
+        <span class="hp-lbl" onmouseenter="showTT(event,'Animationsgeschwindigkeit','Steuert wie schnell die Signalpakete auf dem Canvas animiert werden. 1 = sehr langsam, 10 = sehr schnell.',null)" onmouseleave="hideTT()">Anim.-Speed</span>
         <input class="hp-inp" id="hpAnimSpeedHP" type="range" min="1" max="10" value="7"
-          style="width:70px;accent-color:#a78bfa">
+          style="width:70px;accent-color:#a78bfa"
+          onmouseenter="showTT(event,'Animationsgeschwindigkeit','1 = sehr langsam (jeder Schritt gut sichtbar), 10 = sehr schnell. Wirkt sich nur auf die Canvas-Animation aus, nicht auf die Trainingsgeschwindigkeit selbst.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Zeige Backprop</span>
-        <input class="hp-check" type="checkbox" id="hpShowBPHP" checked>
+        <span class="hp-lbl" onmouseenter="showTT(event,'Backprop anzeigen','Zeigt die Rückwärtspropagation als Animation auf dem Canvas — orange Pfeile von Ausgang zu Eingang. Deaktivieren für schnelleres Training.',null)" onmouseleave="hideTT()">Zeige Backprop</span>
+        <input class="hp-check" type="checkbox" id="hpShowBPHP" checked
+          onmouseenter="showTT(event,'Backprop-Animation','Aktiviert: orange Pfeile zeigen die Fehlerrückpropagation auf dem Canvas.\nDeaktiviert: keine Canvas-Animation — deutlich schnelleres Training.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Log-Intervall</span>
-        <input class="hp-inp" id="hpLogEvery" type="number" value="10" min="1">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Log-Intervall','Alle N Epochen wird ein Eintrag ins Trainingsprotokoll geschrieben. Kleinere Werte = mehr Detail, aber auch mehr Speicher.',null)" onmouseleave="hideTT()">Log-Intervall</span>
+        <input class="hp-inp" id="hpLogEvery" type="number" value="10" min="1"
+          onmouseenter="showTT(event,'Log-Intervall','Alle N Epochen: Loss, Accuracy und LR ins Protokoll schreiben.\n1 = jede Epoche protokollieren (viel Detail, langsamer).\n10 = Standard. 100 = nur grobe Übersicht.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Frühstopp</span>
-        <input class="hp-check" type="checkbox" id="hpEarlyStop">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Early Stopping','Bricht das Training automatisch ab, wenn der Loss sich über mehrere Epochen (Patience) nicht verbessert. Verhindert Overfitting.',null)" onmouseleave="hideTT()">Frühstopp</span>
+        <input class="hp-check" type="checkbox" id="hpEarlyStop"
+          onmouseenter="showTT(event,'Early Stopping','Aktiviert: Training stoppt automatisch wenn der Loss sich über Patience Epochen um weniger als Toleranz verbessert.\nVerhindert unnötig langes Training und Overfitting.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Toleranz</span>
-        <input class="hp-inp" id="hpTolerance" type="number" value="1e-6" step="1e-7">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Toleranz','Minimale Verbesserung des Loss, die als Fortschritt gezählt wird. Kleinere Werte = empfindlicher. Typisch: 1e-6.',null)" onmouseleave="hideTT()">Toleranz</span>
+        <input class="hp-inp" id="hpTolerance" type="number" value="1e-6" step="1e-7"
+          onmouseenter="showTT(event,'Toleranz (Early Stopping)','Mindestverbesserung des Loss pro Epoche. Wird die Verbesserung kleiner als dieser Wert, zählt die Epoche als "kein Fortschritt".\nKleinere Werte = geduldiger. Typisch: 1e-6.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row">
-        <span class="hp-lbl">Patience</span>
-        <input class="hp-inp" id="hpPatience" type="number" value="20" min="1">
+        <span class="hp-lbl" onmouseenter="showTT(event,'Patience','Anzahl Epochen ohne Verbesserung, bevor Early Stopping abbricht. Größere Werte = geduldiger. Typisch: 10–50.',null)" onmouseleave="hideTT()">Patience</span>
+        <input class="hp-inp" id="hpPatience" type="number" value="20" min="1"
+          onmouseenter="showTT(event,'Patience (Early Stopping)','Anzahl aufeinanderfolgender Epochen ohne Verbesserung, nach denen das Training abbricht. Standard: 20.\nKleinere Werte = früher stoppen (5–10 für kleine Datasets).\nGrößere Werte = geduldiger abwarten (50–100 für komplexe Netze).',null)" onmouseleave="hideTT()">
       </div>
     </div>
   </div>
@@ -2615,8 +2717,10 @@ header h1 span{color:var(--text-dim);font-weight:400;}
     <!-- ── Mode selector ── -->
     <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
       <div class="mode-tabs">
-        <button class="mode-tab active" id="modeTabAuto" onclick="setTrainMode('auto')">⚡ Auto</button>
-        <button class="mode-tab" id="modeTabStep" onclick="setTrainMode('step')">🔬 Einzelschritt</button>
+        <button class="mode-tab active" id="modeTabAuto" onclick="setTrainMode('auto')"
+          onmouseenter="showTT(event,'Auto-Modus','Training läuft vollautomatisch über alle Epochen. Ideal um schnell ein Ergebnis zu erhalten.',null)" onmouseleave="hideTT()">⚡ Auto</button>
+        <button class="mode-tab" id="modeTabStep" onclick="setTrainMode('step')"
+          onmouseenter="showTT(event,'Einzelschritt-Modus','Jeden Schritt manuell ausführen: Forward → Ausgaben → Backward → Deltas → Weight Update. Ideal zum Verstehen wie Backpropagation funktioniert.',null)" onmouseleave="hideTT()">🔬 Einzelschritt</button>
       </div>
       <span class="phase-badge" id="tPhase">● Bereit</span>
     </div>
@@ -2624,9 +2728,12 @@ header h1 span{color:var(--text-dim);font-weight:400;}
     <!-- ── AUTO MODE controls ── -->
     <div id="autoControls">
       <div class="train-btns">
-        <button class="train-start-btn" id="trainStartBtn" onclick="startTraining()">⚡ Starten</button>
-        <button class="train-stop-btn" id="trainStopBtn" onclick="stopTraining()" disabled>■ Stopp</button>
-        <button class="tbl-btn" onclick="resetWeights()" style="font-size:9px">↺ Reset</button>
+        <button class="train-start-btn" id="trainStartBtn" onclick="startTraining()"
+          onmouseenter="showTT(event,'Training starten','Startet das automatische Training über alle konfigurierten Epochen. Gewichte werden nach jeder Epoche aktualisiert. Loss, Accuracy und Gradienten werden live angezeigt.',null)" onmouseleave="hideTT()">⚡ Starten</button>
+        <button class="train-stop-btn" id="trainStopBtn" onclick="stopTraining()" disabled
+          onmouseenter="showTT(event,'Training stoppen','Bricht das laufende Training sofort ab. Die bisher trainierten Gewichte bleiben erhalten.',null)" onmouseleave="hideTT()">■ Stopp</button>
+        <button class="tbl-btn" onclick="resetWeights()" style="font-size:9px"
+          onmouseenter="showTT(event,'Gewichte zurücksetzen','Initialisiert alle Gewichte neu gemäß der gewählten Methode (Xavier/He/Zufällig). Trainingsdaten bleiben erhalten.',null)" onmouseleave="hideTT()">↺ Reset</button>
       </div>
       <!-- Metric cards -->
       <div class="metric-grid">
@@ -2676,14 +2783,22 @@ header h1 span{color:var(--text-dim);font-weight:400;}
 
       <!-- Phase buttons -->
       <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px">
-        <button class="step-btn fw" onclick="doStep('fw')" id="btnStepFW">→ Forward</button>
-        <button class="step-btn fwout" onclick="doStep('fwout')" id="btnStepFWOut" title="Neuron-Ausgaben anzeigen (Aktivierungswerte)">◉ Ausgaben</button>
-        <button class="step-btn bw" onclick="doStep('bw')" id="btnStepBW">← Backward</button>
-        <button class="step-btn bwout" onclick="doStep('bwout')" id="btnStepBWOut" title="Neuron-Deltas anzeigen (Gradientenwerte)">◉ Deltas</button>
-        <button class="step-btn wu" onclick="doStep('wu')" id="btnStepWU">⟳ Update</button>
-        <button class="step-btn all" onclick="doStepAll()" id="btnStepAll">▶▶ Alle 5</button>
-        <button class="step-btn" onclick="doStepEpoch()" id="btnStepEpoch" style="border-color:#00d4ff;color:#00d4ff">↻ Epoche</button>
-        <button class="tbl-btn" onclick="resetWeights();_stepEpoch=0;_stepSampleI=0;stepPhaseData=null;updateStepInfo()" style="font-size:9px">↺ Reset</button>
+        <button class="step-btn fw" onclick="doStep('fw')" id="btnStepFW"
+          onmouseenter="showTT(event,'→ Forward Pass','Berechnet die Ausgaben aller Neuronen von Eingang zu Ausgang. Aktivierungswerte werden anhand der aktuellen Gewichte ermittelt.',null)" onmouseleave="hideTT()">→ Forward</button>
+        <button class="step-btn fwout" onclick="doStep('fwout')" id="btnStepFWOut"
+          onmouseenter="showTT(event,'◉ Ausgaben anzeigen','Zeigt die Aktivierungswerte aller Neuronen nach dem Forward Pass auf dem Canvas an.',null)" onmouseleave="hideTT()">◉ Ausgaben</button>
+        <button class="step-btn bw" onclick="doStep('bw')" id="btnStepBW"
+          onmouseenter="showTT(event,'← Backward Pass','Berechnet die Fehlergradienten rückwärts durch alle Schichten (Backpropagation). Benötigt einen abgeschlossenen Forward Pass.',null)" onmouseleave="hideTT()">← Backward</button>
+        <button class="step-btn bwout" onclick="doStep('bwout')" id="btnStepBWOut"
+          onmouseenter="showTT(event,'◉ Deltas anzeigen','Zeigt die Gradienten (Deltas) aller Neuronen nach dem Backward Pass auf dem Canvas an.',null)" onmouseleave="hideTT()">◉ Deltas</button>
+        <button class="step-btn wu" onclick="doStep('wu')" id="btnStepWU"
+          onmouseenter="showTT(event,'⟳ Weight Update','Aktualisiert alle Gewichte anhand der berechneten Gradienten und der konfigurierten Lernrate. Schließt einen vollständigen Trainingsschritt ab.',null)" onmouseleave="hideTT()">⟳ Update</button>
+        <button class="step-btn all" onclick="doStepAll()" id="btnStepAll"
+          onmouseenter="showTT(event,'▶▶ Alle 5 Schritte','Führt Forward, Ausgaben, Backward, Deltas und Weight Update in einem Klick aus — ein kompletter Trainingsschritt für das aktuelle Sample.',null)" onmouseleave="hideTT()">▶▶ Alle 5</button>
+        <button class="step-btn" onclick="doStepEpoch()" id="btnStepEpoch" style="border-color:#00d4ff;color:#00d4ff"
+          onmouseenter="showTT(event,'↻ Epoche','Trainiert eine komplette Epoche (alle Trainingsbeispiele einmal) im Einzelschritt-Modus ohne Animation.',null)" onmouseleave="hideTT()">↻ Epoche</button>
+        <button class="tbl-btn" onclick="resetWeights();_stepEpoch=0;_stepSampleI=0;stepPhaseData=null;updateStepInfo()" style="font-size:9px"
+          onmouseenter="showTT(event,'↺ Reset','Setzt Gewichte, Epochenzähler und Schritt-Status zurück.',null)" onmouseleave="hideTT()">↺ Reset</button>
       </div>
 
       <!-- Step info panels: 3 columns -->
@@ -2713,28 +2828,28 @@ header h1 span{color:var(--text-dim);font-weight:400;}
 
     <!-- ── Anim speed (always visible) ── -->
     <div style="display:flex;align-items:center;gap:8px;font-size:9px;color:#64748b;padding:4px 0;border-top:1px solid #141820">
-      <span>⚡ Anim-Speed</span>
+      <span onmouseenter="showTT(event,'Animationsgeschwindigkeit','Wie schnell die Signalpakete auf dem Canvas animiert werden. 1 = sehr langsam (jeder Schritt gut sichtbar), 10 = sehr schnell.',null)" onmouseleave="hideTT()">⚡ Anim-Speed</span>
       <input type="range" id="hpAnimSpeed" min="1" max="10" value="7" style="flex:1;accent-color:#a78bfa;height:4px">
       <span id="animSpeedLabel" style="color:#a78bfa;min-width:24px">7</span>
-      <span style="margin-left:4px">Zeige Anim</span>
+      <span style="margin-left:4px" onmouseenter="showTT(event,'Backprop-Animation anzeigen','Zeigt die Rückwärtspropagation als orangene Pfeil-Animation auf dem Canvas. Deaktivieren für maximale Trainingsgeschwindigkeit.',null)" onmouseleave="hideTT()">Zeige Anim</span>
       <input type="checkbox" id="hpShowBP" checked style="accent-color:#a78bfa">
     </div>
 
     <!-- ── Charts 2×2 ── -->
     <div class="charts-wrap" id="chartsWrap">
-      <div class="chart-box">
+      <div class="chart-box" onmouseenter="showTT(event,'Loss-Kurve','Zeigt den Fehler (Loss) über alle Epochen. Sollte kontinuierlich sinken. Plateaus zeigen Lernstagnation, starke Schwankungen zu hohe Lernrate.',null)" onmouseleave="hideTT()">
         <div class="chart-title"><span style="color:#a78bfa">▮</span> Loss</div>
         <canvas class="chart-canvas" id="chartLoss"></canvas>
       </div>
-      <div class="chart-box">
+      <div class="chart-box" onmouseenter="showTT(event,'Accuracy-Kurve','Trefferquote in Prozent über alle Epochen. 100% = alle Trainingsbeispiele korrekt klassifiziert. Bei Regression nicht aussagekräftig.',null)" onmouseleave="hideTT()">
         <div class="chart-title"><span style="color:#10b981">▮</span> Accuracy %</div>
         <canvas class="chart-canvas" id="chartAcc"></canvas>
       </div>
-      <div class="chart-box">
+      <div class="chart-box" onmouseenter="showTT(event,'Gradienten-Norm ‖∇‖','Länge des Gradienten-Vektors über alle Gewichte. Sehr klein = verschwindende Gradienten. Sehr groß = explodierende Gradienten → Gradient Clipping aktivieren.',null)" onmouseleave="hideTT()">
         <div class="chart-title"><span style="color:#f59e0b">▮</span> Grad-Norm</div>
         <canvas class="chart-canvas" id="chartGrad"></canvas>
       </div>
-      <div class="chart-box">
+      <div class="chart-box" onmouseenter="showTT(event,'Lernraten-Verlauf','Zeigt wie die Lernrate sich über Epochen verändert. Bei aktivem Scheduler sinkt sie automatisch. Konstant = kein Scheduler aktiv.',null)" onmouseleave="hideTT()">
         <div class="chart-title"><span style="color:#00d4ff">▮</span> Lernrate</div>
         <canvas class="chart-canvas" id="chartLR"></canvas>
       </div>
@@ -12113,16 +12228,26 @@ const CNN = {
 
 // ─── Presets ──────────────────────────────────────────────────────
 const CNN_PRESETS = [
-  {name:'Identität',     k:[[0,0,0],[0,1,0],[0,0,0]], div:1, bias:0},
-  {name:'Box-Blur',      k:[[1,1,1],[1,1,1],[1,1,1]], div:9, bias:0},
-  {name:'Gauß',          k:[[1,2,1],[2,4,2],[1,2,1]], div:16,bias:0},
-  {name:'Schärfen',      k:[[0,-1,0],[-1,5,-1],[0,-1,0]], div:1, bias:0},
-  {name:'Sobel-X',       k:[[-1,0,1],[-2,0,2],[-1,0,1]], div:1, bias:128},
-  {name:'Sobel-Y',       k:[[-1,-2,-1],[0,0,0],[1,2,1]], div:1, bias:128},
-  {name:'Laplace',       k:[[0,-1,0],[-1,4,-1],[0,-1,0]], div:1, bias:128},
-  {name:'Emboss',        k:[[-2,-1,0],[-1,1,1],[0,1,2]], div:1, bias:128},
-  {name:'Verschiebung',  k:[[0,1,0],[0,0,0],[0,0,0]], div:1, bias:0},
-  {name:'Kantenschärfe', k:[[-1,-1,-1],[-1,9,-1],[-1,-1,-1]], div:1, bias:0},
+  {name:'Identität',     k:[[0,0,0],[0,1,0],[0,0,0]], div:1, bias:0,
+   tip:'Gibt das Eingabebild unverändert aus. Nur der mittlere Kernelwert = 1, alle anderen = 0. Ideal als Referenz.'},
+  {name:'Box-Blur',      k:[[1,1,1],[1,1,1],[1,1,1]], div:9, bias:0,
+   tip:'Gleichmäßige Unschärfe: Mittelwert aller 9 Nachbarpixel. Alle Kernelwerte = 1, Divisor = 9. Reduziert Rauschen, glättet Details.'},
+  {name:'Gauß',          k:[[1,2,1],[2,4,2],[1,2,1]], div:16,bias:0,
+   tip:'Glockenförmige Gewichtung: Zentrum stärker als Ränder. Natürlichere Weichzeichnung als Box-Blur. Standard in der Bildverarbeitung.'},
+  {name:'Schärfen',      k:[[0,-1,0],[-1,5,-1],[0,-1,0]], div:1, bias:0,
+   tip:'Hebt das Zentrum hervor und subtrahiert Nachbarn. Erhöht lokalen Kontrast. Kanten werden deutlicher, Rauschen wird verstärkt.'},
+  {name:'Sobel-X',       k:[[-1,0,1],[-2,0,2],[-1,0,1]], div:1, bias:128,
+   tip:'Ost-West-Gradient: erkennt vertikale Kanten (links→rechts Helligkeitswechsel). Bias +128 macht negative Werte sichtbar (Grau = kein Gradient).'},
+  {name:'Sobel-Y',       k:[[-1,-2,-1],[0,0,0],[1,2,1]], div:1, bias:128,
+   tip:'Nord-Süd-Gradient: erkennt horizontale Kanten (oben→unten Helligkeitswechsel). Bias +128 macht negative Werte sichtbar.'},
+  {name:'Laplace',       k:[[0,-1,0],[-1,4,-1],[0,-1,0]], div:1, bias:128,
+   tip:'Richtungsunabhängige Kantenerkennung: findet alle Kanten gleichzeitig. Empfindlicher als Sobel. Bias +128 für Sichtbarkeit.'},
+  {name:'Emboss',        k:[[-2,-1,0],[-1,1,1],[0,1,2]], div:1, bias:128,
+   tip:'Relief-Effekt (Prägung): Kanten erscheinen als 3D-Erhebungen auf grauem Hintergrund. Diagonaler Gradient von links-oben nach rechts-unten.'},
+  {name:'Verschiebung',  k:[[0,1,0],[0,0,0],[0,0,0]], div:1, bias:0,
+   tip:'Kopiert den Pixel direkt oberhalb ins Zentrum — das Bild verschiebt sich optisch eine Zeile nach unten. Zeigt wie Kernelposition die Ausgabe bestimmt.'},
+  {name:'Kantenschärfe', k:[[-1,-1,-1],[-1,9,-1],[-1,-1,-1]], div:1, bias:0,
+   tip:'Aggressivere Schärfung: alle 8 Nachbarn werden subtrahiert, Zentrum ×9. Stärkerer Effekt als Schärfen. Kann bei Fotos Artefakte erzeugen.'},
 ];
 
 // ─── Sample images ────────────────────────────────────────────────
@@ -12181,18 +12306,25 @@ window.toggleCNN=function(){
 };
 window.closeCNN=function(){
   cnnStopRun();
+  cnnPoolStopRun();
   cancelAllRAF();
   document.getElementById('cnnOverlay').classList.remove('open');
 };
 
 // ─── Animation mode builder ────────────────────────────────────────
 const ANIM_MODES=[
-  {id:'sliding',  label:'⬜ Sliding Window',  desc:'Kernel gleitet Pixel für Pixel über das Bild'},
-  {id:'lines',    label:'↗ Verbindungslinien',desc:'9 gewichtete Leitungen animiert von Pixel zu Kernel'},
-  {id:'lift3d',   label:'◈ 3D-Lift',          desc:'3×3-Patch hebt sich perspektivisch aus dem Bild'},
-  {id:'wave',     label:'◎ Wellen',            desc:'Konzentrischer Wellenpuls vom Ausgabepixel'},
-  {id:'histogram',label:'▦ Histogramm',        desc:'Live-Verteilung der berechneten Ausgabewerte'},
-  {id:'stack',    label:'⊞ Filter-Stapel',     desc:'Alle 10 Kernel gleichzeitig – Feature-Maps vergleichen'},
+  {id:'sliding',   label:'⬜ Sliding Window',   desc:'Kernel gleitet Pixel für Pixel über das Bild',
+   tip:'Ein oranges Rechteck gleitet Pixel für Pixel (Zeile für Zeile) über das Eingabebild. Jeder neu berechnete Ausgabepixel leuchtet kurz auf.\n→ Standard-Modus — ideal zum Verstehen des Faltungsprinzips.'},
+  {id:'lines',     label:'↗ Verbindungslinien', desc:'9 gewichtete Leitungen animiert von Pixel zu Kernel',
+   tip:'9 animierte gestrichelte Linien verbinden die 9 Eingabepixel mit den Kernel-Zellen. An jeder Linie wird der Wert pv×kv=Produkt eingeblendet.\n→ Ideal zum Verstehen der elementweisen Multiplikation.'},
+  {id:'lift3d',    label:'◈ 3D-Lift',           desc:'3×3-Patch hebt sich perspektivisch aus dem Bild',
+   tip:'Der aktive 3×3-Patch hebt sich perspektivisch aus dem Eingabebild heraus. Die Kernelgewichte werden direkt auf die Patch-Pixel eingeblendet.\n→ Ideal zum Verstehen der lokalen Struktur des Receptive Field.'},
+  {id:'wave',      label:'◎ Wellen',             desc:'Konzentrischer Wellenpuls vom Ausgabepixel',
+   tip:'Jeder berechnete Ausgabepixel erzeugt zwei konzentrische Wellenpulse (cyan + orange) die sich radial ausbreiten.\n→ Intuitiv sichtbar wie Informationen sich durch die Feature Map verbreiten.'},
+  {id:'histogram', label:'▦ Histogramm',         desc:'Live-Verteilung der berechneten Ausgabewerte',
+   tip:'Unterhalb des Ausgabebilds wächst ein Live-Balkendiagramm (32 Bins, 0–255). Zeigt die Helligkeitsverteilung der bisher berechneten Pixel.\n→ Ideal zum Vergleichen wie unterschiedliche Kernel die Wertverteilung verändern.'},
+  {id:'stack',     label:'⊞ Filter-Stapel',      desc:'Alle 10 Kernel gleichzeitig – Feature-Maps vergleichen',
+   tip:'Alle 10 Kernel-Presets werden gleichzeitig auf das Eingabebild angewendet. Die 10 Feature-Maps erscheinen als Grid nebeneinander.\n→ Ideal um alle Filter auf einen Blick zu vergleichen. Klick auf eine Karte wechselt zu diesem Kernel.'},
 ];
 
 function buildAnimModeButtons(){
@@ -12202,7 +12334,9 @@ function buildAnimModeButtons(){
   ANIM_MODES.forEach(m=>{
     const b=document.createElement('button');
     b.className='cnn-anim-mode-btn'+(m.id==='sliding'?' active':'');
-    b.textContent=m.label; b.title=m.desc;
+    b.textContent=m.label;
+    b.onmouseenter=(e)=>showTT(e, m.label.replace(/^[^ ]+ /,''), m.tip, null);
+    b.onmouseleave=()=>hideTT();
     b.onclick=()=>{
       row.querySelectorAll('.cnn-anim-mode-btn').forEach(x=>x.classList.remove('active'));
       b.classList.add('active');
@@ -12324,6 +12458,8 @@ function buildPresetButtons(){
   CNN_PRESETS.forEach((p,i)=>{
     const b=document.createElement('button');
     b.className='cnn-preset-btn'+(i===0?' active':'');b.textContent=p.name;
+    b.onmouseenter=(e)=>showTT(e, p.name, p.tip, null);
+    b.onmouseleave=()=>hideTT();
     b.onclick=()=>{applyPreset(i);row.querySelectorAll('.cnn-preset-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');};
     row.appendChild(b);
   });
@@ -12804,6 +12940,436 @@ window.cnnDownloadOutput=function(){
   const a=document.createElement('a');a.download='cnn_output.png';a.href=cv.toDataURL();a.click();
 };
 
+// ══════════════════════════════════════════════════════════════════
+// TAB SWITCHER
+// ══════════════════════════════════════════════════════════════════
+window.cnnSwitchTab=function(tab){
+  const convPane=document.getElementById('cnnConvPane');
+  const poolPane=document.getElementById('cnnPoolPane');
+  const tabConv=document.getElementById('cnnTabConv');
+  const tabPool=document.getElementById('cnnTabPool');
+  const hdrTag=document.getElementById('cnnHdrTag');
+  const animLegend=document.getElementById('cnnAnimModeLegend');
+  if(tab==='conv'){
+    convPane.style.display='flex';
+    poolPane.style.display='none';
+    tabConv.classList.add('active');
+    tabPool.classList.remove('active');
+    if(hdrTag)hdrTag.textContent='Convolution · 6 Animationsmodi';
+    if(animLegend)animLegend.style.display='';
+    setTimeout(()=>{cnnSizeCanvases();cnnRedrawIn();cnnRedrawOut();},10);
+  }else{
+    cnnStopRun();
+    convPane.style.display='none';
+    poolPane.style.display='flex';
+    tabConv.classList.remove('active');
+    tabPool.classList.add('active');
+    if(hdrTag)hdrTag.textContent='Pooling · Max · Avg · Min';
+    if(animLegend)animLegend.style.display='none';
+    setTimeout(()=>{
+      if(!POOL.outputPixels){cnnPoolInit();}
+      else{cnnPoolSizeCanvases();cnnPoolRedrawIn();cnnPoolRedrawOut();}
+    },10);
+  }
+};
+
+// ══════════════════════════════════════════════════════════════════
+// MAX POOLING SIMULATION
+// ══════════════════════════════════════════════════════════════════
+const POOL={
+  running:false, timer:null,
+  type:'max',   // 'max' | 'avg' | 'min'
+  size:2, stride:1,
+  curOutR:0, curOutC:0,
+  outW:0, outH:0,
+  outputPixels:null,
+  inDispScale:8, outDispScale:8,
+  speed:4,
+  // eigene Bilddaten (unabhängig vom Faltungs-Tab)
+  imgW:8, imgH:8,
+  inputPixels:null,
+  colorPixels:null,
+  currentSampleIdx:0,
+};
+
+// ─── Eigene Beispielbilder für Pooling (skalierbar) ────────────────
+function cnnPoolMakeSample(idx){
+  const W=POOL.imgW,H=POOL.imgH,px=new Uint8Array(W*H);
+  const set=(x,y,v)=>{if(x>=0&&x<W&&y>=0&&y<H)px[y*W+x]=Math.max(0,Math.min(255,v));};
+  if(idx===0){// Schachbrett
+    for(let y=0;y<H;y++)for(let x=0;x<W;x++)set(x,y,((Math.floor(x*4/W))+(Math.floor(y*4/H)))%2===0?220:30);
+  }else if(idx===1){// Kreis
+    const cx=W/2,cy=H/2,r=Math.min(W,H)/2-1;
+    for(let y=0;y<H;y++)for(let x=0;x<W;x++){const d=Math.sqrt((x-cx+.5)**2+(y-cy+.5)**2);set(x,y,d<r?(d<r-1?210:255):15);}
+  }else if(idx===2){// Diagonale
+    for(let y=0;y<H;y++)for(let x=0;x<W;x++)set(x,y,(x+y)%Math.max(2,Math.floor((W+H)/6))<Math.max(1,Math.floor((W+H)/12))?220:40);
+  }else if(idx===3){// Streifen
+    for(let y=0;y<H;y++)for(let x=0;x<W;x++)set(x,y,Math.floor(y*4/H)%2===0?230:30);
+  }else if(idx===4){// Buchstabe A
+    const cols=8,rows=8,sc=Math.max(1,Math.floor(Math.min(W,H)/8));
+    const A=["00111100","01000010","10000001","11111111","10000001","10000001","10000001","00000000"];
+    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+      const v=A[r]?.[c]==='1'?230:20;
+      for(let dy=0;dy<sc;dy++)for(let dx=0;dx<sc;dx++)set(c*sc+dx,r*sc+dy,v);
+    }
+  }else if(idx===5){// Kante (links hell, rechts dunkel)
+    for(let y=0;y<H;y++)for(let x=0;x<W;x++)set(x,y,x<Math.round(W/2)?220:25);
+  }else{// Gradient
+    for(let y=0;y<H;y++)for(let x=0;x<W;x++)set(x,y,Math.round(255*x/Math.max(W-1,1)));
+  }
+  return px;
+}
+
+window.cnnPoolSelectSample=function(idx,btn){
+  document.querySelectorAll('.pool-img-tab').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  POOL.currentSampleIdx=idx;
+  POOL.colorPixels=null;
+  POOL.inputPixels=cnnPoolMakeSample(idx);
+  cnnPoolReset();cnnPoolSizeCanvases();cnnPoolRedrawIn();
+};
+
+window.cnnPoolSetImgSize=function(size){
+  POOL.imgW=size;POOL.imgH=size;
+  if(POOL.colorPixels){
+    // Foto: neu skalieren vom Original
+    const img=POOL._srcImage;
+    if(img){
+      const oc=document.createElement('canvas');oc.width=size;oc.height=size;
+      const ox=oc.getContext('2d');ox.imageSmoothingEnabled=true;ox.imageSmoothingQuality='high';
+      ox.drawImage(img,0,0,size,size);
+      const id=ox.getImageData(0,0,size,size);
+      POOL.colorPixels=new Uint8ClampedArray(id.data);
+      POOL.inputPixels=new Uint8Array(size*size);
+      for(let i=0;i<size*size;i++){
+        const r=id.data[i*4],g=id.data[i*4+1],b=id.data[i*4+2];
+        POOL.inputPixels[i]=Math.round(0.299*r+0.587*g+0.114*b);
+      }
+    }
+  }else{
+    POOL.inputPixels=cnnPoolMakeSample(POOL.currentSampleIdx);
+  }
+  cnnPoolReset();cnnPoolSizeCanvases();cnnPoolRedrawIn();
+};
+
+window.cnnPoolLoadImage=function(input){
+  const file=input.files[0];if(!file)return;
+  const img=new Image(),url=URL.createObjectURL(file);
+  img.onload=()=>{
+    URL.revokeObjectURL(url);
+    POOL._srcImage=img;
+    const sz=parseInt(document.getElementById('cnnPoolImgSize')?.value||'16')||16;
+    POOL.imgW=sz;POOL.imgH=sz;
+    const oc=document.createElement('canvas');oc.width=sz;oc.height=sz;
+    const ox=oc.getContext('2d');ox.imageSmoothingEnabled=true;ox.imageSmoothingQuality='high';
+    ox.drawImage(img,0,0,sz,sz);
+    const id=ox.getImageData(0,0,sz,sz);
+    POOL.colorPixels=new Uint8ClampedArray(id.data);
+    POOL.inputPixels=new Uint8Array(sz*sz);
+    for(let i=0;i<sz*sz;i++){
+      const r=id.data[i*4],g=id.data[i*4+1],b=id.data[i*4+2];
+      POOL.inputPixels[i]=Math.round(0.299*r+0.587*g+0.114*b);
+    }
+    document.querySelectorAll('.pool-img-tab').forEach(b=>b.classList.remove('active'));
+    cnnPoolReset();cnnPoolSizeCanvases();cnnPoolRedrawIn();
+    input.value='';
+  };img.src=url;
+};
+
+function cnnPoolComputeOutSize(){
+  const W=POOL.imgW,H=POOL.imgH,P=POOL.size,S=POOL.stride;
+  POOL.outW=Math.max(1,Math.floor((W-P)/S)+1);
+  POOL.outH=Math.max(1,Math.floor((H-P)/S)+1);
+}
+function cnnPoolSizeCanvases(){
+  cnnPoolComputeOutSize();
+  const W=POOL.imgW,H=POOL.imgH;
+  const inWrap=document.getElementById('cnnPoolInWrap');
+  if(!inWrap)return;
+  const avail=Math.min(inWrap.clientWidth-20,inWrap.clientHeight-20);
+  POOL.inDispScale=Math.max(3,Math.floor(avail/Math.max(W,H,1)));
+  const inCv=document.getElementById('cnnPoolInCanvas');
+  if(inCv){inCv.width=W*POOL.inDispScale;inCv.height=H*POOL.inDispScale;}
+  const outWrap=document.getElementById('cnnPoolOutWrap');
+  const outAvail=outWrap?Math.min(outWrap.clientWidth-20,outWrap.clientHeight-20):200;
+  POOL.outDispScale=Math.max(4,Math.floor(outAvail/Math.max(POOL.outW,POOL.outH,1)));
+  const outCv=document.getElementById('cnnPoolOutCanvas');
+  if(outCv){outCv.width=POOL.outW*POOL.outDispScale;outCv.height=POOL.outH*POOL.outDispScale;}
+  cnnPoolUpdateSizeInfo();
+}
+function cnnPoolRedrawIn(highlightOutR,highlightOutC){
+  const cv=document.getElementById('cnnPoolInCanvas');if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const W=POOL.imgW,H=POOL.imgH,S=POOL.inDispScale;
+  ctx.clearRect(0,0,cv.width,cv.height);
+  // Draw image
+  if(POOL.colorPixels){
+    const oc=document.createElement('canvas');oc.width=W;oc.height=H;
+    oc.getContext('2d').putImageData(new ImageData(POOL.colorPixels,W,H),0,0);
+    ctx.imageSmoothingEnabled=false;ctx.drawImage(oc,0,0,W*S,H*S);
+  }else{
+    if(!POOL.inputPixels)return;
+    for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+      const v=POOL.inputPixels[y*W+x];ctx.fillStyle=`rgb(${v},${v},${v})`;ctx.fillRect(x*S,y*S,S,S);
+    }
+  }
+  // Pixelwerte immer anzeigen wenn Zoom groß genug
+  const showVals=document.getElementById('cnnPoolShowVals')?.checked;
+  if((showVals||S>=18)&&S>=10&&POOL.inputPixels){
+    ctx.font=`bold ${Math.min(S-4,11)}px JetBrains Mono`;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+      const v=POOL.inputPixels[y*W+x];
+      ctx.fillStyle=v>140?'rgba(0,0,0,0.75)':'rgba(255,255,255,0.75)';
+      ctx.fillText(v,x*S+S/2,y*S+S/2);
+    }
+  }
+  // Grid
+  ctx.strokeStyle='#ffffff28';ctx.lineWidth=1;
+  for(let x=0;x<=W;x++){ctx.beginPath();ctx.moveTo(x*S,0);ctx.lineTo(x*S,H*S);ctx.stroke();}
+  for(let y=0;y<=H;y++){ctx.beginPath();ctx.moveTo(0,y*S);ctx.lineTo(W*S,y*S);ctx.stroke();}
+  // Highlight pool window
+  if(highlightOutR!==undefined){
+    const P=POOL.size,ST=POOL.stride;
+    const sx=highlightOutC*ST,sy=highlightOutR*ST;
+    ctx.fillStyle='rgba(167,139,250,0.15)';ctx.fillRect(sx*S,sy*S,P*S,P*S);
+    ctx.strokeStyle='#a78bfa';ctx.lineWidth=2;ctx.strokeRect(sx*S,sy*S,P*S,P*S);
+  }
+}
+function cnnPoolRedrawOut(){
+  const cv=document.getElementById('cnnPoolOutCanvas');if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const oW=POOL.outW,oH=POOL.outH,S=POOL.outDispScale;
+  ctx.clearRect(0,0,cv.width,cv.height);
+  if(!POOL.outputPixels)return;
+  for(let y=0;y<oH;y++)for(let x=0;x<oW;x++){
+    const v=POOL.outputPixels[y*oW+x];
+    ctx.fillStyle=`rgb(${v},${v},${v})`;ctx.fillRect(x*S,y*S,S,S);
+  }
+  // Ausgabewerte einblenden wenn groß genug
+  const S2=POOL.outDispScale;
+  if(S2>=14){
+    ctx.font=`bold ${Math.min(S2-4,11)}px JetBrains Mono`;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    for(let y=0;y<oH;y++)for(let x=0;x<oW;x++){
+      const v=POOL.outputPixels[y*oW+x];
+      ctx.fillStyle=v>140?'rgba(0,0,0,0.75)':'rgba(255,255,255,0.75)';
+      ctx.fillText(v,x*S2+S2/2,y*S2+S2/2);
+    }
+  }
+  ctx.strokeStyle='#ffffff28';ctx.lineWidth=1;
+  for(let x=0;x<=oW;x++){ctx.beginPath();ctx.moveTo(x*S,0);ctx.lineTo(x*S,oH*S);ctx.stroke();}
+  for(let y=0;y<=oH;y++){ctx.beginPath();ctx.moveTo(0,y*S);ctx.lineTo(oW*S,y*S);ctx.stroke();}
+}
+function cnnPoolInit(){
+  if(!POOL.inputPixels)POOL.inputPixels=cnnPoolMakeSample(0);
+  cnnPoolComputeOutSize();
+  POOL.outputPixels=new Uint8Array(POOL.outW*POOL.outH).fill(0);
+  POOL.curOutR=0;POOL.curOutC=0;
+  cnnPoolSizeCanvases();
+  cnnPoolRedrawIn();
+  cnnPoolRedrawOut();
+  cnnPoolUpdateCalcBox(null,null,-1);
+  cnnPoolUpdateStatus(0,0);
+  cnnPoolUpdateSizeInfo();
+}
+function cnnPoolGetRegion(outR,outC){
+  const W=POOL.imgW,H=POOL.imgH,P=POOL.size,ST=POOL.stride;
+  const sx=outC*ST,sy=outR*ST;
+  const vals=[];
+  for(let dy=0;dy<P;dy++)for(let dx=0;dx<P;dx++){
+    const px=sx+dx,py=sy+dy;
+    if(px>=0&&px<W&&py>=0&&py<H)
+      vals.push({x:px,y:py,v:POOL.inputPixels[py*W+px]});
+  }
+  return vals;
+}
+function cnnPoolCompute(outR,outC){
+  const vals=cnnPoolGetRegion(outR,outC);
+  if(!vals.length)return{result:0,vals,winnerIdx:-1};
+  let result,winnerIdx=-1;
+  if(POOL.type==='max'){
+    result=vals[0].v;winnerIdx=0;
+    vals.forEach((v,i)=>{if(v.v>result){result=v.v;winnerIdx=i;}});
+  }else if(POOL.type==='avg'){
+    result=Math.round(vals.reduce((s,v)=>s+v.v,0)/vals.length);
+  }else{
+    result=vals[0].v;winnerIdx=0;
+    vals.forEach((v,i)=>{if(v.v<result){result=v.v;winnerIdx=i;}});
+  }
+  return{result,vals,winnerIdx};
+}
+function cnnPoolAnimStep(outR,outC,vals,result,winnerIdx){
+  const S=POOL.inDispScale,P=POOL.size,ST=POOL.stride;
+  const sx=outC*ST,sy=outR*ST;
+  cnnPoolRedrawIn(outR,outC);
+  const cv=document.getElementById('cnnPoolInCanvas');if(!cv)return;
+  const ctx=cv.getContext('2d');
+  // Per-pixel highlight im Fenster (Max/Min-Gewinner gesondert)
+  vals.forEach((pix,i)=>{
+    const isWinner=(i===winnerIdx&&POOL.type!=='avg');
+    if(isWinner){
+      ctx.fillStyle='rgba(245,158,11,0.55)';
+      ctx.fillRect(pix.x*S,pix.y*S,S,S);
+      ctx.strokeStyle='#f59e0b';ctx.lineWidth=2;
+      ctx.strokeRect(pix.x*S+1,pix.y*S+1,S-2,S-2);
+    }
+    // Wert im Fenster hervorheben
+    if(S>=8&&POOL.inputPixels){
+      const pv=POOL.inputPixels[pix.y*POOL.imgW+pix.x]??0;
+      ctx.font=`bold ${Math.min(S-3,11)}px JetBrains Mono`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillStyle=isWinner?'#f59e0b':'#a78bfa';
+      ctx.fillText(pv,pix.x*S+S/2,pix.y*S+S/2);
+    }
+  });
+  // Overlay border
+  const ov=document.getElementById('cnnPoolInOverlay');
+  if(ov){
+    const inWrap=document.getElementById('cnnPoolInWrap');
+    const cvRect=cv.getBoundingClientRect();
+    const wRect=inWrap.getBoundingClientRect();
+    ov.style.display='block';
+    ov.style.width=P*S+'px';ov.style.height=P*S+'px';
+    ov.style.left=(cvRect.left-wRect.left+sx*S)+'px';
+    ov.style.top=(cvRect.top-wRect.top+sy*S)+'px';
+  }
+  // Write output pixel + flash
+  const oS=POOL.outDispScale;
+  POOL.outputPixels[outR*POOL.outW+outC]=result;
+  const outCv=document.getElementById('cnnPoolOutCanvas');
+  if(outCv){
+    const octx=outCv.getContext('2d');
+    octx.fillStyle=`rgb(${result},${result},${result})`;
+    octx.fillRect(outC*oS,outR*oS,oS,oS);
+    octx.fillStyle='rgba(167,139,250,0.45)';
+    octx.fillRect(outC*oS,outR*oS,oS,oS);
+    setTimeout(()=>{ const v=POOL.outputPixels[outR*POOL.outW+outC];
+      if(!outCv.getContext)return;
+      cnnPoolRedrawOut();
+    },130);
+  }
+}
+function cnnPoolUpdateCalcBox(vals,result,winnerIdx){
+  const box=document.getElementById('cnnPoolCalcBox');if(!box)return;
+  if(!vals){box.innerHTML='Modus wählen und ▶ Start drücken …';return;}
+  const P=POOL.size;
+  const typeLabel={max:'Maximum',avg:'Durchschnitt',min:'Minimum'}[POOL.type];
+  let cells='';
+  vals.forEach((pix,i)=>{
+    const isW=(i===winnerIdx&&POOL.type!=='avg');
+    cells+=`<span class="${isW?'pv-max':'pv-norm'}">${pix.v}</span>`;
+  });
+  const total=P*P;
+  for(let i=vals.length;i<total;i++)cells+=`<span class="pv-norm">–</span>`;
+  box.innerHTML=
+    `<div style="display:grid;grid-template-columns:repeat(${P},1fr);gap:2px 6px;margin-bottom:6px">${cells}</div>`+
+    `<div style="color:#94a3b8;border-top:1px solid #1a1e2a;padding-top:4px">`+
+    `${typeLabel}(<span class="pv-norm">${vals.map(v=>v.v).join(', ')}</span>) = <span class="pres">${result??'–'}</span></div>`;
+}
+function cnnPoolUpdateStatus(outR,outC){
+  const el=document.getElementById('cnnPoolStatus');if(!el)return;
+  const total=POOL.outW*POOL.outH;
+  const done=outR*POOL.outW+outC;
+  el.textContent=`(${outC},${outR}) | ${Math.min(100,Math.round(done/total*100))}%`;
+}
+function cnnPoolUpdateSizeInfo(){
+  const el=document.getElementById('cnnPoolSizeInfo');if(!el)return;
+  const ratio=((POOL.outW*POOL.outH)/(Math.max(1,POOL.imgW*POOL.imgH))*100).toFixed(1);
+  el.textContent=`Eingabe ${POOL.imgW}×${POOL.imgH} → Ausgabe ${POOL.outW}×${POOL.outH}  (${ratio}% der Pixel)  ·  P=${POOL.size}  S=${POOL.stride}`;
+}
+window.cnnPoolSetType=function(type,btn){
+  POOL.type=type;
+  document.querySelectorAll('.cnn-pool-type-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  cnnPoolReset();
+};
+window.cnnPoolSetSize=function(size,btn){
+  POOL.size=size;
+  document.querySelectorAll('.cnn-pool-size-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  // update S=P button label
+  const spBtn=document.getElementById('poolStrideP');
+  if(spBtn)spBtn.textContent=`S=${size}`;
+  // if current stride > size, clamp
+  if(POOL.stride>size){POOL.stride=size;_poolUpdateStrideBtnActive(size);}
+  cnnPoolReset();cnnPoolSizeCanvases();cnnPoolRedrawIn();
+};
+window.cnnPoolSetStride=function(stride,btn){
+  POOL.stride=stride;
+  _poolUpdateStrideBtnActive(stride);
+  cnnPoolReset();cnnPoolSizeCanvases();cnnPoolRedrawIn();
+};
+window.cnnPoolSetStridePool=function(btn){
+  POOL.stride=POOL.size;
+  _poolUpdateStrideBtnActive(POOL.size);
+  cnnPoolReset();cnnPoolSizeCanvases();cnnPoolRedrawIn();
+};
+function _poolUpdateStrideBtnActive(stride){
+  document.querySelectorAll('.cnn-pool-stride-btn').forEach(b=>b.classList.remove('active'));
+  const map={1:'poolStride1',2:'poolStride2',3:'poolStride3'};
+  const id=map[stride];
+  if(id&&stride!==POOL.size){document.getElementById(id)?.classList.add('active');}
+  else if(stride===POOL.size){document.getElementById('poolStrideP')?.classList.add('active');}
+  else{const el=document.getElementById(id);if(el)el.classList.add('active');}
+}
+function cnnPoolDoStep(){
+  const oW=POOL.outW,oH=POOL.outH;
+  let r=POOL.curOutR,c=POOL.curOutC;
+  if(c>=oW){c=0;r++;}
+  if(r>=oH){cnnPoolStopRun();cnnPoolUpdateStatus(oH,0);return false;}
+  const{result,vals,winnerIdx}=cnnPoolCompute(r,c);
+  cnnPoolAnimStep(r,c,vals,result,winnerIdx);
+  cnnPoolUpdateCalcBox(vals,result,winnerIdx);
+  cnnPoolUpdateStatus(r,c);
+  POOL.curOutC=c+1;POOL.curOutR=r;
+  if(POOL.curOutC>=oW){POOL.curOutC=0;POOL.curOutR=r+1;}
+  return true;
+}
+window.cnnPoolToggleRun=function(){
+  if(POOL.running){cnnPoolStopRun();return;}
+  const btn=document.getElementById('cnnPoolBtnRun');
+  POOL.running=true;if(btn){btn.textContent='■ Stop';btn.classList.add('run');}
+  _cnnPoolLoop();
+};
+function _cnnPoolLoop(){
+  if(!POOL.running)return;
+  if(!cnnPoolDoStep()){cnnPoolStopRun();return;}
+  POOL.timer=setTimeout(_cnnPoolLoop,Math.max(8,280/POOL.speed));
+}
+function cnnPoolStopRun(){
+  POOL.running=false;clearTimeout(POOL.timer);
+  const btn=document.getElementById('cnnPoolBtnRun');
+  if(btn){btn.textContent='▶ Start';btn.classList.remove('run');}
+}
+window.cnnPoolStep=function(){cnnPoolStopRun();cnnPoolDoStep();};
+window.cnnPoolReset=function(){
+  cnnPoolStopRun();
+  POOL.curOutR=0;POOL.curOutC=0;
+  cnnPoolComputeOutSize();
+  POOL.outputPixels=new Uint8Array(POOL.outW*POOL.outH).fill(0);
+  cnnPoolRedrawIn();cnnPoolRedrawOut();
+  const ov=document.getElementById('cnnPoolInOverlay');if(ov)ov.style.display='none';
+  cnnPoolUpdateCalcBox(null,null,-1);
+  cnnPoolUpdateStatus(0,0);
+  cnnPoolUpdateSizeInfo();
+};
+window.cnnPoolApplyFull=function(){
+  cnnPoolStopRun();
+  cnnPoolComputeOutSize();
+  POOL.outputPixels=new Uint8Array(POOL.outW*POOL.outH).fill(0);
+  for(let r=0;r<POOL.outH;r++)for(let c=0;c<POOL.outW;c++){
+    const{result}=cnnPoolCompute(r,c);POOL.outputPixels[r*POOL.outW+c]=result;
+  }
+  POOL.curOutR=POOL.outH;POOL.curOutC=0;
+  cnnPoolRedrawIn();cnnPoolRedrawOut();
+  const el=document.getElementById('cnnPoolStatus');if(el)el.textContent='Fertig! | 100%';
+};
+window.cnnPoolDownload=function(){
+  const cv=document.getElementById('cnnPoolOutCanvas');if(!cv)return;
+  const a=document.createElement('a');a.download='pool_output.png';a.href=cv.toDataURL();a.click();
+};
+
 // ─── Drag panel ───────────────────────────────────────────────────
 // ── CNN: Drag + Overlay-Click (lazy, nach DOM-Aufbau via toggleCNN) ──
 function _initCnnDrag(){
@@ -12864,11 +13430,20 @@ function _initCnnDrag(){
 <div id="cnnOverlay">
 <div id="cnnBox">
   <div id="cnnHdr">
-    <h3>⬛ CNN – Faltungsmatrizen Visualisierung</h3>
-    <span class="cnn-hdr-tag">Convolution · 6 Animationsmodi</span>
+    <h3>⬛ CNN – Faltung &amp; Pooling</h3>
+    <div class="cnn-tab-bar">
+      <button class="cnn-tab-btn active" id="cnnTabConv" onclick="cnnSwitchTab('conv')"
+        onmouseenter="showTT(event,'Faltung (Convolution)','Kernel gleitet über das Bild und erzeugt eine Feature Map. 6 Animationsmodi: Sliding Window, Verbindungslinien, 3D-Lift, Wellen, Histogramm, Filter-Stapel.',null)" onmouseleave="hideTT()">⬛ Faltung</button>
+      <button class="cnn-tab-btn" id="cnnTabPool" onclick="cnnSwitchTab('pool')"
+        onmouseenter="showTT(event,'Max Pooling','Reduziert die räumliche Auflösung der Feature Map. Ein Pooling-Fenster wählt den Maximalwert (oder Durchschnitt/Minimum) aus einem N×N-Bereich. Stride steuert die Schrittweite.',null)" onmouseleave="hideTT()">▦ Pooling</button>
+    </div>
+    <span class="cnn-hdr-tag" id="cnnHdrTag">Convolution · 6 Animationsmodi</span>
     <span id="cnnAnimModeLegend"></span>
     <button class="cnn-close-btn" onclick="closeCNN()" title="Schließen">✕</button>
   </div>
+
+  <!-- ══ TAB 1: FALTUNG ══ -->
+  <div id="cnnConvPane">
 
   <!-- Animation mode selector bar -->
   <div id="cnnAnimModeBar">
@@ -12926,21 +13501,23 @@ function _initCnnDrag(){
         2. Faltungskern <span>– Kernel-Editor</span>
       </div>
       <div id="cnnKernelArea">
-        <div class="cnn-section-lbl" style="border-top:none;margin-top:0;">Vorlagen</div>
+        <div class="cnn-section-lbl" style="border-top:none;margin-top:0;"
+          onmouseenter="showTT(event,'Kernel-Vorlagen','10 vordefinierte Filterkerne:\n• Identität: Bild unverändert\n• Box-Blur / Gauß: Weichzeichnung\n• Schärfen / Kantenschärfe: Kontrast erhöhen\n• Sobel-X/Y: Kantendetektion horizontal/vertikal\n• Laplace: allseitige Kantenerkennung\n• Emboss: Relief-Effekt\n• Verschiebung: Bild um 1 Pixel verschieben',null)" onmouseleave="hideTT()">Vorlagen</div>
         <div class="cnn-preset-row" id="cnnPresetRow"></div>
 
-        <div class="cnn-section-lbl">3×3 Kernel</div>
+        <div class="cnn-section-lbl"
+          onmouseenter="showTT(event,'3×3 Kernel-Matrix','Die 9 Gewichte des Faltungskerns. Jede Zelle multipliziert den entsprechenden Eingabepixel in der 3×3-Nachbarschaft. Werte direkt editierbar.',null)" onmouseleave="hideTT()">3×3 Kernel</div>
         <div class="cnn-kernel-grid" id="cnnKernelGrid"></div>
 
         <div class="cnn-section-lbl">Parameter</div>
         <div class="cnn-param-row">
-          <label>Divisor</label>
+          <label onmouseenter="showTT(event,'Divisor','Teilt die Summe der 9 Produkte. Bei Glättungsfiltern entspricht er der Summe aller Kernelgewichte um die Gesamthelligkeit zu erhalten.\nBox-Blur: 9 · Gauß: 16 · Hochpass: 1',null)" onmouseleave="hideTT()">Divisor</label>
           <input class="cnn-param-inp" id="cnnDivisorInp" type="number" value="1" step="1" min="1" onchange="cnnApplyKernel()">
-          <label style="margin-left:10px">Bias</label>
+          <label style="margin-left:10px" onmouseenter="showTT(event,'Bias','Konstanter Wert der nach der Division addiert wird. Bei Kantendetektoren +128, damit negative Werte sichtbar werden (Grau = 0, hell = positiv, dunkel = negativ).',null)" onmouseleave="hideTT()">Bias</label>
           <input class="cnn-param-inp" id="cnnBiasInp" type="number" value="0" step="1" onchange="cnnApplyKernel()">
         </div>
         <div class="cnn-param-row" style="margin-top:4px">
-          <label>Randbehandlung</label>
+          <label onmouseenter="showTT(event,'Randbehandlung','Was passiert wenn der Kernel über den Bildrand ragt?\n• Zero-Padding: fehlende Pixel = 0 (schwarz) — Standard in CNNs\n• Erweitern: Randpixel spiegeln — natürlichere Übergänge\n• Abschneiden: Randpixel ignorieren — Ausgabe 2px kleiner',null)" onmouseleave="hideTT()">Randbehandlung</label>
           <select class="cnn-param-sel" id="cnnPaddingSelect" onchange="cnnApplyKernel()">
             <option value="zero">Zero-Padding</option>
             <option value="extend">Erweitern (Spiegeln)</option>
@@ -12948,10 +13525,12 @@ function _initCnnDrag(){
           </select>
         </div>
 
-        <div class="cnn-section-lbl">Aktuelle Berechnung</div>
+        <div class="cnn-section-lbl"
+          onmouseenter="showTT(event,'Aktuelle Berechnung','Zeigt nach jedem Schritt die vollständige Rechenoperation: alle 9 Multiplikationen, deren Summe, Division durch Divisor und Addition des Bias.',null)" onmouseleave="hideTT()">Aktuelle Berechnung</div>
         <div id="cnnCalcBox">Modus wählen und ▶ Start drücken …</div>
 
-        <div class="cnn-section-lbl">Formel</div>
+        <div class="cnn-section-lbl"
+          onmouseenter="showTT(event,'Faltungsformel','P(x,y) = Σ [ I(x+i, y+j) × K(i,j) ] / Div + Bias\n\nFür jeden Ausgabepixel: 9 Eingabepixel × 9 Kernelgewichte, summieren, teilen, Bias addieren. Ergebnis wird auf 0–255 geclippt.',null)" onmouseleave="hideTT()">Formel</div>
         <div style="font-size:9px;color:#64748b;font-family:'JetBrains Mono',monospace;
           line-height:1.8;background:#06070e;border:1px solid #1a1e2a;border-radius:4px;padding:7px 8px;">
           P(x,y) = Σ [ I(x+i, y+j) × K(i,j) ] / Div + Bias
@@ -12966,7 +13545,8 @@ function _initCnnDrag(){
     <div class="cnn-col" id="cnnColOut">
       <div class="cnn-col-hdr" style="color:#00d4ff;">
         3. Ausgabebild <span id="cnnOutLabel">– Feature Map</span>
-        <button class="cnn-btn cyan" style="margin-left:auto;font-size:8px;padding:2px 8px;" onclick="cnnDownloadOutput()">⬇ PNG</button>
+        <button class="cnn-btn cyan" style="margin-left:auto;font-size:8px;padding:2px 8px;" onclick="cnnDownloadOutput()"
+          onmouseenter="showTT(event,'⬇ Ausgabebild speichern','Lädt die aktuelle Feature Map als PNG-Datei herunter.',null)" onmouseleave="hideTT()">⬇ PNG</button>
       </div>
       <!-- Standard output canvas -->
       <div class="cnn-canvas-wrap" id="cnnOutWrap">
@@ -12985,28 +13565,195 @@ function _initCnnDrag(){
 
   <!-- ── Footer ── -->
   <div id="cnnFooter">
-    <button class="cnn-btn green" id="cnnBtnRun" onclick="cnnToggleRun()">▶ Start</button>
-    <button class="cnn-btn" onclick="cnnStep()">⟶ Schritt</button>
-    <button class="cnn-btn" onclick="cnnReset()">↺ Reset</button>
-    <button class="cnn-btn cyan" onclick="cnnApplyFull()">⚡ Sofort</button>
+    <button class="cnn-btn green" id="cnnBtnRun" onclick="cnnToggleRun()"
+      onmouseenter="showTT(event,'▶ Start / ■ Stop','Startet die Animation — der Kernel gleitet Pixel für Pixel über das Bild und berechnet die Feature Map. Nochmals klicken hält die Animation an.',null)" onmouseleave="hideTT()">▶ Start</button>
+    <button class="cnn-btn" onclick="cnnStep()"
+      onmouseenter="showTT(event,'⟶ Einzelschritt','Berechnet und animiert genau einen Ausgabepixel. Ideal um die Faltungsoperation Schritt für Schritt zu verfolgen.',null)" onmouseleave="hideTT()">⟶ Schritt</button>
+    <button class="cnn-btn" onclick="cnnReset()"
+      onmouseenter="showTT(event,'↺ Reset','Leert das Ausgabebild, setzt den Cursor auf Position (0,0) zurück und löscht das Histogramm. Das Eingabebild bleibt erhalten.',null)" onmouseleave="hideTT()">↺ Reset</button>
+    <button class="cnn-btn cyan" onclick="cnnApplyFull()"
+      onmouseenter="showTT(event,'⚡ Sofort','Berechnet die gesamte Feature Map ohne Animation in einem Schritt. Auch für sehr große Bilder (256+ px) geeignet.',null)" onmouseleave="hideTT()">⚡ Sofort</button>
     <div class="sep" style="height:16px;background:#1a1e2a;margin:0 4px;"></div>
     <div class="cnn-speed-row">
-      <span>Geschw.</span>
+      <span onmouseenter="showTT(event,'Animationsgeschwindigkeit','Wie viele Pixel pro Sekunde berechnet werden. 1 = sehr langsam, 10 = sehr schnell. Bei Verbindungslinien und 3D-Lift automatisch gedrosselt.',null)" onmouseleave="hideTT()">Geschw.</span>
       <input type="range" id="cnnSpeedSlider" min="1" max="10" value="4" oninput="cnnUpdateSpeed()">
       <span id="cnnSpeedLbl">4</span>
     </div>
     <div class="sep" style="height:16px;background:#1a1e2a;margin:0 4px;"></div>
-    <label style="font-size:9px;color:#64748b;display:flex;align-items:center;gap:4px;cursor:pointer;">
+    <label style="font-size:9px;color:#64748b;display:flex;align-items:center;gap:4px;cursor:pointer;"
+      onmouseenter="showTT(event,'Pixel-Gitter','Zeigt Gitterlinien zwischen den Pixeln auf Eingangs- und Ausgangsbild. Hilfreich um einzelne Pixel zu identifizieren.',null)" onmouseleave="hideTT()">
       <input type="checkbox" id="cnnShowGrid" onchange="cnnRedrawIn()" style="accent-color:#f59e0b;"> Gitter
     </label>
-    <label style="font-size:9px;color:#64748b;display:flex;align-items:center;gap:4px;cursor:pointer;">
+    <label style="font-size:9px;color:#64748b;display:flex;align-items:center;gap:4px;cursor:pointer;"
+      onmouseenter="showTT(event,'Pixelwerte anzeigen','Blendet den numerischen Graustufenwert (0–255) in jeden Pixel des Eingangsbilds ein. Nur sichtbar wenn der Zoom groß genug ist.',null)" onmouseleave="hideTT()">
       <input type="checkbox" id="cnnShowVals" onchange="cnnRedrawIn()"> Werte
     </label>
-    <label style="font-size:9px;color:#64748b;display:flex;align-items:center;gap:4px;cursor:pointer;">
+    <label style="font-size:9px;color:#64748b;display:flex;align-items:center;gap:4px;cursor:pointer;"
+      onmouseenter="showTT(event,'Farbiger Output','Stellt die Ausgabepixel als Heatmap dar statt Graustufen: blau = 0, grün = Mitte, rot = 255. Macht Unterschiede in der Feature Map deutlicher sichtbar.',null)" onmouseleave="hideTT()">
       <input type="checkbox" id="cnnColorOutput" onchange="cnnRedrawOut()"> Farb-Output
     </label>
-    <div id="cnnStatus" style="font-size:9px;color:#475569;font-family:'JetBrains Mono',monospace;margin-left:auto;">(0,0) | 0%</div>
+    <div id="cnnStatus" style="font-size:9px;color:#475569;font-family:'JetBrains Mono',monospace;margin-left:auto;"
+      onmouseenter="showTT(event,'Position & Fortschritt','Aktuelle Kernel-Position (Spalte, Zeile) im Bild und prozentualer Fortschritt der Feature-Map-Berechnung.',null)" onmouseleave="hideTT()">(0,0) | 0%</div>
   </div>
+
+  </div><!-- #cnnConvPane -->
+
+  <!-- ══ TAB 2: MAX POOLING ══ -->
+  <div id="cnnPoolPane">
+
+    <!-- ── Pool Body: 3 columns ── -->
+    <div style="display:flex;flex:1;overflow:hidden;position:relative;">
+
+      <!-- Spalte 1: Eingabebild -->
+      <div class="cnn-col" style="flex:1.1;min-width:0;">
+        <div class="cnn-col-hdr" style="color:#10b981;">
+          1. Eingabebild <span>– Pixel-Matrix</span>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:5px;">
+            <select id="cnnPoolImgSize" class="cnn-param-sel" style="width:auto;padding:2px 5px;font-size:10px;"
+              title="Bildgröße — kleinere Bilder zeigen Zahlenwerte besser"
+              onchange="cnnPoolSetImgSize(parseInt(this.value))">
+              <option value="6">6×6</option>
+              <option value="8" selected>8×8</option>
+              <option value="10">10×10</option>
+              <option value="12">12×12</option>
+              <option value="16">16×16</option>
+              <option value="24">24×24</option>
+              <option value="32">32×32</option>
+            </select>
+            <label class="cnn-btn green" style="cursor:pointer;font-size:10px;padding:3px 9px;"
+              title="Eigenes Foto laden">
+              ⬆ Foto
+              <input type="file" accept="image/*" id="cnnPoolImgInput" style="display:none" onchange="cnnPoolLoadImage(this)">
+            </label>
+          </div>
+        </div>
+        <!-- Beispielbild-Tabs -->
+        <div class="cnn-img-tabs">
+          <button class="cnn-img-tab pool-img-tab active" onclick="cnnPoolSelectSample(0,this)">Schachbrett</button>
+          <button class="cnn-img-tab pool-img-tab" onclick="cnnPoolSelectSample(1,this)">Kreis</button>
+          <button class="cnn-img-tab pool-img-tab" onclick="cnnPoolSelectSample(2,this)">Diagonale</button>
+          <button class="cnn-img-tab pool-img-tab" onclick="cnnPoolSelectSample(3,this)">Streifen</button>
+          <button class="cnn-img-tab pool-img-tab" onclick="cnnPoolSelectSample(4,this)">Buchstabe A</button>
+          <button class="cnn-img-tab pool-img-tab" onclick="cnnPoolSelectSample(5,this)">Kante</button>
+          <button class="cnn-img-tab pool-img-tab" onclick="cnnPoolSelectSample(6,this)">Gradient</button>
+        </div>
+        <div class="cnn-canvas-wrap" id="cnnPoolInWrap" style="position:relative;">
+          <canvas id="cnnPoolInCanvas"></canvas>
+          <div id="cnnPoolInOverlay"></div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="cnn-arrow"><span class="cnn-arrow-sym">⟶</span></div>
+
+      <!-- Spalte 2: Pooling-Einstellungen -->
+      <div class="cnn-col" style="flex:0 0 250px;min-width:220px;background:#0b0d16;">
+        <div class="cnn-col-hdr" style="color:#a78bfa;">
+          2. Pooling <span>– Einstellungen</span>
+        </div>
+        <div style="flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;">
+
+          <!-- Pool type -->
+          <div class="cnn-section-lbl" style="border-top:none;margin-top:0;"
+            onmouseenter="showTT(event,'Pool-Typ','Welche Operation wird auf das N×N-Fenster angewendet?\n• Maximum: wählt den hellsten Pixel — betont Kanten und Texturen\n• Durchschnitt: mittelt alle Pixel — weichere Ausgabe\n• Minimum: wählt den dunkelsten Pixel — betont Hintergrundbereiche',null)" onmouseleave="hideTT()">Pool-Typ</div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;">
+            <button class="cnn-pool-type-btn active" id="poolBtnMax" onclick="cnnPoolSetType('max',this)"
+              onmouseenter="showTT(event,'Maximum Pooling','Wählt den größten Wert im Pooling-Fenster.\nIn CNNs am häufigsten eingesetzt: bewahrt die stärkste Aktivierung (z.B. Kante vorhanden = ja).\nTranslations-invariant: Merkmal darf sich leicht verschieben.',null)" onmouseleave="hideTT()">▲ Maximum</button>
+            <button class="cnn-pool-type-btn" id="poolBtnAvg" onclick="cnnPoolSetType('avg',this)"
+              onmouseenter="showTT(event,'Average Pooling','Mittelt alle Werte im Pooling-Fenster.\nWeichere Ausgabe als Max Pooling. Wird in moderneren Architekturen (z.B. nach letzter Conv-Schicht) als Global Average Pooling eingesetzt.',null)" onmouseleave="hideTT()">≈ Durchschnitt</button>
+            <button class="cnn-pool-type-btn" id="poolBtnMin" onclick="cnnPoolSetType('min',this)"
+              onmouseenter="showTT(event,'Minimum Pooling','Wählt den kleinsten Wert im Fenster.\nSelten in der Praxis. Kann Hintergrundbereiche oder dunkle Strukturen hervorheben. Gut zum Verständnis des Gegensatzes zu Max Pooling.',null)" onmouseleave="hideTT()">▼ Minimum</button>
+          </div>
+
+          <!-- Pool size -->
+          <div class="cnn-section-lbl"
+            onmouseenter="showTT(event,'Fenstergröße (Pool Size)','Größe des Pooling-Fensters in Pixel.\n• 2×2: Standard — halbiert die Auflösung bei Stride 2\n• 3×3: stärkere Reduktion\n• 4×4: sehr aggressiv — nur bei großen Feature Maps sinnvoll',null)" onmouseleave="hideTT()">Fenstergröße</div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;">
+            <button class="cnn-pool-size-btn active" id="poolSize2" onclick="cnnPoolSetSize(2,this)"
+              onmouseenter="showTT(event,'2×2 Pool','Standard-Größe. Bei Stride=2 wird die Ausgabe genau halb so groß wie die Eingabe (Breite und Höhe). Typisch: nach jeder Conv-Schicht in AlexNet, VGG, etc.',null)" onmouseleave="hideTT()">2×2</button>
+            <button class="cnn-pool-size-btn" id="poolSize3" onclick="cnnPoolSetSize(3,this)"
+              onmouseenter="showTT(event,'3×3 Pool','Größeres Fenster: fasst mehr Pixel zusammen. Bei Stride=3 genau 1/3 der Auflösung. Wird seltener eingesetzt als 2×2.',null)" onmouseleave="hideTT()">3×3</button>
+            <button class="cnn-pool-size-btn" id="poolSize4" onclick="cnnPoolSetSize(4,this)"
+              onmouseenter="showTT(event,'4×4 Pool','Aggressivste Reduktion — 1/4 der Auflösung bei Stride=4. Für kleine 32×32 Bilder kaum sinnvoll. Zeigt gut wie viel Information verloren geht.',null)" onmouseleave="hideTT()">4×4</button>
+          </div>
+
+          <!-- Stride -->
+          <div class="cnn-section-lbl"
+            onmouseenter="showTT(event,'Stride (Schrittweite)','Wie viele Pixel das Fenster pro Schritt wandert.\n• Stride = Pool-Size: kein Überlapp — übliche Einstellung\n• Stride < Pool-Size: überlappende Fenster — mehr Ausgabepixel\n• Stride = 1: maximale Überlappung',null)" onmouseleave="hideTT()">Stride (Schrittweite)</div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;" id="cnnPoolStrideBtns">
+            <button class="cnn-pool-stride-btn active" id="poolStride1" onclick="cnnPoolSetStride(1,this)"
+              onmouseenter="showTT(event,'Stride 1','Maximal überlappend: Fenster rückt 1 Pixel vor. Ausgabe fast gleich groß wie Eingabe. Zeigt den Effekt des Poolings ohne Auflösungsverlust.',null)" onmouseleave="hideTT()">S=1</button>
+            <button class="cnn-pool-stride-btn" id="poolStride2" onclick="cnnPoolSetStride(2,this)"
+              onmouseenter="showTT(event,'Stride 2','Standard bei 2×2-Pool: halbiert Breite und Höhe, 4× weniger Pixel. Das Rezeptionsfeld verdoppelt sich effektiv.',null)" onmouseleave="hideTT()">S=2</button>
+            <button class="cnn-pool-stride-btn" id="poolStride3" onclick="cnnPoolSetStride(3,this)"
+              onmouseenter="showTT(event,'Stride 3','Starke Überlapp-Reduktion. Bei 3×3 Pool und S=3: 1/9 der Pixel, kein Überlapp.',null)" onmouseleave="hideTT()">S=3</button>
+            <button class="cnn-pool-stride-btn" id="poolStrideP" onclick="cnnPoolSetStridePool(this)"
+              onmouseenter="showTT(event,'Stride = Pool-Größe','Kein Überlapp: jedes Eingabepixel geht in genau ein Ausgabepixel ein. Standard-Konfiguration in der Praxis.',null)" onmouseleave="hideTT()">S=P</button>
+          </div>
+
+          <!-- Calc box -->
+          <div class="cnn-section-lbl"
+            onmouseenter="showTT(event,'Aktuelle Berechnung','Zeigt alle Pixelwerte im aktuellen Pooling-Fenster. Der gewählte Wert (Max/Avg/Min) ist farblich hervorgehoben.',null)" onmouseleave="hideTT()">Aktuelle Berechnung</div>
+          <div id="cnnPoolCalcBox">Modus wählen und ▶ Start drücken …</div>
+
+          <!-- Formula -->
+          <div class="cnn-section-lbl"
+            onmouseenter="showTT(event,'Pooling-Formeln','y(i,j) = max/avg/min der Pixel im N×N-Fenster an Position (i·S, j·S).\nAusgabegröße: ⌊(W−P)/S⌋+1 × ⌊(H−P)/S⌋+1',null)" onmouseleave="hideTT()">Formeln</div>
+          <div style="font-size:9px;color:#64748b;font-family:'JetBrains Mono',monospace;
+            line-height:2;background:#06070e;border:1px solid #1a1e2a;border-radius:4px;padding:7px 8px;">
+            <span style="color:#a78bfa;">Max:</span> y = max{ I(x+dx, y+dy) }<br>
+            <span style="color:#64748b;">Avg:</span> y = Σ I(…) / (P×P)<br>
+            <span style="color:#64748b;">Größe:</span> ⌊(W−P)/S⌋+1 × ⌊(H−P)/S⌋+1
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="cnn-arrow"><span class="cnn-arrow-sym">⟶</span></div>
+
+      <!-- Spalte 3: Ausgabebild -->
+      <div class="cnn-col" style="flex:1.1;min-width:0;">
+        <div class="cnn-col-hdr" style="color:#00d4ff;">
+          3. Ausgabebild <span id="cnnPoolOutLabel">– Pooled Map</span>
+          <button class="cnn-btn cyan" style="margin-left:auto;font-size:8px;padding:2px 8px;" onclick="cnnPoolDownload()"
+            onmouseenter="showTT(event,'⬇ Ausgabebild speichern','Lädt das gepoolte Ausgabebild als PNG-Datei herunter.',null)" onmouseleave="hideTT()">⬇ PNG</button>
+        </div>
+        <div class="cnn-canvas-wrap" id="cnnPoolOutWrap">
+          <canvas id="cnnPoolOutCanvas"></canvas>
+        </div>
+        <div id="cnnPoolSizeInfo">–</div>
+      </div>
+
+    </div><!-- pool body -->
+
+    <!-- ── Pool Footer ── -->
+    <div id="cnnPoolFooter">
+      <button class="cnn-btn green" id="cnnPoolBtnRun" onclick="cnnPoolToggleRun()"
+        onmouseenter="showTT(event,'▶ Start / ■ Stop','Startet die animierte Pooling-Simulation. Das Fenster gleitet Schritt für Schritt über das Eingabebild und schreibt den Max-/Avg-/Min-Wert ins Ausgabebild.',null)" onmouseleave="hideTT()">▶ Start</button>
+      <button class="cnn-btn" onclick="cnnPoolStep()"
+        onmouseenter="showTT(event,'⟶ Einzelschritt','Berechnet genau einen Ausgabepixel und zeigt das Pooling-Fenster mit allen Werten.',null)" onmouseleave="hideTT()">⟶ Schritt</button>
+      <button class="cnn-btn" onclick="cnnPoolReset()"
+        onmouseenter="showTT(event,'↺ Reset','Leert das Ausgabebild und setzt den Cursor auf (0,0) zurück.',null)" onmouseleave="hideTT()">↺ Reset</button>
+      <button class="cnn-btn cyan" onclick="cnnPoolApplyFull()"
+        onmouseenter="showTT(event,'⚡ Sofort','Berechnet die gesamte gepoolte Map ohne Animation.',null)" onmouseleave="hideTT()">⚡ Sofort</button>
+      <div class="sep" style="height:16px;background:#1a1e2a;margin:0 4px;"></div>
+      <div class="cnn-speed-row"
+        onmouseenter="showTT(event,'Animationsgeschwindigkeit','Schritte pro Sekunde. 1 = sehr langsam, 10 = sehr schnell.',null)" onmouseleave="hideTT()">
+        Geschw.
+        <input type="range" id="cnnPoolSpeedSlider" min="1" max="10" value="4"
+          oninput="POOL.speed=parseInt(this.value);document.getElementById('cnnPoolSpeedLbl').textContent=this.value;" style="width:70px;accent-color:#a78bfa;">
+        <span id="cnnPoolSpeedLbl">4</span>
+      </div>
+      <div class="sep" style="height:16px;background:#1a1e2a;margin:0 4px;"></div>
+      <label style="font-size:9px;color:#64748b;display:flex;align-items:center;gap:4px;cursor:pointer;"
+        onmouseenter="showTT(event,'Pixelwerte anzeigen','Zeigt die Graustufenwerte im Pooling-Fenster direkt auf dem Eingabebild an.',null)" onmouseleave="hideTT()">
+        <input type="checkbox" id="cnnPoolShowVals" style="accent-color:#a78bfa;"> Werte
+      </label>
+      <div id="cnnPoolStatus" style="font-size:9px;color:#475569;font-family:'JetBrains Mono',monospace;margin-left:auto;">(0,0) | 0%</div>
+    </div>
+
+  </div><!-- #cnnPoolPane -->
+
 </div><!-- #cnnBox -->
 </div><!-- #cnnOverlay -->
 
