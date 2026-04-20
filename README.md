@@ -7,7 +7,8 @@
 **Version:** v33
 
 **[Hier sofort ausprobieren](https://ki42-dhbw.github.io/Neuro_Editor/)**
-**Bitte vorher info.md lesen**
+
+**Bitte vorher info.md lesen.**
 
 ---
 
