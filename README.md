@@ -156,11 +156,8 @@ Neuroedit_webapp/
 │   ├── info_1.html … info_4.html               ← Lehrfolien
 │   ├── start.html                              ← Startseite Info-Panel
 │   └── rl_hilfe.html                           ← RL-Hilfe
-├── Bilder/                                     ← Beispielfotos für CNN
-├── RL/                                         ← RL-Experimente
-├── DOC/                                        ← Präsentationen (PDF/PPTX)
-├── neural-network_*.json                       ← Beispiel-Netzwerke
-└── trainingsdaten_*.txt / *.json               ← Beispiel-Trainingsdaten
+└── Bilder/                                     ← Beispielfotos für CNN
+
 ```
 
 ---
