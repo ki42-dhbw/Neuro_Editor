@@ -103,6 +103,7 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
 <nav>
   <span class="nav-title">ℹ Hilfe</span>
   <a href="#ueberblick">Überblick</a>
+  <a href="#tutorial" style="color:#fbbf24;border-color:#fbbf24">🎓 Tutorial</a>
   <a href="#toolbar">Toolbar</a>
   <a href="#neuronen">Neuronen</a>
   <a href="#aktivierung">Aktivierungen</a>
@@ -116,6 +117,9 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
   <a href="#generator">Generator</a>
   <a href="#infopanel">Info-Panel</a>
   <a href="#embeddings" style="color:var(--accent3);border-color:var(--accent3)">⬡ Embedding Lab</a>
+  <a href="#chromadb" style="color:#7c3aed;border-color:#7c3aed">⬡ ChromaDB</a>
+  <a href="#rl" style="color:#10b981;border-color:#10b981">🤖 Reinforcement Learning</a>
+  <a href="#cnn" style="color:#f59e0b;border-color:#f59e0b">⬛ CNN</a>
 </nav>
 
 <main>
@@ -138,6 +142,98 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
   <div class="card"><div class="card-title" style="color:var(--accent)">● Hidden-Neuron</div><p>Verarbeitung in versteckten Schichten mit Aktivierungsfunktion.</p></div>
   <div class="card"><div class="card-title" style="color:var(--accent2)">● Output-Neuron</div><p>Ergebnis­knoten. Keine Aktivierungs­funktion, kein Bias.</p></div>
   <div class="card"><div class="card-title" style="color:var(--yellow)">● Bias-Neuron</div><p>Konstanter Eingang&nbsp;= 1. Gewicht entspricht dem Bias-Wert.</p></div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="tutorial">
+<h1>🎓 Interaktive Tutorials</h1>
+<p class="sub">7 animierte Schritt-für-Schritt-Anleitungen mit Spotlight-Cursor und optionaler deutscher Sprachausgabe</p>
+
+<p>Die <strong>Tutorial-Bar</strong> am unteren Bildschirmrand startet geführte Touren durch die App. Ein animierter Spotlight-Cursor bewegt sich automatisch, führt Klicks aus und erklärt jeden Schritt per Tooltip — auf Wunsch auch mit Sprachausgabe (TTS).</p>
+
+<h2>Tutorial-Bar öffnen</h2>
+<ol class="steps">
+  <li>Am unteren Bildschirmrand auf die Leiste <strong>▲&nbsp;🎓&nbsp;Tutorial</strong> klicken — sie klappt nach oben auf.</li>
+  <li>Im Dropdown eines der 7 Tutorials wählen (gruppiert: Menüleisten → Netz &amp; Simulation → Training).</li>
+  <li><strong>▶ Abspielen</strong> startet das Tutorial automatisch. Während des Abspielens: <strong>⏭ Schritt</strong> springt zum nächsten Schritt vor, <strong>⏮ Zurück</strong> springt einen Schritt zurück, <strong>⏹ Stopp</strong> bricht ab.</li>
+</ol>
+
+<h2>Bedienelemente</h2>
+<table>
+<tr><th>Element</th><th>Funktion</th></tr>
+<tr><td>Dropdown</td><td>Auswahl aus 7 Tutorials in 3 Gruppen (Menüleisten · Netz &amp; Simulation · Training).</td></tr>
+<tr><td>▶ Abspielen</td><td>Spielt alle Schritte automatisch nacheinander ab.</td></tr>
+<tr><td>⏮ Zurück</td><td>Einen Schritt zurück — auch während des Abspielens. So können einzelne Schritte wiederholt werden.</td></tr>
+<tr><td>⏭ Schritt</td><td>Im manuellen Modus: nächsten Schritt ausführen. Während Autoplay: aktuellen Schritt überspringen und zum nächsten vorspringen.</td></tr>
+<tr><td>⏹ Stopp</td><td>Tutorial abbrechen, Spotlight ausblenden.</td></tr>
+<tr><td>🐢 Slider 🐇</td><td>Geschwindigkeit von 0.3× bis 3× (steuert Animations- und Sprechtempo).</td></tr>
+<tr><td>🔇 / 🔊 Sprache</td><td>Sprachausgabe (TTS) ein- oder ausschalten. Nutzt die Browser-Speech-API mit automatischer Aufbereitung englischer Fachbegriffe für deutsche Aussprache.</td></tr>
+<tr><td>Stimmen-Auswahl</td><td>Verfügbare Systemstimmen — deutsche Stimmen werden oben gelistet.</td></tr>
+<tr><td>Fortschrittsbalken</td><td>Aktueller Schritt / Gesamtanzahl plus prozentuale Anzeige.</td></tr>
+<tr><td>≡</td><td>Beschreibungstext des aktuellen Schritts ein-/ausklappen.</td></tr>
+</table>
+
+<h2>Verfügbare Tutorials</h2>
+
+<h3>Menüleisten</h3>
+<div class="grid" style="grid-template-columns:1fr 1fr 1fr">
+  <div class="card">
+    <div class="card-title" style="color:var(--accent)">1 – Die erste Menüleiste</div>
+    <p>Alle Buttons der oberen Toolbar: Modi, Raster, Zoom, Speichern/Laden, Generieren, Lernen, Simulation, 3D, CNN, Chat, UI-Skalierung.</p>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--accent3)">2 – Embedding Lab</div>
+    <p>Die zweite Menüleiste: Schnelleingabe, Analysieren, Token-Zerlegung, 3D Vektor-Raum, RAG/VectorDB und der Info-Link „Was sind Embeddings?".</p>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--accent4)">3 – Reinforcement Learning</div>
+    <p>Die dritte Menüleiste: Simulator, GridWorld/BrickBlaster-Tabs, Map-Werkzeuge (Start, Ziel, Loch), RL-Hyperparameter (ε-Decay, DQN-lr, Abstandsbonus).</p>
+  </div>
+</div>
+
+<h3>Netz &amp; Simulation</h3>
+<div class="grid" style="grid-template-columns:1fr 1fr">
+  <div class="card">
+    <div class="card-title" style="color:var(--accent4)">4 – Einfaches Netz aufbauen</div>
+    <p>Input, Hidden, Bias und Output per Drag &amp; Drop platzieren und schrittweise verbinden. Ideal als erster Einstieg.</p>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--accent)">5 – Simulation &amp; Forward Pass</div>
+    <p>Simulations-Panel, Eingabewerte setzen, animierte Datenpakete beobachten, Forward-Pass-Formel. Erklärt alle Simulationsoptionen.</p>
+  </div>
+</div>
+
+<h3>Training</h3>
+<div class="grid" style="grid-template-columns:1fr 1fr">
+  <div class="card">
+    <div class="card-title" style="color:#fbbf24">6 – Regression (y = 3·x)</div>
+    <p>Baut ein Netz mit <strong>Hidden→Output = 1 (eingefroren)</strong>, trägt 15 Paare (x, 3·x) ein, erklärt alle Hyperparameter (Epochen, Batch, MSE, Adam, η, Regularisierung, Scheduler) und wertet Loss-/Accuracy-/Gradienten-/LR-Charts aus. Das Netz lernt w₁ ≈ 3 und w₂ ≈ 0.</p>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--accent2)">7 – Klassifikation (Softmax &amp; One-Hot)</div>
+    <p>Kompletter Klassifikations-Workflow: Erklärt <strong>One-Hot-Encoding</strong> (warum nicht 1/2/3?), <strong>Softmax</strong> (Wahrscheinlichkeiten, Summe = 1) und <strong>CCE-Loss</strong>. Baut ein 2→3→3 Netz (Fahrrad/Auto/LKW), trainiert mit 15 Beispielen und testet mit einem neuen Fahrzeug.</p>
+  </div>
+</div>
+
+<h2>Spotlight &amp; Tooltip</h2>
+<ul class="feat">
+  <li>Der <strong>Spotlight-Cursor</strong> (leuchtender Kreis) zeigt, wohin die Aktion gerade führt.</li>
+  <li>Ein pulsierender Ring markiert simulierte Klicks.</li>
+  <li>Der <strong>Tooltip</strong> rechts neben dem Spotlight erklärt den aktuellen Schritt — inkl. Formeln und Hinweise.</li>
+  <li>Bei aktiver Sprachausgabe wird der Text zusätzlich in deutscher Sprache vorgelesen. Englische Fachbegriffe (Loss, Batch, Softmax etc.) werden automatisch phonetisch aufbereitet. Die Sprechgeschwindigkeit skaliert mit dem Tempo-Slider.</li>
+</ul>
+
+<div class="warn"><b>Hinweis — Sprachausgabe (TTS)</b>
+  Die Sprachausgabe nutzt die Browser-interne Speech API und ist <strong>betriebssystem- und browserabhängig</strong>. Unter Windows und macOS funktioniert sie gut (Chrome/Edge/Safari empfohlen). Unter Linux sind deutsche Stimmen oft nicht vorinstalliert. Auf iOS muss die Wiedergabe durch einen Klick ausgelöst werden. Details: → <a href="../info.md">info.md</a>
+</div>
+
+<div class="info"><b>Tipp — Tutorials unterbrechen &amp; Navigation</b>
+  Das Tutorial manipuliert das Netz direkt (erstellt, löscht und verbindet Neuronen). Beim Stoppen bleibt der aktuelle Stand erhalten — du kannst weiter experimentieren. Während des Abspielens kannst du mit <strong>⏮ Zurück</strong> und <strong>⏭ Schritt</strong> frei vor- und zurückspringen, um Schritte zu wiederholen. Mit <kbd>Neu</kbd> löschst du alles.
+</div>
+
+<div class="tip"><b>Tipp — Eigenes Lernmaterial</b>
+  Tutorial&nbsp;6 nutzt ein eingefrorenes Hidden→Output-Gewicht (🔒&nbsp;= 1), sodass ŷ&nbsp;=&nbsp;w₁·x&nbsp;+&nbsp;w₂ und das Netz eine reine Gerade lernt. Tutorial&nbsp;7 zeigt den Klassifikations-Workflow mit One-Hot, Softmax und CCE. Beides lässt sich für eigene Daten anpassen (→ <a href="#verbindungen">Verbindungen</a>).
 </div>
 </section>
 
@@ -799,6 +895,696 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
   3. Cosinus-Suche → Top-K Dokumente &nbsp;·&nbsp;
   4. Kontext + Anfrage → LLM → Antwort
 </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="chromadb">
+<h1>⬡ ChromaDB Connector</h1>
+<p class="sub">Tab ③ VectorDB &amp; RAG — Daten aus einer echten ChromaDB-Instanz importieren</p>
+
+<p>Der <strong>ChromaDB Connector</strong> ermöglicht es, Dokumente aus einer laufenden <a href="https://www.trychroma.com/" style="color:var(--accent)">ChromaDB</a>-Instanz direkt in das Embedding Lab zu laden — entweder in die lokale Vektordatenbank (für RAG-Suche) oder in den 3D Vektor-Raum zur Visualisierung.</p>
+
+<div class="info"><b>Wo finde ich den Connector?</b>
+  Tab <strong>③ VectorDB &amp; RAG</strong> öffnen → Bereich <strong>⬡ CHROMADB CONNECTOR</strong> anklicken (klappt auf).
+</div>
+
+<h2>Voraussetzungen — Server starten</h2>
+<p>ChromaDB muss als HTTP-Server laufen und für den Browser per <strong>CORS</strong> erreichbar sein.</p>
+
+<h3>Installation</h3>
+<pre style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:10px 14px;font-family:'Courier New',monospace;font-size:11px;color:#a78bfa;overflow-x:auto">pip install chromadb</pre>
+
+<h3>Server starten (lokal)</h3>
+<table>
+<tr><th>Betriebssystem</th><th>Befehl</th></tr>
+<tr><td>Windows (PowerShell)</td><td><code style="font-size:11px">$env:CHROMA_SERVER_CORS_ALLOW_ORIGINS='["*"]'<br>chroma run --host 0.0.0.0 --port 8000</code></td></tr>
+<tr><td>Windows (CMD)</td><td><code style="font-size:11px">set CHROMA_SERVER_CORS_ALLOW_ORIGINS=["*"]<br>chroma run --host 0.0.0.0 --port 8000</code></td></tr>
+<tr><td>Linux / Mac</td><td><code style="font-size:11px">CHROMA_SERVER_CORS_ALLOW_ORIGINS='["*"]' chroma run --host 0.0.0.0 --port 8000</code></td></tr>
+</table>
+
+<h3>Docker mit CORS</h3>
+<pre style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:10px 14px;font-family:'Courier New',monospace;font-size:11px;color:#a78bfa;overflow-x:auto">docker run -p 8000:8000 \
+  -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["*"]' \
+  chromadb/chroma</pre>
+
+<h3>Docker Compose</h3>
+<pre style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:10px 14px;font-family:'Courier New',monospace;font-size:11px;color:#a78bfa;overflow-x:auto">environment:
+  - CHROMA_SERVER_CORS_ALLOW_ORIGINS=["*"]</pre>
+
+<h3>nginx als CORS-Proxy (empfohlen für Produktivumgebungen)</h3>
+<p>Wenn ChromaDB in Docker ohne CORS läuft, kann ein vorgelagerter nginx-Container die CORS-Header hinzufügen. Der Browser spricht dann den Proxy an (z.B. Port 8001), nicht ChromaDB direkt (Port 8000).</p>
+<table>
+<tr><th>Service</th><th>Port</th><th>Zweck</th></tr>
+<tr><td>ChromaDB (rag-chroma)</td><td>8000</td><td>Interner Zugriff — App → Datenbank, kein CORS nötig</td></tr>
+<tr><td>nginx Proxy (rag-chroma-proxy)</td><td>8001</td><td>Browser-Zugriff mit CORS-Headern</td></tr>
+</table>
+<div class="tip"><b>Tipp</b>
+  Im Embedding Lab als URL dann <code>http://&lt;IP&gt;:8001</code> (nginx-Port) angeben, nicht Port 8000.
+</div>
+
+<h2>Verbindung herstellen</h2>
+<ol class="steps">
+  <li>Tab <strong>③ VectorDB &amp; RAG</strong> öffnen.</li>
+  <li><strong>⬡ CHROMADB CONNECTOR</strong> anklicken — Bereich klappt auf.</li>
+  <li>Server-URL eingeben (z.B. <code>http://10.50.13.85:8001</code>).</li>
+  <li>Tenant und Database prüfen (Standard: <code>default_tenant</code> / <code>default_database</code>).</li>
+  <li><strong>Verbinden</strong> klicken oder <kbd>Enter</kbd> drücken.</li>
+  <li>Bei Erfolg erscheint der Status-Dot grün und das Collections-Dropdown füllt sich.</li>
+</ol>
+
+<h3>Verbindungsfelder</h3>
+<table>
+<tr><th>Feld</th><th>Standard</th><th>Beschreibung</th></tr>
+<tr><td>URL</td><td>http://10.50.13.85:8001</td><td>Vollständige URL des ChromaDB-Servers (oder nginx-Proxys). Kein Schrägstrich am Ende.</td></tr>
+<tr><td>Tenant</td><td>default_tenant</td><td>ChromaDB-Tenant (relevant ab v0.6). Bei Standard-Installation unverändert lassen.</td></tr>
+<tr><td>DB</td><td>default_database</td><td>ChromaDB-Datenbank innerhalb des Tenants. Bei Standard-Installation unverändert lassen.</td></tr>
+</table>
+
+<h3>Status-Dot</h3>
+<table>
+<tr><th>Farbe</th><th>Bedeutung</th></tr>
+<tr><td><span class="badge b-dim">grau</span></td><td>Noch keine Verbindung hergestellt</td></tr>
+<tr><td><span class="badge b-yellow">gelb</span></td><td>Verbindung wird aufgebaut / Collections werden geladen</td></tr>
+<tr><td><span class="badge b-green">grün</span></td><td>Verbunden — Collections wurden geladen</td></tr>
+<tr><td><span class="badge b-red">rot</span></td><td>Verbindungsfehler (CORS, Server nicht erreichbar, falscher Port)</td></tr>
+</table>
+
+<h2>API-Version — automatische Erkennung</h2>
+<p>ChromaDB änderte seine REST-API grundlegend in Version 0.6. Der Connector erkennt die Version automatisch:</p>
+<table>
+<tr><th>ChromaDB-Version</th><th>API</th><th>Endpunkt-Schema</th></tr>
+<tr><td>&lt; 0.6</td><td>v1</td><td><code>/api/v1/collections/{name}/…</code></td></tr>
+<tr><td>≥ 0.6</td><td>v2</td><td><code>/api/v2/tenants/{tenant}/databases/{db}/collections/{uuid}/…</code></td></tr>
+</table>
+
+<div class="warn"><b>410 Gone in der Browser-Konsole</b>
+  Eine <code>410 Gone</code>-Meldung auf <code>/api/v1/heartbeat</code> ist kein Fehler — sie signalisiert, dass ChromaDB ≥ 0.6 läuft und v1 abgekündigt wurde. Der Connector wechselt daraufhin automatisch auf API v2. Die erkannte Version wird im Panel angezeigt.
+</div>
+
+<div class="warn"><b>CORS-Fehler</b>
+  <code>Access-Control-Allow-Origin</code>-Fehler bedeuten, dass der ChromaDB-Server <strong>kein CORS-Header</strong> sendet. Das muss serverseitig behoben werden — entweder per Umgebungsvariable <code>CHROMA_SERVER_CORS_ALLOW_ORIGINS</code> oder über einen nginx-Proxy. Ein Code-Fix auf Browser-Seite ist nicht möglich.
+</div>
+
+<h2>Daten importieren</h2>
+
+<h3>Collection auswählen und prüfen</h3>
+<ol class="steps">
+  <li>Im Dropdown die gewünschte Collection auswählen.</li>
+  <li><strong>Info</strong>-Button klicken → zeigt die Dokumentenanzahl der Collection.</li>
+  <li>Maximale Dokumentenanzahl im Feld <strong>Max. Docs</strong> einstellen (1–1000).</li>
+</ol>
+
+<h3>Import-Varianten</h3>
+<table>
+<tr><th>Schaltfläche</th><th>Ziel</th><th>Effekt</th></tr>
+<tr>
+  <td><span class="badge b-cyan">📥 In VectorDB</span></td>
+  <td>Lokale Vektordatenbank (Tab ③)</td>
+  <td>Dokumente werden tokenisiert, als 50D-Vektoren berechnet und in der Browser-VectorDB gespeichert. Duplikate werden übersprungen. Danach steht die RAG-Suche zur Verfügung.</td>
+</tr>
+<tr>
+  <td><span class="badge b-purple">◉ → 3D</span></td>
+  <td>3D Vektor-Raum (Tab ②)</td>
+  <td>Dokumente erscheinen sofort als lila Punkte im 3D-Raum. Werden <em>nicht</em> in der lokalen VectorDB gespeichert. Für schnelle Visualisierung ohne persistente Speicherung.</td>
+</tr>
+</table>
+
+<div class="tip"><b>Tipp: Kombination beider Varianten</b>
+  Zuerst <strong>📥 In VectorDB</strong> klicken (persistente Speicherung + RAG), dann Tab ② öffnen und <strong>⊕ Tokens hinzufügen</strong> klicken — so sind die Daten sowohl durchsuchbar als auch visualisiert.
+</div>
+
+<h2>Semantische Positionierung im 3D-Raum</h2>
+<p>Wenn Dokumente in den 3D-Raum importiert werden, bestimmt der Connector die Position nach dieser Priorität:</p>
+
+<ol class="steps">
+  <li><strong>Vokabular-Lookup:</strong> Ist das Wort im semantischen Wörterbuch (z.B. „Elefant", „Auto"), landet es exakt im richtigen Cluster.</li>
+  <li><strong>Tokenizer-Fallback:</strong> Bei kurzen unbekannten Texten wird der erste echte Token (kein Special Token, kein Subword) als Positions-Seed verwendet.</li>
+  <li><strong>Text-Hash:</strong> Bei langen Dokumenten (viele Tokens) wird ein stabiler Hash des Textes als Seed verwendet, damit Punkte gleichmäßig im Raum verteilt sind statt am Ursprung zu clustern.</li>
+</ol>
+
+<div class="warn"><b>Warum clustern lange Dokumente am Ursprung?</b>
+  Werden alle Token-Vektoren eines langen Textes gemittelt, konvergiert das Ergebnis gegen den Nullpunkt — je mehr Tokens, desto stärker (Gesetz der großen Zahlen: Durchschnittslänge ∝ 1/√n). Der Text-Hash-Fallback umgeht dieses Problem durch eine positionsunabhängige Platzierung.
+</div>
+
+<h3>Bekannte semantische Cluster</h3>
+<table>
+<tr><th>Cluster</th><th>Beispielwörter (DE)</th><th>Beispielwörter (EN)</th><th>Position</th></tr>
+<tr><td>🐾 Tiere</td><td>Hund, Katze, Elefant, Nashorn, Löwe, Tiger, Giraffe, Delfin, Wolf, Fuchs</td><td>Dog, Cat, Elephant, Lion, Tiger, Horse, Bird</td><td>Oben links vorne</td></tr>
+<tr><td>🚗 Fahrzeuge</td><td>Auto, Fahrrad, Zug, Bus, Flugzeug, LKW, Hubschrauber, Boot</td><td>Car, Bike, Train, Plane, Truck, Ship</td><td>Oben rechts vorne</td></tr>
+<tr><td>🌳 Natur</td><td>Baum, Blume, Wald, Berg, Fluss, Meer, Regen, Schnee, Sonne, Wind</td><td>Tree, Flower, Forest, Mountain, River, Ocean, Rain, Snow, Sun</td><td>Unten links hinten</td></tr>
+<tr><td>🤖 KI / ML</td><td>Token, Embedding, Vektor, Modell, Neuron, Training, Gradient, Loss</td><td>Token, Embedding, Vector, Model, Layer, Weight, Bias, Deep</td><td>Unten rechts hinten</td></tr>
+<tr><td>👑 Royalty</td><td>König, Königin, Mann, Frau, Kaiser</td><td>King, Queen, Man, Woman, Prince, Princess</td><td>Oben Mitte</td></tr>
+<tr><td>± Adjektive</td><td>gut/schlecht, schnell/langsam, groß/klein, heiß/kalt, stark/schwach</td><td>good/bad, fast/slow, big/small, hot/cold, strong/weak</td><td>Mitte links/rechts</td></tr>
+</table>
+
+<div class="info"><b>Hinweis zur Simulation</b>
+  Die 3D-Positionen sind <strong>didaktisch simuliert</strong> — sie basieren auf einem vordefinierten semantischen Wörterbuch, nicht auf echten Embedding-Modellen. Für echte semantische Vektoren (z.B. aus ChromaDB mit tatsächlichen Embeddings) wäre ein Modell wie <em>sentence-transformers</em> notwendig, das die Vektoren dann per PCA auf 3D reduziert.
+</div>
+
+<h2>Testdaten in ChromaDB einfügen (Python)</h2>
+<pre style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:12px 14px;font-family:'Courier New',monospace;font-size:11px;color:#a78bfa;overflow-x:auto">import chromadb
+
+client = chromadb.HttpClient(host="localhost", port=8000)
+col = client.get_or_create_collection("meine_texte")
+
+col.add(
+    documents=[
+        "Das neuronale Netz lernt durch Backpropagation.",
+        "Embeddings kodieren semantische Bedeutung als Vektoren.",
+        "RAG kombiniert Vektordatenbanken mit Sprachmodellen.",
+        "Elefant",
+        "Nashorn",
+        "Auto",
+    ],
+    ids=["doc1", "doc2", "doc3", "doc4", "doc5", "doc6"]
+)
+print("Einträge:", col.count())</pre>
+
+<h2>Fehlerbehebung</h2>
+<table>
+<tr><th>Fehlermeldung</th><th>Ursache</th><th>Lösung</th></tr>
+<tr>
+  <td><code>Failed to fetch</code> / CORS-Fehler</td>
+  <td>CORS-Header fehlen am Server</td>
+  <td>Server mit <code>CHROMA_SERVER_CORS_ALLOW_ORIGINS='["*"]'</code> neu starten oder nginx-Proxy mit CORS-Headern vorschalten</td>
+</tr>
+<tr>
+  <td><code>HTTP 410 Gone</code> auf <code>/api/v1/heartbeat</code></td>
+  <td>ChromaDB ≥ 0.6 — v1-API abgekündigt</td>
+  <td>Kein Handlungsbedarf — Connector erkennt das und wechselt automatisch auf v2</td>
+</tr>
+<tr>
+  <td><code>HTTP 400 Bad Request</code> beim Import</td>
+  <td>Collection-Name statt UUID in der URL (v2-API)</td>
+  <td>Connector wurde behoben — nach Neu-Verbinden wird die UUID automatisch verwendet</td>
+</tr>
+<tr>
+  <td>Collections-Dropdown bleibt leer</td>
+  <td>Keine Collections in der Datenbank vorhanden</td>
+  <td>Zuerst per Python-Client Collections und Dokumente anlegen</td>
+</tr>
+<tr>
+  <td>Alle importierten Punkte klumpen am Ursprung</td>
+  <td>Langer Text → viele Token-Vektoren gemittelt → Ergebnis ≈ 0</td>
+  <td>Connector behoben — Text-Hash-Fallback verhindert Origin-Clustering</td>
+</tr>
+<tr>
+  <td>Wort landet nicht im richtigen Cluster</td>
+  <td>Wort nicht im semantischen Wörterbuch</td>
+  <td>Wörter die im Vokabular fehlen landen als „Bekanntes Wort" oder per Hash. Das Wörterbuch umfasst die häufigsten deutschen und englischen Wörter je Kategorie.</td>
+</tr>
+</table>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="rl">
+<h1>🤖 Reinforcement Learning</h1>
+<p class="sub">Dritte Menüleiste — interaktiver Q-Learning-Simulator mit GridWorld und BrickBlaster</p>
+
+<p>Der <strong>RL-Simulator</strong> ist eine eigenständige Lernumgebung in der dritten Toolbar-Zeile. Ein Agent lernt durch Versuch und Irrtum: Belohnungen verstärken gutes Verhalten, Bestrafungen schwächen schlechtes — ganz ohne explizite Regeln. Die Umgebung unterstützt klassisches Q-Learning mit Q-Tabelle sowie Deep Reinforcement Learning mit neuronalem Netz (DQN).</p>
+
+<div class="info"><b>Schnellstart</b>
+  <strong>🤖 Simulator</strong> in der dritten Leiste klicken → Umgebung wählen (GridWorld oder BrickBlaster) → <strong>▶️ Start</strong> klicken und zusehen wie der Agent lernt.
+</div>
+
+<h2>Dritte Menüleiste</h2>
+<table>
+<tr><th>Element</th><th>Funktion</th></tr>
+<tr><td><span class="badge b-green">🤖 Simulator</span></td><td>RL-Panel öffnen/schließen.</td></tr>
+<tr><td><span class="badge b-green">▦ GridWorld</span></td><td>Klassisches Q-Learning in einer Gitterwelt wählen.</td></tr>
+<tr><td><span class="badge b-green">🎮 BrickBlaster</span></td><td>BrickBlaster-Spiel als RL-Umgebung wählen.</td></tr>
+</table>
+
+<h2>Simulatoren</h2>
+<div class="grid">
+  <div class="card">
+    <div class="card-title" style="color:var(--accent4)">▦ GridWorld</div>
+    <p>Klassisches Gitterwelt-Szenario. Der Agent navigiert von einem Startfeld zum Ziel, vermeidet Löcher und maximiert den kumulierten Reward. Zeigt die Q-Tabelle und Heatmap live.</p>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--accent4)">🎮 BrickBlaster</div>
+    <p>Arkanoid-artiges Spiel als RL-Umgebung. Manuell spielbar oder KI-gesteuert. Die KI lernt via Q-Learning oder Deep RL den Schläger zu steuern, Bälle zu fangen und Steine zu treffen.</p>
+  </div>
+</div>
+
+<hr style="margin:16px 0">
+
+<h2>GridWorld — Kartenaufbau</h2>
+<p>Die Gitterwelt wird über die Toolbar-Werkzeuge direkt auf dem Canvas bearbeitet:</p>
+<table>
+<tr><th>Werkzeug</th><th>Symbol</th><th>Beschreibung</th></tr>
+<tr><td>Auswählen</td><td>👆</td><td>Felder anklicken und inspizieren. Standard-Werkzeug.</td></tr>
+<tr><td>Startpunkt</td><td>🏁</td><td>Startfeld des Agenten setzen. Nur ein Startfeld möglich.</td></tr>
+<tr><td>Ziel</td><td>🏆</td><td>Zielfeld setzen (+10 Reward). Nur ein Zielfeld möglich.</td></tr>
+<tr><td>Loch</td><td>🕳️</td><td>Hindernis setzen (−5 Reward). Agent fällt hinein → Episode endet.</td></tr>
+<tr><td>Frei</td><td>⬜</td><td>Feld auf leer zurücksetzen.</td></tr>
+<tr><td>NEU</td><td>—</td><td>Neue zufällige Map erstellen. Größe über Zeilen × Spalten (2–10) einstellbar.</td></tr>
+</table>
+
+<h2>Belohnungsstruktur (GridWorld)</h2>
+<table>
+<tr><th>Ereignis</th><th>Reward</th></tr>
+<tr><td>Ziel erreicht 🏆</td><td><span class="badge b-green">+10</span></td></tr>
+<tr><td>In Loch gefallen 🕳️</td><td><span class="badge b-red">−5</span></td></tr>
+<tr><td>Normaler Schritt</td><td><span class="badge b-dim">−0.1</span> (kleine Bestrafung → Agent soll kurze Wege bevorzugen)</td></tr>
+</table>
+
+<h2>RL-Steuerung (Sidebar)</h2>
+<table>
+<tr><th>Schaltfläche</th><th>Funktion</th></tr>
+<tr><td>👣 Schritt</td><td>Einen einzelnen Schritt des Agenten ausführen. Gut zum schrittweisen Nachvollziehen.</td></tr>
+<tr><td>▶️ Start / ⏸ Pause</td><td>Kontinuierliches Training starten oder pausieren.</td></tr>
+<tr><td>🚀 Turbo (×100)</td><td>100 Episoden auf einmal berechnen ohne Animation — für schnelles Training.</td></tr>
+<tr><td>🧹 Lern-Reset</td><td>Q-Tabelle und Trainingsstatistiken zurücksetzen, aber die Map behalten.</td></tr>
+<tr><td>💥 Map-Reset</td><td>Kompletter Neustart: neue Map und alle Lernfortschritte löschen.</td></tr>
+</table>
+
+<h2>Lernparameter</h2>
+<table>
+<tr><th>Parameter</th><th>Standard</th><th>Beschreibung</th></tr>
+<tr><td>Alpha (α)</td><td>0.7</td><td><strong>Lernrate.</strong> Wie stark neue Erfahrungen die Q-Werte verändern. 0 = kein Lernen, 1 = sofortiges Überschreiben.</td></tr>
+<tr><td>Gamma (γ)</td><td>0.95</td><td><strong>Diskontierungsfaktor.</strong> Wie stark zukünftige Rewards gewichtet werden. 0 = nur Sofortreward, 1 = volle Zukunftsplanung.</td></tr>
+<tr><td>Epsilon (ε)</td><td>1.0</td><td><strong>Explorationsrate.</strong> Wahrscheinlichkeit, eine zufällige Aktion zu wählen (Exploration vs. Exploitation). Sinkt mit der Zeit.</td></tr>
+<tr><td>Geschwindigkeit</td><td>150 ms</td><td>Pause zwischen zwei Schritten bei laufendem Training (20–1000 ms).</td></tr>
+<tr><td>Pfeile</td><td>☑</td><td>Optimale Aktion pro Zustand als Pfeil in der Gitterwelt anzeigen.</td></tr>
+<tr><td>Farben (Heatmap)</td><td>☑</td><td>Q-Werte als Farbgradient in der Gitterwelt visualisieren (grün = hoher Wert).</td></tr>
+<tr><td>🛡️ Test-Modus</td><td>☐</td><td>Epsilon auf 0 setzen — Agent handelt immer greedy (kein Zufall). Zeigt den gelernten Weg.</td></tr>
+</table>
+
+<div class="tip"><b>Exploration vs. Exploitation</b>
+  Mit ε = 1.0 (Anfang) wählt der Agent zufällige Aktionen und erkundet die Umgebung. Mit sinkendem ε nutzt er zunehmend sein gelerntes Wissen (Q-Tabelle). Der Test-Modus setzt ε = 0 → der Agent folgt immer dem aktuell besten bekannten Pfad.
+</div>
+
+<h2>Statistiken</h2>
+<table>
+<tr><th>Anzeige</th><th>Bedeutung</th></tr>
+<tr><td>Episoden</td><td>Wie viele vollständige Durchläufe (Start → Ziel oder Loch) bisher absolviert wurden.</td></tr>
+<tr><td>Epsilon</td><td>Aktuelle Explorationsrate in Prozent.</td></tr>
+<tr><td>Reward</td><td>Kumulierter Reward der letzten Episode.</td></tr>
+<tr><td>Schritte</td><td>Anzahl der Schritte in der letzten Episode.</td></tr>
+</table>
+
+<h2>Q-Tabelle</h2>
+<p>Die Q-Tabelle zeigt für jeden Zustand (Gitterfeld) die gelernten Q-Werte für alle vier Aktionen:</p>
+<table>
+<tr><th>Spalte</th><th>Aktion</th></tr>
+<tr><td>L</td><td>Links</td></tr>
+<tr><td>D</td><td>Unten (Down)</td></tr>
+<tr><td>R</td><td>Rechts</td></tr>
+<tr><td>U</td><td>Oben (Up)</td></tr>
+</table>
+<p>Der höchste Q-Wert pro Zeile ist farbig hervorgehoben (beste Aktion). Die aktive Zeile (aktueller Agenten-Zustand) und der optimale Pfad werden ebenfalls markiert.</p>
+
+<div class="info"><b>Was ist ein Q-Wert?</b>
+  Q(s, a) ist der erwartete kumulierte zukünftige Reward, wenn der Agent im Zustand s die Aktion a ausführt und danach optimal handelt. Die Bellman-Gleichung definiert das Update:<br>
+  <code style="font-size:11px;color:var(--accent3)">Q(s,a) ← Q(s,a) + α · [r + γ · max Q(s',a') − Q(s,a)]</code>
+</div>
+
+<hr style="margin:16px 0">
+
+<h2>Lernmodi — Q-Learning vs. Deep RL</h2>
+<table>
+<tr><th>Modus</th><th>Methode</th><th>Wann verwenden</th></tr>
+<tr>
+  <td><span class="badge b-green">📋 Q-Learning</span></td>
+  <td>Klassische Q-Tabelle — Zustand × Aktion → Wert</td>
+  <td>GridWorld mit kleinem Zustandsraum. Vollständig interpretierbar, Tabelle direkt einsehbar.</td>
+</tr>
+<tr>
+  <td><span class="badge b-purple">🧠 Deep RL</span></td>
+  <td>DQN — neuronales Netz approximiert die Q-Funktion</td>
+  <td>Großer/kontinuierlicher Zustandsraum (z.B. BrickBlaster). Netz wird live im DQN-Viewer angezeigt.</td>
+</tr>
+</table>
+
+<h3>DQN-Netzwerk-Viewer</h3>
+<p>Im Deep RL-Modus erscheint ein Canvas-Visualisierung des neuronalen Netzes in der Sidebar:</p>
+<ul class="feat">
+  <li>Neuronen leuchten entsprechend ihrer Aktivierung auf.</li>
+  <li>Verbindungsfarben zeigen positive (cyan) und negative (orange) Gewichte.</li>
+  <li>Der aktuelle Verlust (Loss) wird live angezeigt.</li>
+  <li><strong>→ In NN-Editor kopieren:</strong> Das gelernte DQN-Netz in den visuellen Editor übertragen.</li>
+</ul>
+<div class="tip"><b>DQN → NN-Editor</b>
+  Mit <strong>→ In NN-Editor kopieren</strong> wird das gelernte neuronale Netz in den NN-Builder übertragen. Dort können Gewichte und Architektur inspiziert werden.
+</div>
+
+<hr style="margin:16px 0">
+
+<h2>BrickBlaster — Spielmodi</h2>
+<table>
+<tr><th>Modus</th><th>Symbol</th><th>Beschreibung</th></tr>
+<tr><td>Manuell</td><td>🕹️</td><td>Selbst spielen. Schläger per Pfeiltasten, A/D oder Maus steuern. <kbd>Space</kbd> = Ball schießen / Pause.</td></tr>
+<tr><td>KI spielt</td><td>🤖</td><td>KI übernimmt den Schläger via Q-Learning oder Deep RL. Lernfortschritt live in der Sidebar sichtbar.</td></tr>
+</table>
+
+<h3>BrickBlaster-Toolbar-Parameter</h3>
+<table>
+<tr><th>Parameter</th><th>Beschreibung</th></tr>
+<tr><td>Reihen × Spalten</td><td>Anzahl der Steinreihen und -spalten (2–9 × 4–14).</td></tr>
+<tr><td>NEU</td><td>Neues Spiel mit aktuellen Einstellungen starten.</td></tr>
+<tr><td>⚡ Ball (Geschwindigkeit)</td><td>Ballgeschwindigkeit in physikalischen Einheiten (1–12).</td></tr>
+<tr><td>RL × (Tempo)</td><td>Physik-Schritte pro RL-Entscheidung. Mehr = KI lernt schneller, aber weniger anschaulich. ×1 bis ×20.</td></tr>
+<tr><td>ε-Decay</td><td>Wie schnell Epsilon sinkt — langsam (×0.9999) bis sehr schnell (×0.995).</td></tr>
+<tr><td>DQN lr</td><td>Lernrate des neuronalen Netzes (0.001–0.02). Höher = schneller aber instabiler.</td></tr>
+<tr><td>Dist.</td><td>Abstandsbonus-Stärke — belohnt den Schläger dafür, nah am Ball zu bleiben (aus / schwach / standard / mittel / stark).</td></tr>
+</table>
+
+<h3>Belohnungsstruktur (BrickBlaster)</h3>
+<table>
+<tr><th>Ereignis</th><th>Reward</th></tr>
+<tr><td>Stein getroffen</td><td><span class="badge b-green">+3</span></td></tr>
+<tr><td>Ball gefangen (Schläger trifft Ball)</td><td><span class="badge b-green">+4</span></td></tr>
+<tr><td>Ball verloren (fällt unten raus)</td><td><span class="badge b-red">−8</span></td></tr>
+<tr><td>Abstandsbonus (optional)</td><td><span class="badge b-green">+0–0.25</span> je nach Abstand Schläger↔Ball</td></tr>
+</table>
+
+<h3>Zustandsraum des BrickBlaster-Agenten</h3>
+<p>Der Zustandsvektor des Agenten enthält 7 Features:</p>
+<table>
+<tr><th>#</th><th>Feature</th><th>Beschreibung</th></tr>
+<tr><td>1</td><td>ballX</td><td>Horizontale Ball-Position (normalisiert)</td></tr>
+<tr><td>2</td><td>ballY</td><td>Vertikale Ball-Position (normalisiert)</td></tr>
+<tr><td>3</td><td>vX</td><td>Horizontale Ballgeschwindigkeit</td></tr>
+<tr><td>4</td><td>vY</td><td>Vertikale Ballgeschwindigkeit</td></tr>
+<tr><td>5</td><td>padX</td><td>Schläger-Position (normalisiert)</td></tr>
+<tr><td>6</td><td>Δx</td><td>Abstand Ball → Schläger (horizontal)</td></tr>
+<tr><td>7</td><td>brickY</td><td>Y-Position des untersten Steins (normalisiert)</td></tr>
+</table>
+<p>Aktionen: <strong>◀ links</strong> · <strong>Halt</strong> · <strong>▶ rechts</strong></p>
+
+<h3>KI-Lernfortschritt (BrickBlaster)</h3>
+<table>
+<tr><th>Anzeige</th><th>Bedeutung</th></tr>
+<tr><td>KI-Phase &amp; Status</td><td>Aktueller Zustand: Warte auf Start / Exploration / Exploitation / Trainiert</td></tr>
+<tr><td>ε Exploration</td><td>Aktuelle Epsilon-Rate — wie oft die KI noch zufällig handelt</td></tr>
+<tr><td>γ Gamma</td><td>Diskontierungsfaktor (fest: 0.95)</td></tr>
+<tr><td>α Lernrate</td><td>Aktuelle DQN-Lernrate</td></tr>
+<tr><td>argmax Q(s, a; θ)</td><td>Die aktuell gewählte Aktion (◀ Halt ▶)</td></tr>
+<tr><td>Gesamtfortschritt</td><td>Fortschrittsbalken über alle Trainingsepisoden</td></tr>
+<tr><td>Reward / Episode</td><td>Live-Chart des kumulierten Rewards über die letzten Episoden</td></tr>
+<tr><td>Aktuelle Q-Werte</td><td>Balkendiagramm der Q-Werte für alle drei Aktionen im aktuellen Zustand</td></tr>
+<tr><td>Aktions-Verteilung</td><td>Wie oft welche Aktion seit Start gewählt wurde</td></tr>
+<tr><td>Zustände gelernt</td><td>Anzahl der einzigartigen Zustände in der Q-Tabelle</td></tr>
+<tr><td>Bester Reward</td><td>Höchster bisher erreichter Reward in einer Episode</td></tr>
+<tr><td>Top-5 Q-Zustände</td><td>Die fünf Zustände mit dem höchsten Q-Wert</td></tr>
+</table>
+
+<hr style="margin:16px 0">
+
+<h2>Theoretischer Hintergrund</h2>
+
+<h3>Bellman-Gleichung</h3>
+<div class="info"><b>Q-Update (Bellman-Gleichung)</b>
+  <code style="font-size:11px;color:var(--accent3)">Q(s,a) ← Q(s,a) + α · [r + γ · max_a' Q(s',a') − Q(s,a)]</code><br><br>
+  <strong>s</strong> = aktueller Zustand &nbsp;·&nbsp; <strong>a</strong> = gewählte Aktion &nbsp;·&nbsp; <strong>r</strong> = erhaltener Reward &nbsp;·&nbsp;
+  <strong>s'</strong> = Folgezustand &nbsp;·&nbsp; <strong>α</strong> = Lernrate &nbsp;·&nbsp; <strong>γ</strong> = Diskontierung
+</div>
+
+<h3>Exploration vs. Exploitation (ε-greedy)</h3>
+<table>
+<tr><th>Strategie</th><th>Bedingung</th><th>Verhalten</th></tr>
+<tr><td>Exploration</td><td>Zufallszahl &lt; ε</td><td>Zufällige Aktion wählen → neue Zustände erkunden</td></tr>
+<tr><td>Exploitation</td><td>Zufallszahl ≥ ε</td><td>Aktion mit höchstem Q-Wert wählen → bekanntes Wissen nutzen</td></tr>
+</table>
+
+<h3>Deep Q-Network (DQN)</h3>
+<p>Statt einer Tabelle approximiert ein neuronales Netz die Q-Funktion: <code>Q(s, a; θ)</code> mit Gewichten θ. Das Netz nimmt den Zustandsvektor als Eingabe und gibt Q-Werte für alle Aktionen aus. Trainiert wird mit MSE-Loss zwischen Ziel-Q-Wert (Bellman-Ziel) und Netz-Ausgabe.</p>
+<div class="tip"><b>Wann DQN statt Q-Tabelle?</b>
+  Bei großen oder kontinuierlichen Zustandsräumen würde eine Q-Tabelle zu groß. Ein neuronales Netz generalisiert — es kann Q-Werte auch für noch nie gesehene Zustände schätzen.
+</div>
+</section>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="cnn">
+<h1>⬛ CNN – Faltungsmatrizen Visualisierung</h1>
+<p class="sub">Interaktiver Convolutional-Neural-Network-Simulator · Sliding Window · 6 Animationsmodi</p>
+
+<p>Das <strong>CNN-Modul</strong> visualisiert die mathematische Grundoperation hinter Convolutional Neural Networks (CNNs): die <strong>Faltung (Convolution)</strong>. Ein kleiner Filterkern (Kernel) gleitet über ein Bild und berechnet für jeden Pixel einen neuen Ausgabewert als gewichtete Summe seiner Nachbarschaft. Das Ergebnis heißt <strong>Feature Map</strong>.</p>
+
+<div class="warn"><b>Öffnen &amp; Bedienen</b>
+  Schaltfläche <span class="badge b-yellow">⬛ CNN</span> in der ersten Toolbar-Zeile klicken (zwischen <span class="badge b-dim">◻ 3D</span> und <span class="badge b-dim">💬 KI-Chat</span>).<br>
+  <strong>Verschieben:</strong> Titelleiste (Header) mit der Maus ziehen.<br>
+  <strong>Größe ändern:</strong> Fensterkante oder -ecke ziehen (Browser-Resize-Handle unten rechts).
+</div>
+
+<div class="info"><b>Faltungsformel</b>
+  <code style="font-size:11px;color:var(--accent3)">P(x,y) = Σ [ I(x+i, y+j) × K(i,j) ] / Divisor + Bias</code><br>
+  Für alle 9 Positionen (i,j) des 3×3-Kerns K wird der Eingabepixelwert I elementweise multipliziert, summiert, durch den Divisor geteilt und ein Bias addiert. Das Ergebnis wird auf 0–255 geclippt.
+</div>
+
+<!-- ── Aufbau ── -->
+<h2>Dreispalten-Aufbau</h2>
+<table>
+<tr><th>Spalte</th><th>Inhalt</th><th>Farbe</th></tr>
+<tr><td><strong>1. Eingabebild</strong></td><td>Synthetische Testmuster (32×32, Graustufen) oder eigenes Foto laden. Fotos werden <strong>farbig</strong> dargestellt; intern wird für die Faltungsrechnung automatisch eine Graustufen-Kopie erzeugt. Das Sliding-Window-Rechteck zeigt die aktuelle 3×3-Nachbarschaft.</td><td><span class="badge b-green">Grün</span></td></tr>
+<tr><td><strong>2. Faltungskern</strong></td><td>Editierbares 3×3-Kernel-Gitter. Preset-Vorlagen, Divisor, Bias und Randbehandlung konfigurierbar. Live-Berechnungsanzeige zeigt die 9 Multiplikationen.</td><td><span class="badge b-yellow">Gelb</span></td></tr>
+<tr><td><strong>3. Ausgabebild</strong></td><td>Feature Map: wird Pixel für Pixel während der Animation befüllt. Alternativ Histogramm-Ansicht oder alle 10 Kernel gleichzeitig im Stapel-Modus.</td><td><span class="badge b-cyan">Cyan</span></td></tr>
+</table>
+
+<!-- ── Beispielbilder ── -->
+<h2>Beispielbilder</h2>
+<table>
+<tr><th>Bild</th><th>Beschreibung</th><th>Besonders geeignet für</th></tr>
+<tr><td>Schachbrett</td><td>Alternierende 4×4-Blöcke aus Schwarz und Weiß</td><td>Hochpass-Filter (Kanten), Laplace</td></tr>
+<tr><td>Kreis</td><td>Weißer Kreis auf schwarzem Hintergrund</td><td>Kantendetektion, Sobel-X/Y</td></tr>
+<tr><td>Diagonale</td><td>Diagonale Streifen im 45°-Winkel</td><td>Richtungsabhängige Sobel-Filter</td></tr>
+<tr><td>Streifen</td><td>Horizontale Helligkeitsstreifen</td><td>Sobel-Y (Nord-Süd-Gradient)</td></tr>
+<tr><td>Buchstabe A</td><td>Pixelschrift-A (8×8 skaliert)</td><td>Alle Kantendetektion-Kernel</td></tr>
+<tr><td>Kante</td><td>Harte vertikale Kante Mitte (hell/dunkel)</td><td>Sobel-X, Laplace</td></tr>
+<tr><td>Gradient</td><td>Linearer Helligkeitsgradient links→rechts</td><td>Box-Blur, Gauß, Identität</td></tr>
+<tr><td><em>Eigenes Foto</em></td><td>Beliebige Bilddatei laden (<span class="badge b-green">⬆ Bild laden</span>). Wird <strong>farbig</strong> im Eingangsbild angezeigt. Auflösung über Dropdown wählbar: <strong>64 / 96 / 128 / 256 / 512 px</strong> oder <strong>Original</strong> (Seitenverhältnis bleibt erhalten). Intern wird Graustufen-Kopie für Faltung erzeugt.</td><td>Alle Kernel</td></tr>
+</table>
+
+<div class="tip"><b>Auflösung beim Foto-Laden</b>
+  Das <strong>Auflösungs-Dropdown</strong> links neben „⬆ Bild laden" gilt <em>nur</em> für geladene Fotos — synthetische Testbilder bleiben immer bei 32×32.
+  <table style="margin-top:6px;">
+  <tr><th>Einstellung</th><th>Empfehlung</th></tr>
+  <tr><td>64 px</td><td>Schnellste Animation, grobe Darstellung</td></tr>
+  <tr><td>96 px</td><td>Standard — gutes Verhältnis aus Detail und Geschwindigkeit</td></tr>
+  <tr><td>128 px</td><td>Mehr Detail, Sliding-Window etwas langsamer</td></tr>
+  <tr><td>256 px</td><td>Hohe Auflösung — nur für „⚡ Sofort"-Modus empfohlen</td></tr>
+  <tr><td>512 px</td><td>Sehr hohe Auflösung — nur Sofort-Modus praktikabel</td></tr>
+  <tr><td>Original</td><td>Volle Bildgröße (z. B. 1920×1080) — ausschließlich Sofort-Modus</td></tr>
+  </table>
+</div>
+
+<!-- ── Kernel-Presets ── -->
+<h2>Kernel-Presets</h2>
+<p>Zehn vordefinierte Filterkerne decken die wichtigsten Bildverarbeitungsoperationen ab:</p>
+
+<h3>Tiefpassfilter — Glättung</h3>
+<table>
+<tr><th>Preset</th><th>Kernel</th><th>Divisor</th><th>Effekt</th></tr>
+<tr>
+  <td><span class="badge b-dim">Identität</span></td>
+  <td><code style="font-size:10px">[[0,0,0],[0,1,0],[0,0,0]]</code></td>
+  <td>1</td>
+  <td>Bild unverändert durchlassen. Referenz-Ausgangspunkt.</td>
+</tr>
+<tr>
+  <td><span class="badge b-cyan">Box-Blur</span></td>
+  <td><code style="font-size:10px">[[1,1,1],[1,1,1],[1,1,1]]</code></td>
+  <td>9</td>
+  <td>Gleichmäßige Unschärfe — Mittelwert aller 9 Nachbarn. Rauschen reduzieren.</td>
+</tr>
+<tr>
+  <td><span class="badge b-cyan">Gauß</span></td>
+  <td><code style="font-size:10px">[[1,2,1],[2,4,2],[1,2,1]]</code></td>
+  <td>16</td>
+  <td>Glockenförmige Gewichtung — Zentrum stärker, Ränder schwächer. Natürlichere Weichzeichnung.</td>
+</tr>
+<tr>
+  <td><span class="badge b-yellow">Schärfen</span></td>
+  <td><code style="font-size:10px">[[0,−1,0],[−1,5,−1],[0,−1,0]]</code></td>
+  <td>1</td>
+  <td>Hebt das Zentrum hervor, subtrahiert Nachbarn. Kontrast und Schärfe erhöhen.</td>
+</tr>
+<tr>
+  <td><span class="badge b-yellow">Kantenschärfe</span></td>
+  <td><code style="font-size:10px">[[−1,−1,−1],[−1,9,−1],[−1,−1,−1]]</code></td>
+  <td>1</td>
+  <td>Aggressivere Schärfung als Schärfen-Kernel.</td>
+</tr>
+</table>
+
+<h3>Hochpassfilter — Kantendetektion</h3>
+<table>
+<tr><th>Preset</th><th>Kernel</th><th>Bias</th><th>Effekt</th></tr>
+<tr>
+  <td><span class="badge b-orange">Sobel-X</span></td>
+  <td><code style="font-size:10px">[[−1,0,1],[−2,0,2],[−1,0,1]]</code></td>
+  <td>128</td>
+  <td>Ost-West-Gradient. Findet <strong>vertikale Kanten</strong> (links→rechts Kontrast).</td>
+</tr>
+<tr>
+  <td><span class="badge b-orange">Sobel-Y</span></td>
+  <td><code style="font-size:10px">[[−1,−2,−1],[0,0,0],[1,2,1]]</code></td>
+  <td>128</td>
+  <td>Nord-Süd-Gradient. Findet <strong>horizontale Kanten</strong> (oben→unten Kontrast).</td>
+</tr>
+<tr>
+  <td><span class="badge b-purple">Laplace</span></td>
+  <td><code style="font-size:10px">[[0,−1,0],[−1,4,−1],[0,−1,0]]</code></td>
+  <td>128</td>
+  <td>Richtungsunabhängige Kantenerkennung. Findet alle Kanten gleichzeitig.</td>
+</tr>
+<tr>
+  <td><span class="badge b-purple">Emboss</span></td>
+  <td><code style="font-size:10px">[[−2,−1,0],[−1,1,1],[0,1,2]]</code></td>
+  <td>128</td>
+  <td>Relief-Effekt (Prägung). Kanten erscheinen als 3D-Erhebungen auf grauem Hintergrund.</td>
+</tr>
+<tr>
+  <td><span class="badge b-dim">Verschiebung</span></td>
+  <td><code style="font-size:10px">[[0,1,0],[0,0,0],[0,0,0]]</code></td>
+  <td>0</td>
+  <td>Kopiert den Pixel <em>darüber</em> ins Zentrum — das Bild verschiebt sich um eine Zeile nach unten.</td>
+</tr>
+</table>
+
+<div class="tip"><b>Bias bei Hochpass-Filtern</b>
+  Kantendetektoren erzeugen negative Werte (z.B. −128). Bildschirme können „Minus-Grau" nicht anzeigen. Ein Bias von +128 verschiebt den Nullpunkt in ein mittleres, sichtbares Grau. Werte &lt; 0 → dunkel, &gt; 0 → hell.
+</div>
+
+<!-- ── Parameter ── -->
+<h2>Parameter</h2>
+<table>
+<tr><th>Parameter</th><th>Beschreibung</th></tr>
+<tr><td><strong>Divisor</strong></td><td>Teiler für die Summe. Bei Glättungsfiltern entspricht er der Summe aller Kernelgewichte (Box: 9, Gauß: 16), um die Gesamthelligkeit zu erhalten.</td></tr>
+<tr><td><strong>Bias</strong></td><td>Konstante Addition nach der Division. +128 bei Kantendetektoren um negative Werte sichtbar zu machen.</td></tr>
+<tr><td><strong>Randbehandlung</strong></td><td>Steuert, was passiert wenn der Kernel über den Bildrand ragt (→ <a href="#randbehandlung">Randbehandlung</a>).</td></tr>
+</table>
+
+<h3 id="randbehandlung">Randbehandlung</h3>
+<table>
+<tr><th>Modus</th><th>Verhalten</th><th>Ausgabegröße</th><th>Nachteil</th></tr>
+<tr><td><span class="badge b-yellow">Zero-Padding</span></td><td>Fehlende Randpixel werden als 0 (schwarz) behandelt. Standard in CNNs.</td><td>gleich wie Eingabe</td><td>Künstliche dunkle Kanten am Rand</td></tr>
+<tr><td><span class="badge b-green">Erweitern</span></td><td>Randpixel werden gespiegelt (Neumannsche Bedingung) — natürlichere Übergänge.</td><td>gleich wie Eingabe</td><td>Leichte Artefakte an Ecken</td></tr>
+<tr><td><span class="badge b-red">Abschneiden</span></td><td>Randpixel werden ignoriert (Dirichletsche Bedingung). Ausgabe ist 1 Pixel kleiner an jeder Seite.</td><td>2 Pixel kleiner pro Seite</td><td>Bild schrumpft bei jeder Faltung</td></tr>
+</table>
+
+<!-- ── 6 Animationsmodi ── -->
+<h2>Die 6 Animationsmodi</h2>
+<p>Der Modus wird über die <strong>Animationsleiste</strong> direkt unter dem Panel-Titel ausgewählt. Jeder Modus zeigt einen anderen Aspekt der Faltungsoperation:</p>
+
+<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">
+
+  <div class="card" style="border-color:#f59e0b44;">
+    <div class="card-title" style="color:var(--yellow)">⬜ Sliding Window</div>
+    <p>Ein oranges Highlight-Rechteck gleitet Pixel für Pixel (Zeile für Zeile) über das Eingabebild. Jeder neu berechnete Ausgabepixel leuchtet kurz auf. <strong>Standard-Modus — ideal zum Verstehen des Prinzips.</strong></p>
+    <div class="formula">Delay: variabel via Geschwindigkeit-Slider</div>
+  </div>
+
+  <div class="card" style="border-color:#f59e0b44;">
+    <div class="card-title" style="color:var(--yellow)">↗ Verbindungslinien</div>
+    <p>9 animierte gestrichelte Linien verbinden die 9 Eingabepixel der aktuellen 3×3-Nachbarschaft mit den zugehörigen Kernel-Zellen. An jeder Linie wird der Wert <code>pv×kv=Produkt</code> eingeblendet. Danach fließt eine Sammellinie vom Kernel zum Ausgabepixel. <strong>Ideal zum Verstehen der elementweisen Multiplikation.</strong></p>
+    <div class="formula">Farbe: orange = positiv · rot = negativ · grau = 0</div>
+  </div>
+
+  <div class="card" style="border-color:#f59e0b44;">
+    <div class="card-title" style="color:var(--yellow)">◈ 3D-Lift</div>
+    <p>Der aktive 3×3-Patch hebt sich perspektivisch aus dem Eingabebild heraus (Sinuskurve). Während der Lift-Phase werden die Kernel-Gewichte direkt auf die 9 Patch-Pixel eingeblendet (<code>×Gewicht</code>). Am Ende landet der Patch zurück und der Ausgabepixel wird gesetzt. <strong>Ideal zum Verstehen der lokalen Struktur.</strong></p>
+    <div class="formula">Schatten · Scherperspektive · Gewichts-Overlay</div>
+  </div>
+
+  <div class="card" style="border-color:#f59e0b44;">
+    <div class="card-title" style="color:var(--yellow)">◎ Wellen</div>
+    <p>Jeder berechnete Ausgabepixel erzeugt zwei konzentrische Wellenpulse (cyan + orange), die sich radial ausbreiten — wie ein Wassertropfen der ins Wasser fällt. Mehrere Wellen laufen gleichzeitig und überlagern sich. <strong>Intuitiv sichtbar: wie Informationen sich durch die Feature Map ausbreiten.</strong></p>
+    <div class="formula">Äußerer Ring: cyan · Innerer Ring: orange</div>
+  </div>
+
+  <div class="card" style="border-color:#f59e0b44;">
+    <div class="card-title" style="color:var(--yellow)">▦ Histogramm</div>
+    <p>Unterhalb des Ausgabebilds wächst ein Live-Balkendiagramm (32 Bins, Werte 0–255). Es zeigt die Verteilung der bisherigen Ausgabepixelwerte in Echtzeit. Besonders gut mit <strong>Farb-Output</strong> kombinierbar. <strong>Ideal zum Vergleichen wie unterschiedliche Filter die Helligkeitsverteilung verändern.</strong></p>
+    <div class="formula">Anzahl berechneter Pixel wird als n=… angezeigt</div>
+  </div>
+
+  <div class="card" style="border-color:#f59e0b44;">
+    <div class="card-title" style="color:var(--yellow)">⊞ Filter-Stapel</div>
+    <p>Alle <strong>10 Kernel-Presets</strong> werden gleichzeitig auf das aktuelle Eingabebild angewendet. Die 10 resultierenden Feature-Maps erscheinen nebeneinander in einem Grid — beschriftet mit dem Kernel-Namen. Klick auf eine Karte wechselt direkt zu diesem Kernel im Sliding-Window-Modus. <strong>Ideal zum Vergleich aller Filter auf einen Blick.</strong></p>
+    <div class="formula">⚡ Sofort oder ▶ Start = Stack neu berechnen</div>
+  </div>
+
+</div>
+
+<div class="info"><b>Tipp: Animationsgeschwindigkeit</b>
+  Der <strong>Geschwindigkeit-Slider</strong> (1–10) steuert wie schnell der Kernel voranschreitet. Bei <em>Verbindungslinien</em> und <em>3D-Lift</em> wird die Schrittgeschwindigkeit automatisch reduziert, damit die Animation vollständig sichtbar ist. Für schnelle Ergebnisse: <span class="badge b-cyan">⚡ Sofort</span> berechnet die gesamte Feature Map ohne Animation.
+</div>
+
+<!-- ── Steuerung ── -->
+<h2>Steuerung</h2>
+<table>
+<tr><th>Schaltfläche</th><th>Funktion</th></tr>
+<tr><td><span class="badge b-green">▶ Start / ■ Stop</span></td><td>Animation starten bzw. anhalten. Im Stapel-Modus wird der Stack neu berechnet.</td></tr>
+<tr><td><span class="badge b-dim">⟶ Schritt</span></td><td>Einen einzelnen Pixel berechnen und animieren. Ideal für Schritt-für-Schritt-Analyse.</td></tr>
+<tr><td><span class="badge b-dim">↺ Reset</span></td><td>Ausgabebild leeren, Cursor auf (0,0) zurücksetzen, Histogramm löschen.</td></tr>
+<tr><td><span class="badge b-cyan">⚡ Sofort</span></td><td>Gesamtes Ausgabebild ohne Animation berechnen.</td></tr>
+<tr><td><span class="badge b-dim">⬇ PNG</span></td><td>Aktuelles Ausgabebild als PNG-Datei herunterladen.</td></tr>
+</table>
+
+<h3>Anzeigeoptionen (Footer)</h3>
+<table>
+<tr><th>Option</th><th>Funktion</th></tr>
+<tr><td>Geschw. 1–10</td><td>Animationsgeschwindigkeit (1 = sehr langsam, 10 = sehr schnell)</td></tr>
+<tr><td>☑ Gitter</td><td>Pixel-Gitterlinien auf Eingangs- und Ausgangsbild einblenden</td></tr>
+<tr><td>☑ Werte</td><td>Numerische Pixelwerte auf dem Eingabebild einblenden (sichtbar ab größerer Fenstergröße)</td></tr>
+<tr><td>☑ Farb-Output</td><td>Ausgabepixel farblich darstellen (Heatmap: blau=0 → rot=255) statt Graustufen</td></tr>
+</table>
+
+<!-- ── Berechnungsanzeige ── -->
+<h2>Berechnungsanzeige (Kernelspalte)</h2>
+<p>Die <strong>Aktuelle Berechnung</strong> zeigt nach jedem Schritt die vollständige Rechenoperation für den aktuellen Pixel:</p>
+<div class="info"><b>Beispiel: Sobel-X auf einen 3×3-Patch</b>
+<code style="font-size:10px;display:block;line-height:2;color:var(--accent3)">
+200×(−1)=−200 &nbsp; 200×0=0 &nbsp; 30×1=30<br>
+200×(−2)=−400 &nbsp; 200×0=0 &nbsp; 30×2=60<br>
+200×(−1)=−200 &nbsp; 200×0=0 &nbsp; 30×1=30<br>
+Σ = −680 / 1 + 128 = <span style="color:#00d4ff">0</span>  (geclippt auf 0)
+</code>
+</div>
+<p>Positive Produkte erscheinen in <span style="color:#f59e0b">Orange</span>, negative in <span style="color:#f87171">Rot</span>. Das Endergebnis erscheint in <span style="color:#00d4ff">Cyan</span>.</p>
+
+<!-- ── CNN vs. klassisch ── -->
+<h2>Von der klassischen Bildverarbeitung zum CNN</h2>
+<table>
+<tr><th></th><th>Klassische Bildverarbeitung</th><th>Convolutional Neural Network</th></tr>
+<tr><td><strong>Kernel</strong></td><td>Von Menschen vordefiniert (z.B. Sobel-Operator)</td><td>Werden durch Backpropagation <strong>gelernt</strong></td></tr>
+<tr><td><strong>Anzahl</strong></td><td>1–10 Filter</td><td>Hunderte bis tausende Kernel pro Schicht</td></tr>
+<tr><td><strong>Ziel</strong></td><td>Bekannter visueller Effekt (Unschärfe, Kanten)</td><td>Optimale Feature-Extraktion für die Aufgabe</td></tr>
+<tr><td><strong>Ausgabe</strong></td><td>1 Feature Map</td><td>Stack aus N Feature Maps (eine pro Kernel)</td></tr>
+<tr><td><strong>Pipeline</strong></td><td>Faltung → fertig</td><td>Faltung → ReLU → Max Pooling → (wiederholen)</td></tr>
+</table>
+
+<h3>CNN-Pipeline: Was nach der Faltung passiert</h3>
+<div class="grid">
+  <div class="card">
+    <div class="card-title" style="color:var(--accent)">1. Convolution (Faltung)</div>
+    <p>Kernel gleitet über das Bild → Feature Map mit Aktivierungsstärken pro Position.</p>
+    <div class="formula">P(x,y) = Σ I(x+i,y+j)×K(i,j) / Div + Bias</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--accent4)">2. ReLU (Aktivierung)</div>
+    <p>Alle negativen Werte werden auf 0 gesetzt. Nur positive Erkennungen (Muster gefunden) passieren.</p>
+    <div class="formula">f(x) = max(0, x)</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--accent2)">3. Max Pooling</div>
+    <p>2×2-Fenster gleitet über die Feature Map und behält nur den Maximalwert. Halbiert die räumliche Auflösung.</p>
+    <div class="formula">out = max(patch 2×2)</div>
+  </div>
+</div>
+
+<h3>Effizienz: Toeplitz-Matrix statt Schleifen</h3>
+<p>In der Praxis wird die Faltungsoperation nicht mit vier verschachtelten Schleifen implementiert, sondern als eine einzige Matrixmultiplikation formuliert:</p>
+<div class="tip"><b>Vektorisierung (Toeplitz-Trick)</b>
+  Das 2D-Bild wird zu einem 1D-Vektor gestreckt (Flattening). Der Kernel wird zu einer großen <strong>Toeplitz-Matrix</strong> aufgebläht, deren Einträge entlang der Diagonalen periodisch wiederholt werden. Dann:<br><br>
+  <code style="color:var(--accent3)">[Toeplitz-Matrix] × [Bildvektor] = [Feature-Map-Vektor]</code><br><br>
+  Ein einziger hochgradig paralleler Rechenschritt auf der GPU — statt Millionen sequenzieller Schleifeniterationen.
+</div>
+
 </section>
 
 <hr>
