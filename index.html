@@ -1213,6 +1213,115 @@ header h1 span{color:var(--text-dim);font-weight:400;}
   width:3px;border-radius:1px;flex-shrink:0;transition:height .3s;
 }
 
+/* ══ TUTORIAL BAR ══════════════════════════════════════════════ */
+#tutBar{
+  position:fixed;bottom:0;left:0;z-index:600;
+  background:var(--surface);border-top:1px solid var(--border);
+  transition:height .28s cubic-bezier(.4,0,.2,1), opacity .2s;
+  height:0;overflow:hidden;opacity:0;
+  display:flex;flex-direction:column;
+}
+#tutBar.open{height:54px;opacity:1;}
+#tutBar.expanded{height:180px;opacity:1;}
+#tutBarToggle{
+  position:fixed;bottom:0;left:0;z-index:601;
+  height:22px;cursor:pointer;
+  background:var(--surface2);border-top:1px solid var(--border);border-right:1px solid var(--border);
+  display:flex;align-items:center;gap:6px;padding:0 12px;
+  font-size:var(--fz-sm);color:var(--text-dim);
+  transition:bottom .28s cubic-bezier(.4,0,.2,1);
+  border-top-right-radius:6px;
+}
+#tutBarToggle:hover{color:var(--accent);border-color:var(--accent);}
+#tutBarToggle .arrow{transition:transform .2s;display:inline-block;}
+#tutBarToggle.open .arrow{transform:rotate(180deg);}
+#tutBarHead{
+  display:flex;align-items:center;gap:8px;padding:4px 12px;
+  border-bottom:1px solid var(--border);flex-shrink:0;min-height:36px;
+}
+#tutBarHead .tut-title{font-size:var(--fz-ui);font-weight:600;color:var(--accent);white-space:nowrap;}
+#tutBarHead select{
+  background:var(--surface2);border:1px solid var(--border);color:var(--text);
+  font-family:'JetBrains Mono',monospace;font-size:var(--fz-sm);
+  border-radius:3px;padding:2px 6px;cursor:pointer;
+}
+#tutBarHead .tut-btn{
+  padding:3px 10px;border-radius:4px;border:1px solid var(--border);
+  background:var(--surface2);color:var(--text);font-family:'JetBrains Mono',monospace;
+  font-size:var(--fz-sm);cursor:pointer;transition:all .15s;
+}
+#tutBarHead .tut-btn:hover{border-color:var(--accent);color:var(--accent);}
+#tutBarHead .tut-btn.active{background:var(--accent);color:#000;border-color:var(--accent);}
+#tutBarHead .tut-btn:disabled{opacity:.4;pointer-events:none;}
+#tutProgress{flex:1;height:4px;background:var(--surface2);border-radius:2px;margin:0 8px;min-width:60px;}
+#tutProgressFill{height:100%;background:var(--accent);border-radius:2px;width:0%;transition:width .3s;}
+#tutStepInfo{font-size:var(--fz-xs);color:var(--text-dim);white-space:nowrap;}
+#tutDesc{
+  flex:1;overflow-y:auto;padding:6px 12px;font-size:var(--fz-sm);color:var(--text-dim);
+  line-height:1.5;
+}
+/* Speed slider in tut bar */
+#tutSpeedGrp{display:flex;align-items:center;gap:4px;font-size:var(--fz-xs);color:var(--text-dim);}
+#tutSpeedGrp input[type=range]{width:60px;accent-color:var(--accent);}
+#tutSpeedVal{width:28px;text-align:center;}
+/* TTS controls */
+#tutTtsGrp{display:flex;align-items:center;gap:4px;font-size:var(--fz-xs);color:var(--text-dim);}
+#tutTtsBtn{
+  padding:3px 8px;border-radius:4px;border:1px solid var(--border);
+  background:var(--surface2);color:var(--text-dim);font-size:var(--fz-sm);
+  cursor:pointer;transition:all .15s;font-family:'JetBrains Mono',monospace;
+}
+#tutTtsBtn:hover{border-color:var(--accent);color:var(--accent);}
+#tutTtsBtn.active{background:var(--accent);color:#000;border-color:var(--accent);}
+#tutVoiceSel{
+  background:var(--surface2);border:1px solid var(--border);color:var(--text);
+  font-family:'JetBrains Mono',monospace;font-size:var(--fz-xs);
+  border-radius:3px;padding:1px 4px;max-width:130px;cursor:pointer;
+}
+/* Spotlight cursor overlay */
+#tutSpotlight{
+  position:fixed;pointer-events:none;z-index:9999;
+  width:48px;height:48px;border-radius:50%;
+  border:2px solid var(--accent);
+  background:radial-gradient(circle,#00d4ff22 0%,#00d4ff08 60%,transparent 70%);
+  box-shadow:0 0 18px 4px #00d4ff33;
+  transform:translate(-50%,-50%);
+  display:none;transition:left .35s cubic-bezier(.4,0,.2,1),top .35s cubic-bezier(.4,0,.2,1),opacity .25s;
+}
+#tutSpotlight.click{
+  box-shadow:0 0 24px 8px #00d4ff66;border-color:#fff;
+}
+#tutSpotlight::after{
+  content:'';position:absolute;top:50%;left:50%;
+  width:8px;height:8px;border-radius:50%;background:var(--accent);
+  transform:translate(-50%,-50%);
+}
+/* Tooltip bubble at spotlight */
+#tutTip{
+  position:fixed;pointer-events:none;z-index:10000;
+  background:#0e1520ee;border:1px solid #00d4ff66;border-radius:6px;
+  padding:5px 10px;font-size:var(--fz-sm);color:var(--text);
+  font-family:'JetBrains Mono',monospace;
+  max-width:340px;white-space:normal;line-height:1.4;
+  display:none;opacity:0;transition:opacity .25s;
+  box-shadow:0 4px 16px #00000088;
+}
+#tutTip .tut-formula{
+  display:block;margin:6px 0 4px;padding:6px 10px;
+  background:#0a0c10;border:1px solid #00d4ff33;border-radius:4px;
+  font-size:calc(var(--fz-sm) + 2px);color:var(--accent);
+  text-align:center;letter-spacing:.5px;white-space:nowrap;
+}
+#tutTip .tut-formula-desc{
+  display:block;font-size:var(--fz-xs);color:var(--text-dim);margin-top:3px;
+}
+#tutTip.show{display:block;opacity:1;}
+#tutTip::before{
+  content:'';position:absolute;top:-6px;left:20px;
+  border-left:6px solid transparent;border-right:6px solid transparent;
+  border-bottom:6px solid #00d4ff66;
+}
+
 /* ══ CNN PANEL ══════════════════════════════════════════════════ */
 #cnnOverlay{
   position:fixed;inset:0;z-index:8600;background:#00000088;
@@ -2553,8 +2662,10 @@ header h1 span{color:var(--text-dim);font-weight:400;}
       <div class="hp-row">
         <span class="hp-lbl" onmouseenter="showTT(event,'Batch Size','Anzahl Trainingsbeispiele pro Gewichts-Update.\n• 1 (Online): jedes Beispiel aktualisiert sofort — unruhig aber schnell.\n• Mini-Batch (8–32): Balance aus Stabilität und Geschwindigkeit.\n• Full Batch: alle Beispiele zusammen — stabil aber langsam.',null)" onmouseleave="hideTT()">Batch Size</span>
         <select class="hp-sel" id="hpBatch"
-          onmouseenter="showTT(event,'Batch Size','• 1 (Online): jedes Beispiel sofort updaten — schnell, aber unruhige Loss-Kurve.\n• 8–32: Mini-Batch — gute Balance. Empfehlung für die meisten Fälle.\n• Full Batch: alle Beispiele auf einmal — glatte Kurve, aber langsam.',null)" onmouseleave="hideTT()">
+          onmouseenter="showTT(event,'Batch Size','• 1 (Online): jedes Beispiel sofort updaten — schnell, aber unruhige Loss-Kurve.\n• 2–4: Sehr kleine Batches — gut bei kleinen Datensätzen (< 20 Beispiele).\n• 8–32: Mini-Batch — gute Balance. Empfehlung für die meisten Fälle.\n• Full Batch: alle Beispiele auf einmal — glatte Kurve, aber langsam.',null)" onmouseleave="hideTT()">
           <option value="1">1 (Online)</option>
+          <option value="2">2</option>
+          <option value="4">4</option>
           <option value="8">8</option>
           <option value="16">16</option>
           <option value="32" selected>32</option>
@@ -2562,12 +2673,13 @@ header h1 span{color:var(--text-dim);font-weight:400;}
         </select>
       </div>
       <div class="hp-row">
-        <span class="hp-lbl" onmouseenter="showTT(event,'Loss-Funktion','Messgröße für den Fehler zwischen Netzausgabe und Zielwert.\n• MSE: Mittlerer quadratischer Fehler — für Regression.\n• MAE: Mittlerer absoluter Fehler — robuster gegen Ausreißer.\n• BCE: Binary Cross-Entropy — für Klassifikation (0/1-Ausgaben).',null)" onmouseleave="hideTT()">Loss-Funktion</span>
+        <span class="hp-lbl" onmouseenter="showTT(event,'Loss-Funktion','Messgröße für den Fehler zwischen Netzausgabe und Zielwert.\n• MSE: Mittlerer quadratischer Fehler — für Regression.\n• MAE: Mittlerer absoluter Fehler — robuster gegen Ausreißer.\n• BCE: Binary Cross-Entropy — für binäre Klassifikation (0/1).\n• CCE: Categorical Cross-Entropy — für Mehrklassen mit Softmax.',null)" onmouseleave="hideTT()">Loss-Funktion</span>
         <select class="hp-sel" id="hpLoss"
-          onmouseenter="showTT(event,'Loss-Funktion','• MSE (Mean Squared Error): Standardwahl für Regression. Bestraft große Fehler stark.\n• MAE (Mean Absolute Error): robuster gegen Ausreißer.\n• BCE (Binary Cross-Entropy): für 0/1-Klassifikation mit Sigmoid-Ausgang.',null)" onmouseleave="hideTT()">
+          onmouseenter="showTT(event,'Loss-Funktion','• MSE (Mean Squared Error): Standardwahl für Regression. Bestraft große Fehler stark.\n• MAE (Mean Absolute Error): robuster gegen Ausreißer.\n• BCE (Binary Cross-Entropy): für 0/1-Klassifikation mit Sigmoid-Ausgang.\n• CCE (Categorical Cross-Entropy): für Mehrklassen-Klassifikation mit Softmax-Ausgang.',null)" onmouseleave="hideTT()">
           <option value="mse">MSE</option>
           <option value="mae">MAE</option>
           <option value="bce">BCE</option>
+          <option value="cce">CCE</option>
         </select>
       </div>
       <div class="hp-row">
@@ -2704,7 +2816,7 @@ header h1 span{color:var(--text-dim);font-weight:400;}
           onmouseenter="showTT(event,'Toleranz (Early Stopping)','Mindestverbesserung des Loss pro Epoche. Wird die Verbesserung kleiner als dieser Wert, zählt die Epoche als "kein Fortschritt".\nKleinere Werte = geduldiger. Typisch: 1e-6.',null)" onmouseleave="hideTT()">
       </div>
       <div class="hp-row">
-        <span class="hp-lbl" onmouseenter="showTT(event,'Patience','Anzahl Epochen ohne Verbesserung, bevor Early Stopping abbricht. Größere Werte = geduldiger. Typisch: 10–50.',null)" onmouseleave="hideTT()">Patience</span>
+        <span class="hp-lbl" onmouseenter="showTT(event,'Patience','Anzahl Epochen ohne Verbesserung, bevor Early Stopping abbricht. Größere Werte = geduldiger. Typisch: 10-50.',null)" onmouseleave="hideTT()">Patience</span>
         <input class="hp-inp" id="hpPatience" type="number" value="20" min="1"
           onmouseenter="showTT(event,'Patience (Early Stopping)','Anzahl aufeinanderfolgender Epochen ohne Verbesserung, nach denen das Training abbricht. Standard: 20.\nKleinere Werte = früher stoppen (5–10 für kleine Datasets).\nGrößere Werte = geduldiger abwarten (50–100 für komplexe Netze).',null)" onmouseleave="hideTT()">
       </div>
@@ -3319,6 +3431,59 @@ header h1 span{color:var(--text-dim);font-weight:400;}
   </div><!-- /#rlSidebar -->
 
 </div><!-- /.main -->
+
+<!-- Tutorial Bar Toggle -->
+<div id="tutBarToggle" onclick="tutToggle()" title="Tutorial-Leiste ein-/ausklappen">
+  <span class="arrow">▲</span> 🎓 Tutorial
+</div>
+
+<!-- Tutorial Bar -->
+<div id="tutBar">
+  <div id="tutBarHead">
+    <span class="tut-title">🎓 Tutorial</span>
+    <select id="tutSelect" onchange="tutLoad(this.value)">
+      <optgroup label="Menüleisten">
+        <option value="toolbar">1 – Die erste Menüleiste</option>
+        <option value="embToolbar">2 – Die zweite Menüleiste (Embedding Lab)</option>
+        <option value="rlToolbar">3 – Die dritte Menüleiste (Reinforcement Learning)</option>
+      </optgroup>
+      <optgroup label="Netz &amp; Simulation">
+        <option value="buildSimple">4 – Einfaches Netz aufbauen</option>
+        <option value="simulation">5 – Simulation &amp; Forward Pass</option>
+      </optgroup>
+      <optgroup label="Training">
+        <option value="training">6 – Training (Regression: y = 3·x)</option>
+        <option value="classify">7 – Klassifikation (Softmax &amp; One-Hot)</option>
+      </optgroup>
+    </select>
+    <div class="sep" style="height:16px"></div>
+    <button class="tut-btn" id="tutPlayBtn" onclick="tutPlay()" title="Abspielen">▶ Abspielen</button>
+    <button class="tut-btn" id="tutPrevBtn" onclick="tutStepPrev()" disabled title="Schritt zurück">⏮ Zurück</button>
+    <button class="tut-btn" id="tutStepBtn" onclick="tutStepNext()" title="Nächster Schritt">⏭ Schritt</button>
+    <button class="tut-btn" id="tutStopBtn" onclick="tutStop()" disabled title="Stoppen">⏹ Stopp</button>
+    <div class="sep" style="height:16px"></div>
+    <div id="tutSpeedGrp">
+      <span>🐢</span>
+      <input type="range" id="tutSpeed" min="1" max="5" value="3" step="1"
+        oninput="tutSetSpeed(this.value)" title="Geschwindigkeit">
+      <span>🐇</span>
+      <span id="tutSpeedVal">1×</span>
+    </div>
+    <div class="sep" style="height:16px"></div>
+    <div id="tutTtsGrp">
+      <button id="tutTtsBtn" onclick="tutTtsToggle()" title="Sprachausgabe ein/aus">🔇 Sprache</button>
+      <select id="tutVoiceSel" onchange="tutTtsSetVoice(this.value)" title="Stimme wählen"></select>
+    </div>
+    <div id="tutProgress"><div id="tutProgressFill"></div></div>
+    <span id="tutStepInfo">0 / 0</span>
+    <button class="tut-btn" onclick="tutToggleExpand()" title="Details ein-/ausblenden" style="margin-left:auto;">≡</button>
+  </div>
+  <div id="tutDesc"></div>
+</div>
+
+<!-- Tutorial Spotlight Cursor -->
+<div id="tutSpotlight"></div>
+<div id="tutTip"></div>
 
 <div id="ctx-menu">
   <div class="clbl" id="ctx-title">—</div>
@@ -5315,9 +5480,8 @@ function drawSimNeuron(n){
   // For INPUT/BIAS: show floating HTML input above the neuron on the canvas
   if(isInput){
     const sp = w2s(n.x, n.y);
-    const r  = wrap.getBoundingClientRect();
-    const sx = sp.x - r.left;
-    const sy = sp.y - r.top;
+    const sx = sp.x;
+    const sy = sp.y;
     const inputH = 22;
     const inputW = 62;  // feste Breite unabhängig vom Zoom
     const gap = 4;
@@ -6071,6 +6235,10 @@ function calcLoss(preds, targets){
     const pp=Math.max(1e-12,Math.min(1-1e-12,p));
     return s+targets[i]*Math.log(pp)+(1-targets[i])*Math.log(1-pp);
   },0)/preds.length;
+  if(type==='cce') return -preds.reduce((s,p,i)=>{
+    const pp=Math.max(1e-12,p);
+    return s+targets[i]*Math.log(pp);
+  },0);
   return 0;
 }
 function lossGrad(pred, target){
@@ -6080,6 +6248,10 @@ function lossGrad(pred, target){
   if(type==='bce'){
     const pp=Math.max(1e-12,Math.min(1-1e-12,pred));
     return -(target/pp-(1-target)/(1-pp));
+  }
+  if(type==='cce'){
+    const pp=Math.max(1e-12,pred);
+    return -target/pp;
   }
   return pred-target;
 }
@@ -11754,7 +11926,7 @@ document.getElementById('embTextInput').addEventListener('keydown',e=>{
 // ── Persistente Einstellungen ──────────────────────────────────────
 const CHAT_SETTINGS_KEY = 'nnbChatSettings';
 let chatSettings = {
-  host: 'http://127.0.0.1:1234',
+  host: 'http://192.168.1.100:1234',
   model: 'local-model',
   sysPrompt: 'Du bist ein KI-Tutor für den Neural Network Builder (v19). Die App hat drei Bereiche: (1) Neuronales Netz — visueller Editor mit Drag & Drop, Forward-Pass-Simulation und überwachtem Training inkl. Backpropagation, Loss, Accuracy und Keras-Export; (2) Embedding Lab — Tokenisierung, 2D/3D-Vektorvisualisierung und Vektordatenbank; (3) Reinforcement Learning — nativer Q-Learning-Simulator mit Gitterwelt, Bellman-Gleichung, Q-Tabelle und Heatmap. Beantworte alle Fragen auf Deutsch, kurz und präzise. Beziehe dich auf Netzwerk- oder Trainingsdaten die der Nutzer dir mitgibt. Erkläre KI-Konzepte verständlich für Lernende.',
   maxTokens: 4096
@@ -13423,6 +13595,2960 @@ function _initCnnDrag(){
   });
   document.addEventListener('mouseup',()=>drag=false);
 })();
+
+// ══════════════════════════════════════════════════════════════════
+//  TUTORIAL ENGINE — Animierte Schritt-für-Schritt-Anleitungen
+// ══════════════════════════════════════════════════════════════════
+const TUT = {
+  steps: [],
+  idx: -1,
+  playing: false,
+  timer: null,
+  expanded: false,
+  speed: 1,       // Geschwindigkeitsfaktor (0.25 … 3)
+  skip: false     // true → laufenden Schritt abkürzen (Delay+TTS sofort resolven)
+};
+
+// Geschwindigkeits-Stufen: Slider 1–5 → Faktor
+const TUT_SPEED_MAP = { 1: 0.3, 2: 0.6, 3: 1, 4: 1.8, 5: 3 };
+const TUT_SPEED_LABEL = { 1: '0.3×', 2: '0.6×', 3: '1×', 4: '1.8×', 5: '3×' };
+
+function tutSetSpeed(val) {
+  TUT.speed = TUT_SPEED_MAP[val] || 1;
+  document.getElementById('tutSpeedVal').textContent = TUT_SPEED_LABEL[val] || '1×';
+}
+
+/** Delay, skaliert nach Geschwindigkeit. Resolved sofort bei TUT.skip. */
+function tutDelay(ms) {
+  if (TUT.skip) return Promise.resolve();
+  return new Promise(r => {
+    const id = setTimeout(r, Math.max(60, ms / TUT.speed));
+    // Damit tutSkip() den Timer abbrechen kann
+    TUT._delayTimer = id;
+    TUT._delayResolve = r;
+  });
+}
+
+// ── Tutorial-Bar-Breite synchron mit InfoDrawer halten ──
+function tutUpdateWidth() {
+  const bar   = document.getElementById('tutBar');
+  const toggl = document.getElementById('tutBarToggle');
+  const info  = document.getElementById('infoDrawer');
+  if (!bar) return;
+  const sb = document.getElementById('sidebar');
+  const infoW = (info && info.classList.contains('open')) ? info.offsetWidth + 18 : 0;
+  const sbW   = (sb && !sb.classList.contains('collapsed')) ? sb.offsetWidth : 0;
+  const rightOff = infoW + sbW;
+  bar.style.right = rightOff + 'px';
+  if (toggl) toggl.style.right = rightOff + 'px';
+}
+// observe info drawer & sidebar changes
+new MutationObserver(tutUpdateWidth).observe(
+  document.getElementById('infoDrawer'),
+  { attributes: true, attributeFilter: ['class','style'] }
+);
+new MutationObserver(tutUpdateWidth).observe(
+  document.getElementById('sidebar'),
+  { attributes: true, attributeFilter: ['class','style'] }
+);
+window.addEventListener('resize', tutUpdateWidth);
+tutUpdateWidth();
+
+function tutToggle() {
+  const bar = document.getElementById('tutBar');
+  const tog = document.getElementById('tutBarToggle');
+  if (bar.classList.contains('open') || bar.classList.contains('expanded')) {
+    bar.classList.remove('open','expanded');
+    tog.classList.remove('open');
+    tog.style.bottom = '0';
+    TUT.expanded = false;
+  } else {
+    bar.classList.add('open');
+    tog.classList.add('open');
+    tog.style.bottom = '54px';
+    tutUpdateWidth();
+  }
+}
+
+function tutToggleExpand() {
+  const bar = document.getElementById('tutBar');
+  const tog = document.getElementById('tutBarToggle');
+  if (bar.classList.contains('expanded')) {
+    bar.classList.remove('expanded');
+    bar.classList.add('open');
+    tog.style.bottom = '54px';
+    TUT.expanded = false;
+  } else {
+    bar.classList.remove('open');
+    bar.classList.add('expanded');
+    tog.style.bottom = '180px';
+    TUT.expanded = true;
+  }
+}
+
+// ── Spotlight-Cursor ──
+const tutSpot = document.getElementById('tutSpotlight');
+const tutTipEl = document.getElementById('tutTip');
+
+function tutMoveTo(x, y) {
+  // Transition-Dauer an Geschwindigkeit anpassen
+  const dur = Math.max(0.1, 0.35 / TUT.speed);
+  tutSpot.style.transitionDuration = dur + 's,' + dur + 's,0.25s';
+  return new Promise(resolve => {
+    tutSpot.style.display = 'block';
+    tutSpot.style.left = x + 'px';
+    tutSpot.style.top  = y + 'px';
+    // Tooltip mitbewegen
+    if (tutTipEl.classList.contains('show')) {
+      tutTipEl.style.left = (x + 30) + 'px';
+      tutTipEl.style.top  = (y + 30) + 'px';
+    }
+    setTimeout(resolve, dur * 1000 + 50);
+  });
+}
+
+function tutClick() {
+  return new Promise(resolve => {
+    tutSpot.classList.add('click');
+    const d = Math.max(100, 350 / TUT.speed);
+    setTimeout(() => { tutSpot.classList.remove('click'); resolve(); }, d);
+  });
+}
+
+function tutHide() {
+  tutSpot.style.display = 'none';
+  tutTipHide();
+}
+
+/** Tooltip neben dem Spotlight anzeigen */
+function tutTipShow(text, html) {
+  if (html) {
+    tutTipEl.innerHTML = text;
+  } else {
+    tutTipEl.textContent = text;
+  }
+  tutTipEl.classList.add('show');
+  // Position: rechts-unterhalb vom Spotlight
+  const sx = parseFloat(tutSpot.style.left) || 0;
+  const sy = parseFloat(tutSpot.style.top)  || 0;
+  tutTipEl.style.left = (sx + 30) + 'px';
+  tutTipEl.style.top  = (sy + 30) + 'px';
+}
+
+function tutTipHide() {
+  tutTipEl.classList.remove('show');
+}
+
+/**
+ * Zeigt Tooltip + spricht Text (falls TTS aktiv).
+ * Wartet, bis BEIDES fertig ist (min. minMs Anzeige, und Sprache komplett).
+ * @param {string} tip   — Tooltip-Text (oder HTML wenn html=true)
+ * @param {string} [say] — Sprachtext (falls abweichend vom Tooltip)
+ * @param {number} [minMs=2000] — Mindest-Anzeigedauer ohne TTS
+ * @param {boolean} [html=false]
+ */
+async function tutSay(tip, say, minMs, html) {
+  minMs = minMs || 2000;
+  tutTipShow(tip, !!html);
+  const speechText = say || (html ? tutTipEl.textContent : tip);
+  // Sprache und Timer parallel starten
+  const ttsP  = tutTtsSpeak(speechText);
+  const delayP = tutDelay(minMs);
+  // Warten bis beides fertig
+  await Promise.all([ttsP, delayP]);
+}
+
+// ── Hilfsfunktionen ──
+function tutGetElCenter(el) {
+  const r = el.getBoundingClientRect();
+  return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+}
+
+/** Scrollt ein Element in der Sidebar sanft ins Sichtbare */
+function tutScrollTo(el) {
+  if (!el) return Promise.resolve();
+  const sb = document.getElementById('sidebar');
+  if (!sb) return Promise.resolve();
+  // Element in die Mitte der Sidebar scrollen
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  return new Promise(r => setTimeout(r, 350));
+}
+
+/** Viewport so setzen, dass World-Koordinate (wx,wy) in der Canvas-Mitte liegt */
+function tutCenterOn(wx, wy) {
+  const wrapEl = document.getElementById('wrap');
+  const wr = wrapEl.getBoundingClientRect();
+  vx = wr.width  / 2 - wx * vz;
+  vy = wr.height / 2 - wy * vz;
+  renderGrid();
+  render();
+}
+
+function tutUpdateUI() {
+  const total = TUT.steps.length;
+  const cur   = TUT.idx + 1;
+  document.getElementById('tutStepInfo').textContent = cur + ' / ' + total;
+  const pct = total ? (cur / total * 100) : 0;
+  document.getElementById('tutProgressFill').style.width = pct + '%';
+  document.getElementById('tutPlayBtn').disabled  = TUT.playing;
+  document.getElementById('tutPrevBtn').disabled  = TUT.idx <= 0;
+  document.getElementById('tutStepBtn').disabled  = TUT.idx >= total - 1;
+  document.getElementById('tutStopBtn').disabled  = !TUT.playing && TUT.idx < 0;
+  const desc = document.getElementById('tutDesc');
+  if (TUT.idx >= 0 && TUT.idx < total) {
+    desc.textContent = TUT.steps[TUT.idx].desc || '';
+  }
+}
+
+// ── Tutorial-Definitionen ──
+function tutBuildSimpleSteps() {
+  const wrapEl = document.getElementById('wrap');
+
+  // Sidebar-Neuronen-Items (0=Input, 1=Hidden, 2=Output, 3=Bias)
+  const sidebarItems = document.querySelectorAll('.n-item');
+  const inputItem  = sidebarItems[0];
+  const hiddenItem = sidebarItems[1];
+  const outputItem = sidebarItems[2];
+  const biasItem   = sidebarItems[3];
+
+  // Layout: Input → Hidden → Output, Bias unterhalb von Hidden
+  //         Alles um midWX/midWY zentriert
+  const midWX = 350, midWY = 280;
+  const inputWX  = midWX - 200, inputWY  = midWY;
+  const hiddenWX = midWX,       hiddenWY = midWY;
+  const outputWX = midWX + 200, outputWY = midWY;
+  const biasWX   = midWX,       biasWY   = midWY + 130;
+
+  /** Screen-Pos eines World-Punktes (immer aktuell berechnet) */
+  function wScreen(wx, wy) {
+    const wr = wrapEl.getBoundingClientRect();
+    const sp = w2s(wx, wy);
+    return { x: wr.left + sp.x, y: wr.top + sp.y };
+  }
+
+  /** Hilfsfunktion: Neuron aus Sidebar auf Canvas ziehen */
+  async function tutDragNeuron(sidebarEl, type, wx, wy, tipGrab, tipPlace, tipDone, speech) {
+    if (!sidebarEl) return;
+    const from = tutGetElCenter(sidebarEl);
+    await tutMoveTo(from.x, from.y);
+    // Sprache für den gesamten Drag-Vorgang starten
+    const ttsP = tutTtsSpeak(speech || (tipGrab + '. ' + tipPlace + '. ' + tipDone));
+    tutTipShow(tipGrab);
+    await tutClick();
+    await tutDelay(500);
+    const target = wScreen(wx, wy);
+    tutTipShow(tipPlace);
+    await tutMoveTo(target.x, target.y);
+    await tutDelay(350);
+    addN(type, wx, wy);
+    render();
+    await tutClick();
+    tutTipShow(tipDone);
+    await tutDelay(2200);
+    await ttsP; // warten bis Sprache fertig
+    tutTipHide();
+  }
+
+  /** Hilfsfunktion: Verbindung zwischen zwei Neuronen animieren */
+  async function tutConnect(fromN, toN, tipStart, tipEnd, tipDone, speech) {
+    if (!fromN || !toN) return;
+    const ttsP = tutTtsSpeak(speech || (tipStart + '. ' + tipEnd + '. ' + tipDone));
+    const p1 = wScreen(fromN.x, fromN.y);
+    await tutMoveTo(p1.x, p1.y);
+    tutTipShow(tipStart);
+    await tutClick();
+    connectStart = fromN.id;
+    render();
+    await tutDelay(500);
+
+    const p2 = wScreen(toN.x, toN.y);
+    tutTipShow(tipEnd);
+    await tutMoveTo(p2.x, p2.y);
+    await tutClick();
+    if (!connEx(fromN.id, toN.id)) {
+      connections.push({ from: fromN.id, to: toN.id, weight: +(Math.random() * 2 - 1).toFixed(2), frozen: false });
+    }
+    connectStart = null;
+    render();
+    tutTipShow(tipDone);
+    await tutDelay(2200);
+    await ttsP;
+    tutTipHide();
+  }
+
+  return [
+    // ── Schritt 0: Vorbereitung ──
+    {
+      desc: 'Willkommen! Dieses Tutorial zeigt, wie ein neuronales Netz mit Input, Hidden, Bias und Output aufgebaut und verbunden wird.',
+      ownTts: true, action: async () => {
+        neurons.length = 0;
+        connections.length = 0;
+        selNeurons.clear();
+        selConn = null;
+        nc = 0;
+        vz = 1;
+        document.getElementById('zl').textContent = '100%';
+        tutCenterOn(midWX, midWY);
+        await tutSay('Canvas wird vorbereitet …', 'Willkommen! Dieses Tutorial zeigt, wie ein neuronales Netz mit Input, Hidden, Bias und Output aufgebaut und verbunden wird.', 2000);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 1: Input-Neuron ──
+    {
+      desc: 'Schritt 1: Input-Neuron platzieren. Es repräsentiert den Eingabewert des Netzes (z. B. x₁).',
+      ownTts: true, action: async () => {
+        await tutDragNeuron(inputItem, 'input', inputWX, inputWY,
+          'Input-Neuron aus der Sidebar nehmen',
+          '… links auf dem Canvas platzieren',
+          '✓ Input-Neuron platziert!',
+          'Schritt 1: Wir nehmen ein Input-Neuron aus der Sidebar und platzieren es links auf dem Canvas. Input-Neuronen repräsentieren die Eingabewerte des Netzes.'
+        );
+      }
+    },
+    // ── Schritt 2: Hidden-Neuron ──
+    {
+      desc: 'Schritt 2: Hidden-Neuron platzieren. Versteckte Neuronen verarbeiten die Eingaben und lernen Muster zu erkennen.',
+      action: async () => {
+        await tutDragNeuron(hiddenItem, 'hidden', hiddenWX, hiddenWY,
+          'Hidden-Neuron aus der Sidebar nehmen',
+          '… in die Mitte des Canvas platzieren',
+          '✓ Hidden-Neuron platziert!',
+          'Schritt 2: Das Hidden-Neuron kommt in die Mitte. Versteckte Neuronen verarbeiten die Eingaben und lernen Muster zu erkennen.'
+        );
+      }
+    },
+    // ── Schritt 3: Output-Neuron ──
+    {
+      desc: 'Schritt 3: Output-Neuron platzieren. Es liefert das Ergebnis der Berechnung.',
+      action: async () => {
+        await tutDragNeuron(outputItem, 'output', outputWX, outputWY,
+          'Output-Neuron aus der Sidebar nehmen',
+          '… rechts auf dem Canvas platzieren',
+          '✓ Output-Neuron platziert!',
+          'Schritt 3: Das Output-Neuron platzieren wir rechts. Es liefert das Ergebnis der Berechnung.'
+        );
+      }
+    },
+    // ── Schritt 4: Bias-Neuron ──
+    {
+      desc: 'Schritt 4: Bias-Neuron platzieren. Es hat immer den Wert 1 und verschiebt die Aktivierungsschwelle — wie ein „Grundpegel" für das Netz.',
+      action: async () => {
+        await tutDragNeuron(biasItem, 'bias', biasWX, biasWY,
+          'Bias-Neuron aus der Sidebar nehmen',
+          '… unterhalb des Hidden-Neurons platzieren',
+          '✓ Bias-Neuron platziert! Wert ist immer 1.',
+          'Schritt 4: Das Bias-Neuron platzieren wir unterhalb des Hidden-Neurons. Es hat immer den Wert 1 und verschiebt die Aktivierungsschwelle — wie ein Grundpegel für das Netz.'
+        );
+      }
+    },
+    // ── Schritt 5: Verbindungsmodus aktivieren ──
+    {
+      desc: 'Schritt 5: Verbindungsmodus aktivieren. Jetzt verdrahten wir alle Neuronen miteinander.',
+      action: async () => {
+        const btns = document.querySelectorAll('header .btn');
+        let connectBtn = null;
+        btns.forEach(b => { if (b.textContent.trim() === '⟶ Verbinden') connectBtn = b; });
+        if (connectBtn) {
+          const pos = tutGetElCenter(connectBtn);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow('Verbindungsmodus aktivieren (oder Taste C)');
+          await tutClick();
+        }
+        setMode('connect');
+        await tutSay('✓ Verbindungsmodus aktiv — jetzt Neuronen verbinden', 'Schritt 5: Wir aktivieren den Verbindungsmodus. Damit können wir Neuronen miteinander verdrahten. Du kannst auch einfach die Taste C drücken.', 2000);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 6: Input → Hidden ──
+    {
+      desc: 'Schritt 6: Input mit Hidden verbinden. Das Signal fließt von links nach rechts durch das Netz.',
+      action: async () => {
+        const inp = neurons.find(n => n.type === 'input');
+        const hid = neurons.find(n => n.type === 'hidden');
+        await tutConnect(inp, hid,
+          'Input-Neuron anklicken (Startpunkt)',
+          '… zum Hidden-Neuron ziehen',
+          '✓ Input → Hidden verbunden!',
+          'Schritt 6: Wir verbinden das Input-Neuron mit dem Hidden-Neuron. Das Signal fließt von links nach rechts durch das Netz.'
+        );
+      }
+    },
+    // ── Schritt 7: Hidden → Output (Gewicht = 1, eingefroren) ──
+    {
+      desc: 'Schritt 7: Hidden mit Output verbinden. Diese Verbindung wird auf Gewicht 1 eingefroren — sie leitet das Signal unverändert weiter.',
+      action: async () => {
+        const hid = neurons.find(n => n.type === 'hidden');
+        const out = neurons.find(n => n.type === 'output');
+        if (!hid || !out) return;
+        const ttsP = tutTtsSpeak('Schritt 7: Die Verbindung von Hidden zu Output wird auf Gewicht 1 eingefroren. Das bedeutet, sie leitet das Signal unverändert weiter und wird beim Training nicht angepasst.');
+        const p1 = wScreen(hid.x, hid.y);
+        await tutMoveTo(p1.x, p1.y);
+        tutTipShow('Hidden-Neuron anklicken');
+        await tutClick();
+        connectStart = hid.id;
+        render();
+        await tutDelay(500);
+        const p2 = wScreen(out.x, out.y);
+        tutTipShow('… zum Output-Neuron ziehen');
+        await tutMoveTo(p2.x, p2.y);
+        await tutClick();
+        if (!connEx(hid.id, out.id)) {
+          connections.push({ from: hid.id, to: out.id, weight: 1, frozen: true });
+        }
+        connectStart = null;
+        render();
+        tutTipShow('✓ Hidden → Output verbunden!\nGewicht = 1 (eingefroren 🔒)');
+        await tutDelay(1800);
+        await ttsP;
+        tutTipHide();
+      }
+    },
+    // ── Schritt 8: Bias → Hidden ──
+    {
+      desc: 'Schritt 8: Bias mit Hidden verbinden. Der Bias verschiebt die Aktivierungsfunktion und hilft dem Netz, auch bei Eingabe 0 zu lernen.',
+      action: async () => {
+        const bias = neurons.find(n => n.type === 'bias');
+        const hid  = neurons.find(n => n.type === 'hidden');
+        await tutConnect(bias, hid,
+          'Bias-Neuron anklicken',
+          '… zum Hidden-Neuron ziehen',
+          '✓ Bias → Hidden verbunden!',
+          'Schritt 8: Wir verbinden das Bias-Neuron mit dem Hidden-Neuron. Der Bias verschiebt die Aktivierungsfunktion und hilft dem Netz, auch bei einer Eingabe von Null zu lernen.'
+        );
+      }
+    },
+    // ── Schritt 9: Gewicht erklären ──
+    {
+      desc: 'Schritt 9: Gewichte erklärt. Die Zahl auf jeder Verbindung ist das Gewicht — es bestimmt, wie stark ein Signal weitergeleitet wird.',
+      action: async () => {
+        setMode('select');
+        const showW = document.getElementById('showWeights');
+        if (showW && !showW.checked) showW.click();
+        render();
+        await tutDelay(400);
+
+        const inp = neurons.find(n => n.type === 'input');
+        const hid = neurons.find(n => n.type === 'hidden');
+        if (inp && hid) {
+          const conn = connections.find(c => c.from === inp.id && c.to === hid.id);
+          if (conn) {
+            const dx = hid.x - inp.x;
+            const b1x = inp.x + dx * 0.4, b1y = inp.y;
+            const b2x = inp.x + dx * 0.6, b2y = hid.y;
+            const mx = bezPt(inp.x, b1x, b2x, hid.x, 0.5);
+            const my = bezPt(inp.y, b1y, b2y, hid.y, 0.5);
+            const pos = wScreen(mx, my);
+            await tutMoveTo(pos.x, pos.y);
+            const w = conn.weight.toFixed(3);
+            await tutSay('Das Gewicht ' + w + ' steuert die Signalstärke.\nPositiv = verstärkend, negativ = hemmend.', 'Das Gewicht ' + w + ' steuert die Signalstärke. Ein positives Gewicht verstärkt das Signal, ein negatives hemmt es.', 2500);
+            await tutSay('Beim Training passt Backpropagation diese\nGewichte Schritt für Schritt an.', 'Beim Training passt der Backpropagation-Algorithmus diese Gewichte Schritt für Schritt an, bis das Netz die richtige Ausgabe liefert.', 2500);
+            await tutSay('Doppelklick auf ein Gewicht → Wert manuell ändern.', 'Du kannst ein Gewicht auch per Doppelklick manuell ändern.', 2000);
+            tutTipHide();
+          }
+        }
+      }
+    },
+    // ── Schritt 10: Mathematische Formel ──
+    {
+      desc: 'Schritt 10: Die Mathematik dahinter — dieses einfache Netz entspricht einer linearen Regression: y = w₁ · x + w₂.',
+      action: async () => {
+        const inp  = neurons.find(n => n.type === 'input');
+        const hid  = neurons.find(n => n.type === 'hidden');
+        const bias = neurons.find(n => n.type === 'bias');
+        const cIH = connections.find(c => c.from === inp?.id  && c.to === hid?.id);
+        const cBH = connections.find(c => c.from === bias?.id && c.to === hid?.id);
+        const w1 = cIH ? cIH.weight.toFixed(3) : 'w₁';
+        const w2 = cBH ? cBH.weight.toFixed(3) : 'w₂';
+
+        const pos = wScreen(midWX, midWY - 60);
+        await tutMoveTo(pos.x, pos.y);
+
+        await tutSay(
+          'Dieses Netz ist eine <b>lineare Regression</b>:' +
+          '<span class="tut-formula">y = w₁ · x + w₂</span>' +
+          '<span class="tut-formula-desc">w₁ = Gewicht Input→Hidden (Steigung)<br>w₂ = Gewicht Bias→Hidden (y-Achsenabschnitt)</span>',
+          'Dieses Netz ist eine einfache lineare Regression. Die allgemeine Formel lautet: y gleich w1 mal x plus w2. Dabei ist w1 die Steigung und w2 der y-Achsenabschnitt.',
+          3500, true
+        );
+
+        await tutSay(
+          'Mit deinen aktuellen Gewichten:' +
+          '<span class="tut-formula">y = ' + w1 + ' · x + ' + w2 + '</span>' +
+          '<span class="tut-formula-desc">w₁ = ' + w1 + ' (Steigung) · w₂ = ' + w2 + ' (Achsenabschnitt)<br>Hidden→Output ist auf 1 eingefroren und fällt weg.</span>',
+          'Mit deinen aktuellen Gewichten ergibt sich: y gleich ' + w1 + ' mal x plus ' + w2 + '. Die Verbindung von Hidden zu Output ist auf 1 eingefroren und fällt deshalb weg.',
+          3500, true
+        );
+
+        await tutSay(
+          'Das entspricht der Geradengleichung:' +
+          '<span class="tut-formula">y = m · x + b</span>' +
+          '<span class="tut-formula-desc">m = Steigung (w₁) · b = y-Achsenabschnitt (w₂)<br>Beim Training werden w₁ und w₂ automatisch angepasst.</span>',
+          'Das entspricht der klassischen Geradengleichung: y gleich m mal x plus b. Beim Training werden w1 und w2 automatisch so angepasst, dass die Ausgabe möglichst nah am Zielwert liegt.',
+          3500, true
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 11: Fertig ──
+    {
+      desc: 'Fertig! Dein neuronales Netz entspricht einer linearen Regression — bereit zum Trainieren oder Simulieren.',
+      action: async () => {
+        const pos = wScreen(midWX, midWY);
+        await tutMoveTo(pos.x, pos.y);
+        await tutSay('🎉 Fertig! Dein neuronales Netz ist komplett.', 'Fertig! Dein neuronales Netz ist komplett. Es entspricht einer einfachen linearen Regression und ist bereit zum Trainieren oder Simulieren.', 2500);
+        tutTipHide();
+        tutHide();
+      }
+    }
+  ].map(s => ({ ownTts: true, ...s }));
+}
+
+// ── Tutorial 2: Simulation & Forward Pass ──
+function tutSimulationSteps() {
+  const wrapEl = document.getElementById('wrap');
+
+  function wScreen(wx, wy) {
+    const wr = wrapEl.getBoundingClientRect();
+    const sp = w2s(wx, wy);
+    return { x: wr.left + sp.x, y: wr.top + sp.y };
+  }
+
+  // Positionen für ein kleines Demo-Netz (Input → Hidden → Output + Bias)
+  const midWX = 350, midWY = 280;
+  const inpWX = midWX - 200, inpWY = midWY;
+  const hidWX = midWX,       hidWY = midWY;
+  const outWX = midWX + 200, outWY = midWY;
+  const biasWX = midWX,      biasWY = midWY + 130;
+
+  return [
+    // ── Schritt 0: Netz aufbauen ──
+    {
+      desc: 'Vorbereitung: Wir bauen ein kleines Netz auf, um die Simulation zu demonstrieren.',
+      ownTts: true, action: async () => {
+        neurons.length = 0; connections.length = 0;
+        selNeurons.clear(); selConn = null; nc = 0;
+        vz = 1; document.getElementById('zl').textContent = '100%';
+        tutCenterOn(midWX, midWY);
+        if (simMode) toggleSim();
+        addN('input',  inpWX,  inpWY);
+        addN('hidden', hidWX,  hidWY);
+        addN('output', outWX,  outWY);
+        addN('bias',   biasWX, biasWY);
+        const inp  = neurons.find(n => n.type === 'input');
+        const hid  = neurons.find(n => n.type === 'hidden');
+        const out  = neurons.find(n => n.type === 'output');
+        const bias = neurons.find(n => n.type === 'bias');
+        connections.push({ from: inp.id,  to: hid.id, weight: 0.75, frozen: false });
+        connections.push({ from: hid.id,  to: out.id, weight: 1,    frozen: true  });
+        connections.push({ from: bias.id, to: hid.id, weight: -0.3, frozen: false });
+        const showW = document.getElementById('showWeights');
+        if (showW && !showW.checked) showW.click();
+        render();
+        await tutSay('Netz wurde aufgebaut: Input → Hidden → Output + Bias', 'Zuerst bauen wir ein kleines Netz auf, um die Simulation zu demonstrieren. Das Netz besteht aus einem Input, einem Hidden, einem Output und einem Bias-Neuron.', 2500);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 1: Simulations-Button erklären ──
+    {
+      desc: 'Schritt 1: Der Simulations-Button in der Toolbar aktiviert den Simulationsmodus.',
+      ownTts: true, action: async () => {
+        const btn = document.getElementById('btnSim');
+        if (btn) {
+          const pos = tutGetElCenter(btn);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow('Der Simulations-Button aktiviert den Forward Pass');
+          await tutClick();
+          await tutDelay(500);
+        }
+        if (!simMode) toggleSim();
+        await tutSay('✓ Simulationsmodus ist jetzt aktiv!', 'In der Toolbar findest du den Simulations-Button. Er aktiviert den Simulationsmodus, mit dem die Vorwärtspropagation berechnet und animiert wird. Der Simulationsmodus ist jetzt aktiv.', 2500);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 2: Sidebar-Panel Übersicht ──
+    {
+      desc: 'Schritt 2: Rechts erscheint das Simulations-Panel — deine Steuerzentrale.',
+      ownTts: true, action: async () => {
+        if (sidebarCollapsed) toggleSidebar();
+        await tutDelay(400);
+        const panel = document.getElementById('simPanel');
+        if (panel) {
+          await tutScrollTo(panel);
+          const pos = tutGetElCenter(panel);
+          await tutMoveTo(pos.x, pos.y - 80);
+          await tutSay('Das Simulations-Panel — deine Steuerzentrale', 'Rechts erscheint das Simulations-Panel. Hier steuerst du alles: die Geschwindigkeit, verschiedene Animationsoptionen, die Eingabewerte und die berechneten Ausgaben.', 2500);
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 3: Geschwindigkeitsregler ──
+    {
+      desc: 'Schritt 3: Geschwindigkeit — der Slider steuert, wie schnell die animierten Datenpakete über die Verbindungen fließen.',
+      ownTts: true, action: async () => {
+        const slider = document.getElementById('simSpeed');
+        if (slider) {
+          await tutScrollTo(slider);
+          const pos = tutGetElCenter(slider);
+          await tutMoveTo(pos.x, pos.y);
+          await tutSay('Geschwindigkeit: 1 = langsam · 10 = schnell\nSteuert die Animationsgeschwindigkeit der Datenpakete.', 'Der Geschwindigkeitsregler steuert, wie schnell die animierten Datenpakete über die Verbindungen fließen. Stufe 1 ist langsam und anschaulich, Stufe 10 ist sehr schnell.', 2500);
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 4: Aktivierungs-Animation ──
+    {
+      desc: 'Schritt 4: Aktivierungs-Animation — pulsierende Ringe beim Senden von Signalen.',
+      ownTts: true, action: async () => {
+        const chk = document.getElementById('simActivAnim');
+        if (chk) {
+          await tutScrollTo(chk);
+          const pos = tutGetElCenter(chk);
+          await tutMoveTo(pos.x + 60, pos.y);
+          await tutSay('Aktivierungs-Animation: Pulsierende Ringe\nbeim Senden und Empfangen von Signalen', 'Die Aktivierungs-Animation zeigt pulsierende Ringe, wenn Neuronen Werte senden. Cyan-Ringe erscheinen bei positiven Signalen, orange bei negativen.', 2500);
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 5: Inaktive dimmen ──
+    {
+      desc: 'Schritt 5: Inaktive dimmen — Neuronen mit Ausgabewert ≈ 0 werden abgedunkelt. So bleibt der aktive Signalfluss klar sichtbar.',
+      speech: 'Inaktive Neuronen dimmen: Neuronen mit einem Ausgabewert nahe Null werden abgedunkelt. So bleibt der aktive Signalfluss klar sichtbar.',
+      action: async () => {
+        const chk = document.getElementById('simDimInactiveChk');
+        if (chk) {
+          await tutScrollTo(chk);
+          const pos = tutGetElCenter(chk);
+          await tutMoveTo(pos.x + 60, pos.y);
+          tutTipShow('Inaktive dimmen: Neuronen mit Wert ≈ 0\nwerden abgedunkelt dargestellt');
+          await tutDelay(2000);
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 6: Nur aktive animieren ──
+    {
+      desc: 'Schritt 6: Nur aktive animieren — animiert ausschließlich Verbindungen, deren Signalwert ≠ 0 ist. Inaktive Pfade bleiben statisch im Hintergrund.',
+      speech: 'Nur aktive animieren: Diese Option animiert ausschließlich Verbindungen, deren Signalwert ungleich Null ist. Inaktive Pfade bleiben statisch im Hintergrund.',
+      action: async () => {
+        const chk = document.getElementById('simActiveOnlyChk');
+        if (chk) {
+          await tutScrollTo(chk);
+          const pos = tutGetElCenter(chk);
+          await tutMoveTo(pos.x + 60, pos.y);
+          tutTipShow('Nur aktive animieren: Nur Verbindungen\nmit Signal ≠ 0 werden animiert');
+          await tutDelay(2000);
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 7: Einzelschritte ──
+    {
+      desc: 'Schritt 7: Einzelschritte — die Animation hält nach jeder Schicht an. Mit dem Schritt-Button gehst du manuell zur nächsten Schicht weiter. Ideal zum Verstehen des Datenflusses.',
+      speech: 'Einzelschritte: Die Animation hält nach jeder Schicht an. Mit dem Schritt-Button gehst du manuell zur nächsten Schicht weiter. Das ist ideal, um den Datenfluss Schicht für Schicht zu verstehen.',
+      action: async () => {
+        const chk = document.getElementById('simStepModeChk');
+        if (chk) {
+          await tutScrollTo(chk);
+          const pos = tutGetElCenter(chk);
+          await tutMoveTo(pos.x + 60, pos.y);
+          tutTipShow('Einzelschritte: Animation pausiert nach jeder Schicht.\nManuell weiter mit dem Schritt-Button.');
+          await tutDelay(2200);
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 8: Buttons (Schritt, Ausgaben, Loop) ──
+    {
+      desc: 'Schritt 8: Die drei Buttons — ▶ Schritt sendet die nächste Schicht, ◉ Ausgaben zeigt die Aktivierungswerte der Neuronen, ⟳ Loop wiederholt die Animation automatisch.',
+      speech: 'Darunter findest du drei Buttons. Schritt sendet die nächste Schicht los. Ausgaben zeigt die Aktivierungswerte der Neuronen an. Und Loop wiederholt die Animation automatisch, bis du Stopp drückst.',
+      action: async () => {
+        const stepBtn = document.getElementById('simStepBtn');
+        if (stepBtn) {
+          await tutScrollTo(stepBtn);
+          const pos = tutGetElCenter(stepBtn);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow('▶ Schritt: Nächste Schicht manuell auslösen\n(nur im Einzelschritte-Modus)');
+          await tutDelay(2000);
+        }
+        const outBtn = document.getElementById('simOutBtn');
+        if (outBtn) {
+          const pos = tutGetElCenter(outBtn);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow('◉ Ausgaben: Aktivierungswerte der\naktuellen Schicht anzeigen');
+          await tutDelay(2000);
+        }
+        const loopBtn = document.getElementById('simLoopBtn');
+        if (loopBtn) {
+          const pos = tutGetElCenter(loopBtn);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow('⟳ Loop: Animation automatisch\nendlos wiederholen');
+          await tutDelay(2000);
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 9: Eingabewerte ──
+    {
+      desc: 'Schritt 9: Eingabewerte — hier gibst du die Werte für die Input-Neuronen ein. Diese Werte werden durch das Netz propagiert. Du kannst sie auch direkt auf dem Canvas bearbeiten.',
+      speech: 'Darunter siehst du die Eingabewerte. Hier gibst du die Werte für die Input-Neuronen ein. Diese Werte werden mit den Gewichten multipliziert und durch das Netz propagiert. Du kannst die Werte auch direkt auf dem Canvas bearbeiten.',
+      action: async () => {
+        const inputs = document.getElementById('simInputs');
+        if (inputs) {
+          await tutScrollTo(inputs);
+          const pos = tutGetElCenter(inputs);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow('Eingabewerte: Werte für die Input-Neuronen.\nWerden durch das Netz propagiert.');
+          await tutDelay(1800);
+        }
+        const inp = neurons.find(n => n.type === 'input');
+        if (inp) {
+          simValues[inp.id] = 2;
+          const field = document.querySelector('#simInputs input');
+          if (field) field.value = '2';
+          tutTipShow('Wir setzen den Eingabewert auf 2');
+          await tutDelay(2200);
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 10: Berechnen & Animieren ──
+    {
+      desc: 'Schritt 10: Der große Button „Berechnen & Animieren" startet den Forward Pass — die Eingabewerte fließen als animierte Pakete durch das Netz.',
+      speech: 'Der große Button Berechnen und Animieren startet den Forward Pass. Die Eingabewerte fließen als animierte Pakete von Schicht zu Schicht durch das Netz, bis die Ausgabe berechnet ist.',
+      action: async () => {
+        const btn = document.getElementById('simRunBtn');
+        if (btn) {
+          await tutScrollTo(btn);
+          const pos = tutGetElCenter(btn);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow('▶ Berechnen & Animieren:\nStartet den Forward Pass!');
+          await tutClick();
+          await tutDelay(600);
+        }
+        tutTipShow('Schau auf den Canvas — die Datenpakete fließen durch das Netz!');
+        runSim();
+        await tutDelay(3000);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 11: Ausgaben erklären ──
+    {
+      desc: 'Schritt 11: Nach der Berechnung erscheinen die Ausgabewerte unten im Panel. Das Ergebnis zeigt, welchen Wert das Output-Neuron nach dem Forward Pass hat.',
+      speech: 'Nach der Berechnung erscheinen die Ausgabewerte unten im Panel. Das Ergebnis zeigt, welchen Wert das Output-Neuron nach dem Forward Pass berechnet hat. Bei unserem Netz mit Eingabe 2 ergibt sich: 2 mal 0,75 plus minus 0,3 gleich 1,2.',
+      action: async () => {
+        const outWrap = document.getElementById('simOutputsWrap');
+        if (outWrap) {
+          await tutScrollTo(outWrap);
+          const pos = tutGetElCenter(outWrap);
+          await tutMoveTo(pos.x, pos.y);
+          const outN = neurons.find(n => n.type === 'output');
+          const val = outN && simValues[outN.id] !== undefined ? parseFloat(simValues[outN.id]).toFixed(3) : '?';
+          tutTipShow('Ausgabe = ' + val + '\nDas Ergebnis des Forward Pass.');
+          await tutDelay(2200);
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 12: Datenpakete auf dem Canvas ──
+    {
+      desc: 'Schritt 12: Auf dem Canvas siehst du die animierten Datenpakete. Cyan = positives Signal, Orange = negatives Signal. Die Größe zeigt die Signalstärke.',
+      speech: 'Auf dem Canvas siehst du die animierten Datenpakete. Cyan-farbene Pakete bedeuten ein positives Signal, orange Pakete ein negatives. Die Größe der Pakete zeigt die Signalstärke an.',
+      action: async () => {
+        // Spotlight auf eine Verbindung auf dem Canvas
+        const inp = neurons.find(n => n.type === 'input');
+        const hid = neurons.find(n => n.type === 'hidden');
+        if (inp && hid) {
+          const mx = (inp.x + hid.x) / 2;
+          const my = (inp.y + hid.y) / 2;
+          const pos = wScreen(mx, my);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow(
+            'Animierte Datenpakete auf den Verbindungen:' +
+            '<span class="tut-formula" style="font-size:9px">Cyan ● = positives Signal</span>' +
+            '<span class="tut-formula" style="font-size:9px;color:#ff6b35;border-color:#ff6b3533">Orange ● = negatives Signal</span>' +
+            '<span class="tut-formula-desc">Größe = Signalstärke · Richtung = Datenfluss</span>',
+            true
+          );
+          await tutDelay(2500);
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 13: Forward Pass Formel ──
+    {
+      desc: 'Schritt 13: Der Forward Pass berechnet Schicht für Schicht: Eingabe × Gewicht + Bias → Aktivierungsfunktion → Ausgabe. Das ist die Grundoperation jedes neuronalen Netzes.',
+      speech: 'Der Forward Pass berechnet Schicht für Schicht: Eingabe mal Gewicht plus Bias, dann die Aktivierungsfunktion, und daraus entsteht die Ausgabe. Das ist die Grundoperation jedes neuronalen Netzes.',
+      action: async () => {
+        const pos = wScreen(midWX, midWY - 70);
+        await tutMoveTo(pos.x, pos.y);
+
+        const inp = neurons.find(n => n.type === 'input');
+        const hid = neurons.find(n => n.type === 'hidden');
+        const cIH = connections.find(c => c.from === inp?.id && c.to === hid?.id);
+        const cBH = connections.find(c => c.from === neurons.find(n=>n.type==='bias')?.id && c.to === hid?.id);
+        const w1 = cIH ? cIH.weight.toFixed(2) : '?';
+        const w2 = cBH ? cBH.weight.toFixed(2) : '?';
+        const x = simValues[inp?.id] !== undefined ? parseFloat(simValues[inp.id]) : 2;
+        const result = (x * parseFloat(w1) + parseFloat(w2)).toFixed(3);
+
+        tutTipShow(
+          '<b>Forward Pass — Schritt für Schritt:</b>' +
+          '<span class="tut-formula" style="font-size:9px">Hidden = Eingabe × w₁ + w₂</span>' +
+          '<span class="tut-formula" style="font-size:9px">Hidden = ' + x + ' × ' + w1 + ' + (' + w2 + ') = ' + result + '</span>' +
+          '<span class="tut-formula-desc">Das Ergebnis wird an die Aktivierungsfunktion übergeben und dann zum Output weitergeleitet.</span>',
+          true
+        );
+        await tutDelay(3500);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 14: Fertig ──
+    {
+      desc: 'Fertig! Du kennst jetzt die Simulation. Probiere verschiedene Eingabewerte, Geschwindigkeiten und den Einzelschritte-Modus aus!',
+      speech: 'Fertig! Du kennst jetzt die Simulation. Probiere verschiedene Eingabewerte aus, ändere die Geschwindigkeit, oder nutze den Einzelschritte-Modus, um den Datenfluss Schicht für Schicht zu verfolgen.',
+      action: async () => {
+        const pos = wScreen(midWX, midWY);
+        await tutMoveTo(pos.x, pos.y);
+        tutTipShow('🎉 Tutorial abgeschlossen! Experimentiere mit der Simulation.');
+        await tutDelay(2200);
+        tutTipHide();
+        tutHide();
+      }
+    }
+  ];
+}
+
+// ── Tutorial 3: Die erste Menüleiste ──
+function tutToolbarSteps() {
+  /** Spotlight auf ein Header-Element + Tooltip */
+  async function showEl(id, tip, say, dur) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const pos = tutGetElCenter(el);
+    await tutMoveTo(pos.x, pos.y);
+    await tutSay(tip, say || tip, dur || 2000);
+  }
+  /** Spotlight auf einen Button anhand seines Textes */
+  async function showBtn(text, tip, say, dur) {
+    const btns = document.querySelectorAll('header .btn, header .zoom-btn');
+    let el = null;
+    btns.forEach(b => { if (b.textContent.trim() === text) el = b; });
+    if (!el) return;
+    const pos = tutGetElCenter(el);
+    await tutMoveTo(pos.x, pos.y);
+    await tutSay(tip, say || tip, dur || 2000);
+  }
+
+  return [
+    // ── Schritt 0: Übersicht ──
+    {
+      desc: 'Willkommen! Dieses Tutorial erklärt die erste Menüleiste oben — alle Werkzeuge, die du zum Arbeiten mit neuronalen Netzen brauchst.',
+      action: async () => {
+        const hdr = document.querySelector('header');
+        if (hdr) {
+          const r = hdr.getBoundingClientRect();
+          await tutMoveTo(r.left + r.width / 2, r.top + r.height / 2);
+          await tutSay('Die erste Menüleiste — deine Werkzeugbox für neuronale Netze', 'Willkommen! Dieses Tutorial erklärt die erste Menüleiste oben. Hier findest du alle Werkzeuge, die du zum Arbeiten mit neuronalen Netzen brauchst.', 2500);
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 1: Titel ──
+    {
+      desc: 'Schritt 1: Der Titel „Neural Network Builder" und die Modus-Anzeige.',
+      action: async () => {
+        const h1 = document.querySelector('header h1');
+        if (h1) {
+          const pos = tutGetElCenter(h1);
+          await tutMoveTo(pos.x, pos.y);
+          await tutSay('Neural Network Builder — der Titel der Anwendung', 'Links steht der Titel Neural Network Builder.', 1500);
+        }
+        await showEl('modeLabel', 'Modus-Anzeige: zeigt SELECT oder CONNECT', 'Daneben zeigt ein Badge den aktuellen Modus an: SELECT zum Auswählen oder CONNECT zum Verbinden.', 2000);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 2: Auswahl & Verbinden ──
+    {
+      desc: 'Schritt 2: Die zwei Modi — ⬆ Auswahl (Taste S) und ⟶ Verbinden (Taste C).',
+      action: async () => {
+        await showBtn('⬆ Auswahl', '⬆ Auswahl (Taste S)\nNeuronen verschieben, auswählen, Lasso-Selektion.\nShift+Klick = Mehrfachauswahl\nStrg+A = Alle', 'Der Auswahl-Modus, Tastenkürzel S. Damit verschiebst du Neuronen, wählst sie aus, oder nutzt die Lasso-Selektion. Shift-Klick für Mehrfachauswahl, Steuerung A für alle auswählen.', 2500);
+        await showBtn('⟶ Verbinden', '⟶ Verbinden (Taste C)\nErstes Neuron anklicken, dann Zielneuron.\nEine Vorschaulinie zeigt die geplante Verbindung.', 'Der Verbindungsmodus, Tastenkürzel C. Erstes Neuron anklicken, dann das Zielneuron. Eine Vorschaulinie zeigt die geplante Verbindung.', 2500);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 3: Raster ──
+    {
+      desc: 'Schritt 3: Raster-Einstellungen — Raster ein/aus und Rastergröße (10–80 px).',
+      action: async () => {
+        await showEl('gridOn', 'Raster ein/aus — Neuronen rasten am Gitter ein', 'Die Raster-Checkbox schaltet das Gitter ein oder aus. Neuronen rasten automatisch am nächsten Gitterpunkt ein.', 2000);
+        await showEl('gridSz', 'Rastergröße: 10–80 px\nKleinere Werte = feineres Raster', 'Mit dem Slider stellst du die Rastergröße zwischen 10 und 80 Pixel ein. Kleinere Werte ergeben ein feineres Raster für präzisere Platzierung.', 2000);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 4: Zoom ──
+    {
+      desc: 'Schritt 4: Zoom-Steuerung — rein-/rauszoomen (10–400 %) oder zurücksetzen.',
+      action: async () => {
+        await showBtn('−', '− Herauszoomen\nAuch: Mausrad runter oder Strg+Minus', 'Minus zum Herauszoomen. Du kannst auch das Mausrad nach unten drehen oder Steuerung Minus drücken.', 2000);
+        await showEl('zl', 'Aktuelle Zoom-Stufe (10 %–400 %)', 'Hier siehst du die aktuelle Zoom-Stufe, von 10 bis 400 Prozent.', 1500);
+        await showBtn('+', '+ Hineinzoomen\nAuch: Mausrad hoch oder Strg+Plus', 'Plus zum Hineinzoomen. Auch per Mausrad nach oben oder Steuerung Plus.', 2000);
+        await showBtn('⟳', '⟳ Zoom zurücksetzen auf 100 %', 'Der Reset-Button setzt den Zoom auf 100 Prozent zurück.', 1500);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 5: Schriftgröße Canvas ──
+    {
+      desc: 'Schritt 5: Schriftgröße — skaliert die Beschriftungen auf dem Canvas von 50 % bis 200 %.',
+      action: async () => {
+        await showEl('fontSz', 'Canvas-Schriftgröße: 50–200 %\nSkaliert Neuron-Labels und Gewichtsanzeige', 'Die Schriftgröße skaliert die Beschriftungen auf dem Canvas: Neuronennamen, Gewichte und Labels. Der Bereich geht von 50 bis 200 Prozent.', 2500);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 6: Neu / Speichern / Laden ──
+    {
+      desc: 'Schritt 6: Dateiverwaltung — Neu, Speichern, Keras, Laden und Generieren.',
+      action: async () => {
+        await showBtn('✕ Neu', '✕ Neu — Alles löschen\n(nach Bestätigung, nicht rückgängig)', 'Neu löscht alle Neuronen und Verbindungen. Das passiert erst nach einer Bestätigung und ist nicht rückgängig machbar.', 2500);
+        await showBtn('⬇ Speichern', '⬇ Speichern — JSON-Export\nNeuronen, Verbindungen, Gewichte, Viewport', 'Speichern exportiert das gesamte Netzwerk als JSON-Datei, inklusive aller Neuronen, Verbindungen, Gewichte und der Kameraposition.', 2500);
+        await showBtn('🐍 Keras', '🐍 Keras — Python-Export\nErzeugt ein Keras/TensorFlow-Skript\nmit allen trainierten Gewichten', 'Keras erzeugt ein Python-Skript, das das trainierte Netzwerk als Keras- und TensorFlow-Modell mit allen Gewichten speichert.', 2500);
+        await showBtn('⬆ Laden', '⬆ Laden — JSON-Import\nErsetzt das aktuelle Netz', 'Laden importiert eine zuvor gespeicherte JSON-Datei und ersetzt das aktuelle Netzwerk.', 2000);
+        await showBtn('⊞ Generieren', '⊞ Generieren — Netz automatisch erstellen\nz.B. „2, 4, 3, 1" für 4 Schichten', 'Generieren erstellt automatisch ein vollvernetztes Netzwerk. Zum Beispiel 2, 4, 3, 1 für ein Netz mit 4 Schichten.', 2500);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 7: Lernen & Simulation ──
+    {
+      desc: 'Schritt 7: Die Kernfunktionen — ⚡ Lernen und ▶ Simulation.',
+      action: async () => {
+        await showEl('btnLearn', '⚡ Lernen — Trainingsmodus\nTrainingsdaten eingeben, Hyperparameter\nkonfigurieren, Backpropagation starten.', 'Der Lernen-Button öffnet das Trainings-Panel für Backpropagation. Dort kannst du Trainingsdaten eingeben, Hyperparameter konfigurieren und das Netz mit Echtzeit-Metriken trainieren.', 3000);
+        await showEl('btnSim', '▶ Simulation — Forward Pass\nEingabewerte setzen, Animation starten\nund Ausgaben berechnen.', 'Der Simulations-Button berechnet den Forward Pass und zeigt animierte Datenpakete auf den Verbindungen. Du setzt Eingabewerte und siehst live, wie das Signal durch das Netz fließt.', 3000);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 8: 3D-Ansicht ──
+    {
+      desc: 'Schritt 8: 3D-Ansicht — perspektivische Darstellung des Netzwerks.',
+      action: async () => {
+        await showEl('btn3D', '◻ 3D — Perspektivische Ansicht\nSchichten räumlich versetzt dargestellt.\nMaus-Drag = Drehen · Scroll = Zoomen', 'Der 3D-Button wechselt zwischen 2D und 3D-Darstellung. In der 3D-Ansicht werden die Netz-Schichten räumlich hintereinander dargestellt. Mit der Maus kannst du die Ansicht drehen und mit dem Scroll-Rad zoomen.', 3000);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 9: CNN ──
+    {
+      desc: 'Schritt 9: CNN — der Faltungsmatrizen-Simulator.',
+      action: async () => {
+        await showEl('btnCNN', '⬛ CNN — Faltungssimulator\nBild laden, Kernel wählen,\n6 Animationsmodi live erleben.', 'Der CNN-Button öffnet den Faltungs-Simulator. Du kannst ein Bild laden, einen Faltungskern wie Sobel oder Gauß wählen und die Sliding-Window-Animation in 6 verschiedenen Modi live beobachten.', 3000);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 10: KI-Chat ──
+    {
+      desc: 'Schritt 10: KI-Chat — stelle Fragen zum Netzwerk. Verbindet sich mit LM Studio.',
+      action: async () => {
+        await showEl('btnChat', '💬 KI-Chat — KI-Assistent\nFragen zum Netz, Simulation\noder Embeddings stellen.\nVerbindet sich mit LM Studio.', 'Der KI-Chat-Button öffnet einen Assistenten, dem du Fragen zum aktuellen Netzwerk, zur Simulation oder zu Embeddings stellen kannst. Er verbindet sich mit LM Studio als lokaler Sprachmodell-Server.', 3000);
+        tutTipHide();
+      }
+    },
+    // ── Schritt 11: Panel & UI-Skalierung ──
+    {
+      desc: 'Schritt 11: Panel-Toggle und UI-Skalierung (A−/A+).',
+      action: async () => {
+        await showEl('btnSidebarToggle', '⊟ Panel — Rechte Sidebar\nein- oder ausblenden', 'Der Panel-Button blendet die rechte Werkzeug-Sidebar ein oder aus.', 2000);
+        const aPlus = document.querySelector('header .zoom-btn[onclick*="stepFontScale(+1)"]');
+        if (aPlus) {
+          const pos = tutGetElCenter(aPlus);
+          await tutMoveTo(pos.x - 40, pos.y);
+          await tutSay('A−/A+ — UI-Schriftgröße (70–150 %)\nSkaliert Buttons, Labels und Menüs.\nDie Menüleiste bricht automatisch um.', 'Und ganz rechts findest du die A minus und A plus Buttons. Damit skalierst du die gesamte Benutzeroberfläche, wenn dir die Schrift zu klein oder zu groß ist. Die Menüleiste bricht dabei automatisch um.', 3000);
+        }
+        tutTipHide();
+      }
+    },
+    // ── Schritt 12: Fertig ──
+    {
+      desc: 'Fertig! Du kennst jetzt alle Werkzeuge der ersten Menüleiste.',
+      action: async () => {
+        const hdr = document.querySelector('header');
+        if (hdr) {
+          const r = hdr.getBoundingClientRect();
+          await tutMoveTo(r.left + r.width / 2, r.top + r.height / 2);
+        }
+        await tutSay(
+          '🎉 Erste Menüleiste komplett erklärt!' +
+          '<span class="tut-formula" style="font-size:9px">S = Auswahl · C = Verbinden · +/− = Zoom</span>' +
+          '<span class="tut-formula" style="font-size:9px">Del = Löschen · Esc = Abbrechen · Strg+A = Alle</span>',
+          'Fertig! Du kennst jetzt alle Werkzeuge der ersten Menüleiste. Vergiss nicht die Tastenkürzel: S für Auswahl, C für Verbinden, Plus und Minus zum Zoomen, Entfernen zum Löschen, Escape zum Abbrechen und Steuerung A für alles auswählen.',
+          3000, true
+        );
+        tutTipHide();
+        tutHide();
+      }
+    }
+  ].map(s => ({ ownTts: true, ...s }));
+}
+
+// ── Tutorial 5: Die zweite Menüleiste (Embedding Lab) ──
+function tutEmbToolbarSteps() {
+  /** Spotlight auf ein Element per ID */
+  async function showEl(id, tip, say, dur) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const pos = tutGetElCenter(el);
+    await tutMoveTo(pos.x, pos.y);
+    await tutSay(tip, say || tip, dur || 2000);
+  }
+  /** Spotlight auf einen Button im embHeader anhand seines Textes */
+  async function showEmbBtn(text, tip, say, dur) {
+    const btns = document.querySelectorAll('#embHeader .btn');
+    let el = null;
+    btns.forEach(b => { if (b.textContent.trim().includes(text)) el = b; });
+    if (!el) return;
+    const pos = tutGetElCenter(el);
+    await tutMoveTo(pos.x, pos.y);
+    await tutSay(tip, say || tip, dur || 2000);
+  }
+
+  return [
+    // ── Schritt 0: Übersicht ──
+    {
+      desc: 'Willkommen! Dieses Tutorial erklärt die zweite Menüleiste — das Embedding Lab für NLP und Tokenisierung.',
+      action: async () => {
+        const hdr = document.getElementById('embHeader');
+        if (hdr) {
+          const r = hdr.getBoundingClientRect();
+          await tutMoveTo(r.left + r.width / 2, r.top + r.height / 2);
+          await tutSay(
+            'Die zweite Menüleiste — das Embedding Lab',
+            'Willkommen! Dieses Tutorial erklärt die zweite Menüleiste, das Embedding Lab. Hier findest du alles rund um Tokenisierung, Embedding-Vektoren und Vektordatenbanken.',
+            3000
+          );
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 1: Titel & Badge ──
+    {
+      desc: 'Schritt 1: Der Titel „Embedding Lab" und das Lern-Badge.',
+      action: async () => {
+        const h2 = document.querySelector('#embHeader h2');
+        if (h2) {
+          const pos = tutGetElCenter(h2);
+          await tutMoveTo(pos.x, pos.y);
+          await tutSay(
+            'Embedding Lab — NLP-Werkstatt\nDas Badge „LERNEN" zeigt: Hier wird simuliert, kein echter KI-API-Zugriff nötig.',
+            'Links steht Embedding Lab mit dem Badge Lernen. Das bedeutet, alle Embeddings werden lokal simuliert. Du brauchst keinen API-Key und keine Internetverbindung.',
+            3000
+          );
+        }
+        tutTipHide();
+      }
+    },
+    // ── Schritt 2: Schnelleingabe ──
+    {
+      desc: 'Schritt 2: Die Schnelleingabe — Text eingeben und direkt analysieren.',
+      action: async () => {
+        await showEl('embHeaderInp',
+          'Schnelleingabe — Text eingeben und Enter drücken\nTokenisierung, Embedding-Vektoren und 3D-Darstellung werden sofort berechnet.',
+          'Das Eingabefeld in der Mitte ist die Schnelleingabe. Tippe einen beliebigen Text ein und drücke Enter, um sofort die Tokenisierung, Embedding-Vektoren und die 3D-Darstellung zu sehen.',
+          3000
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 3: Analysieren-Button ──
+    {
+      desc: 'Schritt 3: Der Analysieren-Button — startet die Verarbeitung des eingegebenen Textes.',
+      action: async () => {
+        await showEmbBtn('Analysieren',
+          '▶ Analysieren\nText in Tokens zerlegen, Embedding-Vektoren berechnen und Lab öffnen.\nAlternativ: Enter im Eingabefeld.',
+          'Der Analysieren-Button startet die Verarbeitung. Er macht das Gleiche wie Enter im Eingabefeld: Text tokenisieren, Vektoren berechnen und das Embedding Lab öffnen.',
+          2500
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 4: Tab 1 — Token-Zerlegung ──
+    {
+      desc: 'Schritt 4: Button ① Token-Zerlegung — zeigt die animierte Zerlegung in Tokens.',
+      action: async () => {
+        await showEmbBtn('Token-Zerlegung',
+          '① Token-Zerlegung\nText → Tokens → IDs\nAnimierte Zerlegung mit Typ-Farbkodierung:\n• Wort-Tokens (lila)\n• Subword-Splits (cyan)\n• Satzzeichen (orange)',
+          'Der erste Tab zeigt die Token-Zerlegung. Dein Text wird in einzelne Tokens aufgeteilt — ähnlich wie bei BERT oder GPT. Lange Wörter werden per BPE in Subwords gesplittet. Jeder Token-Typ hat seine eigene Farbe.',
+          3500
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 5: Tab 2 — 3D Vektor-Raum ──
+    {
+      desc: 'Schritt 5: Button ② 3D Vektor-Raum — interaktive 3D-Darstellung der Embeddings.',
+      action: async () => {
+        await showEmbBtn('3D Vektor-Raum',
+          '② 3D Vektor-Raum\nInteraktive 3D-Punktwolke\nSemantisch ähnliche Wörter liegen nahe beieinander.\nMaus-Drag = Drehen · Scroll = Zoom',
+          'Der zweite Tab zeigt eine interaktive 3D-Punktwolke. Jedes Wort wird als Punkt im dreidimensionalen Raum dargestellt. Semantisch ähnliche Wörter wie Hund und Katze liegen dabei nah beieinander und bilden Cluster.',
+          3500
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 6: Tab 3 — RAG / VectorDB ──
+    {
+      desc: 'Schritt 6: Button ③ RAG / VectorDB — Vektordatenbank und semantische Suche.',
+      action: async () => {
+        await showEmbBtn('RAG / VectorDB',
+          '③ RAG / VectorDB\nTexte als Vektoren speichern.\nÄhnliche Texte per Cosinus-Similarität finden.\nSo funktioniert Retrieval Augmented Generation.',
+          'Der dritte Tab ist die Vektordatenbank mit RAG-Suche. Hier kannst du Texte als Vektoren abspeichern und dann semantisch ähnliche Texte per Cosinus-Ähnlichkeit wiederfinden. Das ist die Grundlage von Retrieval Augmented Generation, wie es in modernen KI-Systemen eingesetzt wird.',
+          4000
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 7: Info-Link ──
+    {
+      desc: 'Schritt 7: „Was sind Embeddings?" — kurze Erklärung per Tooltip.',
+      action: async () => {
+        const infoSpan = document.querySelector('#embHeader span[onmouseenter*="Was sind Embeddings"]');
+        if (infoSpan) {
+          const pos = tutGetElCenter(infoSpan);
+          await tutMoveTo(pos.x, pos.y);
+          await tutSay(
+            '? Was sind Embeddings\nHover-Tooltip mit Kurzeinführung:\nEmbeddings sind hochdimensionale Vektoren,\ndie Wörter im semantischen Raum darstellen.',
+            'Ganz rechts findest du den Hilfetext: Was sind Embeddings? Beim Überfahren mit der Maus erscheint ein Tooltip mit einer Kurzeinführung. Embeddings sind Vektoren, die Wörter und Texte in einem hochdimensionalen Raum darstellen. Ähnliche Bedeutung ergibt ähnliche Position.',
+            3500
+          );
+        }
+        tutTipHide();
+      }
+    },
+    // ── Schritt 8: Fertig ──
+    {
+      desc: 'Fertig! Du kennst jetzt alle Werkzeuge der Embedding-Lab-Menüleiste.',
+      action: async () => {
+        const hdr = document.getElementById('embHeader');
+        if (hdr) {
+          const r = hdr.getBoundingClientRect();
+          await tutMoveTo(r.left + r.width / 2, r.top + r.height / 2);
+        }
+        await tutSay(
+          '🎉 Embedding Lab komplett erklärt!' +
+          '<span class="tut-formula" style="font-size:9px">Schnelleingabe → ① Tokens → ② 3D-Raum → ③ VectorDB</span>' +
+          '<span class="tut-formula" style="font-size:9px">Alles lokal simuliert — kein API-Key nötig</span>',
+          'Fertig! Du kennst jetzt alle Werkzeuge der Embedding-Lab-Menüleiste. Der typische Workflow: Text in die Schnelleingabe tippen, dann die Token-Zerlegung anschauen, die 3D-Darstellung erkunden oder Texte in der Vektordatenbank speichern und durchsuchen.',
+          3500, true
+        );
+        tutTipHide();
+        tutHide();
+      }
+    }
+  ].map(s => ({ ownTts: true, ...s }));
+}
+
+// ── Tutorial 6: Die dritte Menüleiste (Reinforcement Learning) ──
+function tutRlToolbarSteps() {
+  /** Spotlight auf ein Element per ID */
+  async function showEl(id, tip, say, dur) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const pos = tutGetElCenter(el);
+    await tutMoveTo(pos.x, pos.y);
+    await tutSay(tip, say || tip, dur || 2000);
+  }
+
+  return [
+    // ── Schritt 0: Übersicht ──
+    {
+      desc: 'Willkommen! Dieses Tutorial erklärt die dritte Menüleiste — Reinforcement Learning mit GridWorld und BrickBlaster.',
+      action: async () => {
+        const hdr = document.getElementById('rlHeader');
+        if (hdr) {
+          const r = hdr.getBoundingClientRect();
+          await tutMoveTo(r.left + r.width / 2, r.top + r.height / 2);
+          await tutSay(
+            'Die dritte Menüleiste — Reinforcement Learning',
+            'Willkommen! Dieses Tutorial erklärt die dritte Menüleiste für Reinforcement Learning. Hier findest du zwei RL-Umgebungen: eine Gitterwelt für klassisches Q-Learning und BrickBlaster für Deep Reinforcement Learning.',
+            3500
+          );
+          tutTipHide();
+        }
+      }
+    },
+    // ── Schritt 1: Titel & Badge ──
+    {
+      desc: 'Schritt 1: Der Titel „Reinforcement Learning" und das Q-Learning-Badge.',
+      action: async () => {
+        const h2 = document.querySelector('#rlHeader h2');
+        if (h2) {
+          const pos = tutGetElCenter(h2);
+          await tutMoveTo(pos.x, pos.y);
+          await tutSay(
+            'Reinforcement Learning — Q-LEARNING\nEin Agent lernt durch Versuch und Irrtum.\nBelohnungen formen sein Verhalten.',
+            'Links steht Reinforcement Learning mit dem Badge Q-Learning. Reinforcement Learning bedeutet, dass ein Agent durch Versuch und Irrtum lernt. Belohnungen und Bestrafungen formen sein Verhalten, ganz ohne explizite Regeln.',
+            3500
+          );
+        }
+        tutTipHide();
+      }
+    },
+    // ── Schritt 2: Simulator-Button ──
+    {
+      desc: 'Schritt 2: Der Simulator-Button öffnet die RL-Sidebar mit Spielfeld und Steuerung.',
+      action: async () => {
+        await showEl('btnRlToggle',
+          '🤖 Simulator — RL-Sidebar öffnen/schließen\nÖffnet den Q-Learning Simulator mit Spielfeld,\nQ-Tabelle, Belohnungsanzeige und Steuerung.',
+          'Der Simulator-Button öffnet und schließt die rechte RL-Sidebar. Dort findest du das Spielfeld, die Q-Tabelle mit allen gelernten Werten, eine Belohnungsanzeige und Steuerungsbuttons zum Trainieren des Agenten.',
+          3000
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 3: GridWorld / BrickBlaster Tabs ──
+    {
+      desc: 'Schritt 3: Umgebungswahl — GridWorld für Tabellen-Q-Learning oder BrickBlaster für Deep RL.',
+      action: async () => {
+        await showEl('arkTabGrid',
+          '▦ GridWorld\nKlassisches Q-Learning mit Q-Tabelle.\nEin Agent navigiert durch ein Gitter\nzu Zielen und vermeidet Löcher.',
+          'GridWorld ist die erste Umgebung. Ein Agent navigiert durch ein Gitter und lernt mit klassischem Q-Learning und einer Q-Tabelle den optimalen Pfad zum Ziel. Löcher geben negative Belohnung.',
+          3000
+        );
+        await showEl('arkTabArk',
+          '🎮 BrickBlaster\nArkanoid als RL-Umgebung.\nDer Agent steuert den Schläger\nund lernt mit Deep Q-Network (DQN).',
+          'BrickBlaster ist die zweite Umgebung, ein Arkanoid-Spiel. Hier steuert der Agent einen Schläger und lernt mit einem Deep Q-Network, die Steine abzuräumen. Das neuronale Netz hat 7 Eingänge und 3 Ausgänge: links, rechts und still.',
+          3500
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 4: GridWorld-Steuerung ──
+    {
+      desc: 'Schritt 4: GridWorld-Steuerung — Kartengröße, Neu-Button und Werkzeuge zum Bearbeiten.',
+      action: async () => {
+        await showEl('rlInpR',
+          'Zeilen × Spalten\nGröße der Gitterwelt einstellen (2–10).\nMehr Felder = komplexeres Problem.',
+          'Mit Zeilen und Spalten stellst du die Größe der Gitterwelt ein, von 2 mal 2 bis 10 mal 10. Mehr Felder bedeuten ein komplexeres Problem für den Agenten.',
+          2500
+        );
+        const neuBtn = document.querySelector('#rlGridControls .rl-tool-btn[onclick*="rlInitMap"]');
+        if (neuBtn) {
+          const pos = tutGetElCenter(neuBtn);
+          await tutMoveTo(pos.x, pos.y);
+          await tutSay(
+            'NEU — Neue Map erstellen\nSetzt die Q-Tabelle zurück und\nerzeugt ein neues zufälliges Gitter.',
+            'Der Neu-Button erzeugt eine neue Map mit der eingestellten Größe und setzt die Q-Tabelle zurück.',
+            2000
+          );
+        }
+        tutTipHide();
+      }
+    },
+    // ── Schritt 5: Map-Werkzeuge ──
+    {
+      desc: 'Schritt 5: Map-Werkzeuge — Start, Ziel, Loch und freies Feld setzen.',
+      action: async () => {
+        await showEl('rlt-select',
+          '👆 Auswählen\nFeld anklicken, um Infos zu sehen.',
+          'Das Auswahl-Werkzeug zeigt Informationen zu einem angeklickten Feld an.',
+          1500
+        );
+        await showEl('rlt-S',
+          '🏁 Start setzen\nStartposition des Agenten.\nNur ein Startfeld möglich.',
+          'Die Flagge setzt die Startposition des Agenten. Es kann nur ein Startfeld geben.',
+          2000
+        );
+        await showEl('rlt-G',
+          '🏆 Ziel setzen\nZielfeld mit Belohnung +10.\nHier will der Agent hin.',
+          'Der Pokal setzt das Zielfeld mit einer Belohnung von plus 10. Hierhin soll der Agent navigieren.',
+          2000
+        );
+        await showEl('rlt-H',
+          '🕳️ Loch setzen\nGefährliches Feld mit Strafe −5.\nDer Agent lernt, diese zu vermeiden.',
+          'Das Loch ist ein gefährliches Feld mit einer Strafe von minus 5. Der Agent lernt durch negative Erfahrung, solche Felder zu vermeiden.',
+          2000
+        );
+        await showEl('rlt-F',
+          '⬜ Feld frei machen\nEntfernt Start, Ziel oder Loch.\nMacht ein normales begehbares Feld.',
+          'Das leere Feld entfernt spezielle Markierungen und macht ein normales, begehbares Feld daraus.',
+          2000
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 6: BrickBlaster-Steuerung ──
+    {
+      desc: 'Schritt 6: BrickBlaster-Steuerung — Manuell spielen oder KI trainieren.',
+      action: async () => {
+        await showEl('arkBtnManual',
+          '🕹️ Manuell\nSelbst spielen mit Pfeiltasten oder Maus.\nGut zum Ausprobieren der Physik.',
+          'Im Manuell-Modus steuerst du den Schläger selbst mit den Pfeiltasten oder der Maus. So kannst du die Spielphysik kennenlernen.',
+          2500
+        );
+        await showEl('arkBtnAI',
+          '🤖 KI spielt\nDer DQN-Agent lernt selbstständig.\nSiehe das neuronale Netz live trainieren.',
+          'Im KI-Modus übernimmt der DQN-Agent die Steuerung. Du siehst live, wie das neuronale Netz durch Versuch und Irrtum lernt, die Steine abzuräumen.',
+          2500
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 7: BrickBlaster-Parameter ──
+    {
+      desc: 'Schritt 7: BrickBlaster-Parameter — Reihen, Ballgeschwindigkeit, RL-Tempo und Hyperparameter.',
+      action: async () => {
+        await showEl('arkInpBR',
+          'Reihen × Spalten\nAnzahl der Steinreihen (2–9) und\nSpalten (4–14) im BrickBlaster.',
+          'Hier stellst du die Anzahl der Steinreihen und Spalten im BrickBlaster ein. Mehr Steine bedeuten ein längeres, schwierigeres Spiel.',
+          2500
+        );
+        await showEl('arkSldSpeed',
+          '⚡ Ball — Ballgeschwindigkeit\nSchnellerer Ball = schwieriger,\naber auch mehr Trainingsschritte pro Episode.',
+          'Der Ball-Regler steuert die Geschwindigkeit des Balls. Ein schnellerer Ball macht das Spiel schwieriger, erzeugt aber auch mehr Trainingsschritte pro Spielrunde.',
+          2500
+        );
+        await showEl('arkSelTempo',
+          'RL × — Physik-Schritte pro Entscheidung\n×1 = langsam, ×20 = sehr schnell lernen.\nMehr Schritte = schnelleres Training.',
+          'Das RL-Tempo bestimmt, wie viele Physik-Schritte pro RL-Entscheidung berechnet werden. Ein höheres Tempo beschleunigt das Training erheblich, zum Beispiel mal 5 oder mal 20.',
+          3000
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 8: Hyperparameter ──
+    {
+      desc: 'Schritt 8: RL-Hyperparameter — Epsilon-Decay, DQN-Lernrate und Abstandsbonus.',
+      action: async () => {
+        await showEl('arkSelDecay',
+          'ε-Decay — Erkundung vs. Ausnutzung\n×0.9999 = langsam (viel Exploration)\n×0.995 = schnell (früh Wissen nutzen)',
+          'Epsilon-Decay steuert, wie schnell der Agent von zufälliger Erkundung zu gezieltem Handeln übergeht. Langsamer Decay bedeutet mehr Exploration, schneller Decay bedeutet, dass die KI früher ihr gelerntes Wissen einsetzt.',
+          3500
+        );
+        await showEl('arkSelLr',
+          'DQN lr — Lernrate des neuronalen Netzes\nHöher = schneller lernen,\naber instabiler.',
+          'Die DQN-Lernrate bestimmt, wie stark das neuronale Netz bei jedem Trainingsschritt angepasst wird. Eine höhere Lernrate beschleunigt das Lernen, kann aber zu Instabilität führen.',
+          3000
+        );
+        await showEl('arkSelDist',
+          'Dist. — Abstandsbonus\nBelohnt den Schläger dafür,\nnah am Ball zu bleiben.\n„aus" bis „stark" (×0.25).',
+          'Der Abstandsbonus belohnt den Schläger dafür, sich nah am Ball zu positionieren. Das hilft dem Agenten, schneller eine gute Strategie zu lernen. Du kannst die Stärke von aus bis stark einstellen.',
+          3000
+        );
+        tutTipHide();
+      }
+    },
+    // ── Schritt 9: Info-Link ──
+    {
+      desc: 'Schritt 9: „Was ist RL?" — kurze Erklärung per Tooltip.',
+      action: async () => {
+        const infoSpan = document.querySelector('#rlHeader span[onmouseenter*="Was ist Reinforcement"]');
+        if (infoSpan) {
+          const pos = tutGetElCenter(infoSpan);
+          await tutMoveTo(pos.x, pos.y);
+          await tutSay(
+            '? Was ist RL\nHover-Tooltip mit Kurzeinführung:\nEin Agent lernt durch Versuch und Irrtum.\nQ-Learning, Bellman-Gleichung, DQN.',
+            'Ganz rechts findest du den Hilfetext: Was ist Reinforcement Learning? Beim Überfahren mit der Maus erscheint ein Tooltip, der Q-Learning und die Bellman-Gleichung kurz erklärt.',
+            3000
+          );
+        }
+        tutTipHide();
+      }
+    },
+    // ── Schritt 10: Fertig ──
+    {
+      desc: 'Fertig! Du kennst jetzt alle Werkzeuge der Reinforcement-Learning-Menüleiste.',
+      action: async () => {
+        const hdr = document.getElementById('rlHeader');
+        if (hdr) {
+          const r = hdr.getBoundingClientRect();
+          await tutMoveTo(r.left + r.width / 2, r.top + r.height / 2);
+        }
+        await tutSay(
+          '🎉 RL-Menüleiste komplett erklärt!' +
+          '<span class="tut-formula" style="font-size:9px">▦ GridWorld = Q-Tabelle · 🎮 BrickBlaster = DQN</span>' +
+          '<span class="tut-formula" style="font-size:9px">Manuell spielen oder KI trainieren lassen</span>',
+          'Fertig! Du kennst jetzt alle Werkzeuge der Reinforcement-Learning-Menüleiste. GridWorld nutzt klassisches Q-Learning mit einer Tabelle, BrickBlaster nutzt ein Deep Q-Network. Du kannst beide manuell spielen oder die KI trainieren lassen.',
+          3500, true
+        );
+        tutTipHide();
+        tutHide();
+      }
+    }
+  ].map(s => ({ ownTts: true, ...s }));
+}
+
+// ── Tutorial 7: Klassifikation mit Softmax & One-Hot (Fahrzeug) ──
+function tutClassifySteps() {
+  const wrapEl = document.getElementById('wrap');
+  function wScreen(wx, wy) {
+    const wr = wrapEl.getBoundingClientRect();
+    const sp = w2s(wx, wy);
+    return { x: wr.left + sp.x, y: wr.top + sp.y };
+  }
+
+  // Layout-Positionen (World)
+  const midWX = 400, midWY = 250;
+  const inp1WX = midWX - 280, inp1WY = midWY - 60;
+  const inp2WX = midWX - 280, inp2WY = midWY + 60;
+  const biasWX = midWX - 140, biasWY = midWY + 170;
+  const hid1WX = midWX - 60,  hid1WY = midWY - 90;
+  const hid2WX = midWX - 60,  hid2WY = midWY;
+  const hid3WX = midWX - 60,  hid3WY = midWY + 90;
+  const out1WX = midWX + 200, out1WY = midWY - 90;
+  const out2WX = midWX + 200, out2WY = midWY;
+  const out3WX = midWX + 200, out3WY = midWY + 90;
+
+  // Trainingsdaten: Geschwindigkeit (km/h normalisiert), Gewicht (t normalisiert)
+  // Fahrrad: langsam & leicht, Auto: mittel, LKW: schnell auf Autobahn & schwer
+  const TRAIN_DATA = [
+    // Fahrrad [1,0,0] — v: 0.05–0.20, g: 0.01–0.03
+    { inputs: [0.10, 0.01], targets: [1, 0, 0] },
+    { inputs: [0.15, 0.02], targets: [1, 0, 0] },
+    { inputs: [0.20, 0.01], targets: [1, 0, 0] },
+    { inputs: [0.05, 0.02], targets: [1, 0, 0] },
+    { inputs: [0.12, 0.015], targets: [1, 0, 0] },
+    // Auto [0,1,0] — v: 0.40–0.65, g: 0.10–0.25
+    { inputs: [0.50, 0.15], targets: [0, 1, 0] },
+    { inputs: [0.60, 0.20], targets: [0, 1, 0] },
+    { inputs: [0.45, 0.12], targets: [0, 1, 0] },
+    { inputs: [0.55, 0.18], targets: [0, 1, 0] },
+    { inputs: [0.65, 0.25], targets: [0, 1, 0] },
+    // LKW [0,0,1] — v: 0.35–0.50, g: 0.60–0.95
+    { inputs: [0.40, 0.70], targets: [0, 0, 1] },
+    { inputs: [0.45, 0.80], targets: [0, 0, 1] },
+    { inputs: [0.35, 0.90], targets: [0, 0, 1] },
+    { inputs: [0.50, 0.60], targets: [0, 0, 1] },
+    { inputs: [0.42, 0.95], targets: [0, 0, 1] },
+  ];
+
+  async function showEl(id, tip, say, dur, html) {
+    const el = document.getElementById(id);
+    if (!el) return null;
+    try { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
+    await tutDelay(220);
+    const pos = tutGetElCenter(el);
+    await tutMoveTo(pos.x, pos.y);
+    if (tip) await tutSay(tip, say || tip, dur || 2000, !!html);
+    return el;
+  }
+  function setSelect(id, value) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = value;
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  function setInput(id, value) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = value;
+    el.dispatchEvent(new Event('input',  { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  return [
+    // ── Schritt 0: Begrüßung & Szenario ──
+    {
+      desc: 'Willkommen! In diesem Tutorial bauen wir ein Klassifikationsnetz, das Fahrzeuge anhand von Geschwindigkeit und Gewicht in drei Klassen einteilt: Fahrrad, Auto oder LKW.',
+      action: async () => {
+        // Reset
+        neurons.length = 0; connections.length = 0;
+        selNeurons.clear(); selConn = null; nc = 0;
+        if (simMode) toggleSim();
+        if (learnOpen) toggleLearnMode();
+        trainData = [];
+        vz = 1;
+        const zl = document.getElementById('zl'); if (zl) zl.textContent = '100%';
+        tutCenterOn(midWX, midWY);
+
+        const pos = wScreen(midWX, midWY - 40);
+        await tutMoveTo(pos.x, pos.y);
+        await tutSay(
+          '🚲 🚗 🚛 Fahrzeug-Klassifikation' +
+          '<span class="tut-formula">2 Merkmale → 3 Klassen</span>' +
+          '<span class="tut-formula-desc">Eingabe: Geschwindigkeit + Gewicht<br>Ausgabe: Fahrrad, Auto oder LKW<br>Aktivierung: Softmax · Loss: Cross-Entropy · Kodierung: One-Hot</span>',
+          'Willkommen zum Klassifikations-Tutorial! Wir bauen ein neuronales Netz, das Fahrzeuge anhand von zwei Merkmalen klassifiziert: Geschwindigkeit und Gewicht. Die drei Klassen sind Fahrrad, Auto und LKW. Dazu verwenden wir One-Hot-Encoding, Softmax-Aktivierung und Categorical Cross-Entropy als Loss-Funktion.',
+          5000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 1: One-Hot-Encoding erklären ──
+    {
+      desc: 'Schritt 1: One-Hot-Encoding — jede Klasse bekommt ein eigenes Output-Neuron. Genau eines ist 1, die anderen sind 0.',
+      action: async () => {
+        const pos = wScreen(midWX, midWY);
+        await tutMoveTo(pos.x, pos.y);
+        await tutSay(
+          '<b>One-Hot-Encoding</b>' +
+          '<span class="tut-formula" style="font-size:10px">' +
+          '🚲 Fahrrad&emsp;→ [1, 0, 0]<br>' +
+          '🚗 Auto&emsp;&emsp;→ [0, 1, 0]<br>' +
+          '🚛 LKW&emsp;&emsp;→ [0, 0, 1]</span>' +
+          '<span class="tut-formula-desc">Jede Klasse = ein Neuron. Genau ein Neuron ist „an" (1), alle anderen „aus" (0).</span>',
+          'One-Hot-Encoding. Jede Klasse bekommt ein eigenes Output-Neuron. Fahrrad ist eins null null, Auto ist null eins null, LKW ist null null eins. Genau ein Neuron ist an, alle anderen sind aus. So vermeiden wir, dass das Netz eine falsche Rangordnung zwischen den Klassen lernt — Fahrrad ist nicht kleiner als LKW.',
+          5500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 2: Warum One-Hot? ──
+    {
+      desc: 'Schritt 2: Warum nicht einfach 1, 2, 3? Weil Klassen keine Reihenfolge haben. One-Hot verhindert, dass das Netz eine falsche Ordnung lernt.',
+      action: async () => {
+        const pos = wScreen(midWX, midWY);
+        await tutMoveTo(pos.x, pos.y);
+        await tutSay(
+          '<b>Warum nicht 1, 2, 3?</b>' +
+          '<span class="tut-formula" style="font-size:10px">' +
+          '❌ Fahrrad=1, Auto=2, LKW=3<br>' +
+          '→ Netz lernt: „LKW ist 3× so viel wie Fahrrad"</span>' +
+          '<span class="tut-formula-desc">Kategorien haben keine Rangordnung!<br>One-Hot behandelt alle Klassen gleichberechtigt.</span>',
+          'Warum nicht einfach Fahrrad gleich eins, Auto gleich zwei, LKW gleich drei? Weil das Netz dann lernen würde, dass LKW drei mal so viel ist wie Fahrrad. Aber Klassen haben keine natürliche Reihenfolge. One-Hot behandelt alle Klassen gleichberechtigt — jede bekommt ihre eigene Dimension.',
+          5000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 3: Softmax erklären ──
+    {
+      desc: 'Schritt 3: Softmax wandelt die Rohwerte der Output-Neuronen in Wahrscheinlichkeiten um, die sich zu 1 addieren.',
+      action: async () => {
+        const pos = wScreen(midWX, midWY);
+        await tutMoveTo(pos.x, pos.y);
+        await tutSay(
+          '<b>Softmax-Aktivierung</b>' +
+          '<span class="tut-formula">softmax(zᵢ) = eᶻⁱ / Σⱼ eᶻʲ</span>' +
+          '<span class="tut-formula-desc">Wandelt Rohwerte → Wahrscheinlichkeiten (Summe = 1).<br>' +
+          'Beispiel: z = [2.0, 1.0, 0.1]<br>' +
+          '→ softmax = [0.66, 0.24, 0.10] → Klasse 1 gewinnt</span>',
+          'Softmax-Aktivierung. Die Formel lautet: e hoch z i geteilt durch die Summe aller e hoch z j. Softmax wandelt die Rohwerte aller Output-Neuronen in Wahrscheinlichkeiten um, die sich immer zu eins addieren. Das Neuron mit dem höchsten Wert bekommt die höchste Wahrscheinlichkeit und gewinnt die Klassifikation.',
+          5500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 4: Netz aufbauen ──
+    {
+      desc: 'Schritt 4: Netz aufbauen — 2 Inputs, 3 Hidden (ReLU), 3 Outputs (Softmax) + Bias.',
+      action: async () => {
+        // Neuronen erstellen
+        addN('input',  inp1WX, inp1WY);
+        addN('input',  inp2WX, inp2WY);
+        addN('bias',   biasWX, biasWY);
+        addN('hidden', hid1WX, hid1WY);
+        addN('hidden', hid2WX, hid2WY);
+        addN('hidden', hid3WX, hid3WY);
+        addN('output', out1WX, out1WY);
+        addN('output', out2WX, out2WY);
+        addN('output', out3WX, out3WY);
+
+        // Labels und Aktivierungen setzen
+        const inputs  = neurons.filter(n => n.type === 'input');
+        const hiddens = neurons.filter(n => n.type === 'hidden');
+        const outputs = neurons.filter(n => n.type === 'output');
+        if (inputs[0]) inputs[0].label = 'v (km/h)';
+        if (inputs[1]) inputs[1].label = 'Gew. (t)';
+        hiddens.forEach((h, i) => { h.label = 'h' + (i + 1); h.activation = 'ReLU'; });
+        if (outputs[0]) { outputs[0].label = 'Fahrrad'; outputs[0].activation = 'Softmax'; }
+        if (outputs[1]) { outputs[1].label = 'Auto';    outputs[1].activation = 'Softmax'; }
+        if (outputs[2]) { outputs[2].label = 'LKW';     outputs[2].activation = 'Softmax'; }
+
+        // Verbindungen: Input+Bias → alle Hidden, alle Hidden → alle Output
+        const bias = neurons.find(n => n.type === 'bias');
+        inputs.forEach(inp => {
+          hiddens.forEach(h => {
+            connections.push({ from: inp.id, to: h.id, weight: (Math.random() - 0.5) * 0.5, frozen: false });
+          });
+        });
+        if (bias) {
+          hiddens.forEach(h => {
+            connections.push({ from: bias.id, to: h.id, weight: (Math.random() - 0.5) * 0.2, frozen: false });
+          });
+        }
+        hiddens.forEach(h => {
+          outputs.forEach(o => {
+            connections.push({ from: h.id, to: o.id, weight: (Math.random() - 0.5) * 0.5, frozen: false });
+          });
+        });
+
+        const showW = document.getElementById('showWeights');
+        if (showW && !showW.checked) showW.click();
+        selNeurons.clear(); hideProp();
+        render();
+
+        const pos = wScreen(midWX, midWY - 120);
+        await tutMoveTo(pos.x, pos.y);
+        await tutSay(
+          '<b>Netz: 2 → 3 → 3</b>' +
+          '<span class="tut-formula">v (km/h) ─┐<br>' +
+          '&emsp;&emsp;&emsp;&emsp;&emsp;├→ h₁,h₂,h₃ (ReLU) → Fahrrad,Auto,LKW (Softmax)<br>' +
+          'Gew. (t) ─┘</span>' +
+          '<span class="tut-formula-desc">9 Verbindungen Input→Hidden + 9 Hidden→Output + 3 Bias = 21 trainierbare Gewichte</span>',
+          'Das Netz ist aufgebaut. Zwei Eingabeneuronen für Geschwindigkeit und Gewicht, drei versteckte Neuronen mit ReLU-Aktivierung, und drei Ausgabeneuronen mit Softmax. Die drei Ausgaben repräsentieren die Wahrscheinlichkeiten für Fahrrad, Auto und LKW.',
+          5000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 5: Output-Neuronen erklären ──
+    {
+      desc: 'Schritt 5: Die drei Output-Neuronen — jedes repräsentiert eine Klasse. Softmax sorgt dafür, dass sich die Wahrscheinlichkeiten zu 1 addieren.',
+      action: async () => {
+        const outputs = neurons.filter(n => n.type === 'output');
+        if (outputs[0]) {
+          const pos = wScreen(outputs[0].x, outputs[0].y);
+          await tutMoveTo(pos.x, pos.y);
+          await tutSay('🚲 Fahrrad-Neuron — Softmax-Ausgabe P(Fahrrad)', 'Das erste Output-Neuron steht für Fahrrad. Es gibt die Wahrscheinlichkeit aus, dass die Eingabe ein Fahrrad ist.', 2000);
+        }
+        if (outputs[1]) {
+          const pos = wScreen(outputs[1].x, outputs[1].y);
+          await tutMoveTo(pos.x, pos.y);
+          await tutSay('🚗 Auto-Neuron — Softmax-Ausgabe P(Auto)', 'Das zweite Neuron steht für Auto.', 1500);
+        }
+        if (outputs[2]) {
+          const pos = wScreen(outputs[2].x, outputs[2].y);
+          await tutMoveTo(pos.x, pos.y);
+          await tutSay('🚛 LKW-Neuron — Softmax-Ausgabe P(LKW)', 'Und das dritte für LKW. Alle drei Wahrscheinlichkeiten addieren sich immer zu eins, weil Softmax das garantiert.', 2000);
+        }
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 6: Lernen-Panel öffnen ──
+    {
+      desc: 'Schritt 6: Trainings-Panel öffnen.',
+      action: async () => {
+        const btn = document.getElementById('btnLearn');
+        if (btn) {
+          const pos = tutGetElCenter(btn);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow('⚡ Lernen — Trainings-Fenster öffnen');
+          await tutClick();
+          await tutDelay(300);
+        }
+        if (!learnOpen) toggleLearnMode();
+        await tutDelay(500);
+        await tutSay(
+          'Trainings-Fenster geöffnet' +
+          '<span class="tut-formula">① Daten · ② Hyperparameter · ③ Training</span>',
+          'Das Trainings-Fenster ist offen. Wir gehen jetzt alle drei Reiter durch: Daten, Hyperparameter und Training.',
+          2500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 7: Tab Daten öffnen ──
+    {
+      desc: 'Schritt 7: Tab ① Daten — wir geben 15 Trainingsbeispiele ein: je 5 pro Fahrzeugklasse.',
+      action: async () => {
+        lTab(0);
+        await tutDelay(300);
+        const tab = document.getElementById('ltab0');
+        if (tab) {
+          const pos = tutGetElCenter(tab);
+          await tutMoveTo(pos.x, pos.y);
+        }
+        await tutSay(
+          '① Daten — 15 Trainingsbeispiele' +
+          '<span class="tut-formula-desc">Je 5 Beispiele für Fahrrad, Auto und LKW.<br>Inputs: v (normalisiert), Gewicht (normalisiert)<br>Outputs: One-Hot [Fahrrad, Auto, LKW]</span>',
+          'Der Daten-Reiter. Wir tragen 15 Trainingsbeispiele ein, je 5 pro Klasse. Die Eingabewerte sind normalisiert: Geschwindigkeit und Gewicht zwischen null und eins. Die Ausgabewerte sind One-Hot-kodiert.',
+          4000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 8: Trainingsdaten animiert eingeben ──
+    {
+      desc: 'Schritt 8: Die Trainingsdaten werden jetzt Zeile für Zeile eingefügt — beachte die One-Hot-Kodierung in den Ausgaben.',
+      action: async () => {
+        trainData = [];
+        buildDataTable();
+        const tbl = document.getElementById('dataTable');
+        if (tbl) {
+          try { tbl.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
+          await tutDelay(250);
+          const pos = tutGetElCenter(tbl);
+          await tutMoveTo(pos.x, pos.y - 20);
+        }
+        tutTipShow(
+          '<b>Trainingsdaten eingeben</b>' +
+          '<span class="tut-formula" style="font-size:9px">' +
+          '🚲 v=0.10, g=0.01 → [1,0,0]<br>' +
+          '🚗 v=0.50, g=0.15 → [0,1,0]<br>' +
+          '🚛 v=0.40, g=0.70 → [0,0,1]</span>' +
+          '<span class="tut-formula-desc">Normalisierte Merkmale + One-Hot-Ausgabe</span>',
+          true
+        );
+        const ttsP = tutTtsSpeak('Jetzt werden die fünfzehn Trainingsbeispiele eingefügt. Beobachte die One-Hot-Kodierung in den Ausgabespalten: Bei Fahrrad ist die erste Spalte eins, bei Auto die zweite, bei LKW die dritte. Die Eingabewerte Geschwindigkeit und Gewicht sind normalisiert.');
+        await tutDelay(1500);
+
+        const labels = ['🚲','🚲','🚲','🚲','🚲','🚗','🚗','🚗','🚗','🚗','🚛','🚛','🚛','🚛','🚛'];
+        for (let i = 0; i < TRAIN_DATA.length; i++) {
+          trainData.push({ inputs: TRAIN_DATA[i].inputs, targets: TRAIN_DATA[i].targets });
+          buildDataTable();
+          const tbody = document.getElementById('dataTBody');
+          if (tbody && tbody.lastElementChild) {
+            try { tbody.lastElementChild.scrollIntoView({ block: 'nearest' }); } catch (_) {}
+            const color = i < 5 ? '#a78bfa22' : i < 10 ? '#00d4ff22' : '#10b98122';
+            tbody.lastElementChild.style.background = color;
+            setTimeout((row => () => { if (row) row.style.background = ''; })(tbody.lastElementChild), 500);
+          }
+          await tutDelay(280);
+        }
+        await ttsP;
+        await tutDelay(400);
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 9: Datentabelle erklären ──
+    {
+      desc: 'Schritt 9: Die Datentabelle — pro Zeile genau eine 1 in den Ausgabespalten. Das ist One-Hot.',
+      action: async () => {
+        const tbl = document.getElementById('dataTable');
+        if (tbl) {
+          const pos = tutGetElCenter(tbl);
+          await tutMoveTo(pos.x, pos.y);
+        }
+        await tutSay(
+          '<b>✓ 15 Trainingsbeispiele bereit</b>' +
+          '<span class="tut-formula-desc">Schau auf die Ausgabespalten: Pro Zeile ist genau eine 1, der Rest 0.<br>' +
+          'Das ist One-Hot-Encoding in Aktion!</span>',
+          'Fünfzehn Trainingsbeispiele sind eingetragen. Schau dir die Ausgabespalten an: In jeder Zeile ist genau eine Eins, alle anderen sind Null. Das ist das One-Hot-Encoding in Aktion. Das Netz soll lernen, welches Neuron bei welcher Eingabe feuern muss.',
+          4000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 10: Tab Hyperparameter ──
+    {
+      desc: 'Schritt 10: Tab ② Hyperparameter — wir stellen die Parameter für die Klassifikation ein.',
+      action: async () => {
+        lTab(1);
+        await tutDelay(300);
+        const tab = document.getElementById('ltab1');
+        if (tab) {
+          const pos = tutGetElCenter(tab);
+          await tutMoveTo(pos.x, pos.y);
+        }
+        await tutSay(
+          '② Hyperparameter — Einstellungen für Klassifikation',
+          'Jetzt stellen wir die Hyperparameter ein. Bei Klassifikation mit Softmax verwenden wir eine andere Loss-Funktion als bei Regression.',
+          2500
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 11: Epochen ──
+    {
+      desc: 'Schritt 11: Epochen = 200 — genug Durchläufe zum Konvergieren.',
+      action: async () => {
+        setInput('hpEpochs', 200);
+        await showEl('hpEpochs',
+          '<b>Epochen = 200</b>' +
+          '<span class="tut-formula-desc">200 Durchläufe durch alle 15 Beispiele. Klassifikation braucht oft mehr Epochen als Regression.</span>',
+          'Epochen auf zweihundert. Klassifikation braucht oft mehr Durchläufe als einfache Regression, weil das Netz komplexere Entscheidungsgrenzen lernen muss.',
+          2500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 12: Batch Size ──
+    {
+      desc: 'Schritt 12: Batch Size = 5 — ein Batch pro Klasse.',
+      action: async () => {
+        setSelect('hpBatch', '4');
+        await showEl('hpBatch',
+          '<b>Batch Size = 4</b>' +
+          '<span class="tut-formula-desc">Kleine Batches für häufigere Gewichts-Updates.</span>',
+          'Batch Size vier. Kleine Batches sorgen für häufigere Gewichts-Updates und damit schnelleres Lernen bei kleinen Datensätzen.',
+          2000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 13: Loss = CCE ──
+    {
+      desc: 'Schritt 13: Loss = CCE (Categorical Cross-Entropy) — der natürliche Partner von Softmax.',
+      action: async () => {
+        setSelect('hpLoss', 'cce');
+        await showEl('hpLoss',
+          '<b>Loss = CCE (Categorical Cross-Entropy)</b>' +
+          '<span class="tut-formula">CCE = −Σ tᵢ · log(pᵢ)</span>' +
+          '<span class="tut-formula-desc">Der Standardloss für Softmax-Klassifikation.<br>' +
+          'Bestraft sichere Fehlvorhersagen exponentiell stärker.<br>' +
+          'MSE → Regression · BCE → Binär · CCE → Mehrklassen</span>',
+          'Loss-Funktion: Categorical Cross-Entropy, kurz C-C-E. Die Formel lautet: minus Summe t i mal Logarithmus p i. C-C-E ist der natürliche Partner von Softmax. Sie bestraft sichere Fehlvorhersagen exponentiell stärker als unsichere. Zur Einordnung: M-S-E für Regression, B-C-E für binäre Klassifikation mit Sigmoid, und C-C-E für Mehrklassen mit Softmax.',
+          6000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 14: Optimizer = Adam ──
+    {
+      desc: 'Schritt 14: Optimizer = Adam — robust und schnell.',
+      action: async () => {
+        setSelect('hpOptim', 'adam');
+        if (typeof updateOptimFields === 'function') updateOptimFields();
+        await showEl('hpOptim',
+          '<b>Optimizer = Adam</b>' +
+          '<span class="tut-formula-desc">Adaptiver Optimizer — passt die Lernrate pro Gewicht an. Standardwahl für Klassifikation.</span>',
+          'Optimizer Adam. Adam passt die Lernrate für jedes Gewicht individuell an und ist die robusteste Standardwahl, besonders bei Klassifikation.',
+          2500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 15: Lernrate ──
+    {
+      desc: 'Schritt 15: Lernrate = 0.03 — etwas konservativer als bei Regression.',
+      action: async () => {
+        setInput('hpLR', 0.03);
+        await showEl('hpLR',
+          '<b>Lernrate η = 0.03</b>' +
+          '<span class="tut-formula-desc">Nicht zu hoch — Cross-Entropy kann bei großen Schritten instabil werden.</span>',
+          'Lernrate null komma null drei. Bei Cross-Entropy sollte die Lernrate etwas konservativer sein als bei M-S-E Regression, weil die Gradienten stärker schwanken können.',
+          2500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 16: Regularisierung ──
+    {
+      desc: 'Schritt 16: L2 = 0, Dropout = 0, Init = Xavier — für dieses kleine Netz keine Regularisierung nötig.',
+      action: async () => {
+        setInput('hpL2', 0);
+        setInput('hpDropout', 0);
+        setSelect('hpInit', 'xavier');
+        await showEl('hpL2',
+          '<b>Regularisierung deaktiviert</b>' +
+          '<span class="tut-formula-desc">L2 = 0, Dropout = 0, Init = Xavier.<br>Bei 21 Gewichten und 15 Beispielen ist Overfitting unwahrscheinlich.</span>',
+          'Regularisierung deaktiviert. Bei einem so kleinen Netz mit 21 Gewichten und 15 Trainingsbeispielen ist Overfitting unwahrscheinlich. Xavier-Initialisierung sorgt für einen guten Start der Gewichte.',
+          3000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 17: Tab Training ──
+    {
+      desc: 'Schritt 17: Tab ③ Training — jetzt wird trainiert!',
+      action: async () => {
+        const bp = document.getElementById('hpShowBP');
+        if (bp && bp.checked) bp.click();
+        lTab(2);
+        await tutDelay(300);
+        const tab = document.getElementById('ltab2');
+        if (tab) {
+          const pos = tutGetElCenter(tab);
+          await tutMoveTo(pos.x, pos.y);
+        }
+        await tutSay(
+          '③ Training — Jetzt geht\'s los!' +
+          '<span class="tut-formula-desc">Wir starten das Training und beobachten:<br>• Loss sinkt (Cross-Entropy → 0)<br>• Accuracy steigt (→ 100 %)<br>• Softmax-Ausgaben werden eindeutiger</span>',
+          'Der Training-Reiter. Wir starten gleich das Training und beobachten, wie der Cross-Entropy-Loss sinkt und die Accuracy steigt. Die Softmax-Ausgaben werden dabei immer eindeutiger.',
+          3500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 18: Training starten ──
+    {
+      desc: 'Schritt 18: Training starten — das Netz lernt jetzt die Entscheidungsgrenzen zwischen Fahrrad, Auto und LKW.',
+      action: async () => {
+        const btn = document.getElementById('trainStartBtn');
+        if (btn) {
+          try { btn.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
+          await tutDelay(250);
+          const pos = tutGetElCenter(btn);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow('⚡ Training starten!');
+          await tutClick();
+          await tutDelay(300);
+        }
+        if (!trainRunning) startTraining();
+        await tutTtsSpeak('Training gestartet. Beobachte die Metriken: Der Cross-Entropy-Loss startet bei etwa eins komma eins, das ist der Zufallswert bei drei Klassen, und sollte gegen Null sinken. Die Accuracy zeigt, wie viele Fahrzeuge korrekt klassifiziert werden.');
+        tutTipHide();
+
+        // Warten auf Abschluss (max 25 s)
+        const t0 = Date.now();
+        await new Promise(resolve => {
+          const check = () => {
+            if (!trainRunning || Date.now() - t0 > 25000) resolve();
+            else setTimeout(check, 150);
+          };
+          check();
+        });
+        await tutDelay(400);
+      }
+    },
+
+    // ── Schritt 19: Loss-Chart ──
+    {
+      desc: 'Schritt 19: Loss-Chart — der Cross-Entropy-Loss sollte von ~1.1 (Zufall) gegen 0 fallen.',
+      action: async () => {
+        await showEl('chartLoss',
+          '<b>Loss-Kurve (Cross-Entropy)</b>' +
+          '<span class="tut-formula">Startwert ≈ −ln(1/3) ≈ 1.10 (Zufall bei 3 Klassen)</span>' +
+          '<span class="tut-formula-desc">Sinkt gegen 0 → Netz wird sicherer in seinen Vorhersagen.<br>CCE bestraft falsche Vorhersagen exponentiell — daher lernt Softmax schnell.</span>',
+          'Die Loss-Kurve. Der Startwert bei drei gleichwahrscheinlichen Klassen ist minus Logarithmus von ein Drittel, also etwa eins komma eins. Je weiter der Loss gegen Null sinkt, desto sicherer ist das Netz in seinen Vorhersagen. Cross-Entropy bestraft falsche Vorhersagen exponentiell, deshalb lernt Softmax besonders schnell.',
+          5000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 20: Accuracy-Chart ──
+    {
+      desc: 'Schritt 20: Accuracy — bei One-Hot zählt: Stimmt der höchste Softmax-Ausgang mit der 1 im One-Hot-Vektor überein?',
+      action: async () => {
+        await showEl('chartAcc',
+          '<b>Accuracy-Kurve</b>' +
+          '<span class="tut-formula">argmax(Softmax) = argmax(One-Hot)?</span>' +
+          '<span class="tut-formula-desc">Die Position des höchsten Softmax-Werts muss mit der Position der 1 im One-Hot-Vektor übereinstimmen.<br>100 % = alle 15 Fahrzeuge korrekt klassifiziert.</span>',
+          'Die Accuracy-Kurve. Bei der Klassifikation prüfen wir: Stimmt der Index des höchsten Softmax-Werts mit der Position der Eins im One-Hot-Vektor überein? Argmax der Vorhersage gleich Argmax des Zielvektors. 100 Prozent bedeutet: alle fünfzehn Fahrzeuge werden korrekt klassifiziert.',
+          5000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 21: Simulation mit Testbeispiel ──
+    {
+      desc: 'Schritt 21: Ergebnis testen — wir schicken ein neues Fahrzeug durch das Netz und lesen die Softmax-Wahrscheinlichkeiten.',
+      action: async () => {
+        // Learn-Box minimieren
+        const box = document.getElementById('learnBox');
+        if (box && !box.classList.contains('minimized')) {
+          toggleMinLearn();
+          await tutDelay(500);
+        }
+
+        // Simulation aktivieren
+        if (!simMode) toggleSim();
+        await tutDelay(500);
+
+        // Testbeispiel: v=0.55, g=0.17 → sollte Auto sein
+        const inputs = neurons.filter(n => n.type === 'input');
+        const simInps = document.querySelectorAll('#simInputs input[type="number"]');
+        if (simInps[0]) { simInps[0].value = '0.55'; simInps[0].dispatchEvent(new Event('input', { bubbles: true })); }
+        if (simInps[1]) { simInps[1].value = '0.17'; simInps[1].dispatchEvent(new Event('input', { bubbles: true })); }
+
+        // Forward Pass berechnen
+        const calcBtn = document.querySelector('#simSidebar button[onclick*="simRun"]');
+        if (calcBtn) calcBtn.click();
+        await tutDelay(800);
+
+        // Ausgaben der Output-Neuronen lesen
+        const outputs = neurons.filter(n => n.type === 'output');
+        let resultText = '';
+        outputs.forEach(o => {
+          const val = simValues[o.id];
+          if (val !== undefined) {
+            resultText += o.label + ': ' + (val * 100).toFixed(1) + ' %\n';
+          }
+        });
+
+        const pos = wScreen(out1WX + 80, midWY);
+        await tutMoveTo(pos.x, pos.y);
+        await tutSay(
+          '<b>🧪 Test: v=0.55, Gew.=0.17</b>' +
+          '<span class="tut-formula" style="font-size:10px">' + resultText.replace(/\n/g, '<br>') + '</span>' +
+          '<span class="tut-formula-desc">Das Neuron mit der höchsten Wahrscheinlichkeit gewinnt!<br>→ Die Softmax-Ausgaben zeigen die Sicherheit des Netzes.</span>',
+          'Testergebnis. Wir haben ein unbekanntes Fahrzeug mit Geschwindigkeit null komma fünf fünf und Gewicht null komma siebzehn durch das Netz geschickt. Die Softmax-Ausgaben zeigen die Wahrscheinlichkeit für jede Klasse. Das Neuron mit dem höchsten Wert gewinnt die Klassifikation. Bei diesen Werten sollte Auto die höchste Wahrscheinlichkeit haben.',
+          5500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 22: Zusammenfassung ──
+    {
+      desc: 'Schritt 22: Zusammenfassung — One-Hot + Softmax + Cross-Entropy bilden das Trio für Mehrklassen-Klassifikation.',
+      action: async () => {
+        if (simMode) toggleSim();
+        const pos = wScreen(midWX, midWY);
+        await tutMoveTo(pos.x, pos.y);
+        await tutSay(
+          '<b>Das Klassifikations-Trio</b>' +
+          '<span class="tut-formula" style="font-size:10px">' +
+          '① One-Hot-Encoding → 1 Neuron pro Klasse<br>' +
+          '② Softmax → Wahrscheinlichkeiten (Summe=1)<br>' +
+          '③ Cross-Entropy → Loss bestraft Fehlsicherheit</span>' +
+          '<span class="tut-formula-desc">Diese drei Bausteine bilden den Standard für jede Mehrklassen-Klassifikation — von Bilderkennung bis Textklassifikation.</span>',
+          'Zusammenfassung. Drei Bausteine bilden den Standard für Mehrklassen-Klassifikation: Erstens, One-Hot-Encoding gibt jeder Klasse ein eigenes Neuron. Zweitens, Softmax wandelt Rohwerte in Wahrscheinlichkeiten um, die sich zu eins addieren. Drittens, Categorical Cross-Entropy bestraft sichere Fehlvorhersagen exponentiell. Dieses Trio wird überall eingesetzt, von Bilderkennung bis Textklassifikation.',
+          6000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 23: Fertig ──
+    {
+      desc: 'Fertig! Du hast ein komplettes Klassifikationsnetz mit Softmax und One-Hot trainiert und ausgewertet.',
+      action: async () => {
+        const pos = wScreen(midWX, midWY);
+        await tutMoveTo(pos.x, pos.y);
+        await tutSay(
+          '🎉 Klassifikations-Tutorial abgeschlossen!' +
+          '<span class="tut-formula" style="font-size:9px">🚲 Fahrrad · 🚗 Auto · 🚛 LKW — erfolgreich klassifiziert!</span>' +
+          '<span class="tut-formula-desc">Experimentiere: Mehr Hidden-Neuronen, andere Lernrate,<br>oder eigene Fahrzeugdaten hinzufügen!</span>',
+          'Tutorial abgeschlossen! Du hast ein komplettes Klassifikationsnetz mit One-Hot-Encoding, Softmax-Aktivierung und Categorical Cross-Entropy aufgebaut, trainiert und getestet. Experimentiere weiter: Füge mehr Hidden-Neuronen hinzu, ändere die Lernrate, oder erstelle eigene Trainingsdaten mit anderen Fahrzeugtypen.',
+          4500, true
+        );
+        tutTipHide();
+        tutHide();
+      }
+    }
+  ].map(s => ({ ownTts: true, ...s }));
+}
+
+// ── Tutorial 4: Training (Supervised Learning — y = 3·x) ──
+function tutTrainingSteps() {
+  const wrapEl = document.getElementById('wrap');
+  function wScreen(wx, wy) {
+    const wr = wrapEl.getBoundingClientRect();
+    const sp = w2s(wx, wy);
+    return { x: wr.left + sp.x, y: wr.top + sp.y };
+  }
+
+  // Netz-Layout: Input → Hidden → Output, Bias unter Hidden
+  const midWX = 350, midWY = 280;
+  const inpWX  = midWX - 200, inpWY  = midWY;
+  const hidWX  = midWX,       hidWY  = midWY;
+  const outWX  = midWX + 200, outWY  = midWY;
+  const biasWX = midWX,       biasWY = midWY + 130;
+
+  // Trainingsdaten: y = 3·x
+  const X_VALS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 20, 22, 25, 30];
+  const Y_VALS = [0, 3, 6, 9, 12, 15, 18, 21, 24, 30, 33, 60, 66, 75, 90];
+
+  /** Element hervorheben, Spotlight darauf bewegen, Tooltip zeigen */
+  async function showEl(id, tip, say, dur, html) {
+    const el = document.getElementById(id);
+    if (!el) return null;
+    try { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
+    await tutDelay(220);
+    const pos = tutGetElCenter(el);
+    await tutMoveTo(pos.x, pos.y);
+    if (tip) await tutSay(tip, say || tip, dur || 2000, !!html);
+    return el;
+  }
+
+  /** Select-Wert per JS setzen und change-Event feuern */
+  function setSelect(id, value) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = value;
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  /** Number-Input setzen und change feuern */
+  function setInput(id, value) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = value;
+    el.dispatchEvent(new Event('input',  { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  return [
+    // ── Schritt 0: Netz aufbauen (Input → Hidden → Output, Bias → Hidden) ──
+    {
+      desc: 'Willkommen! In diesem Tutorial bringen wir einem neuronalen Netz bei, die Geradengleichung y = 3·x zu erkennen — anhand von 15 Trainingsbeispielen.',
+      action: async () => {
+        // Reset Szene
+        neurons.length = 0; connections.length = 0;
+        selNeurons.clear(); selConn = null; nc = 0;
+        if (simMode) toggleSim();
+        if (learnOpen) toggleLearnMode();
+        trainData = [];
+        vz = 1;
+        const zl = document.getElementById('zl'); if (zl) zl.textContent = '100%';
+        tutCenterOn(midWX, midWY);
+
+        // Netz analog zu Tutorial 1: Input → Hidden → Output + Bias → Hidden
+        addN('input',  inpWX,  inpWY);
+        addN('hidden', hidWX,  hidWY);
+        addN('output', outWX,  outWY);
+        addN('bias',   biasWX, biasWY);
+        const inp  = neurons.find(n => n.type === 'input');
+        const hid  = neurons.find(n => n.type === 'hidden');
+        const out  = neurons.find(n => n.type === 'output');
+        const bias = neurons.find(n => n.type === 'bias');
+        if (inp) inp.label = 'x';
+        if (hid) { hid.label = 'h'; hid.activation = 'Linear'; }
+        if (out) { out.label = 'ŷ'; out.activation = null; }
+        // Trainierbare Gewichte: Input→Hidden (w₁), Bias→Hidden (w₂)
+        // Eingefrorenes Gewicht: Hidden→Output = 1 (nicht trainierbar)
+        connections.push({ from: inp.id,  to: hid.id, weight: 0.10, frozen: false });
+        connections.push({ from: bias.id, to: hid.id, weight: 0.00, frozen: false });
+        connections.push({ from: hid.id,  to: out.id, weight: 1.00, frozen: true  });
+        const showW = document.getElementById('showWeights');
+        if (showW && !showW.checked) showW.click();
+        selNeurons.clear(); hideProp();
+        render();
+
+        const pos = wScreen(midWX, midWY - 100);
+        await tutMoveTo(pos.x, pos.y);
+        await tutSay(
+          '🎯 Ziel: Netz soll y = 3·x lernen' +
+          '<span class="tut-formula">ŷ = w₁ · x + w₂</span>' +
+          '<span class="tut-formula-desc">Input → Hidden → Output. Die Verbindung Hidden → Output ist eingefroren (=1). Nur w₁ und w₂ werden gelernt.</span>',
+          'Willkommen zum Trainings-Tutorial. Wir bringen einem neuronalen Netz bei, die Geradengleichung y gleich drei mal x zu erkennen. Das Netz hat ein verstecktes Neuron, ein Hidden-Neuron in der Mitte. Die Verbindung vom Hidden zum Output ist auf eins eingefroren und wird nicht trainiert. Das Netz soll die beiden Parameter w eins und w zwei finden, sodass y gleich w eins mal x plus w zwei der Geraden entspricht.',
+          4500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 1: Die zwei trainierbaren Parameter + die eingefrorene Verbindung ──
+    {
+      desc: 'Das Netz hat zwei trainierbare Gewichte: w₁ (Input → Hidden) und w₂ (Bias → Hidden). Die Verbindung Hidden → Output ist auf 1 eingefroren — sie wird nicht mit trainiert.',
+      action: async () => {
+        const inp  = neurons.find(n => n.type === 'input');
+        const hid  = neurons.find(n => n.type === 'hidden');
+        const bias = neurons.find(n => n.type === 'bias');
+        const out  = neurons.find(n => n.type === 'output');
+
+        // w₁: Input → Hidden
+        if (inp && hid) {
+          const mx = (inp.x + hid.x) / 2, my = (inp.y + hid.y) / 2;
+          const pos = wScreen(mx, my - 10);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow(
+            '<b>w₁ — Eingabe-Gewicht (trainierbar)</b>' +
+            '<span class="tut-formula">w₁ · x → Hidden</span>' +
+            '<span class="tut-formula-desc">Steigung der Geraden. Zielwert: w₁ ≈ 3.</span>',
+            true
+          );
+          await tutTtsSpeak('Die Verbindung zwischen Input und Hidden trägt das Gewicht w eins. Sie ist trainierbar. w eins bestimmt die Steigung der Geraden. Unser Ziel ist, dass w eins den Wert drei annimmt.');
+          tutTipHide();
+        }
+        // w₂: Bias → Hidden
+        if (bias && hid) {
+          const mx = (bias.x + hid.x) / 2, my = (bias.y + hid.y) / 2;
+          const pos = wScreen(mx, my);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow(
+            '<b>w₂ — Bias-Gewicht (trainierbar)</b>' +
+            '<span class="tut-formula">w₂ · 1 = w₂ → Hidden</span>' +
+            '<span class="tut-formula-desc">y-Achsenabschnitt. Zielwert: w₂ ≈ 0.</span>',
+            true
+          );
+          await tutTtsSpeak('Die Verbindung vom Bias zum Hidden trägt das Gewicht w zwei, ebenfalls trainierbar. w zwei entspricht dem y-Achsenabschnitt. Bei unserer Geraden y gleich drei mal x soll w zwei gegen Null gehen.');
+          tutTipHide();
+        }
+        // Hidden → Output (eingefroren = 1)
+        if (hid && out) {
+          const mx = (hid.x + out.x) / 2, my = (hid.y + out.y) / 2;
+          const pos = wScreen(mx, my - 10);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow(
+            '<b>🔒 Hidden → Output = 1 (eingefroren)</b>' +
+            '<span class="tut-formula">ŷ = h · 1 = h</span>' +
+            '<span class="tut-formula-desc">Diese Verbindung ist fix und wird nicht trainiert. Dadurch ist ŷ = h = w₁·x + w₂ — eine reine Gerade.</span>',
+            true
+          );
+          await tutTtsSpeak('Die Verbindung zwischen Hidden und Output ist auf den Wert eins eingefroren. Sie wird während des Trainings nicht verändert. Dadurch wird die Netzausgabe y-Dach identisch zum Hidden-Wert — also genau w eins mal x plus w zwei, eine perfekte Geradengleichung.');
+          tutTipHide();
+        }
+      }
+    },
+
+    // ── Schritt 2: Lernen-Button öffnen ──
+    {
+      desc: 'Schritt 2: Der ⚡ Lernen-Button in der Menüleiste öffnet das Trainings-Fenster.',
+      action: async () => {
+        const btn = document.getElementById('btnLearn');
+        if (btn) {
+          const pos = tutGetElCenter(btn);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow('⚡ Lernen — Trainings-Fenster öffnen');
+          await tutClick();
+          await tutDelay(300);
+        }
+        if (!learnOpen) toggleLearnMode();
+        await tutDelay(500);
+        await tutSay(
+          'Trainings-Fenster geöffnet' +
+          '<span class="tut-formula">① Daten · ② Hyperparameter · ③ Training</span>' +
+          '<span class="tut-formula-desc">Drei Reiter für den kompletten Lern-Workflow.</span>',
+          'Der Lernen-Button öffnet das Trainings-Fenster. Es hat drei Reiter: Daten für die Trainingsbeispiele, Hyperparameter für die Lerneinstellungen, und Training für den eigentlichen Lernvorgang.',
+          3500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 3: Tab ① Daten ──
+    {
+      desc: 'Schritt 3: Tab ① Daten — hier geben wir die 15 Trainingsbeispiele für x und y ein.',
+      action: async () => {
+        lTab(0);
+        await tutDelay(300);
+        const tab = document.getElementById('ltab0');
+        if (tab) {
+          const pos = tutGetElCenter(tab);
+          await tutMoveTo(pos.x, pos.y);
+        }
+        await tutSay(
+          '① Daten — Trainingsbeispiele' +
+          '<span class="tut-formula-desc">Jede Zeile = 1 Beispiel (Eingabe x → Zielwert y).</span>',
+          'Der erste Reiter Daten enthält alle Trainingsbeispiele. Jede Zeile ist ein Paar aus einer Eingabe x und dem zugehörigen Zielwert y. Daraus soll das Netz die Geradengleichung selbstständig ableiten.',
+          3500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 4: Trainingsdaten animiert eingeben ──
+    {
+      desc: 'Schritt 4: Die 15 Wertepaare x = [0,1,2,…,30] und y = [0,3,6,…,90] werden nun nacheinander in die Tabelle eingetragen.',
+      action: async () => {
+        trainData = [];
+        buildDataTable();
+        const tbl = document.getElementById('dataTable');
+        if (tbl) {
+          try { tbl.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
+          await tutDelay(250);
+          const pos = tutGetElCenter(tbl);
+          await tutMoveTo(pos.x, pos.y - 20);
+        }
+        tutTipShow(
+          '<b>Trainingsdaten eingeben</b>' +
+          '<span class="tut-formula">x = [0,1,2,3,4,…,30]</span>' +
+          '<span class="tut-formula">y = [0,3,6,9,12,…,90]</span>' +
+          '<span class="tut-formula-desc">15 Beispiele für die Gerade y = 3·x.</span>',
+          true
+        );
+        const ttsP = tutTtsSpeak('Jetzt tragen wir die fünfzehn Wertepaare in die Tabelle ein. Die x-Werte sind Null, eins, zwei, drei und so weiter bis dreißig. Die zugehörigen y-Werte sind jeweils das Dreifache davon, also Null, drei, sechs, neun und so weiter bis neunzig. Beobachte, wie die Werte Zeile für Zeile eingefügt werden.');
+        await tutDelay(1500);
+
+        // Zeilenweise hinzufügen mit sichtbarer Animation
+        for (let i = 0; i < X_VALS.length; i++) {
+          trainData.push({ inputs: [X_VALS[i]], targets: [Y_VALS[i]] });
+          buildDataTable();
+          const tbody = document.getElementById('dataTBody');
+          if (tbody && tbody.lastElementChild) {
+            try { tbody.lastElementChild.scrollIntoView({ block: 'nearest' }); } catch (_) {}
+            tbody.lastElementChild.style.background = '#a78bfa22';
+            setTimeout((row => () => { if (row) row.style.background = ''; })(tbody.lastElementChild), 400);
+          }
+          await tutDelay(220);
+        }
+        await ttsP;
+        await tutDelay(400);
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 5: Fertige Datentabelle erklären ──
+    {
+      desc: 'Schritt 5: Bei Supervised Learning sieht das Netz Eingabe x und Zielwert y. Es passt seine Gewichte so an, dass die Ausgabe ŷ ≈ y wird.',
+      action: async () => {
+        const tbl = document.getElementById('dataTable');
+        if (tbl) {
+          const pos = tutGetElCenter(tbl);
+          await tutMoveTo(pos.x, pos.y);
+        }
+        await tutSay(
+          '✓ 15 Trainingspaare bereit' +
+          '<span class="tut-formula">Supervised Learning</span>' +
+          '<span class="tut-formula-desc">Das Netz passt w₁ und w₂ so an, dass ŷ = w₁·x + w₂ ≈ y wird.</span>',
+          'Jetzt sind fünfzehn Trainingspaare eingetragen. Beim überwachten Lernen, englisch Supervised Learning, sieht das Netz zu jeder Eingabe x den gewünschten Zielwert y. Die Gewichte werden so angepasst, dass die Netzausgabe y-Dach dem Zielwert y möglichst nahekommt.',
+          4000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 6: Tab ② Hyperparameter ──
+    {
+      desc: 'Schritt 6: Tab ② Hyperparameter — hier stellen wir alle Lernparameter ein. Wir gehen sie nun im Detail durch.',
+      action: async () => {
+        lTab(1);
+        await tutDelay(300);
+        const tab = document.getElementById('ltab1');
+        if (tab) {
+          const pos = tutGetElCenter(tab);
+          await tutMoveTo(pos.x, pos.y);
+        }
+        await tutSay(
+          '② Hyperparameter — die Stellschrauben' +
+          '<span class="tut-formula">Epochen · Batch · Loss · Optimizer · LR</span>' +
+          '<span class="tut-formula">Regularisierung · Scheduler · Early Stop</span>',
+          'Der zweite Reiter Hyperparameter enthält alle Stellschrauben des Trainings: Epochen, Batch-Größe, Loss-Funktion, Optimizer, Lernrate, Regularisierung und den Lernraten-Scheduler. Wir gehen sie jetzt einzeln durch.',
+          3800, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 7: Epochen ──
+    {
+      desc: 'Schritt 7: Epochen — wie oft wird der gesamte Datensatz durchlaufen?',
+      action: async () => {
+        setInput('hpEpochs', 300);
+        await showEl('hpEpochs',
+          '<b>Epochen = 300</b>' +
+          '<span class="tut-formula">1 Epoche = alle 15 Beispiele 1×</span>' +
+          '<span class="tut-formula-desc">Mehr Epochen → genaueres Lernen, aber längeres Training. Zu viele → Overfitting.</span>',
+          'Epochen. Eine Epoche bedeutet, dass alle fünfzehn Trainingsbeispiele einmal durch das Netz geschickt wurden. Wir wählen dreihundert Epochen. Je mehr Epochen, desto genauer lernt das Netz — allerdings steigt die Trainingszeit entsprechend.',
+          3800, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 8: Batch Size ──
+    {
+      desc: 'Schritt 8: Batch Size — wie viele Beispiele fließen in ein einzelnes Gewichts-Update ein?',
+      action: async () => {
+        setSelect('hpBatch', '8');
+        await showEl('hpBatch',
+          '<b>Batch Size = 8</b>' +
+          '<span class="tut-formula">8 Beispiele pro Gewichts-Update</span>' +
+          '<span class="tut-formula-desc">1 = Online · 8–32 = Mini-Batch · Full = alle auf einmal</span>',
+          'Batch Size. Sie gibt an, wie viele Beispiele gemeinsam ein Gewichts-Update auslösen. Eins bedeutet Online-Lernen, acht bis zweiunddreißig ist der typische Mini-Batch und die beste Balance aus Stabilität und Geschwindigkeit. Wir wählen acht.',
+          3800, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 9: Loss-Funktion ──
+    {
+      desc: 'Schritt 9: Loss-Funktion — die Messgröße für den Fehler. MSE ist die Standardwahl für Regression.',
+      action: async () => {
+        setSelect('hpLoss', 'mse');
+        await showEl('hpLoss',
+          '<b>Loss = MSE</b>' +
+          '<span class="tut-formula">MSE = Σ (ŷ − y)² / n</span>' +
+          '<span class="tut-formula-desc">Mittlerer quadratischer Fehler — ideal für Regression.</span>',
+          'Loss-Funktion. MSE, Mittlerer Quadratischer Fehler, ist die Standardwahl bei Regression. Sie berechnet den quadratischen Abstand zwischen Netzausgabe y-Dach und Zielwert y, gemittelt über alle Beispiele. Große Abweichungen werden stärker bestraft als kleine.',
+          4000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 10: Optimizer ──
+    {
+      desc: 'Schritt 10: Optimizer — der Algorithmus, der die Gewichte aus den Gradienten aktualisiert. Adam ist die robusteste Standardwahl.',
+      action: async () => {
+        setSelect('hpOptim', 'adam');
+        if (typeof updateOptimFields === 'function') updateOptimFields();
+        await showEl('hpOptim',
+          '<b>Optimizer = Adam</b>' +
+          '<span class="tut-formula">Adam = Momentum + adaptive LR</span>' +
+          '<span class="tut-formula-desc">Robust & schnell — Standardwahl. Alternativen: SGD, RMSProp, Adagrad.</span>',
+          'Optimizer. Der Algorithmus, der die Gewichte anhand der Gradienten aktualisiert. Adam kombiniert Momentum mit adaptiver Lernrate und ist für die meisten Aufgaben die robusteste Wahl. Alternativen sind S-G-D, R-M-S-Prop oder Adagrad.',
+          3800, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 11: Lernrate ──
+    {
+      desc: 'Schritt 11: Lernrate η — die Schrittweite bei jedem Gewichts-Update.',
+      action: async () => {
+        setInput('hpLR', 0.05);
+        await showEl('hpLR',
+          '<b>Lernrate η = 0.05</b>' +
+          '<span class="tut-formula">wᵢ ← wᵢ − η · ∂L/∂wᵢ</span>' +
+          '<span class="tut-formula-desc">Zu groß → Divergenz · Zu klein → zu langsam</span>',
+          'Lernrate. Sie bestimmt die Schrittweite bei der Gewichts-Aktualisierung. Ist sie zu groß, divergiert das Training — der Loss steigt. Ist sie zu klein, dauert das Training sehr lange. Für Adam liegen typische Werte zwischen null komma null null eins und null komma null fünf.',
+          4000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 12: Regularisierung ──
+    {
+      desc: 'Schritt 12: Regularisierung — L2-Strafterm und Dropout verhindern Overfitting bei komplexen Netzen.',
+      action: async () => {
+        setInput('hpL2', 0);
+        setInput('hpDropout', 0);
+        setSelect('hpInit', 'xavier');
+        await showEl('hpL2',
+          '<b>Regularisierung — L2 = 0, Dropout = 0</b>' +
+          '<span class="tut-formula">L2: Strafterm für große Gewichte</span>' +
+          '<span class="tut-formula">Dropout: Neuronen zufällig deaktivieren</span>' +
+          '<span class="tut-formula-desc">Bei unserem 2-Gewichte-Netz nicht nötig.</span>',
+          'Regularisierung. L zwei bestraft große Gewichte, Dropout schaltet Neuronen zufällig ab. Beides hilft gegen Overfitting — wenn das Netz die Trainingsdaten auswendig lernt statt zu generalisieren. Bei unserem einfachen Zwei-Gewichte-Netz brauchen wir das nicht. Als Gewichts-Initialisierung wählen wir Xavier — varianzerhaltend und für die meisten Aktivierungsfunktionen ideal.',
+          4800, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 13: Scheduler ──
+    {
+      desc: 'Schritt 13: Lernraten-Scheduler — senkt die Lernrate während des Trainings automatisch ab. Für unsere Aufgabe bleibt sie konstant.',
+      action: async () => {
+        setSelect('hpScheduler', 'none');
+        await showEl('hpScheduler',
+          '<b>Scheduler = Keiner</b>' +
+          '<span class="tut-formula">Step · Exp · Cosine Annealing</span>' +
+          '<span class="tut-formula-desc">Senkt η mit der Zeit — Feinabstimmung bei großen Modellen.</span>',
+          'Lernraten-Scheduler. Er senkt die Lernrate automatisch im Trainingsverlauf: Step Decay alle N Epochen, Exponentiell kontinuierlich, oder Cosine Annealing schwingend. Für unsere einfache Gerade belassen wir die Lernrate konstant — also Scheduler Keiner.',
+          4000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 14: Tab ③ Training öffnen ──
+    {
+      desc: 'Schritt 14: Tab ③ Training — Startknopf, Live-Metriken, Fortschrittsbalken und vier Charts.',
+      action: async () => {
+        // Canvas-Animation deaktivieren → Training läuft schneller
+        const bp = document.getElementById('hpShowBP');
+        if (bp && bp.checked) bp.click();
+        lTab(2);
+        await tutDelay(300);
+        const tab = document.getElementById('ltab2');
+        if (tab) {
+          const pos = tutGetElCenter(tab);
+          await tutMoveTo(pos.x, pos.y);
+        }
+        await tutSay(
+          '③ Training — Start & Metriken' +
+          '<span class="tut-formula-desc">Starten · Epoche · Loss · Accuracy · ‖∇‖ · Zeit · 4 Charts</span>',
+          'Der dritte Reiter Training. Hier starten wir das Training und beobachten in Echtzeit die Metriken: aktuelle Epoche, Loss, Accuracy, Gradienten-Norm und Zeit. Darunter zeigen vier Live-Charts den Verlauf über alle Epochen.',
+          3800, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 15: Metrik-Karten ──
+    {
+      desc: 'Schritt 15: Die Metrik-Karten — Epoche, Loss, Accuracy, Gradienten-Norm, Zeit.',
+      action: async () => {
+        await showEl('tEpoch',
+          '<b>Epoche</b>' +
+          '<span class="tut-formula-desc">Aktuelle Epoche und Fortschritt in Prozent.</span>',
+          'Die erste Karte zeigt die aktuelle Epoche und den Fortschritt in Prozent.',
+          2500, true);
+        tutTipHide();
+        await showEl('tLoss',
+          '<b>Loss</b>' +
+          '<span class="tut-formula-desc">Aktueller Fehler — sollte kontinuierlich sinken.<br>„Best" = bisher niedrigster Loss.</span>',
+          'Die zweite Karte zeigt den aktuellen Loss und den bisher besten erreichten Wert. Der Loss sollte während des Trainings kontinuierlich sinken.',
+          3000, true);
+        tutTipHide();
+        await showEl('tAcc',
+          '<b>Accuracy & Lernrate</b>' +
+          '<span class="tut-formula-desc">Trefferquote in % · aktuelle Lernrate.</span>',
+          'Die dritte Karte zeigt die Accuracy, also die Trefferquote in Prozent, und darunter die aktuelle Lernrate.',
+          2800, true);
+        tutTipHide();
+        await showEl('tGrad',
+          '<b>Gradienten-Norm ‖∇‖</b>' +
+          '<span class="tut-formula">‖∇‖ = √Σ (∂L/∂wᵢ)²</span>' +
+          '<span class="tut-formula-desc">Länge des Gradientenvektors — Stärke des Lernsignals.</span>',
+          'Die Gradienten-Norm zeigt die Länge des Gradientenvektors, also die Stärke des aktuellen Lernsignals. Sehr kleine Werte bedeuten verschwindende Gradienten, sehr große deuten auf explodierende Gradienten hin.',
+          4000, true);
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 16: Training starten und warten ──
+    {
+      desc: 'Schritt 16: Training starten — das Netz sucht jetzt über 300 Epochen die passenden Werte für w₁ und w₂.',
+      action: async () => {
+        const btn = document.getElementById('trainStartBtn');
+        if (btn) {
+          try { btn.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
+          await tutDelay(250);
+          const pos = tutGetElCenter(btn);
+          await tutMoveTo(pos.x, pos.y);
+          tutTipShow('⚡ Training starten!');
+          await tutClick();
+          await tutDelay(300);
+        }
+        if (!trainRunning) startTraining();
+        await tutTtsSpeak('Training gestartet. Das Netz passt jetzt über dreihundert Epochen die Gewichte w eins und w zwei so an, dass der MSE minimiert wird. Beobachte, wie Loss und Accuracy sich in Echtzeit entwickeln.');
+        tutTipHide();
+
+        // Auf Abschluss warten (max. 20 s Sicherheitslimit)
+        const t0 = Date.now();
+        await new Promise(resolve => {
+          const check = () => {
+            if (!trainRunning || Date.now() - t0 > 20000) resolve();
+            else setTimeout(check, 150);
+          };
+          check();
+        });
+        await tutDelay(400);
+      }
+    },
+
+    // ── Schritt 17: Loss-Chart ──
+    {
+      desc: 'Schritt 17: Die Loss-Kurve — zeigt den Fehler über alle Epochen. Sie sollte kontinuierlich fallen.',
+      action: async () => {
+        await showEl('chartLoss',
+          '<b>Loss-Kurve</b>' +
+          '<span class="tut-formula">MSE über Epochen</span>' +
+          '<span class="tut-formula-desc">Fallend → gutes Training<br>Plateau → Stagnation<br>Schwingend → LR zu hoch</span>',
+          'Die Loss-Kurve zeigt den Fehler-Verlauf über alle Epochen. Eine stetig fallende Kurve bedeutet erfolgreiches Training. Ein Plateau signalisiert Stagnation, starke Schwankungen deuten auf eine zu hohe Lernrate hin. In unserem Fall sinkt der Loss klar gegen Null — das Netz hat die Gerade gelernt.',
+          5000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 18: Accuracy-Chart ──
+    {
+      desc: 'Schritt 18: Die Accuracy-Kurve — Prozent der korrekt vorhergesagten Beispiele über die Epochen.',
+      action: async () => {
+        await showEl('chartAcc',
+          '<b>Accuracy-Kurve</b>' +
+          '<span class="tut-formula">Accuracy = korrekt / gesamt · 100 %</span>' +
+          '<span class="tut-formula-desc">Bei Regression: Vergleich gerundeter Werte.</span>',
+          'Die Accuracy-Kurve zeigt den Prozentsatz der Beispiele, bei denen die Netzausgabe dem Zielwert entspricht. Bei Regression werden die Werte zum Vergleich gerundet. Die Kurve sollte im Laufe des Trainings gegen hundert Prozent steigen.',
+          4500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 19: Gradienten-Norm Chart ──
+    {
+      desc: 'Schritt 19: Die Gradienten-Norm ‖∇‖ — Länge des Gradientenvektors über die Epochen.',
+      action: async () => {
+        await showEl('chartGrad',
+          '<b>Gradienten-Norm ‖∇‖</b>' +
+          '<span class="tut-formula">‖∇‖ = √Σ (∂L/∂wᵢ)²</span>' +
+          '<span class="tut-formula-desc">Sinkt mit dem Loss — Lernsignal wird schwächer. Zu klein = vanishing, zu groß = exploding.</span>',
+          'Die Gradienten-Norm-Kurve zeigt, wie stark die Gradienten über die Epochen sind. Anfangs ist die Norm groß, weil der Fehler groß ist, und sinkt dann zusammen mit dem Loss. Verschwindet sie zu schnell, gibt es keine Lernsignale mehr. Explodiert sie, hilft Gradient Clipping.',
+          5000, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 20: Lernraten-Chart ──
+    {
+      desc: 'Schritt 20: Die Lernraten-Kurve — bei Scheduler „Keiner" ist sie eine konstante Linie.',
+      action: async () => {
+        await showEl('chartLR',
+          '<b>Lernraten-Verlauf</b>' +
+          '<span class="tut-formula">Scheduler = Keiner → konstant</span>' +
+          '<span class="tut-formula-desc">Mit Step / Exp / Cosine fällt bzw. schwingt diese Kurve.</span>',
+          'Die Lernraten-Kurve zeigt, wie sich die Lernrate über das Training verändert. Da wir keinen Scheduler aktiviert haben, ist die Linie eine konstante Horizontale. Mit Step Decay, Exponentiell oder Cosine Annealing wäre hier eine abfallende oder schwingende Kurve zu sehen.',
+          4500, true
+        );
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 21: Gelernte Gewichte zeigen ──
+    {
+      desc: 'Schritt 21: Die gelernten Gewichte — w₁ ≈ 3 und w₂ ≈ 0. Das Netz hat die Gerade y = 3·x selbstständig entdeckt!',
+      action: async () => {
+        const inp  = neurons.find(n => n.type === 'input');
+        const hid  = neurons.find(n => n.type === 'hidden');
+        const bias = neurons.find(n => n.type === 'bias');
+        const cIH = connections.find(c => c.from === inp?.id  && c.to === hid?.id);
+        const cBH = connections.find(c => c.from === bias?.id && c.to === hid?.id);
+        const w1 = cIH ? cIH.weight.toFixed(3) : '?';
+        const w2 = cBH ? cBH.weight.toFixed(3) : '?';
+        // Learn-Box minimieren, damit der Canvas sichtbar wird
+        const box = document.getElementById('learnBox');
+        if (box && !box.classList.contains('minimized')) {
+          toggleMinLearn();
+          await tutDelay(500);
+        }
+        const pos = wScreen(midWX, midWY - 120);
+        await tutMoveTo(pos.x, pos.y);
+        tutTipShow(
+          '<b>🎓 Gelernte Geradengleichung</b>' +
+          '<span class="tut-formula">ŷ = ' + w1 + ' · x + (' + w2 + ')</span>' +
+          '<span class="tut-formula-desc">Ziel war y = 3·x + 0 — das Netz hat beide Parameter eigenständig gefunden!</span>',
+          true
+        );
+        await tutTtsSpeak('Das Netz hat gelernt. w eins ist ' + w1 + ', w zwei ist ' + w2 + '. Erwartet waren drei und Null. Das neuronale Netz hat die Geradengleichung eigenständig aus den fünfzehn Trainingsbeispielen abgeleitet. Das ist das Wesen von Supervised Learning.');
+        await tutDelay(600);
+        tutTipHide();
+      }
+    },
+
+    // ── Schritt 22: Fertig ──
+    {
+      desc: 'Fertig! Du hast gesehen, wie Supervised Learning funktioniert: Trainingsdaten → Hyperparameter → Training → fertiges Modell. Probiere eigene Gleichungen wie y = 2x+5 oder andere Optimizer aus!',
+      action: async () => {
+        const pos = wScreen(midWX, midWY);
+        await tutMoveTo(pos.x, pos.y);
+        await tutSay(
+          '🎉 Training-Tutorial abgeschlossen!' +
+          '<span class="tut-formula">Daten → Hyperparameter → Training</span>' +
+          '<span class="tut-formula-desc">Experimentiere mit anderen Gleichungen, Optimizern, Schedulern und Regularisierung.</span>',
+          'Tutorial abgeschlossen! Du kennst jetzt den kompletten Trainingsablauf: Daten eingeben, Hyperparameter konfigurieren, Training starten und Metriken beobachten. Probiere eigene Geradengleichungen wie y gleich zwei x plus fünf oder experimentiere mit anderen Optimizern und Schedulern.',
+          4500, true
+        );
+        tutTipHide();
+        tutHide();
+      }
+    }
+  ].map(s => ({ ownTts: true, ...s }));
+}
+
+// ── Tutorial laden ──
+function tutLoad(id) {
+  tutStop();
+  if (id === 'buildSimple') {
+    TUT.steps = tutBuildSimpleSteps();
+  } else if (id === 'simulation') {
+    TUT.steps = tutSimulationSteps();
+  } else if (id === 'toolbar') {
+    TUT.steps = tutToolbarSteps();
+  } else if (id === 'training') {
+    TUT.steps = tutTrainingSteps();
+  } else if (id === 'embToolbar') {
+    TUT.steps = tutEmbToolbarSteps();
+  } else if (id === 'rlToolbar') {
+    TUT.steps = tutRlToolbarSteps();
+  } else if (id === 'classify') {
+    TUT.steps = tutClassifySteps();
+  }
+  TUT.idx = -1;
+  tutUpdateUI();
+}
+
+// ── Skip: laufenden Schritt abkürzen (Delays + TTS sofort beenden) ──
+function tutSkip() {
+  TUT.skip = true;
+  tutTtsStop();
+  tutTipHide();
+  // Laufenden Delay-Timer sofort auflösen
+  if (TUT._delayTimer) { clearTimeout(TUT._delayTimer); TUT._delayTimer = null; }
+  if (TUT._delayResolve) { TUT._delayResolve(); TUT._delayResolve = null; }
+  // Laufenden Pausen-Timer sofort auflösen
+  if (TUT.timer) { clearTimeout(TUT.timer); TUT.timer = null; }
+  if (TUT._pauseResolve) { TUT._pauseResolve(); TUT._pauseResolve = null; }
+}
+
+// ── Schritt zurück ──
+async function tutStepPrev() {
+  if (TUT.idx <= 0) return;
+  if (TUT.playing) { tutSkip(); TUT.idx -= 2; return; }  // -2 weil Play-Loop selbst +1 macht
+  tutTtsStop();
+  TUT.idx--;
+  tutUpdateUI();
+  const step = TUT.steps[TUT.idx];
+  const ttsP = !step.ownTts && (step.speech || step.desc) ? tutTtsSpeak(step.speech || step.desc) : null;
+  if (step.action) await step.action();
+  if (ttsP) await ttsP;
+  tutUpdateUI();
+}
+
+// ── Einzelschritt (vorwärts) ──
+async function tutStepNext() {
+  if (TUT.idx >= TUT.steps.length - 1) return;
+  if (TUT.playing) { tutSkip(); return; }  // Im Autoplay: aktuellen Schritt überspringen
+  TUT.idx++;
+  tutUpdateUI();
+  const step = TUT.steps[TUT.idx];
+  const ttsP = !step.ownTts && (step.speech || step.desc) ? tutTtsSpeak(step.speech || step.desc) : null;
+  if (step.action) await step.action();
+  if (ttsP) await ttsP;
+  tutUpdateUI();
+}
+
+// ── Autoplay ──
+async function tutPlay() {
+  if (TUT.playing) return;
+  if (TUT.steps.length === 0) tutLoad(document.getElementById('tutSelect').value);
+  if (TUT.idx >= TUT.steps.length - 1) {
+    TUT.idx = -1;
+    tutUpdateUI();
+  }
+  TUT.playing = true;
+  TUT.skip = false;
+  tutUpdateUI();
+  while (TUT.playing && TUT.idx < TUT.steps.length - 1) {
+    TUT.skip = false;
+    TUT.idx++;
+    tutUpdateUI();
+    const step = TUT.steps[TUT.idx];
+    const ttsP = !step.ownTts && (step.speech || step.desc) ? tutTtsSpeak(step.speech || step.desc) : null;
+    if (step.action) await step.action();
+    if (!TUT.skip && ttsP) await ttsP;
+    tutUpdateUI();
+    if (!TUT.skip) {
+      await new Promise(r => {
+        TUT._pauseResolve = r;
+        TUT.timer = setTimeout(() => { TUT._pauseResolve = null; r(); }, Math.max(200, 600 / TUT.speed));
+      });
+    }
+  }
+  TUT.playing = false;
+  TUT.skip = false;
+  tutHide();
+  tutUpdateUI();
+}
+
+// ── Stopp ──
+function tutStop() {
+  TUT.playing = false;
+  TUT.skip = true;  // Laufende Delays beenden
+  if (TUT.timer) { clearTimeout(TUT.timer); TUT.timer = null; }
+  if (TUT._pauseResolve) { TUT._pauseResolve(); TUT._pauseResolve = null; }
+  if (TUT._delayTimer) { clearTimeout(TUT._delayTimer); TUT._delayTimer = null; }
+  if (TUT._delayResolve) { TUT._delayResolve(); TUT._delayResolve = null; }
+  tutTtsStop();
+  tutHide();
+  TUT.skip = false;
+  tutUpdateUI();
+}
+
+// ── TTS (Text-to-Speech) ─────────────────────────────────────
+const TTS = {
+  enabled: false,
+  voice: null,
+  voices: [],
+  speaking: false
+};
+
+function tutTtsLoadVoices() {
+  TTS.voices = speechSynthesis.getVoices();
+  const sel = document.getElementById('tutVoiceSel');
+  if (!sel) return;
+  sel.innerHTML = '';
+  // Deutsche Stimmen bevorzugen, dann alle
+  const sorted = [...TTS.voices].sort((a, b) => {
+    const aDE = a.lang.startsWith('de') ? 0 : 1;
+    const bDE = b.lang.startsWith('de') ? 0 : 1;
+    return aDE - bDE;
+  });
+  sorted.forEach((v, i) => {
+    const opt = document.createElement('option');
+    opt.value = TTS.voices.indexOf(v);
+    opt.textContent = v.name.substring(0, 20) + ' (' + v.lang + ')';
+    sel.appendChild(opt);
+  });
+  // Erste deutsche Stimme als Default
+  const deVoice = TTS.voices.find(v => v.lang.startsWith('de'));
+  if (deVoice) {
+    TTS.voice = deVoice;
+    sel.value = TTS.voices.indexOf(deVoice);
+  }
+}
+speechSynthesis.onvoiceschanged = tutTtsLoadVoices;
+tutTtsLoadVoices();
+
+function tutTtsToggle() {
+  TTS.enabled = !TTS.enabled;
+  const btn = document.getElementById('tutTtsBtn');
+  if (TTS.enabled) {
+    btn.classList.add('active');
+    btn.textContent = '🔊 Sprache';
+  } else {
+    btn.classList.remove('active');
+    btn.textContent = '🔇 Sprache';
+    speechSynthesis.cancel();
+  }
+}
+
+function tutTtsSetVoice(idx) {
+  TTS.voice = TTS.voices[idx] || null;
+}
+
+/** Bereinigt Text für deutsche TTS: englische Fachbegriffe → phonetisch,
+ *  Formeln/Sonderzeichen → sprechbar, Gedankenstriche → Pausen. */
+function ttsSanitize(text) {
+  if (!text) return text;
+  const R = [
+    // ── Mehrwort-Begriffe zuerst ──
+    [/\bForward Pass\b/gi,       'Forwärd Päss'],
+    [/\bBatch Size\b/gi,         'Bätsch-Seis'],
+    [/\bDeep Learning\b/gi,      'Diep Lörning'],
+    [/\bDeep RL\b/gi,            'Diep R-L'],
+    [/\bEarly Stopping\b/gi,     'Örli Stopping'],
+    [/\bCross.?Entropy\b/gi,     'Kross-Enntropi'],
+    [/\bNeural Network\b/gi,     'Njuural Netzwörk'],
+    [/\bMachine Learning\b/gi,   'Mäschien Lörning'],
+    [/\bWeight Freeze\b/gi,      'Wäit Friies'],
+    [/\bWeight Update\b/gi,      'Wäit Updäit'],
+    [/\bGradient Clipping\b/gi,  'Gräidient Klipping'],
+    [/\bCosine Annealing\b/gi,   'Kohsein Ennieling'],
+    [/\bStep Decay\b/gi,         'Stepp Dikäi'],
+    [/\bLearning Rate\b/gi,      'Lörning Räit'],
+    [/\bExperience Replay\b/gi,  'Experiänss Rieplay'],
+    [/\bTarget Net\b/gi,         'Targett Nett'],
+    [/\bFull Batch\b/gi,         'Full Bätsch'],
+    [/\bMini.?Batch\b/gi,        'Minni-Bätsch'],
+    [/\bOne.?Hot.?Encoding\b/gi, 'Wann-Hott Enkohding'],
+    [/\bOne.?Hot\b/gi,           'Wann-Hott'],
+    [/\bQ.?Learning\b/gi,        'Kjuh-Lörning'],
+    [/\bQ.?Tabelle\b/gi,         'Kjuh-Tabelle'],
+    [/\bQ.?Wert\b/gi,            'Kjuh-Wert'],
+
+    // ── Einzelne Begriffe ──
+    [/\bLoss\b/gi,             'Lohss'],
+    [/\bBatch\b/gi,            'Bätsch'],
+    [/\bBackpropagation\b/gi,  'Bäckproppagäischen'],
+    [/\bSoftmax\b/gi,          'Ssoftmäx'],
+    [/\bShuffle\b/gi,          'Schaffel'],
+    [/\bDropout\b/gi,          'Dropp-aut'],
+    [/\bOverfitting\b/gi,      'Owwer-fitting'],
+    [/\bUnderfitting\b/gi,     'Ander-fitting'],
+    [/\bTraining\b/gi,         'Träining'],
+    [/\bWeights\b/gi,          'Wäits'],
+    [/\bWeight\b/gi,            'Wäit'],
+    [/\bGradient\b/gi,         'Gräidient'],
+    [/\bGradienten\b/gi,       'Gräidienten'],
+    [/\bClipping\b/gi,         'Klipping'],
+    [/\bScheduler\b/gi,        'Schedjuler'],
+    [/\bOnline\b/gi,           'Onlein'],
+    [/\bLayer\b/gi,            'Läier'],
+    [/\bHidden\b/gi,           'Hiddn'],
+    [/\bInput\b/gi,            'Inpuht'],
+    [/\bOutput\b/gi,           'Autpuht'],
+    [/\bBuilder\b/gi,          'Billder'],
+    [/\bEmbedding\b/gi,        'Embädding'],
+    [/\bEmbeddings\b/gi,       'Embäddings'],
+    [/\bTokenizer\b/gi,        'Toukenaiser'],
+    [/\bTokenisierung\b/gi,    'Toukennisierung'],
+    [/\bToken\b/gi,            'Toukn'],
+    [/\bTokens\b/gi,           'Toukens'],
+    [/\bSubword\b/gi,          'Ssabb-Wörd'],
+    [/\bSubwords\b/gi,         'Ssabb-Wörds'],
+    [/\bCluster\b/gi,          'Klaster'],
+    [/\bOptimizer\b/gi,        'Opttimaiser'],
+    [/\bMomentum\b/gi,         'Momentamm'],
+    [/\bDecay\b/gi,            'Dikäi'],
+    [/\bEpsilon\b/gi,          'Eppsilon'],
+    [/\bExploration\b/gi,      'Exploräischen'],
+    [/\bReward\b/gi,           'Riwohrd'],
+    [/\bAgent\b/gi,            'Äidschent'],
+    [/\bCanvas\b/gi,           'Känwäss'],
+    [/\bViewport\b/gi,         'Wjuh-Port'],
+    [/\bToolbar\b/gi,          'Tuhlbar'],
+    [/\bSlider\b/gi,           'Sleider'],
+    [/\bCheckbox\b/gi,         'Tscheckbox'],
+    [/\bPanel\b/gi,            'Pännel'],
+    [/\bBrowser\b/gi,          'Brauser'],
+    [/\bDownload\b/gi,         'Daunlohd'],
+    [/\bUpload\b/gi,           'Applohd'],
+    [/\bImport\b/gi,           'Importt'],
+    [/\bExport\b/gi,           'Exportt'],
+
+    // ── Abkürzungen ──
+    [/\bDQN\b/g,   'Dee-Kjuh-Enn'],
+    [/\bReLU\b/g,  'Reh-Luh'],
+    [/\bAdam\b/g,  'Ädamm'],
+    [/\bSGD\b/g,   'Ess-Gee-Dee'],
+    [/\bMSE\b/g,   'Emm-Ess-Ee'],
+    [/\bMAE\b/g,   'Emm-Ah-Ee'],
+    [/\bBCE\b/g,   'Bee-Cee-Ee'],
+    [/\bCCE\b/g,   'Cee-Cee-Ee'],
+    [/\bRAG\b/g,   'Rägg'],
+    [/\bBPE\b/g,   'Bee-Pee-Ee'],
+    [/\bTTS\b/g,   'Tee-Tee-Ess'],
+    [/\bRL\b/g,    'R-L'],
+    [/\bKI\b/g,    'K-I'],
+    [/\bLR\b/g,    'L-R'],
+    [/\bPCA\b/g,   'Pee-Cee-Ah'],
+    [/\bAPI\b/g,   'Ah-Pee-I'],
+    [/\bCSV\b/g,   'Cee-Ess-Vau'],
+    [/\bJSON\b/g,  'Jäi-Sonn'],
+    [/\bUI\b/g,    'Ju-Ei'],
+
+    // ── Formeln & Sonderzeichen → sprechbar ──
+    [/ŷ/g,          'y-Dach'],
+    [/w₁/g,         'w eins'],
+    [/w₂/g,         'w zwei'],
+    [/w₃/g,         'w drei'],
+    [/wᵢ/g,         'w i'],
+    [/zᵢ/g,         'z i'],
+    [/tᵢ/g,         't i'],
+    [/pᵢ/g,         'p i'],
+    [/zʲ/g,         'z j'],
+    [/eᶻⁱ/g,        'e hoch z i'],
+    [/eᶻʲ/g,        'e hoch z j'],
+    [/Σⱼ/g,         'Summe über j'],
+    [/Σ\s/g,        'Summe '],
+    [/∂L\/∂wᵢ/g,    'Ableitung von L nach w i'],
+    [/∂L\/∂/g,      'Ableitung von L nach '],
+    [/∂/g,          ''],
+    [/∇/g,          'Nabla'],
+    [/‖∇‖/g,        'Gradienten-Norm'],
+    [/‖/g,          ''],
+    [/η/g,          'Eta'],
+    [/ε/g,          'Epsilon'],
+    [/√/g,          'Wurzel aus '],
+    [/≈/g,          'ungefähr'],
+    [/→/g,          'nach'],
+    [/←/g,          'wird zu'],
+    [/×/g,          'mal'],
+    [/·/g,          'mal'],
+    [/±/g,          'plus minus'],
+    [/−/g,          'minus'],
+
+    // ── Gedankenstriche → Pausen (Punkt erzeugt kurze Pause bei TTS) ──
+    [/\s—\s/g,  '. '],
+    [/\s–\s/g,  '. '],
+    [/\s—/g,    '. '],
+    [/—\s/g,    '. '],
+    [/—/g,      '. '],
+    [/–/g,      '. '],
+  ];
+  for (const [p, r] of R) text = text.replace(p, r);
+  return text;
+}
+
+/** Spricht den Text und gibt ein Promise zurück, das nach Ende resolved */
+let _ttsResolve = null; // löst vorheriges Promise bei cancel
+function tutTtsSpeak(text) {
+  return new Promise(resolve => {
+    if (!TTS.enabled || !text || TUT.skip) { resolve(); return; }
+    // Vorheriges Promise auflösen bevor cancel
+    if (_ttsResolve) { _ttsResolve(); _ttsResolve = null; }
+    speechSynthesis.cancel();
+    TTS.speaking = false;
+    // Text für deutsche TTS aufbereiten
+    const cleanText = ttsSanitize(text);
+    // Kurze Pause nach cancel (Chrome-Bug)
+    setTimeout(() => {
+      const utt = new SpeechSynthesisUtterance(cleanText);
+      if (TTS.voice) utt.voice = TTS.voice;
+      utt.lang = 'de-DE';
+      utt.rate = Math.min(1.4, 0.8 + (TUT.speed - 1) * 0.15);
+      utt.pitch = 1;
+      utt.volume = 1;
+      TTS.speaking = true;
+      _ttsResolve = resolve;
+      utt.onend = () => { TTS.speaking = false; if (_ttsResolve === resolve) { _ttsResolve = null; resolve(); } };
+      utt.onerror = () => { TTS.speaking = false; if (_ttsResolve === resolve) { _ttsResolve = null; resolve(); } };
+      speechSynthesis.speak(utt);
+    }, 50);
+  });
+}
+
+/** Stoppt laufende Sprachausgabe */
+function tutTtsStop() {
+  speechSynthesis.cancel();
+  TTS.speaking = false;
+}
+
+// ── Initial laden ──
+tutLoad('toolbar');
 
 </script>
 
