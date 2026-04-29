@@ -596,6 +596,34 @@ header h1 span{color:var(--text-dim);font-weight:400;}
 .gen-ok{background:var(--accent);border-color:var(--accent);color:#000;}
 .gen-ok:hover{background:#33e0ff;}
 
+/* ── KERAS IMPORT DIALOG ── */
+#kerasDialog{
+  position:fixed;inset:0;z-index:9000;display:none;
+  background:#00000088;align-items:center;justify-content:center;
+}
+#kerasDialog.open{display:flex;}
+#kerasBox{
+  background:#0e1118;border:1px solid #252a35;border-radius:10px;
+  padding:20px 24px;min-width:540px;max-width:760px;width:90vw;
+  box-shadow:0 20px 60px #000c;
+}
+#kerasBox h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;
+  color:var(--accent);margin-bottom:6px;letter-spacing:.04em;}
+#kerasCode{
+  width:100%;min-height:240px;max-height:55vh;
+  background:#070a10;border:1px solid var(--border);border-radius:6px;
+  color:#cdd9e5;font-family:'JetBrains Mono',monospace;font-size:11px;
+  line-height:1.55;padding:10px 12px;outline:none;resize:vertical;
+  white-space:pre;tab-size:4;
+}
+#kerasCode:focus{border-color:var(--accent);}
+#kerasErr{
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:#ef4444;
+  margin:8px 0 0;min-height:14px;white-space:pre-wrap;
+}
+.keras-hint{font-size:9px;color:var(--text-dim);margin:6px 0 10px;line-height:1.6;}
+.keras-hint code{background:#1a1f2c;padding:1px 5px;border-radius:3px;color:#cbd5e1;}
+
 /* ══════════════════════════════════════════════════
    EMBEDDING LAB — ZWEITE MENÜLEISTE
 ══════════════════════════════════════════════════ */
@@ -1801,6 +1829,29 @@ header h1 span{color:var(--text-dim);font-weight:400;}
 </head>
 <body>
 
+<!-- ══ KERAS-IMPORT DIALOG ══ -->
+<div id="kerasDialog">
+  <div id="kerasBox">
+    <h3>🐍 Keras-Code importieren</h3>
+    <div class="keras-hint">
+      Füge Python-Code mit <code>keras.layers.Input(shape=(N,))</code> und <code>keras.layers.Dense(units=N, activation='…')</code> ein —
+      das Netz wird automatisch gezeichnet. Unterstützt: <code>Sequential([…])</code>, <code>model.add(…)</code>,
+      Aktivierungen <code>relu · sigmoid · tanh · softmax · linear · leaky_relu</code>,
+      und <code>use_bias=True/False</code>.
+    </div>
+    <textarea id="kerasCode" spellcheck="false" placeholder="model = keras.Sequential([
+    keras.layers.Input(shape=(2,)),
+    keras.layers.Dense(units=4, activation='relu'),
+    keras.layers.Dense(units=1, activation='sigmoid'),
+])"></textarea>
+    <div id="kerasErr"></div>
+    <div class="gen-btns">
+      <button class="gen-cancel" onclick="closeKerasDialog()">Abbrechen</button>
+      <button class="gen-ok" onclick="importKerasFromTextarea()">Importieren</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ AUTO-GENERATE DIALOG ══ -->
 <div id="genDialog">
   <div id="genBox">
@@ -1908,6 +1959,9 @@ header h1 span{color:var(--text-dim);font-weight:400;}
   <button class="btn" onclick="exportKeras()"
           onmouseenter="showTT(event,'Keras-Modell exportieren','Generiert ein Python-Skript, das das trainierte Netzwerk als Keras/TensorFlow-Modell (.keras) mit allen Gewichten speichert.',null)"
           onmouseleave="hideTT()">🐍 Keras</button>
+  <button class="btn" onclick="openKerasDialog()"
+          onmouseenter="showTT(event,'Keras-Code importieren','Fügt Python-Code mit keras.Sequential / Dense-Layern ein und zeichnet das Netz automatisch. Aktivierungen und use_bias werden übernommen.',null)"
+          onmouseleave="hideTT()">🐍↓ Import</button>
   <button class="btn" onclick="loadNet()"
           onmouseenter="showTT(event,'Netzwerk laden','Lädt eine zuvor gespeicherte JSON-Datei. Das aktuelle Netzwerk wird dabei ersetzt.',null)"
           onmouseleave="hideTT()">⬆ Laden</button>
@@ -3999,12 +4053,8 @@ mc.addEventListener('mousedown',e=>{
       if(!connectStart){connectStart=n;render();}
       else{
         if(connectStart.id!==n.id&&!connEx(connectStart.id,n.id)){
-          if(connectStart.type==='bias'&&n.type==='output'){
-            notify('Bias-Neuronen können nicht mit Output-Neuronen verbunden werden.');
-          } else {
-            connections.push({from:connectStart.id,to:n.id,weight:1.0});
-            notify('Verbindung erstellt');
-          }
+          connections.push({from:connectStart.id,to:n.id,weight:1.0});
+          notify('Verbindung erstellt');
         }
         connectStart=null;render();
       }
@@ -4115,9 +4165,8 @@ function openCtxN(n,px,py){
       <span style="color:${n.showSigma?'#00d4ff':'var(--text-dim)'}">Σ</span> Σ-Symbol ${n.showSigma?'ausblenden':'einblenden'}
     </div>
     <div class="csep"></div>
-    ${n.type==='output'
-      ? `<div class="clbl" style="color:var(--text-dim)">Aktivierungsfunktion</div>
-         <div class="ci" style="opacity:.4;cursor:default;pointer-events:none"><span style="color:var(--text-dim)">—</span> Nicht verfügbar (Output)</div>`
+    ${n.type==='bias'
+      ? ''
       : `<div class="clbl">Aktivierungsfunktion</div>
          <div class="ci" onclick="setAct('${n.id}',null);closeCtx()">
            <span style="color:var(--text-dim)">✕</span> Keine${!n.activation?' ✓':''}
@@ -4184,6 +4233,7 @@ function openCtxBg(px,py,wx,wy){
     <div class="ci" onclick="saveNet();closeCtx()">⬇ Netzwerk speichern</div>
     <div class="ci" onclick="loadNet();closeCtx()">⬆ Netzwerk laden</div>
     <div class="ci" onclick="exportKeras();closeCtx()">🐍 Keras-Modell exportieren</div>
+    <div class="ci" onclick="openKerasDialog();closeCtx()">🐍↓ Keras-Code importieren</div>
     <div class="csep"></div>
     <div class="ci danger" onclick="clearAll();closeCtx()">✕ Alles löschen</div>
   `;
@@ -4242,7 +4292,7 @@ function connEx(a,b){return connections.some(c=>c.from===a&&c.to===b);}
 
 function setAct(id,fn){
   const n=neurons.find(n=>n.id===id);if(!n)return;
-  if(n.type==='output'){notify('Output-Neuronen haben keine Aktivierungsfunktion.');return;}
+  if(n.type==='bias'){notify('Bias-Neuronen haben keine Aktivierungsfunktion.');return;}
   n.activation=fn; render();
   if(selNeurons.has(id))showNeuronProp(n);
   notify(fn?`${actLabel(fn)} → ${n.label||n.type}`:'Aktivierung entfernt');
@@ -4317,7 +4367,7 @@ function showNeuronProp(n){
       <input class="p-inp" value="${n.label||''}" placeholder="z.B. x₁"
         oninput="neurons.find(nn=>nn.id==='${n.id}').label=this.value;render()">
     </div>
-    ${n.type!=='output' ? `<div class="p-row">
+    ${n.type!=='bias' ? `<div class="p-row">
       <div class="p-lbl">Aktivierung</div>
       <select class="p-inp" onchange="setAct('${n.id}',this.value||null)">
         <option value="">– keine –</option>
@@ -4581,6 +4631,193 @@ print("  Laden mit: tf.keras.models.load_model('neural_network_builder.keras')")
   notify(`Keras-Export: Python-Skript heruntergeladen (${topology})`);
 }
 
+// ── KERAS-CODE IMPORT ─────────────────────────────────
+// Map a Keras activation string to the internal name used by ACT/ACT_COMPUTE.
+function kerasActToInternal(s){
+  if(!s) return null;
+  const k = String(s).trim().toLowerCase().replace(/[_\-\s]/g,'');
+  if(k==='relu')                       return 'ReLU';
+  if(k==='sigmoid')                    return 'Sigmoid';
+  if(k==='tanh')                       return 'Tanh';
+  if(k==='softmax')                    return 'Softmax';
+  if(k==='leakyrelu')                  return 'LeakyReLU';
+  if(k==='linear'||k==='none'||k==='') return null;     // identity → no activation
+  return null;                                          // unsupported → silent fallback
+}
+
+// Parse a Keras-style Python snippet and extract a topology description.
+// Returns {inputSize, layers:[{units, activation, useBias}, ...]} or {error: '...'}.
+function parseKerasPython(src){
+  if(!src || !src.trim()) return {error: 'Kein Code eingegeben.'};
+
+  // Strip block strings and # comments so they don't interfere.
+  let s = src.replace(/"""[\s\S]*?"""/g,'').replace(/'''[\s\S]*?'''/g,'').replace(/#.*$/gm,'');
+
+  let inputSize = null;
+
+  // Input(shape=(N,)) / Input((N,)) / shape=(N,) / input_shape=(N,)
+  const inpPats = [
+    /Input\s*\(\s*shape\s*=\s*\(\s*(\d+)\s*,?\s*\)/,
+    /Input\s*\(\s*\(\s*(\d+)\s*,?\s*\)/,
+    /input_shape\s*=\s*\(\s*(\d+)/,
+    /shape\s*=\s*\(\s*(\d+)\s*,?\s*\)/,
+  ];
+  for(const p of inpPats){
+    const m = s.match(p);
+    if(m){ inputSize = parseInt(m[1],10); break; }
+  }
+
+  // Find every Dense(...) call. Capture argument list (no nested parens supported,
+  // which is fine for typical Keras code).
+  const denseRe = /Dense\s*\(([^()]*)\)/g;
+  const layers = [];
+  let m;
+  while((m = denseRe.exec(s)) !== null){
+    const args = m[1];
+
+    // Units: keyword units=N, otherwise first positional integer.
+    let units = null;
+    const uK = args.match(/units\s*=\s*(\d+)/);
+    if(uK) units = parseInt(uK[1],10);
+    else {
+      const uP = args.match(/^\s*(\d+)\b/);
+      if(uP) units = parseInt(uP[1],10);
+    }
+    if(!units || units < 1) continue;
+
+    // Activation: activation='relu' or activation="relu"
+    let activation = null;
+    const aK = args.match(/activation\s*=\s*['"]([^'"]+)['"]/);
+    if(aK) activation = aK[1];
+
+    // use_bias: defaults to True in Keras.
+    let useBias = true;
+    const bK = args.match(/use_bias\s*=\s*(True|False|true|false)/);
+    if(bK) useBias = /true/i.test(bK[1]);
+
+    // input_shape inline (legacy first-layer shorthand).
+    if(inputSize === null){
+      const isM = args.match(/input_shape\s*=\s*\(\s*(\d+)/);
+      if(isM) inputSize = parseInt(isM[1],10);
+    }
+
+    layers.push({units, activation, useBias});
+  }
+
+  if(layers.length === 0) return {error: 'Keine Dense-Layer gefunden.'};
+  if(inputSize === null)  return {error: 'Keine Input-Shape gefunden (z.B. Input(shape=(2,))).'};
+
+  return {inputSize, layers};
+}
+
+function openKerasDialog(){
+  document.getElementById('kerasErr').textContent = '';
+  document.getElementById('kerasDialog').classList.add('open');
+  setTimeout(()=>document.getElementById('kerasCode').focus(), 30);
+}
+function closeKerasDialog(){
+  document.getElementById('kerasDialog').classList.remove('open');
+}
+document.getElementById('kerasDialog').addEventListener('click', e=>{
+  if(e.target.id==='kerasDialog') closeKerasDialog();
+});
+
+function importKerasFromTextarea(){
+  const code = document.getElementById('kerasCode').value;
+  const errEl = document.getElementById('kerasErr');
+  const parsed = parseKerasPython(code);
+  if(parsed.error){ errEl.textContent = '⚠ ' + parsed.error; return; }
+  errEl.textContent = '';
+
+  if(neurons.length && !confirm('Bestehendes Netzwerk wird ersetzt. Fortfahren?')) return;
+  buildNetworkFromKeras(parsed);
+  closeKerasDialog();
+}
+
+// Build neurons + connections from a parsed Keras topology, reusing the
+// generator's layer layout. Each Dense becomes the next layer; the last
+// Dense is the output layer. A bias neuron is added for every source layer
+// whose downstream Dense has use_bias=True.
+function buildNetworkFromKeras(parsed){
+  const {inputSize, layers} = parsed;
+
+  // Reset state
+  neurons = []; connections = []; selNeurons.clear(); selConn = null; hideProp();
+
+  // Build size/type/activation arrays. Element 0 = input.
+  const sizes      = [inputSize, ...layers.map(l => l.units)];
+  const types      = ['input'];
+  for(let i=0;i<layers.length;i++) types.push(i === layers.length-1 ? 'output' : 'hidden');
+  // Activations: input has none; each Dense layer's activation maps to its target neurons.
+  const acts = [null, ...layers.map(l => kerasActToInternal(l.activation))];
+
+  // Layout (mirrors generateNetwork)
+  const spacingX = Math.max(60,  parseInt(document.getElementById('genSpacingX')?.value) || 180);
+  const spacingY = Math.max(40,  parseInt(document.getElementById('genSpacingY')?.value) || 80);
+  const totalW   = (sizes.length - 1) * spacingX;
+  const startX   = -totalW / 2;
+
+  const layerIds = [];
+  for(let li = 0; li < sizes.length; li++){
+    const count  = sizes[li];
+    const type   = types[li];
+    const cx_    = startX + li * spacingX;
+    const totalH = (count - 1) * spacingY;
+    const startY = -totalH / 2;
+    const ids = [];
+
+    for(let ni = 0; ni < count; ni++){
+      nc++;
+      const id = 'n' + nc;
+      neurons.push({
+        id, type,
+        x: snap(cx_), y: snap(startY + ni * spacingY),
+        label: '',
+        activation: acts[li]
+      });
+      ids.push(id);
+    }
+
+    // Bias for this layer: only if the NEXT Dense (= layers[li]) sets use_bias.
+    // li indexes into sizes/types; the Dense that consumes this layer is layers[li]
+    // (when li < layers.length).
+    if(li < layers.length && layers[li].useBias){
+      nc++;
+      const biasId = 'n' + nc;
+      neurons.push({
+        id: biasId, type: 'bias',
+        x: snap(cx_), y: snap(startY + count * spacingY),
+        label: '', activation: null
+      });
+      ids.push(biasId);
+    }
+
+    layerIds.push(ids);
+  }
+
+  // Fully-connected forward connections (incl. bias → next layer).
+  for(let li = 0; li < layerIds.length - 1; li++){
+    const srcIds   = layerIds[li];
+    const dstLayer = layerIds[li + 1];
+    const dstIds   = dstLayer.filter(id => neurons.find(nn => nn.id === id)?.type !== 'bias');
+    for(const src of srcIds){
+      for(const dst of dstIds){
+        connections.push({from: src, to: dst, weight: +(Math.random()*2 - 1).toFixed(3)});
+      }
+    }
+  }
+
+  // Center viewport
+  vx = Math.round(mc.width / 2);
+  vy = Math.round(mc.height / 2);
+  vz = 1;
+  document.getElementById('zl').textContent = '100%';
+
+  renderGrid(); render(); renderRegionList();
+  const topo = sizes.join(' → ');
+  notify(`Keras-Import: Netz erzeugt (${topo})`);
+}
+
 // ── AUTO-GENERATE NETWORK ─────────────────────────────
 function openGenDialog(){
   document.getElementById('genDialog').classList.add('open');
@@ -4641,8 +4878,9 @@ function generateNetwork(){
       ids.push(id);
     }
 
-    // Add bias neuron for this layer (not for output layer, not when next layer is output)
-    if(addBias && type !== 'output' && layerTypes[li + 1] !== 'output'){
+    // Add bias neuron for this layer (not for the output layer itself; bias for the layer
+    // BEFORE the output is now allowed and feeds into the output.)
+    if(addBias && type !== 'output'){
       nc++;
       const biasId = 'n' + nc;
       neurons.push({
@@ -4665,10 +4903,7 @@ function generateNetwork(){
       const n = neurons.find(nn => nn.id === id);
       return n && n.type !== 'bias';
     });
-    // If destination layer is output, skip bias source neurons
-    const dstIsOutput = dstIds.some(id => neurons.find(nn=>nn.id===id)?.type==='output');
     for(const src of srcIds){
-      if(dstIsOutput && neurons.find(nn=>nn.id===src)?.type==='bias') continue;
       for(const dst of dstIds){
         connections.push({from: src, to: dst, weight: +(Math.random() * 2 - 1).toFixed(3)});
       }
