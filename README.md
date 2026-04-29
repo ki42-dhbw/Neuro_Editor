@@ -4,7 +4,7 @@
 
 **Autor:** Stefan Bauer · DHBW Mosbach 2026  
 **Sprache:** Vanilla HTML · CSS · JavaScript (keine Abhängigkeiten)  
-**Version:** v33
+**Version:** v34
 
 **[Hier sofort ausprobieren](https://ki42-dhbw.github.io/Neuro_Editor/)**
 
