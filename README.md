@@ -8,8 +8,6 @@
 
 **[Hier sofort ausprobieren](https://ki42-dhbw.github.io/Neuro_Editor/)**
 
-**Bitte vorher info.md lesen.**
-
 ---
 
 ## Überblick
@@ -23,12 +21,12 @@ Der **Neuro Editor** ist eine Lehr- und Experimentierplattform für künstliche 
 ### 1. Neural Network Builder (Canvas-Editor)
 
 - Drag & Drop von Neuronen (Input, Hidden, Output, Bias) auf einem unendlichen Canvas
-- Verbindungen durch Klick-zu-Klick im Verbindungsmodus
+- Verbindungen durch Klick-zu-Klick im Verbindungsmodus (inkl. Bias → Output für Klassifikation)
 - Gewichte editierbar (Doppelklick), einfrierbar (Weight Freeze)
 - Raster-Snap, Zoom (10–400 %), Pan, Lasso-Selektion
 - Rechtsklick-Kontextmenü für Neuronen und Hintergrund
-- Speichern / Laden als JSON · Python/Keras-Export
-- Aktivierungsfunktionen: **ReLU · Sigmoid · Tanh · Softmax · Linear · Leaky ReLU**
+- Speichern / Laden als JSON · Python/Keras-Export · **Keras-Code-Import** (Python-Snippet einfügen → Netz wird gezeichnet)
+- Aktivierungsfunktionen: **ReLU · Sigmoid · Tanh · Softmax · Linear · Leaky ReLU** (auch am Output zuweisbar — z. B. Sigmoid für binäre, Softmax für Mehrklassen-Klassifikation; standardmäßig deaktiviert)
 
 ### 2. Simulation (Forward Pass)
 
@@ -94,6 +92,24 @@ Der **Neuro Editor** ist eine Lehr- und Experimentierplattform für künstliche 
 ### 9. Netzwerk-Generator
 
 - Automatisch vollvernetztes Netz erstellen (Architektur per Eingabe, z. B. `2, 4, 3, 1`)
+
+### 9b. Keras-Code-Import
+
+- Toolbar-Button **🐍↓ Import** öffnet einen Code-Editor: Python/Keras-Snippet einfügen → das Netz wird sofort gezeichnet.
+- Erkannt: `keras.Sequential([…])`, `model.add(…)`, `Input(shape=(N,))`, `Dense(units=N, activation='…', use_bias=True/False)`.
+- Aktivierungs-Mapping: `relu · sigmoid · tanh · softmax · linear · leaky_relu`.
+- `use_bias=True` erzeugt automatisch ein Bias-Neuron in der vorgelagerten Schicht.
+- Beispiel:
+
+```python
+model = keras.Sequential([
+    keras.layers.Input(shape=(2,)),
+    keras.layers.Dense(units=4, activation='relu'),
+    keras.layers.Dense(units=1, activation='sigmoid'),
+])
+```
+
+→ erzeugt ein 2 → 4 → 1 Netz, ReLU im Hidden-Layer, Sigmoid am Output, Bias pro Quell-Schicht.
 
 ### 10. Info-Drawer (Lehr-Panel)
 
@@ -168,7 +184,8 @@ Neuroedit_webapp/
 
 Ausführliche technische Dokumentation in **[info.md](info.md)**:
 
-- **Training ohne TensorFlow/Keras** — Backpropagation, Optimizer (SGD, Adam, RMSProp, Adagrad) und 4 Loss-Funktionen (MSE, MAE, BCE, CCE) sind komplett in ~500 Zeilen Vanilla-JS implementiert
+- **Training ohne TensorFlow/Keras** — Backpropagation, Optimizer (SGD, Adam, RMSProp, Adagrad) und 4 Loss-Funktionen (MSE, MAE, BCE, CCE) sind komplett in ~500 Zeilen Vanilla-JS implementiert. Output-Aktivierung (Sigmoid/Softmax) und Output-Bias sind frei kombinierbar.
+- **Keras-Roundtrip** — Python-Skript exportieren (`🐍 Keras`), bearbeiten und über `🐍↓ Import` zurück in den Editor einfügen. Topologie + Aktivierung + Bias-Konfiguration werden übernommen, Gewichte werden beim Import zufällig initialisiert.
 - **Performance-Grenzen** — Netzwerk-Größenlimits der Browser-Implementierung (problemlos bis ~20 Neuronen, grenzwertig ab ~100) und mögliche Optimierungen
 - **Sprachausgabe (TTS)** — Betriebssystem-/Browser-Abhängigkeit, bekannte Bugs und Workarounds, Empfehlungen pro Plattform
 - **Deutsch/Englisch-Mischsprache** — Automatische phonetische Aufbereitung englischer Fachbegriffe (Loss, Batch, Softmax etc.) für die deutsche TTS-Engine via `ttsSanitize()`
