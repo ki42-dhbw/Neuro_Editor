@@ -115,6 +115,7 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
   <a href="#shortcuts">Shortcuts</a>
   <a href="#speichern">Speichern</a>
   <a href="#generator">Generator</a>
+  <a href="#kerasimport">Keras-Import</a>
   <a href="#infopanel">Info-Panel</a>
   <a href="#embeddings" style="color:var(--accent3);border-color:var(--accent3)">⬡ Embedding Lab</a>
   <a href="#chromadb" style="color:#7c3aed;border-color:#7c3aed">⬡ ChromaDB</a>
@@ -140,7 +141,7 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
 <div class="grid">
   <div class="card"><div class="card-title" style="color:var(--accent4)">● Input-Neuron</div><p>Eingabe­größe des Netzes. Kein Aktivierungs­aufwand nötig.</p></div>
   <div class="card"><div class="card-title" style="color:var(--accent)">● Hidden-Neuron</div><p>Verarbeitung in versteckten Schichten mit Aktivierungsfunktion.</p></div>
-  <div class="card"><div class="card-title" style="color:var(--accent2)">● Output-Neuron</div><p>Ergebnis­knoten. Keine Aktivierungs­funktion, kein Bias.</p></div>
+  <div class="card"><div class="card-title" style="color:var(--accent2)">● Output-Neuron</div><p>Ergebnis­knoten. Aktivierungs­funktion und Bias optional zuweisbar (für Klassifikation z.&nbsp;B. Sigmoid oder Softmax).</p></div>
   <div class="card"><div class="card-title" style="color:var(--yellow)">● Bias-Neuron</div><p>Konstanter Eingang&nbsp;= 1. Gewicht entspricht dem Bias-Wert.</p></div>
 </div>
 </section>
@@ -273,6 +274,8 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
 <tr><td>⬇ Speichern</td><td>Netzwerk als JSON-Datei exportieren (Neuronen, Verbindungen, Gewichte, Viewport, Bereiche).</td></tr>
 <tr><td>⬆ Laden</td><td>Gespeicherte JSON-Datei importieren. Ersetzt das aktuelle Netzwerk.</td></tr>
 <tr><td>⊞ Generieren</td><td>Automatisch ein vollvernetztes Netzwerk erstellen (→ <a href="#generator">Generator</a>).</td></tr>
+<tr><td>🐍 Keras</td><td>Aktuelles Netz als Python-/Keras-Skript exportieren (.keras-Modell mit allen Gewichten).</td></tr>
+<tr><td>🐍↓ Import</td><td>Python-/Keras-Code einfügen — das Netz wird automatisch gezeichnet (→ <a href="#kerasimport">Keras-Import</a>).</td></tr>
 <tr><td>⚡ Lernen</td><td>Öffnet das Trainings­panel mit Backpropagation (→ <a href="#training">Training</a>).</td></tr>
 <tr><td>▶ Simulation</td><td>Öffnet den Simulationsmodus für den Forward Pass (→ <a href="#simulation">Simulation</a>).</td></tr>
 </table>
@@ -301,13 +304,13 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
   <td><strong>Output</strong></td>
   <td><span class="badge b-orange">OUT</span></td>
   <td style="color:var(--accent2)">Orange</td>
-  <td>Ausgabeknoten des Netzwerks. <em>Keine</em> Aktivierungsfunktion und <em>kein</em> Bias-Neuron zulässig. Liefert das Endergebnis der Berechnung.</td>
+  <td>Ausgabeknoten des Netzwerks. Liefert das Endergebnis der Berechnung. <strong>Standardmäßig</strong> ohne Aktivierung und ohne Bias; beides ist optional aktivierbar (z.&nbsp;B. <em>Sigmoid</em> für binäre, <em>Softmax</em> für Mehrklassen-Klassifikation; Bias-Neuron in der vorletzten Schicht erzeugen und auf den Output verbinden).</td>
 </tr>
 <tr>
   <td><strong>Bias</strong></td>
   <td><span class="badge b-yellow">B</span></td>
   <td style="color:var(--yellow)">Gelb</td>
-  <td>Konstante Eingabe mit festem Wert&nbsp;1. Das Verbindungsgewicht vom Bias zum nächsten Neuron entspricht dem klassischen Bias-Wert. Kann <em>nicht</em> mit Output-Neuronen verbunden werden.</td>
+  <td>Konstante Eingabe mit festem Wert&nbsp;1. Das Verbindungsgewicht vom Bias zum nächsten Neuron entspricht dem klassischen Bias-Wert. Kann auch mit Output-Neuronen verbunden werden.</td>
 </tr>
 </table>
 
@@ -327,7 +330,7 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
 <!-- ══════════════════════════════════════════════════════════════ -->
 <section id="aktivierung">
 <h1>Aktivierungsfunktionen</h1>
-<p>Aktivierungsfunktionen werden durch <strong>Drag&nbsp;&amp;&nbsp;Drop</strong> aus der Seitenleiste auf ein Neuron gezogen. Alternativ: Rechtsklick auf Neuron. Nicht anwendbar auf Input-, Output- und Bias-Neuronen.</p>
+<p>Aktivierungsfunktionen werden durch <strong>Drag&nbsp;&amp;&nbsp;Drop</strong> aus der Seitenleiste auf ein Neuron gezogen. Alternativ: Rechtsklick auf Neuron oder Properties-Panel. Anwendbar auf Hidden- <em>und</em> Output-Neuronen (am Output standardmäßig deaktiviert; für Klassifikation explizit Sigmoid/Softmax wählen). Bias- und Input-Neuronen haben keine Aktivierung.</p>
 
 <div class="grid">
   <div class="card">
@@ -400,7 +403,7 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
 <ul class="feat">
   <li>✎ Bezeichnung ändern</li>
   <li>Σ-Symbol ein-/ausblenden</li>
-  <li>Aktivierungsfunktion wählen (nur bei Non-Output-Neuronen)</li>
+  <li>Aktivierungsfunktion wählen (Hidden- und Output-Neuronen)</li>
   <li>🗑 Neuron löschen</li>
 </ul>
 
@@ -430,8 +433,8 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
   <li>Auf das <strong>Zielneuron</strong> klicken — die Verbindung wird mit zufälligem Startgewicht erstellt.</li>
 </ol>
 
-<div class="warn"><b>Einschränkungen</b>
-  Bias-Neuronen können nicht mit Output-Neuronen verbunden werden. Selbstverbindungen und Doppelverbindungen werden automatisch verhindert.
+<div class="info"><b>Verbindungsregeln</b>
+  Beliebige Quell-Neuronen können auf beliebige Zielneuronen verbunden werden — auch <em>Bias → Output</em> ist erlaubt (für Klassifikation oft sinnvoll). Selbstverbindungen und Doppelverbindungen werden automatisch verhindert.
 </div>
 
 <h2>Verbindung bearbeiten</h2>
@@ -698,9 +701,9 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
 <tr><th>Option</th><th>Standard</th><th>Beschreibung</th></tr>
 <tr><td>Eingaben</td><td>2</td><td>Anzahl Input-Neuronen (1–50).</td></tr>
 <tr><td>Hidden Layers</td><td>—</td><td>Kommagetrennte Neuronen­anzahlen, z.&nbsp;B. <code>4, 3</code> = zwei versteckte Schichten mit 4 und 3 Neuronen.</td></tr>
-<tr><td>Ausgaben</td><td>1</td><td>Anzahl Output-Neuronen (1–50). Keine Aktivierungsfunktion, kein Bias.</td></tr>
-<tr><td>Aktivierungsfunktion</td><td>ReLU</td><td>Gilt für alle Hidden-Neuronen.</td></tr>
-<tr><td>Bias-Neuronen</td><td>☑</td><td>Fügt pro Schicht (außer der letzten Hidden-Schicht und dem Output) ein Bias-Neuron hinzu.</td></tr>
+<tr><td>Ausgaben</td><td>1</td><td>Anzahl Output-Neuronen (1–50). Standardmäßig ohne Aktivierung; nach dem Generieren manuell Sigmoid/Softmax setzen, wenn klassifiziert werden soll.</td></tr>
+<tr><td>Aktivierungsfunktion</td><td>ReLU</td><td>Gilt für alle Hidden-Neuronen. Outputs bleiben standardmäßig linear (ohne Aktivierung).</td></tr>
+<tr><td>Bias-Neuronen</td><td>☑</td><td>Fügt pro Quell-Schicht (Input und alle Hidden) ein Bias-Neuron hinzu, das auch auf den Output verbinden kann.</td></tr>
 <tr><td>Abstand horizontal</td><td>180&nbsp;px</td><td>Abstand zwischen den Schichten (60–600&nbsp;px).</td></tr>
 <tr><td>Abstand vertikal</td><td>80&nbsp;px</td><td>Abstand zwischen den Neuronen einer Schicht (40–300&nbsp;px).</td></tr>
 </table>
@@ -717,6 +720,47 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0;}
 <tr><td>3</td><td>8, 6</td><td>3</td><td>Mehrklassen­klassifikation</td></tr>
 <tr><td>1</td><td>6, 4</td><td>1</td><td>Kurvenanpassung (Regression)</td></tr>
 </table>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section id="kerasimport">
+<h1>Keras-Code importieren</h1>
+<p>Über <span class="badge b-dim">🐍↓ Import</span> in der Toolbar (oder Rechtsklick auf den Hintergrund → <em>Keras-Code importieren</em>) öffnet sich ein Eingabefenster. Beim Einfügen eines Python-/Keras-Snippets wird die Architektur automatisch erkannt und als Netz gezeichnet.</p>
+
+<h2>Beispiel</h2>
+<pre style="background:#070a10;border:1px solid var(--border);border-radius:6px;padding:12px;font-family:'Courier New',monospace;font-size:11px;color:#cdd9e5;line-height:1.55;overflow-x:auto;">model = keras.Sequential([
+    keras.layers.Input(shape=(2,)),
+    keras.layers.Dense(units=4, activation='relu'),
+    keras.layers.Dense(units=1, activation='sigmoid'),
+])</pre>
+<p>Erzeugt ein 2 → 4 → 1 Netz mit ReLU in der Hidden-Schicht, Sigmoid am Output und Bias-Neuronen pro Quell-Schicht (Keras-Default <code>use_bias=True</code>).</p>
+
+<h2>Erkannt wird</h2>
+<table>
+<tr><th>Element</th><th>Schreibweisen</th></tr>
+<tr><td>Eingabe-Shape</td><td><code>Input(shape=(N,))</code> · <code>Input((N,))</code> · <code>input_shape=(N,)</code> · <code>shape=(N,)</code></td></tr>
+<tr><td>Dense-Schicht</td><td><code>Dense(units=N, activation='…')</code> · <code>Dense(N, …)</code> · <code>model.add(Dense(…))</code></td></tr>
+<tr><td>Aktivierungen</td><td><code>relu · sigmoid · tanh · softmax · linear · leaky_relu</code> (case-insensitiv)</td></tr>
+<tr><td>Bias</td><td><code>use_bias=True</code> (Keras-Default) erzeugt ein Bias-Neuron in der Quell-Schicht; <code>use_bias=False</code> unterdrückt es schichtweise.</td></tr>
+<tr><td>Sequential-Block</td><td><code>keras.Sequential([…])</code> sowie sequenzielle <code>model.add(…)</code>-Aufrufe</td></tr>
+</table>
+
+<h2>Mapping auf Neurontypen</h2>
+<ul class="feat">
+  <li><strong>Input(shape=(N,))</strong> → N Input-Neuronen.</li>
+  <li><strong>Erste bis vorletzte Dense-Schicht</strong> → Hidden-Neuronen mit der angegebenen Aktivierung.</li>
+  <li><strong>Letzte Dense-Schicht</strong> → Output-Neuronen mit der angegebenen Aktivierung (z.&nbsp;B. <code>softmax</code> für Mehrklassen-Klassifikation).</li>
+  <li><strong>use_bias=True</strong> → Bias-Neuron in der Quell-Schicht, voll verbunden mit allen Ziel-Neuronen.</li>
+  <li><code>activation='linear'</code> oder weggelassen → keine Aktivierung (identisch zur Pass-Through-Schicht).</li>
+</ul>
+
+<div class="info"><b>Layout</b>
+  Das importierte Netz wird mit der gleichen Layout-Logik wie der Generator gezeichnet (horizontale/vertikale Abstände aus den Generator-Feldern, vollvernetzt zwischen aufeinanderfolgenden Schichten, Gewichte zufällig in [−1, 1]). Anschließend kann es ganz normal weiterbearbeitet, simuliert und trainiert werden.
+</div>
+
+<div class="warn"><b>Was nicht unterstützt wird</b>
+  Keine Verarbeitung von <code>Conv2D</code>, <code>LSTM</code>, <code>Dropout</code>, mehreren Eingängen oder verzweigten Topologien. Solche Layer werden ignoriert. Nur sequenzielle Dense-Netze werden importiert.
+</div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════ -->
